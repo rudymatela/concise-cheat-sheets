@@ -4,8 +4,8 @@
 # Implicit Rules
 
 %.pdf: %.tex
-	pdflatex -draftmode $<
-	pdflatex $<
+	pdflatex -halt-on-error -draftmode $<
+	pdflatex -halt-on-error $<
 
 
 # Making Rules

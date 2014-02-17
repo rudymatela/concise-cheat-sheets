@@ -12,6 +12,8 @@
 
 all: template-refcard.pdf
 
+template-refcard.pdf: template-refcard.tex refcard.cls
+
 # Cleanup rules
 
 .PHONY: clean cleanauxs cleanfigs

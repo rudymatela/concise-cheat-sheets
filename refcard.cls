@@ -8,7 +8,14 @@
 \RequirePackage[cm]{fullpage}
 
 \setlength{\columnseprule}{0.4pt}
-\AtBeginDocument{\begin{multicols}{3}}
-\AtEndDocument{\end{multicols}}
+\setcounter{secnumdepth}{0}
 \pagestyle{empty}
+\AtBeginDocument{\begin{multicols*}{3}}
+\AtEndDocument{\end{multicols*}}
+\renewcommand\maketitle{
+	\begin{center}
+		\huge
+		\@title
+	\end{center}
+}
 

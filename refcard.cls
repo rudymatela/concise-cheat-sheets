@@ -17,4 +17,20 @@
 		\@title
 	\end{center}
 }
-
+\newenvironment{ldesc}{
+\begin{tabular}{ll}
+}{
+\end{tabular}
+}
+\newcommand{\C}{\texttt}
+\newcommand{\B}{\textbf}
+\newcommand{\I}{\textit}
+\newcommand{\lditem}[2]{
+	#1 & \C{#2} \\
+}
+\newcommand{\fitem}[1]{
+	#1 & 
+}
+\newcommand{\oitem}[1]{
+	\\ #1 &
+}

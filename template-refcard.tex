@@ -20,20 +20,20 @@
 
 \section{Types}
 
-\begin{tabular}{ll}
-	char    & \texttt{char} \\
-	integer & \texttt{integer} \\
-	list    & \texttt{list} \\
-	pointer & \texttt{*char, *integer, ...} \\
-\end{tabular}
+\begin{ldesc}
+	\lditem{char}   {char   }
+	\lditem{integer}{integer}
+	\lditem{list}   {list   }
+	\lditem{pointer}{*char, *integer, ...}
+\end{ldesc}
 
 \section{Initialization}
 
 \begin{tabular}{ll}
-	local variable    & \texttt{such \textit{type} \textit{name}=\textit{value}} \\
-	global variable   & \texttt{much \textit{type} \textit{name}=\textit{value}} \\
-	volatile variable & \texttt{so   \textit{type} \textit{name}=\textit{value}} \\
-	lists             & \texttt{such \textit{type} \textit{name}[\textit{size}]=\textit{value}} \\
+	local variable    & \C{such \I{type} \I{name}=\I{value}} \\
+	global variable   & \C{much \I{type} \I{name}=\I{value}} \\
+	volatile variable & \C{so   \I{type} \I{name}=\I{value}} \\
+	lists             & \C{such \I{type} \I{name}[\I{size}]=\I{value}} \\
 \end{tabular}
 
 \section{Literals}

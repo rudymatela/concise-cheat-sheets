@@ -4,8 +4,7 @@
 \ProvidesClass{refcard}[2014/02/17 Reference Card]
 \LoadClass{article}
 \RequirePackage{multicol}
-\RequirePackage[landscape,a4paper]{geometry}
-\RequirePackage[cm]{fullpage}
+\RequirePackage[margin=8mm,landscape,a4paper]{geometry}
 
 \setlength{\columnseprule}{0.4pt}
 \setcounter{secnumdepth}{0}

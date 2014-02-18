@@ -5,6 +5,7 @@
 \LoadClass{article}
 \RequirePackage{multicol}
 \RequirePackage[margin=8mm,landscape,a4paper]{geometry}
+\RequirePackage{array}
 
 \setlength{\columnseprule}{0.4pt}
 \setcounter{secnumdepth}{0}
@@ -17,8 +18,9 @@
 		\@title
 	\end{center}
 }
+\newcolumntype{C}{>{\ttfamily\arraybackslash}l}
 \newenvironment{ldesc}{
-\begin{tabular}{ll}
+\begin{tabular}{lC}
 }{
 \end{tabular}
 }
@@ -26,6 +28,6 @@
 \newcommand{\B}{\textbf}
 \newcommand{\I}{\textit}
 \newcommand{\lditem}[2]{
-	#1 & \C{#2} \\
+	#1 & #2 \\
 }
 \newcommand{\s}{\hphantom{\_}}

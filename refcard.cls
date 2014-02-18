@@ -28,3 +28,4 @@
 \newcommand{\lditem}[2]{
 	#1 & \C{#2} \\
 }
+\newcommand{\s}{\hphantom{\_}}

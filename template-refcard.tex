@@ -83,6 +83,34 @@ All other group left to right.
 
 \section{Control Flow}
 
+\begin{ldesc}
+	\lditem{statement terminator      }{;}
+	\lditem{block delimiter           }{\{ ] or [ \}}
+	\lditem{exit from while           }{brk}
+	\lditem{next while iteration      }{cnt}
+	\lditem{return value from function}{return \I{expr}}
+\end{ldesc}
+
+
+\subsection{Flow Constructions}
+
+\begin{ldesc}
+	\lditem{if statement}{
+		\begin{minipage}{35mm}
+			if\s(\I{expr})\s\I{block} \\
+			else\s\s\s\s\s\s\s\s\I{block} \\
+		\end{minipage}
+	}
+	\lditem{while}{
+		\begin{minipage}{35mm}
+			while (\I{expr}) \{ \\
+			\s\s\s\s\I{statement}; \\
+			\s\s\s\s\I{statement}; \\
+			\} \\
+		\end{minipage}
+	}
+\end{ldesc}
+
 \section{Libraries}
 
 \subsection{Such.StdList}

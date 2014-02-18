@@ -18,34 +18,68 @@
 	]
 \end{verbatim}
 
+
 \section{Types}
 
 \begin{ldesc}
-	\lditem{char}   {char   }
-	\lditem{integer}{integer}
-	\lditem{list}   {list   }
+	\lditem{char   }{char                }
+	\lditem{integer}{integer             }
+	\lditem{list   }{list                }
 	\lditem{pointer}{*char, *integer, ...}
 \end{ldesc}
+
 
 \section{Initialization}
 
 \begin{ldesc}
-	\lditem{local variable}   { such \I{type} \I{name}=\I{value}           }
-	\lditem{global variable}  { much \I{type} \I{name}=\I{value}           }
+	\lditem{local variable   }{ such \I{type} \I{name}=\I{value}           }
+	\lditem{global variable  }{ much \I{type} \I{name}=\I{value}           }
 	\lditem{volatile variable}{ so   \I{type} \I{name}=\I{value}           }
-	\lditem{lists}            { such \I{type} \I{name}[\I{size}]=\I{value} }
+	\lditem{lists            }{ such \I{type} \I{name}[\I{size}]=\I{value} }
 \end{ldesc}
+
 
 \section{Literals}
 
-\begin{tabular}{ll}
-	String with escapes    & \texttt{"str..$\backslash{}$a.ing"} \\
-	String without escapes & \texttt{'str..$\backslash{}$a.ing'} \\
-	Character              & \texttt{\#x} \\
-	Character (Unicode)    & \texttt{\#\{12AB56\}} \\
-\end{tabular}
+\begin{ldesc}
+	\lditem{String with escapes   }{"str..$\backslash{}$a.ing"}
+	\lditem{String without escapes}{'str..$\backslash{}$a.ing'}
+	\lditem{Character             }{\#x}
+	\lditem{Character (Unicode)   }{\#\{12AB56\}}
+\end{ldesc}
+
 
 \section{Operators (grouped by precedence)}
+
+\begin{ldesc}
+	\hline
+	\lditem{object member                }{\I{name}.\I{member}}
+	\lditem{module member                }{\I{name}::\I{member}}
+	\hline
+	\lditem{plus, minus (unary), negation}{+, -, ~}
+	\hline
+	\lditem{multiplication, division, remainder}{*, /, \%}
+	\lditem{division\&remainder          }{\I{qo},\I{rt} <- \I{dd} /\% \I{ds}}
+	\hline
+	\lditem{sum, subtraction             }{+, -}
+	\hline
+	\lditem{comparisons                  }{>, >=, <, <=}
+	\hline
+	\lditem{comparisons                  }{==, !=}
+	\hline
+	\lditem{and, or                      }{\&\&, ||}
+	\hline
+	\lditem{ternary conditional          }{\I{expr1}?\I{expr2}:\I{expr3}}
+	\hline
+	\lditem{assignments                  }{<-, +<-, -<-, *<-}
+	\lditem{                             }{/<-, ||<-, \&\&<-}
+	\hline
+\end{ldesc}
+
+\noindent
+Unary operators and conditionals group right to left.\\
+All other group left to right.
+
 
 \section{Control Flow}
 

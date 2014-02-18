@@ -33,7 +33,7 @@
 \newcommand{\lditem}[2]{
 	#1 & #2 \\
 }
-\newcommand{\li}[1]{
+\newcommand{\li}[1][]{%
 \stepcounter{line}%
 \ifnum\theline>1 \\\fi%
 #1 &

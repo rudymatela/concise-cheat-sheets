@@ -27,6 +27,13 @@
 }{
 \end{tabular}
 }
+\newenvironment{Ldesc}{
+\begin{ldesc}
+\hline
+}{
+\\\hline
+\end{ldesc}
+}
 \newcommand{\C}{\texttt}
 \newcommand{\B}{\textbf}
 \newcommand{\I}{\textit}
@@ -38,10 +45,10 @@
 \ifnum\theline>1 \\\fi%
 #1 &
 }
-\newcommand{\LI}[1][]{%
+
+\newcommand{\Li}[1][]{%
 \stepcounter{line}%
-\hline%
-\ifnum\theline>1 \\\fi%
+\ifnum\theline>1 \\\hline\fi%
 #1 &
 }
 \newcommand{\s}{\hphantom{\_}}

@@ -1,0 +1,177 @@
+\documentclass{refcard}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\title{Ultimate Haskell Cheat Sheet}
+
+\begin{document}
+
+\maketitle
+
+\section{Structure}
+
+\begin{verbatim}
+	func :: type -> type
+	func x = expr
+
+	fung :: type -> [type] -> type
+	func x xs = expr
+
+	main = do code
+	          code
+	          ...
+\end{verbatim}
+
+
+\section{Binding Types}
+
+\begin{ldesc}
+	\li[has type]               \I{expr}\s::\s\I{type}
+	\li[boolean]                True :: Bool
+	\li                         False :: Bool
+	\li[character]              'a' :: Char
+	\li[integer (32-bit)]       1 :: Int
+	\li                         3 + 2 :: Int
+	\li[integer (arbitrary)]    31337 :: Integer
+	\li                         31337\verb+^+10 :: Integer
+	\li[single precision float] 1.2 :: Float 
+	\li[double precision float] 1.2 :: Double
+	\li[list]                   [] :: [a]
+	\li[]                       [1,2,3] :: [Integer]
+	\li[]                       ['a','b','c'] :: [Char]
+	\li                         "abc" :: [Char]
+	\li[]                       [[1,2],[3,4]] :: [[Integer]]
+	\li[tuple]                  (1,2) :: (Int,Int)
+	\li                         (1,'a') :: (Int,Char)
+	\li                         ([1,2],'a') :: ([Int],Char)
+	\li[string]                 "asdf" :: String
+	\li[functions]              foo :: a -> a
+	\li                         double :: Int -> Int
+\end{ldesc}
+
+
+\section{Binding Classes (Typeclasses)}
+
+\begin{ldesc}
+	\li[Numeric (+,-,*,/)]             137 :: Num a => a
+	\li[Floating]                      1.2 :: Floating a => a
+	\li[Fractional]                    1.2 :: Fractional a => a
+	\li[Equatable (==)]                'a' :: Eq a => a
+	\li[Ordered ($<=,>=,>,<$)]         731 :: Ord a => a
+	\li                                sort :: 
+	\li                                \s\s\s\s Ord a => [a] -> [a]
+\end{ldesc}
+
+
+\section{Operators (grouped by precedence)}
+
+\begin{Ldesc}
+	\Li[object member                ] \I{name}.\I{member}
+	\li[module member                ] \I{name}::\I{member}
+	\Li[plus, minus (unary), negation] +, -, ~
+	\Li[multiplication, division, remainder] *, /, \%
+	\li[division\&remainder          ] \I{qo},\I{rt} <- \I{dd} /\% \I{ds}
+	\Li[sum, subtraction             ] +, -
+	\Li[comparisons                  ] >, >=, <, <=
+	\Li[comparisons                  ] ==, !=
+	\Li[and, or                      ] \&\&, ||
+	\Li[ternary conditional          ] \I{expr1}?\I{expr2}:\I{expr3}
+	\Li[assignments                  ] <-, +<-, -<-, *<-
+	\li                                /<-, ||<-, \&\&<-
+\end{Ldesc}
+
+\noindent
+Unary operators and conditionals group right to left.\\
+All other group left to right.
+
+
+\section{Common functions}
+
+\subsection{Numbers}
+
+\subsection{Lists {\small (and Strings {\tiny(which are lists...)})}}
+
+\begin{ldesc}
+	\li[size / length of \C{xs}]         length xs
+	\li[invert / reverse of \C{xs}]      reverse xs
+	\li[head / first element of \C{xs}]  head xs
+	\li[checks for \C{x} in \C{xs}]      x `elem` xs
+	                                     elem x xs
+	\li[sorts \C{xs}]                    sort xs
+	\li                                  (xs :: Ord a => [a])
+\end{ldesc}
+
+\subsection{Tuples}
+
+\begin{ldesc}
+	\li[first of pair \C{p}]             fst p
+	\li[second of pair \C{p}]            snd p
+\end{ldesc}
+
+
+\subsection{High Order Functions}
+
+
+\section{Control Flow}
+
+\begin{ldesc}
+	\li[statement terminator]        ;
+	\li[block delimiter]             \{ ] or [ \}
+	\li[exit from while]             brk
+	\li[next while iteration]        cnt
+	\li[return value from function]  return \I{expr}
+\end{ldesc}
+
+
+\subsection{Flow Constructions}
+
+\begin{ldesc}
+	\li[if statement]
+		if\s(\I{expr})\s\I{block}     \li
+		else\s\s\s\s\s\s\s\s\I{block} \li
+	
+	\li[do notation] do ...
+
+	\li[while statement]
+		while (\I{expr}) \{           \li
+		\s\s\s\s\I{statement};        \li
+		\s\s\s\s\I{statement};        \li
+	    \}
+\end{ldesc}
+
+
+\section{List Comprehensions}
+
+
+\section{Libraries}
+
+
+\subsection{QuickCheck \hfill \C{Test.Quickcheck}}
+
+\begin{ldesc}
+	\li[iiii] iiii
+	\li[wwww] wwww
+\end{ldesc}
+
+\subsection{SmallCheck \hfill \C{Test.SmallCheck}}
+
+\begin{ldesc}
+	\li[iiii] iiii
+	\li       wwww
+	\li[blah] blah
+\end{ldesc}
+
+
+\subsection{HUnit \hfill \C{Test.HUnit}}
+
+\begin{ldesc}
+	\li[printing] print "formatstring"
+	\li[wwww] wwww
+	\li[iiii] wwww
+	\li       wwww
+	\li[blah] blah
+\end{ldesc}
+
+
+\end{document} 
+

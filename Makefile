@@ -10,7 +10,7 @@
 
 # Making Rules
 
-all: template-refcard.pdf
+all: template-refcard.pdf haskell-ucc.pdf
 
 template-refcard.pdf: template-refcard.tex refcard.cls
 

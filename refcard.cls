@@ -38,4 +38,10 @@
 \ifnum\theline>1 \\\fi%
 #1 &
 }
+\newcommand{\LI}[1][]{%
+\stepcounter{line}%
+\hline%
+\ifnum\theline>1 \\\fi%
+#1 &
+}
 \newcommand{\s}{\hphantom{\_}}

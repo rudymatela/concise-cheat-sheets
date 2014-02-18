@@ -22,30 +22,30 @@
 \section{Types}
 
 \begin{ldesc}
-	\lditem{char   }{char                }
-	\lditem{integer}{integer             }
-	\lditem{list   }{list                }
-	\lditem{pointer}{*char, *integer, ...}
+	\li[char]    char
+	\li[integer] integer
+	\li[list]    list
+	\li[pointer] *char, *integer, ...
 \end{ldesc}
 
 
 \section{Initialization}
 
 \begin{ldesc}
-	\lditem{local variable   }{ such \I{type} \I{name}=\I{value}           }
-	\lditem{global variable  }{ much \I{type} \I{name}=\I{value}           }
-	\lditem{volatile variable}{ so   \I{type} \I{name}=\I{value}           }
-	\lditem{lists            }{ such \I{type} \I{name}[\I{size}]=\I{value} }
+	\li[local variable]     such \I{type} \I{name}=\I{value}
+	\li[global variable]    much \I{type} \I{name}=\I{value}
+	\li[volatile variable]  so   \I{type} \I{name}=\I{value}
+	\li[lists]              such \I{type} \I{name}[\I{size}]=\I{value}
 \end{ldesc}
 
 
 \section{Literals}
 
 \begin{ldesc}
-	\lditem{String with escapes   }{"str..$\backslash{}$a.ing"}
-	\lditem{String without escapes}{'str..$\backslash{}$a.ing'}
-	\lditem{Character             }{\#x}
-	\lditem{Character (Unicode)   }{\#\{12AB56\}}
+	\li[String with escapes]    "str..$\backslash{}$a.ing"
+	\li[String without escapes] 'str..$\backslash{}$a.ing'
+	\li[Character]              \#x
+	\li[Character (Unicode)]    \#\{12AB56\}
 \end{ldesc}
 
 
@@ -84,11 +84,11 @@ All other group left to right.
 \section{Control Flow}
 
 \begin{ldesc}
-	\lditem{statement terminator      }{;}
-	\lditem{block delimiter           }{\{ ] or [ \}}
-	\lditem{exit from while           }{brk}
-	\lditem{next while iteration      }{cnt}
-	\lditem{return value from function}{return \I{expr}}
+	\li[statement terminator]        ;
+	\li[block delimiter]             \{ ] or [ \}
+	\li[exit from while]             brk
+	\li[next while iteration]        cnt
+	\li[return value from function]  return \I{expr}
 \end{ldesc}
 
 

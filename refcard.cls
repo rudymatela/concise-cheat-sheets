@@ -7,6 +7,8 @@
 \RequirePackage[margin=8mm,landscape,a4paper]{geometry}
 \RequirePackage{array}
 
+\newcounter{line}
+
 \setlength{\columnseprule}{0.4pt}
 \setcounter{secnumdepth}{0}
 \pagestyle{empty}
@@ -20,6 +22,7 @@
 }
 \newcolumntype{C}{>{\ttfamily\arraybackslash}l}
 \newenvironment{ldesc}{
+\setcounter{line}{0}
 \begin{tabular}{lC}
 }{
 \end{tabular}
@@ -29,5 +32,10 @@
 \newcommand{\I}{\textit}
 \newcommand{\lditem}[2]{
 	#1 & #2 \\
+}
+\newcommand{\li}[1]{
+\stepcounter{line}%
+\ifnum\theline>1 \\\fi%
+#1 &
 }
 \newcommand{\s}{\hphantom{\_}}

@@ -87,8 +87,6 @@ All other group left to right.
 
 \section{Common functions}
 
-\subsection{Numbers}
-
 \subsection{Lists {\small (and Strings {\tiny(which are lists...)})}}
 
 \begin{ldesc}
@@ -110,6 +108,14 @@ All other group left to right.
 
 
 \subsection{High Order Functions}
+
+\newcommand{\emptyarray}{[]}
+\begin{ldesc}
+	\li[apply f for each x in xs]   map f xs
+	\li[\s\s returning new list]    \s\s:: (a -> b) -> [a] -> [b]
+	\li[$x_1:x_2:...:\emptyarray \Rightarrow \backslash$]  foldl (+) xs
+	\li[$x_1 + x_2 + ... + n$]                             \s\s\footnotesize :: (a -> b -> a) -> b -> [a] -> b
+\end{ldesc}
 
 
 \section{Control Flow}

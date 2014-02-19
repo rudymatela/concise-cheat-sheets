@@ -10,7 +10,7 @@
 
 # Making Rules
 
-all: template-refcard.pdf haskell-ucc.pdf
+all: template-refcard.pdf haskell-ucs.pdf
 
 template-refcard.pdf: template-refcard.tex refcard.cls
 
@@ -18,7 +18,7 @@ template-refcard.pdf: template-refcard.tex refcard.cls
 
 .PHONY: clean cleanauxs cleanfigs
 clean: cleanauxs cleanfigs
-	rm -f template-refcard.pdf
+	rm -f template-refcard.pdf haskell-ucs.pdf
 
 cleanauxs:
 	rm -f *~ *.aux *.bbl *.blg *.log *.toc *.nav *.out *.snm

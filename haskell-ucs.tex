@@ -69,23 +69,22 @@
 \section{Operators (grouped by precedence)}
 
 \begin{Ldesc}
-	\Li[object member                ] \I{name}.\I{member}
-	\li[module member                ] \I{name}::\I{member}
-	\Li[plus, minus (unary), negation] +, -, ~
-	\Li[multiplication, division, remainder] *, /, \%
-	\li[division\&remainder          ] \I{qo},\I{rt} <- \I{dd} /\% \I{ds}
-	\Li[sum, subtraction             ] +, -
-	\Li[comparisons                  ] >, >=, <, <=
-	\Li[comparisons                  ] ==, !=
-	\Li[and, or                      ] \&\&, ||
-	\Li[ternary conditional          ] \I{expr1}?\I{expr2}:\I{expr3}
-	\Li[assignments                  ] <-, +<-, -<-, *<-
-	\li                                /<-, ||<-, \&\&<-
+	\Li[9] .
+	\Li[8] **, \verb+^+
+	\Li[7] *, /, `div`, `mod`
+	\Li[6] +, -
+	\Li[5] ++, :
+	\Li[4] `elem`
+	\li[4] >, >=, <, <=
+	\li[4] ==, /=
+	\Li[3] \&\&
+	\Li[2] ||
+	\Li[1] >>=, >>
+	\Li[0] \$
 \end{Ldesc}
 
 \noindent
-Unary operators and conditionals group right to left.\\
-All other group left to right.
+Note, default is infixl 9.  See section 4.4 of the Haskell Report.
 
 
 \section{Common functions}
@@ -204,11 +203,13 @@ All other group left to right.
 	\li[running]                  \$ ./program
 	\li[running directly]         \$ run\_haskell program.hs
 	\li[interactive mode (GHCi)]  \$ ghci
-	\li[GHCi load]                \verb+>+ :l program.hs
-	\li[GHCi reload]              \verb+>+ :r program.hs
+	\li[GHCi load]                \verb+>+ :l \I{program.hs}
+	\li[GHCi reload]              \verb+>+ :r \I{program.hs}
 	\li[GHCi activate stats]      \verb+>+ :set +s
 	\li[GHCi turn off stats]      \verb+>+ :unset +s
 	\li[GHCi help]                \verb+>+ :?
+	\li[Type of an expression]    \verb+>+ :t \I{expr}
+	\li[Info (oper./func./class)] \verb+>+ :info \I{oper/func/clss}
 \end{ldesc}
 
 

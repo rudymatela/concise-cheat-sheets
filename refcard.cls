@@ -4,14 +4,27 @@
 \ProvidesClass{refcard}[2014/02/17 Reference Card]
 \LoadClass{article}
 \RequirePackage{multicol}
-\RequirePackage[margin=8mm,landscape,a4paper]{geometry}
+\RequirePackage[margin=8mm,bmargin=4mm,landscape,a4paper,includefoot,foot=24pt]{geometry}
 \RequirePackage{array}
+\RequirePackage{fancyhdr}
 
 \newcounter{line}
 
 \setlength{\columnseprule}{0.4pt}
 \setcounter{secnumdepth}{0}
-\pagestyle{empty}
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+
+\newcommand{\cright}[2]{%
+	\lfoot{\footnotesize #1}%
+	\rfoot{\footnotesize #2}%
+}
+
 \AtBeginDocument{\begin{multicols*}{3}}
 \AtEndDocument{\end{multicols*}}
 \renewcommand\maketitle{

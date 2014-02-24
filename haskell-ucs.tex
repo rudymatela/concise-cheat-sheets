@@ -87,22 +87,35 @@
 \section{Operators (grouped by precedence)}
 
 \begin{Ldesc}
-	\Li[9] .
-	\Li[8] **, \verb+^+
-	\Li[7] *, /, `div`, `mod`
-	\Li[6] +, -
-	\Li[5] ++, :
-	\Li[4] `elem`
-	\li[4] >, >=, <, <=
-	\li[4] ==, /=
-	\Li[3] \&\&
-	\Li[2] ||
-	\Li[1] >>=, >>
-	\Li[0] \$
+	\Li[List index, function composition] !!, \hfill .
+	\Li[raise to: Non-neg. Int, Int, Float] \hfill \verb+^+, \verb+^^+, \verb+**+
+	\Li[multiplication, fractional division] *, /
+	\li[integral division ($\Rightarrow -\infty$), modulus] `div`, `mod`
+	\li[integral quotient ($\Rightarrow 0$), remainder] `quot`, `rem`
+	\Li[addition, subtraction] +, -
+	\Li[list construction, append lists] \hfill :, ++
+	\Li[comparisons: relative] >, >=, <, <=
+	\li[comparisons: equality] ==, /=
+	\li[list membership] `elem`, `notElem`
+	\Li[boolean and] \hfill \&\&
+	\Li[boolean or] \hfill ||
+	\Li[sequencing: bind and then] >>=, >>
+	\Li[application, strict apl., sequencing] \$, \$!, seq
 \end{Ldesc}
 
 \noindent
-Note, default is infixl 9.  See section 4.4 of the Haskell Report.
+NOTE: Highest precedence (first line) is 9, lowest precedence is 0.  Those
+aligned to the right are right associative, all others left associative: except
+boolean comparisons and list membership, which are non-associative.  Default is
+\C{infixl 9}.
+
+\subsubsection{Defining fixity}
+\begin{ldesc}
+	\li[non associative fixity] infix \I{0-9} \I{`op`}
+	\li[left associative fixity] infixl \I{0-9} \I{+--+}
+	\li[right associative fixity] infixr \I{0-9} \I{-!-}
+	\li[default, implied when no fixity given] infixl 9
+\end{ldesc}
 
 
 \section{Common functions}

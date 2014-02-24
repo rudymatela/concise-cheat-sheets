@@ -17,3 +17,13 @@ Cheat Sheets in this project are:
 * Licensed under CC-BY-SA 3.0 or GNU FDL 1.3  (at your option)  unless otherwise stated.
 	* The `refcard.cls` file and the template are licensed under the LPPL.
 
+
+Compiling
+---------
+
+Clone the project, then:
+
+    cd ./ultimate-cheat-sheets
+    make
+
+

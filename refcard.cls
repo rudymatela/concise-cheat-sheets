@@ -17,7 +17,8 @@
 % vim:set filetype=tex:
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{refcard}[2014/02/17 Reference Card]
-\LoadClass{article}
+\LoadClass[10pt]{article}
+%\LoadClass[8pt]{extarticle}
 \RequirePackage{multicol}
 \RequirePackage[margin=8mm,bmargin=4mm,landscape,a4paper,includefoot,foot=24pt]{geometry}
 \RequirePackage{array}

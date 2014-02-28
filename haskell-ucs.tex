@@ -225,7 +225,11 @@ boolean comparisons and list membership, which are non-associative.  Default is
 \section{List Comprehensions}
 
 \begin{ldesc}
-	\li[etc] etc
+	\li[pairs where sum=4] [(x,y) | \li
+	                       \s\s{}x <- [0..4], \li
+						   \s\s{}y <- [0..4], \li
+						   \s\s{}x + y == 4] \li
+	                       == [(0,4),(1,3),(2,2),...]
 \end{ldesc}
 
 

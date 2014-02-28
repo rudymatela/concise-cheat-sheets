@@ -179,20 +179,46 @@ boolean comparisons and list membership, which are non-associative.  Default is
 \end{ldesc}
 
 
-\subsection{Flow Constructions}
+\subsection{Expressions (Eval. control)}
 
 \begin{ldesc}
-	\li[if statement]
-		if\s(\I{expr})\s\I{block}     \li
-		else\s\s\s\s\s\s\s\s\I{block} \li
-	
-	\li[do notation] do ...
+	\li[if expression]
+		if\s\I{expr}\s\textcolor{gray}{::\s{}Bool} \li
+		\s\s{}then\s\I{expr} \textcolor{gray}{::\s{}a} \li
+		\s\s{}else\s\I{expr} \textcolor{gray}{::\s{}a} \li
 
-	\li[while statement]
-		while (\I{expr}) \{           \li
-		\s\s\s\s\I{statement};        \li
-		\s\s\s\s\I{statement};        \li
-	    \}
+	\li[case expression]
+		case\s\I{expr}\s{}of     \li
+		\s\s{}\I{expr}\s->\s{}\I{expr}   \li
+		\s\s{}\I{expr}\s->\s{}\I{expr}   \li
+		\s\s... \li
+		\s\s{}\I{\_}\s->\s{}\I{expr}   \li
+
+	\li[let expression]
+		let\s\I{name}=\I{expr} \li
+		\s\s\s\s\I{name}=\I{expr} \li
+		\s\s\s\s... \li
+		in\s\I{expr} \li
+
+	\li[where notation]
+		\I{expr} \li
+		where\s\I{name}=\I{expr} \li
+		\s\s\s\s\s\s\I{name}=\I{expr} \li
+		\s\s\s\s\s\s... \li
+
+	\li[do notation]
+		do      \I{statement} \li
+		\s\s\s{}\I{pat} <- \I{exp} \li
+		\s\s\s{}\I{statement} \li
+		\s\s\s{}\I{pat} <- \I{exp} \li
+		\s\s\s{}... \li
+
+	\li[pattern matching]
+		f\s::\s{}a -> b -> c \li[\s{}\I{(case sugar)}]
+		f expr expr = expr \li
+		f \verb+_+\s\s\s{} expr = expr \li
+		f expr \verb+_+\s\s\s{} = expr \li
+		f \verb+_+\s\s\s{} \verb+_+\s\s\s{} = expr
 \end{ldesc}
 
 

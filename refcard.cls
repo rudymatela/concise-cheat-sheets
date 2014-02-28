@@ -22,6 +22,7 @@
 \RequirePackage[margin=8mm,bmargin=4mm,landscape,a4paper,includefoot,foot=24pt]{geometry}
 \RequirePackage{array}
 \RequirePackage{fancyhdr}
+\RequirePackage{xcolor}
 
 \newcounter{line}
 
@@ -79,4 +80,5 @@
 \ifnum\theline>1 \\\hline\fi%
 #1 &
 }
-\newcommand{\s}{\hphantom{\_}}
+%\newcommand{\s}{\hphantom{\_}}
+\newcommand{\s}{\hphantom{A}}

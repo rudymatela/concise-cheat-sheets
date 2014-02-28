@@ -33,7 +33,7 @@
 	func x = expr
 
 	fung :: type -> [type] -> type
-	func x xs = expr
+	fung x xs = expr
 
 	main = do code
 	          code
@@ -143,7 +143,7 @@ boolean comparisons and list membership, which are non-associative.  Default is
 	\li[size / length of \C{xs}]         length xs
 	\li[invert / reverse of \C{xs}]      reverse xs
 	\li[head / first element of \C{xs}]  head xs
-	\li[checks for \C{x} in \C{xs}]      x `elem` xs
+	\li[checks for \C{x} in \C{xs}]      x `elem` xs \li
 	                                     elem x xs
 	\li[sorts \C{xs}]                    sort xs
 	\li                                  (xs :: Ord a => [a])
@@ -157,7 +157,7 @@ boolean comparisons and list membership, which are non-associative.  Default is
 \end{ldesc}
 
 
-\subsection{High Order Functions}
+\subsection{Higher-order / Functors}
 
 \newcommand{\emptyarray}{[]}
 \begin{ldesc}

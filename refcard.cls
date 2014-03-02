@@ -17,8 +17,8 @@
 % vim:set filetype=tex:
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{refcard}[2014/02/17 Reference Card]
-\LoadClass[10pt]{article}
-%\LoadClass[8pt]{extarticle}
+%\LoadClass[10pt]{article}
+\LoadClass[8pt]{extarticle}
 \RequirePackage{multicol}
 \RequirePackage[margin=8mm,bmargin=4mm,landscape,a4paper,includefoot,foot=24pt]{geometry}
 \RequirePackage{array}
@@ -28,6 +28,7 @@
 \newcounter{line}
 
 \setlength{\columnseprule}{0.4pt}
+\setlength{\columnsep}{24pt}
 \setcounter{secnumdepth}{0}
 \pagestyle{fancy}
 \lhead{}

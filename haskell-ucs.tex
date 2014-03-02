@@ -148,7 +148,9 @@ boolean comparisons and list membership, which are non-associative.  Default is
 	\li[checks for \C{x} in \C{xs}]      x `elem` xs \li
 	                                     elem x xs
 	\li[sorts \C{xs}]                    sort xs
-	\li                                  (xs :: Ord a => [a])
+	\li                                  \s\s:: Ord a => [a]
+	\li[all pairs of two lists]          zip xs ys ps \li
+										 \s\s:: [a] -> [b] -> [(a, b)]
 \end{ldesc}
 
 \subsection{Tuples}
@@ -165,8 +167,12 @@ boolean comparisons and list membership, which are non-associative.  Default is
 \begin{ldesc}
 	\li[apply f for each x in xs]   map f xs
 	\li[\s\s returning new list]    \s\s:: (a -> b) -> [a] -> [b]
-	\li[$x_1:x_2:...:\emptyarray \Rightarrow \backslash$]  foldl (+) n xs
-	\li[$x_1 + x_2 + ... + n$]                             \s\s\footnotesize :: (a -> b -> a) -> b -> [a] -> b
+	\li[fold - (z + left) `to` right]   foldl f z xs \li
+										\s\s\small{}:: (a -> b -> a) -> a -> [b] -> a
+	\li[fold - right `to` (left + z)]   foldr f z xs \li
+										\s\s\small{}:: (a -> b -> b) -> b -> [a] -> b
+	\li[filter all xs satisfying p xs]  filter p xs \li
+	                                    \s\s\small{}:: (a -> Bool) -> [a] -> [a]
 \end{ldesc}
 
 

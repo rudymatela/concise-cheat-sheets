@@ -153,7 +153,7 @@ boolean comparisons and list membership, which are non-associative.  Default is
 
 \section{Common functions}
 
-\subsection{Lists {\small (and Strings {\tiny(which are lists...)})}}
+\subsection{Lists {\normalsize (and Strings {\small(which are lists...)})}}
 
 \begin{ldesc}
 	\li[size / length of \C{xs}]         length xs
@@ -188,6 +188,24 @@ boolean comparisons and list membership, which are non-associative.  Default is
 										\s\s\small{}:: (a -> b -> b) -> b -> [a] -> b
 	\li[filter all xs satisfying p xs]  filter p xs \li
 	                                    \s\s\small{}:: (a -> Bool) -> [a] -> [a]
+\end{ldesc}
+
+
+\subsection{IO \normalsize -- Must be ``inside'' the IO Monad}
+
+\begin{ldesc}
+	\li[Write char \C{c} to stdout]                      putChar c
+	\li[Write string \C{cs} to stdout]                   putStr cs
+	\li[... \C{cs} ... with a newline]                   putStrLn cs
+	\li[Print \C{x}, a \C{show} instance$^2$, to stdout] print x
+	\li[Read char from stdin]                            getChar
+	\li[Read line from stdin as a string]                getLine
+	\li[Read all input from stdin as a string]           getContents
+	\li[Make foo process the input]                      interact foo \li
+	                                                     \s\s\small{}:: (String -> String) -> IO ()
+	\li[Write char \C{c} to channel/file \C{h}]          hPutChar h c
+	\li[Write string \C{cs} to channel/file \C{h}]       hPutStr h cs
+	\li[... \C{cs} ... with a newline ... to \C{h}]      hPutStrLn h cs
 \end{ldesc}
 
 

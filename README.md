@@ -8,7 +8,19 @@ tools.  Currently:
 * A Template Cheat Sheet
 * A LaTeX cls file, for the creation of sheets.
 
-Cheat Sheets in this project are:
+
+Compiling
+---------
+
+Clone the project, then:
+
+    cd ./ultimate-cheat-sheets
+    make
+
+
+
+Features
+--------
 
 * No more than 2 pages long: adhering to the dictionary definition of a sheet of paper.
 	* Look at the [C Reference Card] by J. H. Silverman for a good example
@@ -18,14 +30,6 @@ Cheat Sheets in this project are:
 * Licensed under CC-BY-SA 3.0 or GNU FDL 1.3  (at your option)  unless otherwise stated.
 	* The `refcard.cls` file and the template are licensed under the LPPL.
 
-
-Compiling
----------
-
-Clone the project, then:
-
-    cd ./ultimate-cheat-sheets
-    make
 
 
 [C Reference Card]: http://www.math.brown.edu/~jhs/ReferenceCards/CRefCard.v2.2.pdf

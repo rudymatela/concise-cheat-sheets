@@ -4,7 +4,7 @@ Ultimate Cheat Sheets
 This repository is a collection of Cheat Sheets for programming languages and
 tools.  Currently:
 
-* A [Haskell Cheat Sheet]  ("beta" version)
+* A [Haskell Cheat Sheet] -- "beta" version
 * A Template Cheat Sheet
 * A LaTeX cls file, for the creation of sheets.
 

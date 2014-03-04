@@ -217,6 +217,38 @@ boolean comparisons and list membership, which are non-associative.  Default is
 \end{ldesc}
 
 
+\section{Pattern Matching}
+
+\begin{ldesc}
+    \li[Lists] 
+        x:xs\s\textcolor{gray}{-- Cons} \li[]
+        [] \textcolor{gray}{-- Nil} \li[]
+        [a,b,c] \textcolor{gray}{-- List with 3 elements} \li
+        (a:b:c:[]) \textcolor{gray}{-- Equivalent to above} \li
+        (x:3:xs) \textcolor{gray}{-- List where 2nd elem is 3} \li
+
+    \li[Other Types] 
+        (a,b) \textcolor{gray}{-- Match on tuple}\li
+        Just a \textcolor{gray}{-- Match on 'Just' constructor} \li
+        Nothing \textcolor{gray}{-- Match on 'Nothing' constructor} \li
+        MyData a b c \textcolor{gray}{-- Match on user-defined type} \li
+
+    \li[Nested patterns]                                
+        (a,b):xs \textcolor{gray}{-- Match first tuple from list} \li
+        (a,[1,2],c) \li
+
+    \li[As-pattern]
+        s@(a,b) \textcolor{gray}{-- s represents the entire tuple} \li
+        a@(x:xs) \li
+        p@(MyData a b c) \li
+
+    \li[Wildcard]
+        (\_:xs) \textcolor{gray}{-- ignore first elem of list} \li
+        (a,\_)  \textcolor{gray}{-- ignore second elem of tuple} \li
+        MyData a \_ c \li
+\end{ldesc}
+
+
 \section{List Comprehensions}
 
 \begin{ldesc}
@@ -241,8 +273,8 @@ boolean comparisons and list membership, which are non-associative.  Default is
 
 	\li[case expression]
 		case\s\I{expr}\s{}of     \li
-		\s\s{}\I{expr}\s->\s{}\I{expr}   \li
-		\s\s{}\I{expr}\s->\s{}\I{expr}   \li
+		\s\s{}\I{pat}\s->\s{}\I{expr}   \li
+		\s\s{}\I{pat}\s->\s{}\I{expr}   \li
 		\s\s... \li
 		\s\s{}\I{\_}\s->\s{}\I{expr}   \li
 

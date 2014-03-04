@@ -22,14 +22,14 @@ Clone the project, then:
 Features
 --------
 
-* No more than *2 pages long*: adhering to the dictionary definition of a sheet of paper.
+* No more than **2 pages long**: adhering to the dictionary definition of a sheet of paper.
 	* Look at the [C Reference Card] by J. H. Silverman for a good example
 	* If you think something must be added and there is no space: consider removing something
-* *Simple to read*: they do *not* aim to *teach* you how to use something, but simply
-  *remind you* of syntax, functions or caveats.
-* Made in LaTeX using a *simple 3 column format*.
-* Licensed under *CC-BY-SA* 3.0 or *GNU FDL* 1.3  (at your option)  unless otherwise stated.
-	* The `refcard.cls` file and the template are licensed under the *LPPL*.
+* **Simple to read**: they do **not** aim to **teach** you how to use something, but simply
+  **remind you** of syntax, functions or caveats.
+* Made in LaTeX using a **simple 3 column format**.
+* Licensed under **CC-BY-SA** 3.0 or **GNU FDL** 1.3  (at your option)  unless otherwise stated.
+	* The `refcard.cls` file and the template are licensed under the **LPPL**.
 
 
 

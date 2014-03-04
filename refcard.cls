@@ -20,7 +20,7 @@
 %\LoadClass[10pt]{article}
 \LoadClass[8pt]{extarticle}
 \RequirePackage{multicol}
-\RequirePackage[margin=8mm,bmargin=4mm,landscape,a4paper,includefoot,foot=24pt]{geometry}
+\RequirePackage[margin=9mm,bmargin=6mm,landscape,a4paper,includefoot,foot=24pt]{geometry}
 \RequirePackage{array}
 \RequirePackage{fancyhdr}
 \RequirePackage{xcolor}

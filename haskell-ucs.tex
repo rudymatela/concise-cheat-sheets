@@ -46,8 +46,8 @@
 \section{Function Application}
 
 \begin{tabular}{CC}
-	\li[f a b] (f a) b
-	\li[f a b c] ((f a) b) c
+	\li[f x y] (f x) y
+	\li[f x y z] ((f x) y) z
 	\li[f g \$ h x] f g (h x)
 	\li[f \$ g x y] f (g x y)
 	\li[f \$ g \$ h x] f (g (h x))
@@ -127,9 +127,8 @@
 	\li[integral quotient ($\Rightarrow 0$), remainder] `quot`, `rem`
 	\Li[addition, subtraction] +, -
 	\Li[list construction, append lists] \hfill :, ++
-	\Li[comparisons: relative] >, >=, <, <=
-	\li[comparisons: equality] ==, /=
-	\li[list membership] `elem`, `notElem`
+	\Li[comparisons:]     \s>, >=, <, <=, ==, /=\s
+	\li[list membership]  \s\s`elem`, `notElem`\s\s
 	\Li[boolean and] \hfill \&\&
 	\Li[boolean or] \hfill ||
 	\Li[sequencing: bind and then] >>=, >>
@@ -149,6 +148,15 @@ boolean comparisons and list membership, which are non-associative.  Default is
 	\li[right associative fixity] infixr \I{0-9} \I{-!-}
 	\li[default, implied when no fixity given] infixl 9
 \end{ldesc}
+
+\subsection{Functions $\equiv$ Infix operators}
+
+\begin{tabular}{CC}
+	\li[f a b]         a `f` b
+	\li[a + b]         (+) a b
+	\li[(a +) b]       ((+) a) b
+	\li[(+ b) a]       (\verb+\x+ -> ((+) x b)) a
+\end{tabular}
 
 
 \section{Common functions}

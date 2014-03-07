@@ -34,4 +34,4 @@ Features
 
 
 [C Reference Card]: http://www.math.brown.edu/~jhs/ReferenceCards/CRefCard.v2.2.pdf
-[Haskell Cheat Sheet]: https://matela.com.br/pub/cheat-sheets/haskell-ucs-0.2.pdf
+[Haskell Cheat Sheet]: https://matela.com.br/pub/cheat-sheets/haskell-ucs-0.3.pdf

@@ -217,7 +217,7 @@ boolean comparisons and list membership, which are non-associative.  Default is
 \end{ldesc}
 
 
-\vspace{2cm} % Pragma, move pattern matching to next page
+\vspace{35mm} % Pragma, move pattern matching to next page
 
 
 \section{Pattern Matching}
@@ -326,10 +326,10 @@ boolean comparisons and list membership, which are non-associative.  Default is
 
 	\li[pattern matching]
 		f\s::\s{}a -> b -> c \li[\s{}\I{(case sugar)}]
-		f expr expr = expr \li
-		f \verb+_+\s\s\s{} expr = expr \li
-		f expr \verb+_+\s\s\s{} = expr \li
-		f \verb+_+\s\s\s{} \verb+_+\s\s\s{} = expr
+		f pat pat = expr \li
+		f \verb+_+\s\s{} pat = expr \li
+		f pat \verb+_+\s\s{} = expr \li
+		f \verb+_+\s\s{} \verb+_+\s\s{} = expr
 \end{ldesc}
 
 

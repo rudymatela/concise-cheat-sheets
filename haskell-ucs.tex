@@ -217,36 +217,60 @@ boolean comparisons and list membership, which are non-associative.  Default is
 \end{ldesc}
 
 
+\vspace{2cm} % Pragma, move pattern matching to next page
+
+
 \section{Pattern Matching}
 
+
+\subsection{List Pattern Matching}
+
 \begin{ldesc}
-    \li[Lists] 
-        x:xs\s\textcolor{gray}{-- Cons} \li[]
-        [] \textcolor{gray}{-- Nil} \li[]
-        [a,b,c] \textcolor{gray}{-- List with 3 elements} \li
-        (a:b:c:[]) \textcolor{gray}{-- Equivalent to above} \li
-        (x:3:xs) \textcolor{gray}{-- List where 2nd elem is 3} \li
-
-    \li[Other Types] 
-        (a,b) \textcolor{gray}{-- Match on tuple}\li
-        Just a \textcolor{gray}{-- Match on 'Just' constructor} \li
-        Nothing \textcolor{gray}{-- Match on 'Nothing' constructor} \li
-        MyData a b c \textcolor{gray}{-- Match on user-defined type} \li
-
-    \li[Nested patterns]                                
-        (a,b):xs \textcolor{gray}{-- Match first tuple from list} \li
-        (a,[1,2],c) \li
-
-    \li[As-pattern]
-        s@(a,b) \textcolor{gray}{-- s represents the entire tuple} \li
-        a@(x:xs) \li
-        p@(MyData a b c) \li
-
-    \li[Wildcard]
-        (\_:xs) \textcolor{gray}{-- ignore first elem of list} \li
-        (a,\_)  \textcolor{gray}{-- ignore second elem of tuple} \li
-        MyData a \_ c \li
+	\li[head \C{x} and tail \C{xs}]  (x:xs)
+	\li[empty list]                  []
+	\li[list with 3 elements \C{a}, \C{b} and \C{c}]  [a,b,c]
+	\li[list with 3 elements \C{a}, \C{b} and \C{c}]  (a:b:c:[])
+	\li[list where 2nd element is 3] (x:3:xs)
 \end{ldesc}
+
+
+\subsection{Other Types Pattern Matching}
+
+\begin{ldesc}
+	\li[pair values \C{a} and \C{b}]           (a,b)
+	\li[triple values \C{a}, \C{b} and \C{c}]  (a,b,c)
+	\li[just constructor]                      Just a
+	\li[nothing constructor]                   Nothing
+	\li[user-defined type]                     MyData a b c
+\end{ldesc}
+
+
+\subsection{Wildcard Pattern ``Matching''}
+
+\begin{ldesc}
+	\li[ignore value]                      \verb+_+
+	\li[ignore first elements of list]     (\verb+_+:xs)
+	\li[ignore second element of tuple]    (a,\verb+_+)
+	\li[ignore one of the ``componenet'']  MyData a \verb+_+ c
+\end{ldesc}
+
+
+\subsection{Nested Pattern}
+
+\begin{ldesc}
+	\li[match first tuple on list]  ((a,b):xs)
+	\li[match list inside tuple]    (xs,y:ys,zs)
+\end{ldesc}
+
+
+\subsection{As-pattern}
+
+\begin{ldesc}
+	\li[match entire tuple \C{s} its values \C{a,b}]            s@(a,b)
+	\li[match entire list \C{a} its head \C{x} and tail \C{xs}] a@(x:xs)
+	\li[entire data \C{p} and ``components'']                   p@(MyData a b c)
+\end{ldesc}
+
 
 
 \section{List Comprehensions}
@@ -258,6 +282,9 @@ boolean comparisons and list membership, which are non-associative.  Default is
 						   \s\s{}x + y == 4] \li
 	                       == [(0,4),(1,3),(2,2),...]
 \end{ldesc}
+
+
+\vspace{45mm} % Pragma, move list comprehensions to next column
 
 
 \section{Expressions (Eval. control)}

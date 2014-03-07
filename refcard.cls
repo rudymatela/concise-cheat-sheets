@@ -14,10 +14,8 @@
 % This work consists of the files refcard.cls and tempalte-refcard.tex
 
 
-% vim:set filetype=tex:
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{refcard}[2014/02/17 Reference Card]
-%\LoadClass[10pt]{article}
 \LoadClass[8pt]{extarticle}
 \RequirePackage{multicol}
 \RequirePackage[margin=9mm,bmargin=6mm,landscape,a4paper,includefoot,foot=24pt]{geometry}
@@ -82,5 +80,4 @@
 \ifnum\theline>1 \\\hline\fi%
 #1 &
 }
-%\newcommand{\s}{\hphantom{\_}}
 \newcommand{\s}{\hphantom{A}}

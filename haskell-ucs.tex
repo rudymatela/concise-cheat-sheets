@@ -61,10 +61,9 @@
 	\li[has type]               \I{expr}\s::\s\I{type}
 	\li[boolean]                True || False :: Bool
 	\li[character]              'a' :: Char
-	\li[integer (32-bit)]       1 :: Int
-	\li                         3 + 2 :: Int
-	\li[integer (arbitrary sz.)]    31337 :: Integer
-	\li                         31337\verb+^+10 :: Integer
+	\li[fixed-precision integer] 1 :: Int
+	\li[integer (arbitrary sz.)] 31337 :: Integer
+	\li                          31337\verb+^+10 :: Integer
 	\li[single precision float] 1.2 :: Float 
 	\li[double precision float] 1.2 :: Double
 	\li[list]                   [] :: [a]
@@ -89,8 +88,8 @@
 	\li[Fractional]                    1.2 :: Fractional a => a
 	\li[Equatable (==)]                'a' :: Eq a => a
 	\li[Ordered ($<=,>=,>,<$)]         731 :: Ord a => a
-	\li                                sort :: 
-	\li                                \s\s\s\s Ord a => [a] -> [a]
+	\li                                sort :: Ord a => [a] -> [a]
+	\li[Bounded (minBound,maxBound)]   minBound ::\s{}Int
 \end{ldesc}
 
 

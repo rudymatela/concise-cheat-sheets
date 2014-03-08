@@ -126,8 +126,9 @@
 	\li[integral quotient ($\Rightarrow 0$), remainder] `quot`, `rem`
 	\Li[addition, subtraction] +, -
 	\Li[list construction, append lists] \hfill :, ++
-	\Li[comparisons:]     \s>, >=, <, <=, ==, /=\s
-	\li[list membership]  \s\s`elem`, `notElem`\s\s
+	\li[list difference]                 \s\s\s\s\s\s\s\s\s\s\s\s\verb+\\+
+	\Li[comparisons:]     \s\s>, >=, <, <=, ==, /=\s\s
+	\li[list membership]  \s\s\s`elem`, `notElem`\s\s\s
 	\Li[boolean and] \hfill \&\&
 	\Li[boolean or] \hfill ||
 	\Li[sequencing: bind and then] >>=, >>
@@ -137,7 +138,7 @@
 \noindent
 NOTE: Highest precedence (first line) is 9, lowest precedence is 0.  Those
 aligned to the right are right associative, all others left associative: except
-boolean comparisons and list membership, which are non-associative.  Default is
+comparisons, list membership and list difference which are non-associative.  Default is
 \C{infixl 9}.
 
 \subsubsection{Defining fixity}

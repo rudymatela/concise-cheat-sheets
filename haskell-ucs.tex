@@ -190,9 +190,9 @@ comparisons, list membership and list difference which are non-associative.  Def
 \begin{ldesc}
 	\li[apply f to each x in xs]   map f xs
 	\li[\s\s returning new list]    \s\s:: (a -> b) -> [a] -> [b]
-	\li[fold - (z + left) `to` right]   foldl f z xs \li
+	\li[fold - (z `f` left) `to` right]   foldl f z xs \li
 										\s\s\small{}:: (a -> b -> a) -> a -> [b] -> a
-	\li[fold - right `to` (left + z)]   foldr f z xs \li
+	\li[fold - right `to` (left `f` z)]   foldr f z xs \li
 										\s\s\small{}:: (a -> b -> b) -> b -> [a] -> b
 	\li[filter all xs satisfying p xs]  filter p xs \li
 	                                    \s\s\small{}:: (a -> Bool) -> [a] -> [a]

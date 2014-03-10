@@ -164,16 +164,29 @@ comparisons, list membership and list difference which are non-associative.  Def
 \subsection{Lists {\normalsize (and Strings {\small(which are lists...)})}}
 
 \begin{ldesc}
+	\li[head / first element of \C{xs}]  head xs
+	\li[tail (rest) of \C{xs}]           tail xs
+	\li[elements of \C{xs} except last]  init xs
+	\li[first \C{n} elements of \C{xs}]  take n xs
+	\li[excludes first \C{n} elements of \C{xs}] drop n xs
+	\li[checks for \C{x} in \C{xs}]      x `elem` xs
+	\li[is \C{xs} null/empty?]           null xs
 	\li[size / length of \C{xs}]         length xs
 	\li[invert / reverse of \C{xs}]      reverse xs
-	\li[head / first element of \C{xs}]  head xs
-	\li[checks for \C{x} in \C{xs}]      x `elem` xs \li
-	                                     elem x xs
 	\li[sorts \C{xs}]                    sort xs
-	\li                                  \s\s:: Ord a => [a]
-	\li[pairs of elements from xs and ys] zip xs ys \li
-										 \s\s:: [a] -> [b] -> [(a, b)]
+%	\li                                  \s\s:: Ord a => [a]
+	\li[pairs (x,y) from xs and ys]      zip xs ys
+%										 \s\s:: [a] -> [b] -> [(a, b)]
+	\li[infinite repetition of \C{xs}]   cycle xs
+	\li[and of booleans in \C{xs}]      and xs
+	\li[or of booleans in \C{xs}]       or xs
+	\li[sum of numbers in \C{xs}]       sum xs
+	\li[product of numbers in \C{xs}]   product xs
+	\li[concatenates list of lists \C{xs}] concat xs
+	\li[largest element in \C{xs}]      maximum xs
+	\li[smallest element in \C{xs}]     minimum xs
 \end{ldesc}
+
 
 \subsection{Tuples}
 
@@ -189,13 +202,13 @@ comparisons, list membership and list difference which are non-associative.  Def
 \newcommand{\emptyarray}{[]}
 \begin{ldesc}
 	\li[apply f to each x in xs]   map f xs
-	\li[\s\s returning new list]    \s\s:: (a -> b) -> [a] -> [b]
+%	\li[\s\s returning new list]    \s\s:: (a -> b) -> [a] -> [b]
 	\li[fold - (z `f` left) `to` right]   foldl f z xs \li
 										\s\s\small{}:: (a -> b -> a) -> a -> [b] -> a
 	\li[fold - right `to` (left `f` z)]   foldr f z xs \li
 										\s\s\small{}:: (a -> b -> b) -> b -> [a] -> b
 	\li[filter all xs satisfying p xs]  filter p xs \li
-	                                    \s\s\small{}:: (a -> Bool) -> [a] -> [a]
+%	                                    \s\s\small{}:: (a -> Bool) -> [a] -> [a]
 \end{ldesc}
 
 
@@ -215,9 +228,6 @@ comparisons, list membership and list difference which are non-associative.  Def
 	\li[Write string \C{cs} to channel/file \C{h}]       hPutStr h cs
 	\li[... \C{cs} ... with a newline ... to \C{h}]      hPutStrLn h cs
 \end{ldesc}
-
-
-\vspace{35mm} % Pragma, move pattern matching to next page
 
 
 \section{Pattern Matching}

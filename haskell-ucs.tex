@@ -381,6 +381,17 @@ comparisons, list membership and list difference which are non-associative.  Def
 \end{ldesc}
 
 
+\section{Language Pragmas}
+
+\begin{ldesc}
+	\li[Activating some pragma]      \verb+{+-\# LANGUAGE \I{SomePragma} \#-\verb+}+
+	\li[Same, via GHC call]          ghc -X\I{SomePragma} ...
+	\li[No monomorphism restriction] NoMonomorphismRestriction
+	\li[Scoped type variables]       ScopedTypeVariables
+	\li[Template Haskell]            TemplateHaskell
+\end{ldesc}
+
+
 \section{GHC - Glasgow Haskell Compiler}
 
 \begin{ldesc}

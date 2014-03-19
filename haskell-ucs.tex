@@ -232,6 +232,13 @@ comparisons, list membership and list difference which are non-associative.  Def
 
 \section{Pattern Matching}
 
+\subsection{Simple Pattern Matching}
+
+\begin{ldesc}
+	\li[Number 3]      3
+	\li[Character 'a'] 'a'
+	\li[Empty string]  ""
+\end{ldesc}
 
 \subsection{List Pattern Matching}
 
@@ -294,7 +301,7 @@ comparisons, list membership and list difference which are non-associative.  Def
 \end{ldesc}
 
 
-\vspace{45mm} % Pragma, move list comprehensions to next column
+\vspace{20mm} % Pragma, move list comprehensions to next column
 
 
 \section{Expressions (Eval. control)}
@@ -339,7 +346,13 @@ comparisons, list membership and list difference which are non-associative.  Def
 		f pat pat = expr \li
 		f \verb+_+\s\s{} pat = expr \li
 		f pat \verb+_+\s\s{} = expr \li
-		f \verb+_+\s\s{} \verb+_+\s\s{} = expr
+		f \verb+_+\s\s{} \verb+_+\s\s{} = expr \li
+	
+	\li[guarded equations]
+		\I{name} \li
+		\s\s| \I{boolexpr} = \I{expr} \li
+		\s\s| \I{boolexpr} = \I{expr} \li
+		\s\s| \I{boolexpr} = \I{expr}
 \end{ldesc}
 
 

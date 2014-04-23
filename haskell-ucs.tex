@@ -383,12 +383,12 @@ comparisons, list membership and list difference which are non-associative.  Def
 		quickCheck \I{prop\_something}
 \end{ldesc}
 
-\subsection{SmallCheck \hfill \C{Test.SmallCheck}}
+%\subsection{SmallCheck \hfill \C{Test.SmallCheck}}
 
-\begin{ldesc}
-	\li[verifying property]
-		smallCheck \I{depth} \I{prop\_something}
-\end{ldesc}
+%\begin{ldesc}
+%	\li[verifying property]
+%		smallCheck \I{depth} \I{prop\_something}
+%\end{ldesc}
 
 
 \subsection{HUnit \hfill \C{Test.HUnit}}
@@ -401,6 +401,18 @@ comparisons, list membership and list difference which are non-associative.  Def
 						\s\s\s\s\s\s\s\s\s\s\s... \li
 						\s\s\s\s\s\s\s\s\s\s\s, \I{expec} \~{}=?\s\I{actual} ]
 	\li[running tests]      runTestTT \I{mytestlist}
+\end{ldesc}
+
+
+\subsection{Tracing and monitoring (unsafe) \hfill \C{Debug.Trace}}
+
+\begin{ldesc}
+	\li[Print \I{string}, eval'n'return \I{expr}] trace \I{string} \$ \I{expr}
+	\li[Show and print value]                traceShow \I{expr} \$ \I{expr}
+\end{ldesc}
+\begin{ldesc}
+	\li[Trace function]  fun x y | traceShow (x,y) False = undefined \li[\s call values]
+	                     fun x y = ...
 \end{ldesc}
 
 

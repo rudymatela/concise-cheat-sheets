@@ -8,6 +8,7 @@
 %
 
 \documentclass{refcard}
+\usepackage{clistings}
 
 \renewcommand{\familydefault}{\sfdefault}
 
@@ -161,23 +162,40 @@ comparisons, list membership and list difference which are non-associative.  Def
 
 \section{Common functions}
 
-\subsection{Lists {\normalsize (and Strings {\small(which are lists...)})}}
+
+\subsection{Standard Prelude}
+
+\begin{tabular}{@{}C@{\s}CC}
+	% TODO: Move id from here
+	id      & ::\s{}a -> a             & id 1337 \I{\s= 1337} \s-- identity \\
+	head    & ::\s{}[a] -> a           & head [5,4,3,6] \I{\s= 5}           \\
+	tail    & ::\s{}[a] -> [a]         & tail [5,4,3,6] \I{\s= [4,3,6]}     \\
+	init    & ::\s{}[a] -> [a]         & init [5,4,3,6] \I{\s= [5,4,3]}     \\[-1pt]
+	init xs & \s\s \textnormal{\I{init}ial elements of xs}& \s\s\textnormal{(excludes last element)} \\
+	reverse & ::\s{}[a] -> [a]         & reverse [1,3,7] \I{\s= [7,3,1]}    \\
+	take    & ::\s{}Int -> [a] -> [a]  & take 2 [5,4,3,6] \I{\s= [5,4]}     \\
+	drop    & ::\s{}Int -> [a] -> [a]  & drop 2 [5,4,3,6] \I{\s= [3,6]}     \\
+	null    & ::\s{}[a] -> Bool        & null []  \I{\s= True} \s-- emptiness \\
+	length  & ::\s{}[a] -> Int         & length [5,4,3,6] \I{\s= 4}         \\
+	elem    & ::\s{}a -> [a] -> Bool   & 'a' `elem` "bad" \I{\s= True}      \\
+	cycle   & ::\s{}[a] -> [a]         & cycle [1,2,3] \I{\s= [1,2,3,1,2,3...} \\[-1pt] % ]
+	cycle xs& \s\textnormal{infinite repetition of \C{xs}} & \\
+%	sort
+%   zip
+\end{tabular}
+
+
+\subsection{Ord Class}
+
+\begin{tabular}{C@{\s}CC}
+	min     & ::\s{}Ord a => a -> a -> a & min 'a' 'b'    \I{\s= 'a'} \\
+	max     & ::\s{}Ord a => a -> a -> a & max "b" "ab" \I{\s= "b"}   \\
+	compare & ::\s{}Ord a => a -> a -> Ordering & compare 1 2 \I{\s= LT}   \\
+\end{tabular}
+
+\subsection{Special folds}
 
 \begin{ldesc}
-	\li[head / first element of \C{xs}]  head xs
-	\li[tail (rest) of \C{xs}]           tail xs
-	\li[elements of \C{xs} except last]  init xs
-	\li[first \C{n} elements of \C{xs}]  take n xs
-	\li[excludes first \C{n} elements of \C{xs}] drop n xs
-	\li[checks for \C{x} in \C{xs}]      x `elem` xs
-	\li[is \C{xs} null/empty?]           null xs
-	\li[size / length of \C{xs}]         length xs
-	\li[invert / reverse of \C{xs}]      reverse xs
-	\li[sorts \C{xs}]                    sort xs
-%	\li                                  \s\s:: Ord a => [a]
-	\li[pairs (x,y) from xs and ys]      zip xs ys
-%										 \s\s:: [a] -> [b] -> [(a, b)]
-	\li[infinite repetition of \C{xs}]   cycle xs
 	\li[and of booleans in \C{xs}]      and xs
 	\li[or of booleans in \C{xs}]       or xs
 	\li[sum of numbers in \C{xs}]       sum xs
@@ -190,19 +208,23 @@ comparisons, list membership and list difference which are non-associative.  Def
 
 \subsection{Tuples}
 
-\begin{ldesc}
-	\li[first of pair \C{p}]             fst p
-	\li[second of pair \C{p}]            snd p
-	\li[swap pair p]                     swap p
-\end{ldesc}
+\begin{tabular}{C@{\s}CC}
+	fst  & ::\s{}(a, b) -> a     & fst ('a',1) \I{\s= 'a'} \\
+	snd  & ::\s{}(a, b) -> b     & snd ('a',1) \I{\s= 1} \\
+%	swap & ::\s{}(a, b) -> (b, a) & swap (1,2) \I{\s= (2,1)} -- Data.Tuple \\
+\end{tabular}
 
 
 \subsection{Higher-order / Functors}
 
+\begin{tabular}{C@{\s}C}
+	map                 & :: (a->b) -> [a] -> [b] \\
+	map f xs            & \textnormal{apply \C{f} to each \C{x} in \C{xs} returning new list} \\
+    map (==4) [5,4,3,6] & \I{\s= [False,True,False,False]} \\
+
+\end{tabular} \\
 \newcommand{\emptyarray}{[]}
 \begin{ldesc}
-	\li[apply f to each x in xs]   map f xs
-%	\li[\s\s returning new list]    \s\s:: (a -> b) -> [a] -> [b]
 	\li[fold - (z `f` left) `to` right]   foldl f z xs \li
 										\s\s\small{}:: (a -> b -> a) -> a -> [b] -> a
 	\li[fold - right `to` (left `f` z)]   foldr f z xs \li
@@ -210,6 +232,17 @@ comparisons, list membership and list difference which are non-associative.  Def
 	\li[filter all xs satisfying p xs]  filter p xs \li
 %	                                    \s\s\small{}:: (a -> Bool) -> [a] -> [a]
 \end{ldesc}
+
+%\begin{verbatim}
+%foldr :: (a->b->b) -> b -> [a] -> [b]
+%                       foldr (+) 0 [5,4,3,6] = 5+(4+(3+(6+0))) = 18
+%                       foldr (.) id [tail,tail] [5,4,3,6] = [3,6]
+%zipWith (a->b->c) [a] -> [b] -> [c]
+%                       zipWith elem ['a','b','c'] ["ab","ca"] = [True,False]
+%and :: [Bool] -> Bool
+%                       and = foldr (&&) True
+%\end{verbatim}
+
 
 
 \subsection{IO \normalsize -- Must be ``inside'' the IO Monad}
@@ -290,15 +323,15 @@ comparisons, list membership and list difference which are non-associative.  Def
 
 
 
-\section{List Comprehensions}
-
-\begin{ldesc}
-	\li[pairs where sum=4] [(x,y) | \li
-	                       \s\s{}x <- [0..4], \li
-						   \s\s{}y <- [0..4], \li
-						   \s\s{}x + y == 4]  \li
-	                       == [(0,4),(1,3),(2,2),...]
-\end{ldesc}
+%\section{List Comprehensions}
+%
+%\begin{ldesc}
+%	\li[pairs where sum=4] [(x,y) | \li
+%	                       \s\s{}x <- [0..4], \li
+%						   \s\s{}y <- [0..4], \li
+%						   \s\s{}x + y == 4]  \li
+%	                       == [(0,4),(1,3),(2,2),...]
+%\end{ldesc}
 
 
 \vspace{20mm} % Pragma, move list comprehensions to next column
@@ -391,17 +424,17 @@ comparisons, list membership and list difference which are non-associative.  Def
 %\end{ldesc}
 
 
-\subsection{HUnit \hfill \C{Test.HUnit}}
-
-\begin{ldesc}
-	\li[equality assertion] \I{expected} \~{}=?\s\I{actual}
-	\li[testlist]           \I{mytestlist} = \li
-							\s\s{}TestList\s{}[ \I{expec} \~{}=?\s\I{actual} \li
-						\s\s\s\s\s\s\s\s\s\s\s, \I{expec} \~{}=?\s\I{actual} \li
-						\s\s\s\s\s\s\s\s\s\s\s... \li
-						\s\s\s\s\s\s\s\s\s\s\s, \I{expec} \~{}=?\s\I{actual} ]
-	\li[running tests]      runTestTT \I{mytestlist}
-\end{ldesc}
+%\subsection{HUnit \hfill \C{Test.HUnit}}
+%
+%\begin{ldesc}
+%	\li[equality assertion] \I{expected} \~{}=?\s\I{actual}
+%	\li[testlist]           \I{mytestlist} = \li
+%							\s\s{}TestList\s{}[ \I{expec} \~{}=?\s\I{actual} \li
+%						\s\s\s\s\s\s\s\s\s\s\s, \I{expec} \~{}=?\s\I{actual} \li
+%						\s\s\s\s\s\s\s\s\s\s\s... \li
+%						\s\s\s\s\s\s\s\s\s\s\s, \I{expec} \~{}=?\s\I{actual} ]
+%	\li[running tests]      runTestTT \I{mytestlist}
+%\end{ldesc}
 
 
 \subsection{Tracing and monitoring (unsafe) \hfill \C{Debug.Trace}}

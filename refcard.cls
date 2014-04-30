@@ -74,7 +74,11 @@
 \ifnum\theline>1 \\\fi%
 #1 &
 }
-
+\newcommand{\lI}[1][]{%
+\stepcounter{line}%
+\ifnum\theline>1 \\[3.5pt]\fi%
+#1 &
+}
 \newcommand{\Li}[1][]{%
 \stepcounter{line}%
 \ifnum\theline>1 \\\hline\fi%

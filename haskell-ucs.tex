@@ -8,7 +8,6 @@
 %
 
 \documentclass{refcard}
-\usepackage{clistings}
 
 \renewcommand{\familydefault}{\sfdefault}
 
@@ -68,12 +67,12 @@
 	\li[single precision float] 1.2 :: Float 
 	\li[double precision float] 1.2 :: Double
 	\li[list]                   [] :: [a]
-%	\li[]                       [1,2,3] :: [Integer]
+	\li[]                       [1,2,3] :: [Integer]
 	\li[]                       ['a','b','c'] :: [Char]
 	\li                         "abc" :: [Char]
 	\li[]                       [[1,2],[3,4]] :: [[Integer]]
 	\li[tuple]                  (1,2) :: (Int,Int)
-%	\li                         (1,'a') :: (Int,Char)
+	\li                         (1,'a') :: (Int,Char)
 	\li                         ([1,2],'a') :: ([Int],Char)
 	\li[string]                 "asdf" :: String
 	\li[functions]              foo :: a -> a
@@ -162,12 +161,10 @@ comparisons, list membership and list difference which are non-associative.  Def
 
 \section{Common functions}
 
-
-\subsection{Standard Prelude}
+\subsection{Lists}
 
 \begin{tabular}{@{}C@{\s}CC}
 	% TODO: Move id from here
-	id      & ::\s{}a -> a             & id 1337 \I{\s= 1337} \s-- identity \\
 	head    & ::\s{}[a] -> a           & head [5,4,3,6] \I{\s= 5}           \\
 	tail    & ::\s{}[a] -> [a]         & tail [5,4,3,6] \I{\s= [4,3,6]}     \\
 	init    & ::\s{}[a] -> [a]         & init [5,4,3,6] \I{\s= [5,4,3]}     \\[-1pt]
@@ -206,9 +203,12 @@ comparisons, list membership and list difference which are non-associative.  Def
 \end{ldesc}
 
 
-\subsection{Tuples}
+\subsection{Misc / Tuples}
 
 \begin{tabular}{C@{\s}CC}
+	id        & ::\s{}a -> a      & id 1337 \I{\s= 1337} \s-- identity \\
+	const     & ::\s{}a -> b -> a & \textnormal{Return first parameter, constant func.} \\
+	undefined & ::\s{}a           & \textnormal{lifts error} \\
 	fst  & ::\s{}(a, b) -> a     & fst ('a',1) \I{\s= 'a'} \\
 	snd  & ::\s{}(a, b) -> b     & snd ('a',1) \I{\s= 1} \\
 %	swap & ::\s{}(a, b) -> (b, a) & swap (1,2) \I{\s= (2,1)} -- Data.Tuple \\
@@ -218,20 +218,20 @@ comparisons, list membership and list difference which are non-associative.  Def
 \subsection{Higher-order / Functors}
 
 \begin{tabular}{C@{\s}C}
-	map                 & :: (a->b) -> [a] -> [b] \\
+	map                 & ::\s{}(a->b) -> [a] -> [b] \\
 	map f xs            & \textnormal{apply \C{f} to each \C{x} in \C{xs} returning new list} \\
-    map (==4) [5,4,3,6] & \I{\s= [False,True,False,False]} \\
+    map (==4) [5,4,3,6] & \I{\s= [False,True,False,False]} \\[3pt]
 
-\end{tabular} \\
-\newcommand{\emptyarray}{[]}
-\begin{ldesc}
-	\li[fold - (z `f` left) `to` right]   foldl f z xs \li
-										\s\s\small{}:: (a -> b -> a) -> a -> [b] -> a
-	\li[fold - right `to` (left `f` z)]   foldr f z xs \li
-										\s\s\small{}:: (a -> b -> b) -> b -> [a] -> b
-	\li[filter all xs satisfying p xs]  filter p xs \li
-%	                                    \s\s\small{}:: (a -> Bool) -> [a] -> [a]
-\end{ldesc}
+	filter              & ::\s{}(a -> Bool) -> [a] -> [a] \\[3pt]
+
+	foldl               & ::\s{}(a -> b -> a) -> a -> [b] -> a \\
+	foldl f z xs        & \textnormal{fold - (z `f` left) `to` right} \\
+    foldl (+) 0 [5,4,3,6] & \I{\s= ((((0+5)+4)+3)+6) = 18} \\[3pt]
+
+	foldr               & ::\s{}(a -> b -> b) -> b -> [a] -> b \\
+	foldr f z xs        & \textnormal{fold - right `to` (left `f` z)} \\
+    foldr (+) 0 [5,4,3,6] & \I{\s= 5+(4+(3+(6+0))) = 18} \\
+\end{tabular}
 
 %\begin{verbatim}
 %foldr :: (a->b->b) -> b -> [a] -> [b]
@@ -339,46 +339,45 @@ comparisons, list membership and list difference which are non-associative.  Def
 \begin{ldesc}
 	\li[statement separator]         ;\s\s\s\s-- or line break
 	\li[statement grouping]          \verb+{ }+\s\s-- or layout/indentation
-	\li
-	\li[if expression]
+	\lI[if expression]
 		if\s\I{expr}\s\textcolor{gray}{::\s{}Bool} \li
 		\s\s{}then\s\I{expr} \textcolor{gray}{::\s{}a} \li
-		\s\s{}else\s\I{expr} \textcolor{gray}{::\s{}a} \li
+		\s\s{}else\s\I{expr} \textcolor{gray}{::\s{}a}
 
-	\li[case expression]
+	\lI[case expression]
 		case\s\I{expr}\s{}of     \li
 		\s\s{}\I{pat}\s->\s{}\I{expr}   \li
 		\s\s{}\I{pat}\s->\s{}\I{expr}   \li
 		\s\s... \li
-		\s\s{}\I{\_}\s->\s{}\I{expr}   \li
+		\s\s{}\I{\_}\s->\s{}\I{expr}
 
-	\li[let expression]
+	\lI[let expression]
 		let\s\I{name}=\I{expr} \li
 		\s\s\s\s\I{name}=\I{expr} \li
 		\s\s\s\s... \li
-		in\s\I{expr} \li
+		in\s\I{expr}
 
-	\li[where notation]
+	\lI[where notation]
 		\I{expr} \li
 		where\s\I{name}=\I{expr} \li
 		\s\s\s\s\s\s\I{name}=\I{expr} \li
-		\s\s\s\s\s\s... \li
+		\s\s\s\s\s\s...
 
-	\li[do notation]
+	\lI[do notation]
 		do      \I{statement} \li
 		\s\s\s{}\I{pat} <- \I{exp} \li
 		\s\s\s{}\I{statement} \li
 		\s\s\s{}\I{pat} <- \I{exp} \li
-		\s\s\s{}... \li
+		\s\s\s{}...
 
-	\li[pattern matching]
+	\lI[pattern matching]
 		f\s::\s{}a -> b -> c \li[\s{}\I{(case sugar)}]
 		f pat pat = expr \li
 		f \verb+_+\s\s{} pat = expr \li
 		f pat \verb+_+\s\s{} = expr \li
-		f \verb+_+\s\s{} \verb+_+\s\s{} = expr \li
+		f \verb+_+\s\s{} \verb+_+\s\s{} = expr
 	
-	\li[guarded equations]
+	\lI[guarded equations]
 		\I{name} \li
 		\s\s| \I{boolexpr} = \I{expr} \li
 		\s\s| \I{boolexpr} = \I{expr} \li
@@ -398,8 +397,8 @@ comparisons, list membership and list difference which are non-associative.  Def
 		\s\s, \I{goo} \li
 		\s\s) \li
 		where \li
-	    ... \li
-	\li[./File/On/Disk.hs] import File.On.Disk
+	    ...
+	\lI[./File/On/Disk.hs] import File.On.Disk
 \end{ldesc}
 
 
@@ -427,6 +426,7 @@ comparisons, list membership and list difference which are non-associative.  Def
 	\li[equality assertion] \I{expected} \~{}=?\s\I{actual}
 	\li[testlist]           \I{mytestlist} = \li
 							\s\s{}TestList\s{}[ \I{expec} \~{}=?\s\I{actual} \li
+						\s\s\s\s\s\s\s\s\s\s\s, \I{expec} \~{}=?\s\I{actual} \li
 						\s\s\s\s\s\s\s\s\s\s\s... \li
 						\s\s\s\s\s\s\s\s\s\s\s, \I{expec} \~{}=?\s\I{actual} ]
 	\li[running tests]      runTestTT \I{mytestlist}
@@ -451,8 +451,8 @@ comparisons, list membership and list difference which are non-associative.  Def
 	\li[Activating some pragma]      \verb+{+-\# LANGUAGE \I{SomePragma} \#-\verb+}+
 	\li[Same, via GHC call]          ghc -X\I{SomePragma} ...
 	\li[No monomorphism restriction] NoMonomorphismRestriction
-%	\li[Scoped type variables]       ScopedTypeVariables
-%	\li[Template Haskell]            TemplateHaskell
+	\li[Scoped type variables]       ScopedTypeVariables
+	\li[Template Haskell]            TemplateHaskell
 \end{ldesc}
 
 

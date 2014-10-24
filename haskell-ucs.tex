@@ -46,38 +46,38 @@
 \section{Function Application}
 
 \begin{tabular}{CC}
-	\li[f x y] (f x) y
-	\li[f x y z] ((f x) y) z
-	\li[f g \$ h x] f g (h x)
-	\li[f \$ g x y] f (g x y)
-	\li[f \$ g \$ h x] f (g (h x))
+	\li[f x y]               (f x) y
+	\li[f x y z]             ((f x) y) z
+	\li[f g \$ h x]          f g (h x)
+	\li[f \$ g x y]          f (g x y)
+	\li[f \$ g \$ h x]       f (g (h x))
 	\li[(f .\s{}g .\s{}h) x] f (g (h x))
 \end{tabular}
 
 
-\section{Binding Types}
+\section{Types}
 
-\begin{ldesc}
-	\li[has type]               \I{expr}\s::\s\I{type}
-	\li[boolean]                True || False :: Bool
-	\li[character]              'a' :: Char
-	\li[fixed-precision integer] 1 :: Int
-	\li[integer (arbitrary sz.)] 31337 :: Integer
-	\li                          31337\verb+^+10 :: Integer
-	\li[single precision float] 1.2 :: Float 
-	\li[double precision float] 1.2 :: Double
-	\li[list]                   [] :: [a]
-	\li[]                       [1,2,3] :: [Integer]
-	\li[]                       ['a','b','c'] :: [Char]
-	\li                         "abc" :: [Char]
-	\li[]                       [[1,2],[3,4]] :: [[Integer]]
-	\li[tuple]                  (1,2) :: (Int,Int)
-	\li                         (1,'a') :: (Int,Char)
-	\li                         ([1,2],'a') :: ([Int],Char)
-	\li[string]                 "asdf" :: String
-	\li[functions]              foo :: a -> a
-	\li                         double :: Int -> Int
-\end{ldesc}
+\begin{tabular}{lCC}
+	\li[has type]               \I{expr}         & ::~\I{type}
+	\li[boolean]                True || False    & ::~Bool
+	\li[character]              'a'              & ::~Char
+	\li[fixed-precision integer] 1               & ::~Int
+	\li[integer (arbitrary sz.)] 31337           & ::~Integer
+	\li                          31337\verb+^+10 & ::~Integer
+	\li[single precision float] 1.2              & ::~Float 
+	\li[double precision float] 1.2              & ::~Double
+	\li[list]                   []               & ::~[a]
+	\li[]                       [1,2,3]          & ::~[Integer]
+	\li[]                       ['a','b','c']    & ::~[Char]
+	\li                         "abc"            & ::~[Char]
+	\li[]                       [[1,2],[3,4]]    & ::~[[Integer]]
+	\li[string]                 "asdf"           & ::~String
+	\li[tuple]                  (1,2)            & ::~(Int,Int)
+	\li                         (1,'a')          & ::~(Int,Char)
+	\li                         ([1,2],'a')      & ::~([Int],Char)
+%	\li[function]               $\backslash$x -> x & ::~a -> a
+%	\li                         double           & ::~Int -> Int
+\end{tabular}
 
 
 \section{Binding Classes (Typeclasses)}

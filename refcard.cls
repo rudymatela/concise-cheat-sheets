@@ -17,11 +17,85 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{refcard}[2014/02/17 Reference Card]
 \LoadClass[8pt]{extarticle}
-\RequirePackage{multicol}
 \RequirePackage[margin=9mm,bmargin=6mm,landscape,a4paper,includefoot,foot=24pt]{geometry}
 \RequirePackage{array}
 \RequirePackage{fancyhdr}
 \RequirePackage{xcolor}
+
+\newif \if@threecolumn   \@threecolumnfalse
+\newif \if@secondcolumn  \@secondcolumnfalse
+\newbox \@centercolumn
+
+\def \threecolumn {%
+  \clearpage
+  \global\columnwidth\textwidth
+  \global\advance\columnwidth-\columnsep
+  \global\divide\columnwidth\thr@@
+  \global\hsize\columnwidth
+  \global\linewidth\columnwidth
+  \global\@threecolumntrue
+  \global\@twocolumntrue
+  \global\@firstcolumntrue
+  \global\@secondcolumntrue
+  \col@number \thr@@
+  \@ifnextchar [\@topnewpage\@floatplacement
+}
+
+\def \@opcol {%
+  \if@threecolumn
+	\@outputtplcol
+  \else
+    \if@twocolumn
+      \@outputdblcol
+    \else
+      \@outputpage
+    \fi
+  \fi
+  \global \@mparbottom \z@ \global \@textfloatsheight \z@
+  \@floatplacement
+}
+
+
+\def\@outputtplcol{%
+  \if@firstcolumn
+    \global \@firstcolumnfalse
+    \global \setbox\@leftcolumn \box\@outputbox
+  \else
+    \if@secondcolumn
+      \global \@secondcolumnfalse
+      \global \setbox\@centercolumn \box\@outputbox
+    \else %%%%%%%%%%%%%%%%%%% ELSE STANDARD
+
+    \global \@firstcolumntrue
+    \global \@secondcolumntrue
+    \setbox\@outputbox \vbox {%
+                         \hb@xt@\textwidth {%
+                           \hb@xt@\columnwidth {%
+                             \box\@leftcolumn \hss}%
+                           \hfil
+                           {\normalcolor\vrule \@width\columnseprule}%
+                           \hfil
+                           \hb@xt@\columnwidth {%
+                             \box\@centercolumn \hss}%
+                           \hfil
+                           {\normalcolor\vrule \@width\columnseprule}%
+                           \hfil
+                           \hb@xt@\columnwidth {%
+                             \box\@outputbox \hss}%
+                                             }%
+                              }%
+    \@combinedblfloats
+    \@outputpage
+    \begingroup
+      \@dblfloatplacement
+      \@startdblcolumn
+      \@whilesw\if@fcolmade \fi
+        {\@outputpage
+         \@startdblcolumn}%
+    \endgroup
+  \fi \fi %%%%%%%%%%%%%%%%%%%%% ELSE STANDARD
+}
+
 
 \newcounter{line}
 
@@ -41,8 +115,7 @@
 	\rfoot{\footnotesize #2}%
 }
 
-\AtBeginDocument{\begin{multicols*}{3}}
-\AtEndDocument{\end{multicols*}}
+\AtBeginDocument{\threecolumn}
 \renewcommand\maketitle{
 	\begin{center}
 		\huge

@@ -45,13 +45,13 @@
 
 \section{Function Application}
 
-\begin{tabular}{CC}
-	\li[f x y]               (f x) y
-	\li[f x y z]             ((f x) y) z
-	\li[f g \$ h x]          f g (h x)
-	\li[f \$ g x y]          f (g x y)
-	\li[f \$ g \$ h x]       f (g (h x))
-	\li[(f .\s{}g .\s{}h) x] f (g (h x))
+\begin{tabular}{CCC}
+	\li[f x y]         (f x) y
+	\li[f x y z]       ((f x) y) z
+	\li[f g \$ h x]    f g (h x)
+	\li[f \$ g x y]    f (g x y)
+	\li[f \$ g \$ h x] f (g (h x))
+	\li[(f~.~g~.~h) x] f (g (h x)) & f~.~g~.~h~\$~x
 \end{tabular}
 
 

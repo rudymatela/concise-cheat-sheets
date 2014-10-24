@@ -98,7 +98,7 @@
 \begin{ldesc}
 	\li[type synonym] type \I{MyType} = \I{Type} \li
 	                  type UserId = Integer \li
-					  type UserName = String \li
+%					  type UserName = String \li
 					  type User = (UserId,UserName) \li
 					  type UserList = [User]
 	\li[data \small{(single constructor)}]
@@ -110,8 +110,13 @@
 		~~~\hphantom{\I{MyData}}~~~~~{}\I{Nople}
 
 	\li[typeclass] class \I{MyClass} a where \li
-	               ~~{}\I{foo}~::~{}a~->~{}a~->~{}\I{b} \li
-	               ~~{}\I{goo}~::~{}a~->~{}a \li
+	               ~~\I{foo}~::~a~->~a~->~\I{b} \li
+	               ~~\I{goo}~::~a~->~a \li
+				   ~~...
+	\li[typeclass instance]
+	               instance \I{MyClass} \I{MyType} where \li
+				   ~~\I{foo}~\I{x}~\I{y}~=~... \li
+				   ~~\I{goo}~\I{x}~=~... \li
 				   ~~...
 \end{ldesc}
 

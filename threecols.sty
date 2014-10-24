@@ -12,6 +12,34 @@
 % The Current Maintainer of this work is Rudy Matela.
 %
 % This work consists of the file threecols.sty
+%
+%
+% To use this package just:
+% \usepackage{threecols} % or \RequirePackage{threecols}
+% ...
+% \begin{document}\threecols
+%
+% This will make the document three columns in a similar way that \twocolumn
+% makes the document two columns.
+%
+% This was made because the ``multicols'' package is intended to make multi
+% columns in parts of the document (not in it as a whole.  This might be a
+% better solution.
+%
+%
+% NOTE:
+% This is an ugly hack.  Use with caution.
+%
+% As this is based on the redefinition of the \@opcol (output column) command,
+% this is likely to break in future LaTeX versions as the internal workings
+% might change.
+%
+% If you're reading this in the future because the \threecolumn command broke,
+% you'll probably have to copy-paste the original definition of \@opcol,
+% \twocolumn and \@outputdblcolumn and start converting over.  It is not that
+% hard, it only took me a couple of hours.  :-)
+%
+% This was tested on texlive-2014.34872 with latex-base 2014-10-12.
 
 \ProvidesPackage{threecols}[2014/10/24 Definition of threecolumn command (A hack)]
 
@@ -19,39 +47,40 @@
 \newif \if@firstcolumns  \@firstcolumnsfalse
 \newbox \@centercolumn
 
-\def \threecolumn {%
+\def \threecolumn {% based on \twocolumn (from latex.ltx)
   \clearpage
   \global\columnwidth\textwidth
   \global\advance\columnwidth-\columnsep
-  \global\divide\columnwidth\thr@@
+  \global\divide\columnwidth\thr@@ % columnwidth / 3
   \global\hsize\columnwidth
   \global\linewidth\columnwidth
-  \global\@threecolumntrue
-  \global\@twocolumntrue
-  \global\@firstcolumntrue
-  \global\@firstcolumnstrue
-  \col@number \thr@@
+  \global\@threecolumntrue % we are now in a three column format
+  \global\@firstcolumntrue % we start with the first column
+  \global\@firstcolumnstrue % and also start with the first columns
+  \col@number \thr@@ % 3 columns
   \@ifnextchar [\@topnewpage\@floatplacement
 }
 
-\def \@opcol {%
-  \if@threecolumn
-	\@outputtplcol
-  \else
+% Redefinition of the standard ``output column'' command supporting 3 columns.
+\def \@opcol {% originally from latex.ltx
+  \if@threecolumn% we are in three columns?
+	\@outputtplcol% yes, output in 3 columns
+  \else% do as usual
     \if@twocolumn
       \@outputdblcol
     \else
       \@outputpage
     \fi
-  \fi
+  \fi%
   \global \@mparbottom \z@ \global \@textfloatsheight \z@
   \@floatplacement
 }
 
 
-\def\@outputtplcol{%
-  \if@firstcolumns
-  	\if@firstcolumn
+% Output three columns
+\def\@outputtplcol{% based on \@outputdblcol (from latex.ltx)
+  \if@firstcolumns% are we typesetting the first 2 columns?
+  	\if@firstcolumn% yes, is this the left or center column?
       \global \@firstcolumnfalse
       \global \setbox\@leftcolumn \box\@outputbox
 	\else
@@ -68,9 +97,9 @@
                            \hfil
                            {\normalcolor\vrule \@width\columnseprule}%
                            \hfil
-                           \hb@xt@\columnwidth {%
+                           \hb@xt@\columnwidth {% we also need a center column:
                              \box\@centercolumn \hss}%
-                           \hfil
+                           \hfil% and an extra separator
                            {\normalcolor\vrule \@width\columnseprule}%
                            \hfil
                            \hb@xt@\columnwidth {%

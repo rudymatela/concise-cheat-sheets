@@ -1,0 +1,91 @@
+%% threecols.sty
+%% Copyright 2014  Rudy Matela
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% The Current Maintainer of this work is Rudy Matela.
+%
+% This work consists of the file threecols.sty
+
+\ProvidesPackage{threecols}[2014/10/24 Definition of threecolumn command (A hack)]
+
+\newif \if@threecolumn   \@threecolumnfalse
+\newif \if@firstcolumns  \@firstcolumnsfalse
+\newbox \@centercolumn
+
+\def \threecolumn {%
+  \clearpage
+  \global\columnwidth\textwidth
+  \global\advance\columnwidth-\columnsep
+  \global\divide\columnwidth\thr@@
+  \global\hsize\columnwidth
+  \global\linewidth\columnwidth
+  \global\@threecolumntrue
+  \global\@twocolumntrue
+  \global\@firstcolumntrue
+  \global\@firstcolumnstrue
+  \col@number \thr@@
+  \@ifnextchar [\@topnewpage\@floatplacement
+}
+
+\def \@opcol {%
+  \if@threecolumn
+	\@outputtplcol
+  \else
+    \if@twocolumn
+      \@outputdblcol
+    \else
+      \@outputpage
+    \fi
+  \fi
+  \global \@mparbottom \z@ \global \@textfloatsheight \z@
+  \@floatplacement
+}
+
+
+\def\@outputtplcol{%
+  \if@firstcolumns
+  	\if@firstcolumn
+      \global \@firstcolumnfalse
+      \global \setbox\@leftcolumn \box\@outputbox
+	\else
+      \global \@firstcolumnsfalse
+      \global \setbox\@centercolumn \box\@outputbox
+	\fi
+  \else
+    \global \@firstcolumntrue
+    \global \@firstcolumnstrue
+    \setbox\@outputbox \vbox {%
+                         \hb@xt@\textwidth {%
+                           \hb@xt@\columnwidth {%
+                             \box\@leftcolumn \hss}%
+                           \hfil
+                           {\normalcolor\vrule \@width\columnseprule}%
+                           \hfil
+                           \hb@xt@\columnwidth {%
+                             \box\@centercolumn \hss}%
+                           \hfil
+                           {\normalcolor\vrule \@width\columnseprule}%
+                           \hfil
+                           \hb@xt@\columnwidth {%
+                             \box\@outputbox \hss}%
+                                             }%
+                              }%
+    \@combinedblfloats
+    \@outputpage
+    \begingroup
+      \@dblfloatplacement
+      \@startdblcolumn
+      \@whilesw\if@fcolmade \fi
+        {\@outputpage
+         \@startdblcolumn}%
+    \endgroup
+  \fi
+}
+

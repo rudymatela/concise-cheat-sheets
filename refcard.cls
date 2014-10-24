@@ -49,6 +49,7 @@
 	\end{center}
 }
 \newcolumntype{C}{>{\ttfamily\arraybackslash}l}
+\newcolumntype{R}{>{\ttfamily\arraybackslash}r}
 \newenvironment{ldesc}{
 \setcounter{line}{0}
 \begin{tabular}{lC}

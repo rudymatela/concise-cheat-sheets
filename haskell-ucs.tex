@@ -192,15 +192,22 @@ comparisons, list membership and list difference which are non-associative.  Def
 
 \subsection{Special folds}
 
-\begin{ldesc}
-	\li[and of booleans in \C{xs}]      and xs
-	\li[or of booleans in \C{xs}]       or xs
-	\li[sum of numbers in \C{xs}]       sum xs
-	\li[product of numbers in \C{xs}]   product xs
-	\li[concatenates list of lists \C{xs}] concat xs
-	\li[largest element in \C{xs}]      maximum xs
-	\li[smallest element in \C{xs}]     minimum xs
-\end{ldesc}
+\begin{tabular}{@{}C@{\s}C@{\hspace{1ex}}R@{\s$\equiv$\s}C}
+	and     & ::~[Bool]~->~Bool    & and [p,q,r]     & p~\&\&~q~\&\&~r \\
+	or      & ::~[Bool]~->~Bool    & or [p,q,r]      & p~||~q~||~r \\
+	sum     & ::~Num~a~=>~[a]~->~a & sum [i,j,k]     & i + j + k \\
+	product & ::~Num~a~=>~[a]~->~a & product [i,j,k] & i * j * k \\
+	concat  & ::~[[a]]~->[a]       & concat [xs,ys,zs] & xs ++ ys ++ zs \\
+	maximum & ::~Ord~a=>[a]->a     & maximum [10,0,5] & 10 \\
+	minimum & ::~Ord~a=>[a]->a     & minimum [10,0,5] & 0 \\
+%	\li[and of booleans in \C{xs}]      and xs
+%	\li[or of booleans in \C{xs}]       or xs
+%	\li[sum of numbers in \C{xs}]       sum xs
+%	\li[product of numbers in \C{xs}]   product xs
+%	\li[concatenates list of lists \C{xs}] concat xs
+%	\li[largest element in \C{xs}]      maximum xs
+%	\li[smallest element in \C{xs}]     minimum xs
+\end{tabular}
 
 
 \subsection{Misc / Tuples}

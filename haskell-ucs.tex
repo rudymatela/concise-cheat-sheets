@@ -102,17 +102,17 @@
 					  type User = (UserId,UserName) \li
 					  type UserList = [User]
 	\li[data \small{(single constructor)}]
-		data\s\I{MyData}\s{}=\s\I{MyData}\s\I{Type}\s\I{Type}\s\I{Type} \li
-		\s\s\s\s\s\s\s\s\s\s\s\s\s\s{}deriving (\I{Class},\I{Class})
+		data~\I{MyData}~{}=~\I{MyData}~\I{Type}~\I{Type}~\I{Type} \li
+		~~~~~~~~~~~~~~{}deriving (\I{Class},\I{Class})
 	\li[data \small{(multi constructor)}]
-		data\s\I{MyData}\s{}=\s{}\I{Simple} \I{Type} | \li
-		\s\s\s\hphantom{\I{MyData}}\s\s\s\s\s{}\I{Duple} \I{Type} \I{Type} | \li
-		\s\s\s\hphantom{\I{MyData}}\s\s\s\s\s{}\I{Nople}
+		data~\I{MyData}~{}=~{}\I{Simple} \I{Type} | \li
+		~~~\hphantom{\I{MyData}}~~~~~{}\I{Duple} \I{Type} \I{Type} | \li
+		~~~\hphantom{\I{MyData}}~~~~~{}\I{Nople}
 
 	\li[typeclass] class \I{MyClass} a where \li
-	               \s\s{}\I{foo}\s::\s{}a\s->\s{}a\s->\s{}\I{b} \li
-	               \s\s{}\I{goo}\s::\s{}a\s->\s{}a \li
-				   \s\s...
+	               ~~{}\I{foo}~::~{}a~->~{}a~->~{}\I{b} \li
+	               ~~{}\I{goo}~::~{}a~->~{}a \li
+				   ~~...
 \end{ldesc}
 
 

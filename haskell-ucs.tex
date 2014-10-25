@@ -226,11 +226,60 @@ comparisons, list membership and list difference which are non-associative.  Def
 	snd       & ::~(a, b) -> b      & snd (\I{x},\I{y})   & \I{y} \\
 %	swap      & ::~(a, b) -> (b, a) & snd (\I{x},\I{y})   & (\I{y},\I{x}) \\ % Data.Tuple
 	curry     & \multicolumn{3}{@{}C}{::~((a, b) -> c) -> a -> b -> c} \\
-	          &                     & curry (\la(\I{x},\I{y}) -> \I{e}) & \la\I{x} \I{y} -> \I{e}\\
+	          & \multicolumn{2}{R@{\s$\equiv$\s}}{curry (\la(\I{x},\I{y}) -> \I{e})} & \la\I{x} \I{y} -> \I{e}\\
 	uncurry   & \multicolumn{3}{@{}C}{::~((a, b) -> c) -> a -> b -> c} \\
-	          &                     & uncurry (\la \I{x} \I{y} -> \I{e}) & \la(\I{x},\I{y}) -> \I{e} \\
-% not
+	          & \multicolumn{2}{R@{\s$\equiv$\s}}{uncurry (\la \I{x} \I{y} -> \I{e})} & \la(\I{x},\I{y}) -> \I{e} \\
+    not       & ::~Bool -> Bool     & not True            & False \\
+% todo: ??
+%   flip
+%   until
+%   error
 \end{tabular}
+
+
+\subsection{Numeric}
+
+\begin{tabular}{@{}C@{\s}C@{\hspace{3ex}}R@{\s$\equiv$\s}C}
+	abs            & ::~Num a => a -> a        & abs -10             & 10    \\
+	even, odd      & ::~Num a => a -> Bool     & even -10          & True  \\
+	gcd, lcm       & \multicolumn{3}{@{}C}{::~Integral a => a -> a -> a} \\
+	               &                           & gcd 4 2  &  2 \\
+	recip          & ::~Fractional a => a -> a & recip \X & 1/\X \\
+    pi             & ::~Floating a => a        & pi     & 3.1415... \\
+	sqrt, log      & ::~Floating a => a -> a   & sqrt x & x**0.5 \\
+	\multicolumn{2}{@{}C}{exp, sin, cos, tan, asin, acos, atan} &
+	\multicolumn{2}{@{}C}{::~Floating a => a  -> a} \\
+	\multicolumn{2}{@{}C}{truncate, round, ceiling, floor} &
+	\multicolumn{2}{@{}C}{::~(RealFrac a, Integral b) => a -> b} \\
+\end{tabular}
+
+% todo: Either?
+
+
+\subsection{Strings}
+
+\newcommand{\longtype}[1]{\multicolumn{3}{@{}C}{#1}}
+\newcommand{\longcall}[1]{\multicolumn{3}{@{}R@{\s$\equiv$\s}}{#1}}
+
+\begin{tabular}{@{}C@{\s}C@{\hspace{3ex}}R@{\s$\equiv$\s}C}
+	lines & \longtype{::~String -> [String]} \\
+	\longcall{lines "ab\la{}nc\la{}nd"} & ["ab","c","d"] \\[1ex]
+	unlines & \longtype{::~[String] -> String} \\
+	\longcall{~~~~~~~~~~unlines ["ab","c","d"]} & "ab\la{}nc\la{}nd" \\[1ex]
+	words & \longtype{::~String -> [String]} \\
+	\longcall{words "ab c d"} & ["ab","c","d"] \\[1ex]
+	unwords & \longtype{::~[String] -> String} \\
+	\longcall{unwords ["ab","cd","ef"]} & "ab cd ef" \\[1ex]
+\end{tabular}
+
+\subsection{Read and Show classes}
+
+\begin{tabular}{@{}C@{\s}C@{\hspace{5ex}}R@{\s$\equiv$\s}C}
+	show & ::~Show a => a -> String & show 137 & "137" \\
+	read & ::~Show a => String -> a & read "2" & 2 \\
+\end{tabular} \\
+\B{Instances}: \C{Int}, \C{Integer}, \C{Char} (\C{String}), \C{Float},
+\C{Double}, \C{Maybe}, ...
 
 
 \subsection{Higher-order / Functors}
@@ -247,13 +296,8 @@ comparisons, list membership and list difference which are non-associative.  Def
 \end{tabular}
 
 %\begin{verbatim}
-%foldr :: (a->b->b) -> b -> [a] -> [b]
-%                       foldr (+) 0 [5,4,3,6] = 5+(4+(3+(6+0))) = 18
-%                       foldr (.) id [tail,tail] [5,4,3,6] = [3,6]
 %zipWith (a->b->c) [a] -> [b] -> [c]
 %                       zipWith elem ['a','b','c'] ["ab","ca"] = [True,False]
-%and :: [Bool] -> Bool
-%                       and = foldr (&&) True
 %\end{verbatim}
 
 
@@ -263,16 +307,19 @@ comparisons, list membership and list difference which are non-associative.  Def
 \begin{ldesc}
 	\li[Write char \C{c} to stdout]                      putChar c
 	\li[Write string \C{cs} to stdout]                   putStr cs
-	\li[... \C{cs} ... with a newline]                   putStrLn cs
-	\li[Print \C{x}, a \C{show} instance$^2$, to stdout] print x
+	\li[Write string \C{cs} to stdout w/ a newline]      putStrLn cs
+	\li[Print \C{x}, a \C{show} instance, to stdout]     print x
 	\li[Read char from stdin]                            getChar
 	\li[Read line from stdin as a string]                getLine
 	\li[Read all input from stdin as a string]           getContents
-	\li[Make foo process the input]                      interact foo \li
-	                                                     \s\s\small{}:: (String -> String) -> IO ()
-	\li[Write char \C{c} to channel/file \C{h}]          hPutChar h c
-	\li[Write string \C{cs} to channel/file \C{h}]       hPutStr h cs
-	\li[... \C{cs} ... with a newline ... to \C{h}]      hPutStrLn h cs
+	\li[Bind stdin/stdout to \C{foo} (\C{\footnotesize ::~String -> String})]
+	                                                     interact foo
+	\li[Write \C{cs} to a file named \C{fn}]             writeFile fn cs
+	\li[Append \C{cs} to a file named \C{fn}]            appendFile fn cs
+	\li[Read contents from a file named \C{fn}]          readFile fn
+%	\li[Write char \C{c} to channel/file \C{h}]          hPutChar h c  -- ghc specific!
+%	\li[Write string \C{cs} to channel/file \C{h}]       hPutStr h cs
+%	\li[Write \C{cs} to channel/file \C{h} w/ a newline] hPutStrLn h cs
 \end{ldesc}
 
 

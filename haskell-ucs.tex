@@ -15,6 +15,8 @@
 \newcommand{\X}{\I{x}}
 \newcommand{\Y}{\I{y}}
 \newcommand{\Z}{\I{z}}
+\newcommand{\W}{\I{w}}
+\newcommand{\XS}{\I{xs}}
 
 \title{Ultimate Haskell Cheat Sheet}
 
@@ -141,7 +143,7 @@
 	\Li[boolean and] \hfill \&\&
 	\Li[boolean or] \hfill ||
 	\Li[sequencing: bind and then] >>=, >>
-	\Li[application, strict apl., sequencing] \$, \$!, seq
+	\Li[application, strict apl., sequencing] \$, \$!, `seq`
 \end{Ldesc}
 
 \noindent
@@ -172,20 +174,21 @@ comparisons, list membership and list difference which are non-associative.  Def
 
 \subsection{Lists}
 
-\begin{tabular}{@{}C@{\s}CC}
-	% TODO: Move id from here
-	head    & ::\s{}[a] -> a           & head [5,4,3,6] \I{\s= 5}           \\
-	tail    & ::\s{}[a] -> [a]         & tail [5,4,3,6] \I{\s= [4,3,6]}     \\
-	init    & ::\s{}[a] -> [a]         & init [5,4,3,6] \I{\s= [5,4,3]}     \\[-1pt]
-	init xs & \s\s \textnormal{\I{init}ial elements of xs}& \s\s\textnormal{(excludes last element)} \\
-	reverse & ::\s{}[a] -> [a]         & reverse [1,3,7] \I{\s= [7,3,1]}    \\
-	take    & ::\s{}Int -> [a] -> [a]  & take 2 [5,4,3,6] \I{\s= [5,4]}     \\
-	drop    & ::\s{}Int -> [a] -> [a]  & drop 2 [5,4,3,6] \I{\s= [3,6]}     \\
-	null    & ::\s{}[a] -> Bool        & null []  \I{\s= True} \s-- emptiness \\
-	length  & ::\s{}[a] -> Int         & length [5,4,3,6] \I{\s= 4}         \\
-	elem    & ::\s{}a -> [a] -> Bool   & 'a' `elem` "bad" \I{\s= True}      \\
-	cycle   & ::\s{}[a] -> [a]         & cycle [1,2,3] \I{\s= [1,2,3,1,2,3...} \\[-1pt] % ]
-	cycle xs& \s\textnormal{infinite repetition of \C{xs}} & \\
+\begin{tabular}{@{}C@{\s}CC@{\s$\equiv$\s}C}
+	null    & ::~[a] -> Bool        & null []              & True~~{\footnotesize -- \textnormal{empty?}} \\
+	head    & ::~[a] -> a           & head [\X,\Y,\Z,\W]   & \X               \\
+	tail    & ::~[a] -> [a]         & tail [\X,\Y,\Z,\W]   & [\Y,\Z,\W]       \\
+	init    & ::~[a] -> [a]         & init [\X,\Y,\Z,\W]   & [\X,\Y,\Z]       \\
+%	init xs & \s\s \textnormal{\I{init}ial elements of xs}& \s\s\textnormal{(excludes last element)} \\
+	reverse & ::~[a] -> [a]         & reverse [\X,\Y,\Z]   & [\Z,\Y,\X]       \\
+	take    & ::~Int -> [a] -> [a]  & take 2 [\X,\Y,\Z,\W] & [\X,\Y]          \\
+	drop    & ::~Int -> [a] -> [a]  & drop 2 [\X,\Y,\Z,\W] & [\Z,\W]          \\
+	length  & ::~[a] -> Int         & length [\X,\Y,\Z]    & 3                \\
+	elem    & ::~a -> [a] -> Bool   & \Y~`elem`~[\X,\Y]    & True~~{\footnotesize-- \textnormal{$\in?$}}  \\
+	repeat  & ::~a -> [a]           & repeat x             & [\X,\X,\X,\X,...] \\
+	cycle   & ::~[a] -> [a]         & cycle [\X,\Y]        & [\X,\Y,\X,\Y,...] \\
+	        &                       & cycle \XS            & \XS++\XS++... \\
+%	cycle xs& \s\textnormal{infinite repetition of \C{xs}} & \\
 %	sort
 %   zip
 \end{tabular}

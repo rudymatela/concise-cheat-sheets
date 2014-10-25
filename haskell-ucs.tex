@@ -423,37 +423,6 @@ do \I{statement}        & \I{statement} >>\\
 \end{ldesc}
 
 
-\subsection{QuickCheck \hfill \C{Test.Quickcheck}}
-
-\begin{ldesc}
-	\li[declaring property]
-		\I{prop\_something} ::\s{}\I{a}\s{}->\s{}Bool %\li
-%		\I{prop\_something} ::\s{}\I{a}\s{}->\s{}Property
-	\li[verifying property]
-		quickCheck \I{prop\_something}
-\end{ldesc}
-
-%\subsection{SmallCheck \hfill \C{Test.SmallCheck}}
-
-%\begin{ldesc}
-%	\li[verifying property]
-%		smallCheck \I{depth} \I{prop\_something}
-%\end{ldesc}
-
-
-\subsection{HUnit \hfill \C{Test.HUnit}}
-
-\begin{ldesc}
-	\li[equality assertion] \I{expected} \~{}=?\s\I{actual}
-	\li[testlist]           \I{mytestlist} = \li
-							\s\s{}TestList\s{}[ \I{expec} \~{}=?\s\I{actual} \li
-						\s\s\s\s\s\s\s\s\s\s\s, \I{expec} \~{}=?\s\I{actual} \li
-						\s\s\s\s\s\s\s\s\s\s\s... \li
-						\s\s\s\s\s\s\s\s\s\s\s, \I{expec} \~{}=?\s\I{actual} ]
-	\li[running tests]      runTestTT \I{mytestlist}
-\end{ldesc}
-
-
 \subsection{Tracing and monitoring (unsafe) \hfill \C{Debug.Trace}}
 
 \begin{ldesc}

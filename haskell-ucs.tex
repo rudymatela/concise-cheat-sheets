@@ -162,11 +162,11 @@ comparisons, list membership and list difference which are non-associative.  Def
 
 \subsection{Functions $\equiv$ Infix operators}
 
-\begin{tabular}{CC}
-	\li[f a b]         a `f` b
-	\li[a + b]         (+) a b
-	\li[(a +) b]       ((+) a) b
-	\li[(+ b) a]       (\verb+\x+ -> ((+) x b)) a
+\begin{tabular}{C@{\s$\equiv$\s}C}
+	f a b & a `f` b \\
+	a + b & (+) a b \\
+	(a +) b & ((+) a) b \\
+	(+ b) a & \la{}x -> ((+) x b)) a \\
 \end{tabular}
 
 
@@ -174,18 +174,19 @@ comparisons, list membership and list difference which are non-associative.  Def
 
 \subsection{Lists}
 
-\begin{tabular}{@{}C@{\s}CC@{\s$\equiv$\s}C}
+\begin{tabular}{@{}C@{\s}C@{\s}R@{\s$\equiv$\s}C}
 	null    & ::~[a] -> Bool        & null []              & True~~{\footnotesize -- \textnormal{empty?}} \\
+%	        &                       & null [\X,\Y]         & False \\
 	head    & ::~[a] -> a           & head [\X,\Y,\Z,\W]   & \X               \\
 	tail    & ::~[a] -> [a]         & tail [\X,\Y,\Z,\W]   & [\Y,\Z,\W]       \\
 	init    & ::~[a] -> [a]         & init [\X,\Y,\Z,\W]   & [\X,\Y,\Z]       \\
 %	init xs & \s\s \textnormal{\I{init}ial elements of xs}& \s\s\textnormal{(excludes last element)} \\
 	reverse & ::~[a] -> [a]         & reverse [\X,\Y,\Z]   & [\Z,\Y,\X]       \\
-	take    & ::~Int -> [a] -> [a]  & take 2 [\X,\Y,\Z,\W] & [\X,\Y]          \\
-	drop    & ::~Int -> [a] -> [a]  & drop 2 [\X,\Y,\Z,\W] & [\Z,\W]          \\
+	take    & ::~Int -> [a] -> [a]  & take 2 [\X,\Y,\Z]    & [\X,\Y]          \\
+	drop    & ::~Int -> [a] -> [a]  & drop 2 [\X,\Y,\Z]    & [\Z]             \\
 	length  & ::~[a] -> Int         & length [\X,\Y,\Z]    & 3                \\
 	elem    & ::~a -> [a] -> Bool   & \Y~`elem`~[\X,\Y]    & True~~{\footnotesize-- \textnormal{$\in?$}}  \\
-	repeat  & ::~a -> [a]           & repeat x             & [\X,\X,\X,\X,...] \\
+	repeat  & ::~a -> [a]           & repeat x             & [\X,\X,\X,...] \\
 	cycle   & ::~[a] -> [a]         & cycle [\X,\Y]        & [\X,\Y,\X,\Y,...] \\
 	        &                       & cycle \XS            & \XS++\XS++... \\
 %	cycle xs& \s\textnormal{infinite repetition of \C{xs}} & \\
@@ -196,22 +197,22 @@ comparisons, list membership and list difference which are non-associative.  Def
 
 \subsection{Ord Class}
 
-\begin{tabular}{C@{\s}CC}
-	min     & ::\s{}Ord a => a -> a -> a & min 'a' 'b'    \I{\s= 'a'} \\
-	max     & ::\s{}Ord a => a -> a -> a & max "b" "ab" \I{\s= "b"}   \\
-	compare & ::\s{}Ord a => a -> a -> Ordering & compare 1 2 \I{\s= LT}   \\
+\begin{tabular}{@{}C@{\s}CR@{\s$\equiv$\s}C}
+	min     & ::~Ord a => a -> a -> a        & min 'a' 'b'  & 'a' \\
+	max     & ::~Ord a => a -> a -> a        & max "b" "ab" & "b" \\
+	compare & ::~Ord a => a -> a -> Ordering & compare 1 2  & LT  \\
 \end{tabular}
 
 \subsection{Special folds}
 
 \begin{tabular}{@{}C@{\s}C@{\hspace{1ex}}R@{\s$\equiv$\s}C}
-	and     & ::~[Bool]~->~Bool    & and [\I{p},\I{q},\I{r}]     & \I{p}~\&\&~\I{q}~\&\&~\I{r} \\
-	or      & ::~[Bool]~->~Bool    & or [\I{p},\I{q},\I{r}]      & \I{p}~||~\I{q}~||~\I{r} \\
+	and     & ::~[Bool]~->~Bool    & and [\I{p},\I{q},\I{r}]     & \I{p}~\&\&~\I{q}\&\&\I{r} \\
+	or      & ::~[Bool]~->~Bool    & or [\I{p},\I{q},\I{r}]      & \I{p}~||~\I{q}||\I{r} \\
 	sum     & ::~Num~a~=>~[a]~->~a & sum [\I{i},\I{j},\I{k}]     & \I{i} + \I{j} + \I{k} \\
 	product & ::~Num~a~=>~[a]~->~a & product [\I{i},\I{j},\I{k}] & \I{i} * \I{j} * \I{k} \\
 	concat  & ::~[[a]]~->[a]       & concat [\I{xs},\I{ys},\I{zs}] & \I{xs}++\I{ys}++\I{zs} \\
-	maximum & ::~Ord~a=>[a]->a     & maximum [10,0,5] & 10 \\
-	minimum & ::~Ord~a=>[a]->a     & minimum [10,0,5] & 0 \\
+	maximum & ::~Ord~a => [a] -> a & maximum [10,0,5] & 10 \\
+	minimum & ::~Ord~a => [a] -> a & minimum [10,0,5] & 0 \\
 \end{tabular}
 
 
@@ -224,10 +225,11 @@ comparisons, list membership and list difference which are non-associative.  Def
 	fst       & ::~(a, b) -> a      & fst (\I{x},\I{y})   & \I{x} \\
 	snd       & ::~(a, b) -> b      & snd (\I{x},\I{y})   & \I{y} \\
 %	swap      & ::~(a, b) -> (b, a) & snd (\I{x},\I{y})   & (\I{y},\I{x}) \\ % Data.Tuple
-	curry     & ::~((a, b) -> c)    & curry (\la(\I{x},\I{y}) = \I{e}) & \la\I{x} \I{y} = \I{e}\\
-	          & -> a -> b -> c      \\
-	uncurry   & ::~((a, b) -> c)    & uncurry (\la \I{x} \I{y} = \I{e}) & \la(\I{x},\I{y}) = \I{e} \\
-	          & -> a -> b -> c      \\
+	curry     & \multicolumn{3}{@{}C}{::~((a, b) -> c) -> a -> b -> c} \\
+	          &                     & curry (\la(\I{x},\I{y}) -> \I{e}) & \la\I{x} \I{y} -> \I{e}\\
+	uncurry   & \multicolumn{3}{@{}C}{::~((a, b) -> c) -> a -> b -> c} \\
+	          &                     & uncurry (\la \I{x} \I{y} -> \I{e}) & \la(\I{x},\I{y}) -> \I{e} \\
+% not
 \end{tabular}
 
 
@@ -345,55 +347,63 @@ comparisons, list membership and list difference which are non-associative.  Def
 %\end{ldesc}
 
 
-\section{Expressions (Eval. control)}
+\section{Expressions}
 
+\newcommand{\thead}[1]{\textnormal{\textbf{#1}}}
+
+\begin{tabular}{CC}
+\thead{if expression}  & \thead{guarded equations} \\
+\I{foo} = if~\I{boolExpr}    & \I{foo} | \I{boolExpr}~ = \I{exprA} \\
+\T{foo}~~~~~then~\I{exprA}   & \T{foo} | otherwise    = \I{exprB} \\
+\T{foo}~~~~~else~\I{exprB}   &                                       \\[1ex]
+
+\thead{nested if expression}      & \thead{guarded equations} \\
+\I{foo} = if~\I{boolExpr1}        & \I{foo} | \I{boolExpr1} = \I{exprA} \\
+\T{foo}~~~~~then~\I{exprA}        & \T{foo} | \I{boolExpr2} = \I{exprB} \\
+\T{foo}~~~~~else~if~\I{boolExpr2} & \T{foo} | otherwise     = \I{exprC} \\
+\T{foo}~~~~~~~~~~~~then~\I{exprB} & \\
+\T{foo}~~~~~~~~~~~~else~\I{exprC} & \\[1ex]
+
+\thead{case expression}           & \thead{function pattern matching} \\
+\I{foo x} = case~\I{x}~of         & \I{foo pat1} = exprA \\
+\T{foo x}~~~~~\I{pat1} -> exprA   & \I{foo pat2} = exprB \\
+\T{foo x}~~~~~\I{pat2} -> exprB   & \I{foo \_~~~} = exprC \\
+\T{foo x}~~~~~\_\T{at2} -> exprC  & \\[1ex]
+
+\thead{2-variable case expression}  & \thead{function pattern matching} \\
+\I{foo x y} = case~(\I{x},\I{y})~of & \I{foo pat1 patA} = exprA \\
+~~(\I{pat1},\I{patA}) -> exprA      & \I{foo pat2 patB} = exprB \\
+~~(\I{pat2},\I{patB}) -> exprB      & \I{foo \_~~~ \_~~~}~ = exprC \\
+~~\_~~~~~~~~~~        -> exprC      & \\[1ex]
+
+\thead{let expression}  & \thead{where clause} \\
+let~\I{nameA}=\I{exprA} & \I{foo ...}~=~mainExpression \\
+~~~~\I{nameB}=\I{exprB} & ~~where \I{nameA}=\I{exprA} \\
+~~~~...                 & ~~~~~~~~\I{nameB}=\I{exprB} \\
+in mainExpression       & ~~~~~~~~...\\[1ex]
+
+\thead{do notation}     & \thead{desugarized do notation} \\
+do \I{statement}        & \\
+~~~\I{pat} <- \I{exp}   & \\
+~~~\I{statement}        & \\
+~~~\I{pat} <- \I{exp}   & \\
+~~~...                  & \\
+\end{tabular} \\[1ex]
 \begin{ldesc}
 	\li[statement separator]         ;\s\s\s\s-- or line break
 	\li[statement grouping]          \verb+{ }+\s\s-- or layout/indentation
-	\lI[if expression]
-		if\s\I{expr}\s\textcolor{gray}{::\s{}Bool} \li
-		\s\s{}then\s\I{expr} \textcolor{gray}{::\s{}a} \li
-		\s\s{}else\s\I{expr} \textcolor{gray}{::\s{}a}
-
-	\lI[case expression]
-		case\s\I{expr}\s{}of     \li
-		\s\s{}\I{pat}\s->\s{}\I{expr}   \li
-		\s\s{}\I{pat}\s->\s{}\I{expr}   \li
-		\s\s... \li
-		\s\s{}\I{\_}\s->\s{}\I{expr}
-
-	\lI[let expression]
-		let\s\I{name}=\I{expr} \li
-		\s\s\s\s\I{name}=\I{expr} \li
-		\s\s\s\s... \li
-		in\s\I{expr}
-
-	\lI[where notation]
-		\I{expr} \li
-		where\s\I{name}=\I{expr} \li
-		\s\s\s\s\s\s\I{name}=\I{expr} \li
-		\s\s\s\s\s\s...
-
-	\lI[do notation]
-		do      \I{statement} \li
-		\s\s\s{}\I{pat} <- \I{exp} \li
-		\s\s\s{}\I{statement} \li
-		\s\s\s{}\I{pat} <- \I{exp} \li
-		\s\s\s{}...
-
-	\lI[pattern matching]
-		f\s::\s{}a -> b -> c \li[\s{}\I{(case sugar)}]
-		f pat pat = expr \li
-		f \verb+_+\s\s{} pat = expr \li
-		f pat \verb+_+\s\s{} = expr \li
-		f \verb+_+\s\s{} \verb+_+\s\s{} = expr
-	
-	\lI[guarded equations]
-		\I{name} \li
-		\s\s| \I{boolexpr} = \I{expr} \li
-		\s\s| \I{boolexpr} = \I{expr} \li
-		\s\s| \I{boolexpr} = \I{expr}
 \end{ldesc}
+
+% Secondary formatting for case and pattern match
+%\\
+%\I{foo x} = case~\I{x}~of         & \\
+%\T{foo x}~~~~~\I{pat1} -> exprA   & \I{foo pat1} = exprA \\
+%\T{foo x}~~~~~\I{pat2} -> exprB   & \I{foo pat2} = exprB \\
+%\T{foo x}~~~~~\_\T{at2} -> exprC  & \I{foo \_~~~} = exprC \\
+%\\
+%\I{foo x} = case~\I{x}~of~\I{pat1} -> \I{eA} & \I{foo pat1} = exprA \\
+%\T{foo x}~~~~~~~~\T{x}~~~~\I{pat2} -> \I{eB} & \I{foo pat2} = exprB \\
+%\T{foo x}~~~~~~~~\T{x}~~~~\_\T{at2} -> \I{eC} & \I{foo \_~~~} = exprC \\
 
 
 \section{Libraries / Modules}
@@ -447,9 +457,9 @@ comparisons, list membership and list difference which are non-associative.  Def
 \subsection{Tracing and monitoring (unsafe) \hfill \C{Debug.Trace}}
 
 \begin{ldesc}
-	\li[Print \I{string}, eval'n'return \I{expr}] trace \I{string} \$ \I{expr}
-	\li[Show and print value]                traceShow \I{expr} \$ \I{expr}
-\end{ldesc}
+	\li[Print \I{string}, return \I{expr}] trace \I{string} \$ \I{expr}
+	\li[Call \C{show} before printing]     traceShow \I{expr} \$ \I{expr}
+\end{ldesc} \\
 \begin{ldesc}
 	\li[Trace function]  fun x y | traceShow (x,y) False = undefined \li[\s call values]
 	                     fun x y = ...
@@ -476,7 +486,7 @@ comparisons, list membership and list difference which are non-associative.  Def
 	\li[running directly]         \$ run\_haskell program.hs
 	\li[interactive mode (GHCi)]  \$ ghci
 	\li[GHCi load]                \verb+>+ :l \I{program.hs}
-	\li[GHCi reload]              \verb+>+ :r \I{program.hs}
+	\li[GHCi reload]              \verb+>+ :r
 	\li[GHCi activate stats]      \verb+>+ :set +s
 	\li[GHCi turn off stats]      \verb+>+ :unset +s
 	\li[GHCi help]                \verb+>+ :?

@@ -66,6 +66,9 @@
 \newcommand{\C}{\texttt}
 \newcommand{\B}{\textbf}
 \newcommand{\I}{\textit}
+\newcommand{\N}{\textnormal}
+\newcommand{\T}[1]{\hphantom{\I{#1}}}
+\newcommand{\D}[1]{\hphantom{#1}}
 \newcommand{\lditem}[2]{
 	#1 & #2 \\
 }

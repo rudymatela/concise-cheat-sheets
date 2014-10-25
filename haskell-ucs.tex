@@ -302,27 +302,6 @@ comparisons, list membership and list difference which are non-associative.  Def
 
 
 
-\subsection{IO \normalsize -- Must be ``inside'' the IO Monad}
-
-\begin{ldesc}
-	\li[Write char \C{c} to stdout]                      putChar c
-	\li[Write string \C{cs} to stdout]                   putStr cs
-	\li[Write string \C{cs} to stdout w/ a newline]      putStrLn cs
-	\li[Print \C{x}, a \C{show} instance, to stdout]     print x
-	\li[Read char from stdin]                            getChar
-	\li[Read line from stdin as a string]                getLine
-	\li[Read all input from stdin as a string]           getContents
-	\li[Bind stdin/stdout to \C{foo} (\C{\footnotesize ::~String -> String})]
-	                                                     interact foo
-	\li[Write \C{cs} to a file named \C{fn}]             writeFile fn cs
-	\li[Append \C{cs} to a file named \C{fn}]            appendFile fn cs
-	\li[Read contents from a file named \C{fn}]          readFile fn
-%	\li[Write char \C{c} to channel/file \C{h}]          hPutChar h c  -- ghc specific!
-%	\li[Write string \C{cs} to channel/file \C{h}]       hPutStr h cs
-%	\li[Write \C{cs} to channel/file \C{h} w/ a newline] hPutStrLn h cs
-\end{ldesc}
-
-
 \section{Pattern Matching}
 
 \subsection{Simple Pattern Matching}
@@ -470,6 +449,27 @@ do \I{statement}        & \I{statement} >>\\
 \end{ldesc}
 
 
+\subsection{IO \normalsize -- Must be ``inside'' the IO Monad}
+
+\begin{ldesc}
+	\li[Write char \C{c} to stdout]                      putChar c
+	\li[Write string \C{cs} to stdout]                   putStr cs
+	\li[Write string \C{cs} to stdout w/ a newline]      putStrLn cs
+	\li[Print \C{x}, a \C{show} instance, to stdout]     print x
+	\li[Read char from stdin]                            getChar
+	\li[Read line from stdin as a string]                getLine
+	\li[Read all input from stdin as a string]           getContents
+	\li[Bind stdin/stdout to \C{foo} (\C{\footnotesize ::~String -> String})]
+	                                                     interact foo
+	\li[Write \C{cs} to a file named \C{fn}]             writeFile fn cs
+	\li[Append \C{cs} to a file named \C{fn}]            appendFile fn cs
+	\li[Read contents from a file named \C{fn}]          readFile fn
+%	\li[Write char \C{c} to channel/file \C{h}]          hPutChar h c  -- ghc specific!
+%	\li[Write string \C{cs} to channel/file \C{h}]       hPutStr h cs
+%	\li[Write \C{cs} to channel/file \C{h} w/ a newline] hPutStrLn h cs
+\end{ldesc}
+
+
 \subsection{Tracing and monitoring (unsafe) \hfill \C{Debug.Trace}}
 
 \begin{ldesc}
@@ -482,16 +482,16 @@ do \I{statement}        & \I{statement} >>\\
 \end{ldesc}
 
 
-\section{Language Pragmas}
+%\section{Language Pragmas}
 
-\begin{ldesc}
-	\li[Activating some pragma]      \verb+{+-\# LANGUAGE \I{SomePragma} \#-\verb+}+
-	\li[Same, via GHC call]          ghc -X\I{SomePragma} ...
-	\li[No monomorphism restriction] NoMonomorphismRestriction
-	\li[Scoped type variables]       ScopedTypeVariables
-	\li[Template Haskell]            TemplateHaskell
-	\li[GHC option via pragma]       \verb+{+-\# OPTIONS\_GHC \I{-parameter} \#-\verb+}+ 
-\end{ldesc}
+%\begin{ldesc}
+%	\li[Activating some pragma]      \verb+{+-\# LANGUAGE \I{SomePragma} \#-\verb+}+
+%	\li[Same, via GHC call]          ghc -X\I{SomePragma} ...
+%	\li[No monomorphism restriction] NoMonomorphismRestriction
+%	\li[Scoped type variables]       ScopedTypeVariables
+%	\li[Template Haskell]            TemplateHaskell
+%	\li[GHC option via pragma]       \verb+{+-\# OPTIONS\_GHC \I{-parameter} \#-\verb+}+ 
+%\end{ldesc}
 
 
 \section{GHC - Glasgow Haskell Compiler}
@@ -504,12 +504,12 @@ do \I{statement}        & \I{statement} >>\\
 	\li[GHCi load]                \verb+>+ :l \I{program.hs}
 	\li[GHCi reload]              \verb+>+ :r
 	\li[GHCi activate stats]      \verb+>+ :set +s
-	\li[GHCi turn off stats]      \verb+>+ :unset +s
+%	\li[GHCi turn off stats]      \verb+>+ :unset +s
 	\li[GHCi help]                \verb+>+ :?
 	\li[Type of an expression]    \verb+>+ :t \I{expr}
 	\li[Info (oper./func./class)] \verb+>+ :i \I{thing}
-	\li[Installed packages]       \$ ghc-pkg list
-	\li[Installed versions of \C{package}] \$ ghc-pkg list package
+%	\li[Installed packages]       \$ ghc-pkg list \I{[optional query]}
+%   \li[Installed versions of \C{package}] \$ ghc-pkg list package
 \end{ldesc}
 
 
@@ -520,10 +520,10 @@ do \I{statement}        & \I{statement} >>\\
 	\li[update package list]                        \$ cabal update
 	\li[list/search for packages matching \C{pat}]  \$ cabal list \I{pat}
 	\li[information about package \C{pkg}]          \$ cabal info \I{pkg}
-	\LI[help on commands]                           \$ cabal help \I{[command]}
-	\li[run executable]                             \$ cabal run \I{[name]}
-	\li[run test suite(s)]                          \$ cabal test \I{[name]}
-	\li[run benchmark(s)]                           \$ cabal bench \I{[name]}
+	\li[help on commands]                           \$ cabal help \I{[command]}
+%	\li[run executable]                             \$ cabal run \I{[name]}
+%	\li[run test suite(s)]                          \$ cabal test \I{[name]}
+%	\li[run benchmark(s)]                           \$ cabal bench \I{[name]}
 \end{ldesc}
 
 \end{document} 

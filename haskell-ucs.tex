@@ -383,11 +383,11 @@ let~\I{nameA}=\I{exprA} & \I{foo ...}~=~mainExpression \\
 in mainExpression       & ~~~~~~~~...\\[1ex]
 
 \thead{do notation}     & \thead{desugarized do notation} \\
-do \I{statement}        & \\
-~~~\I{pat} <- \I{exp}   & \\
-~~~\I{statement}        & \\
-~~~\I{pat} <- \I{exp}   & \\
-~~~...                  & \\
+do \I{statement}        & \I{statement} >>\\
+~~~\I{pat} <- \I{exp}   & \I{exp} >>= \la \I{pat} ->\\
+~~~\I{statement}        & ~~\I{statement} >>\\
+~~~\I{pat} <- \I{exp}   & ~~\I{exp} >>= \la \I{pat} ->\\
+~~~...                  & ~~~~...\\
 \end{tabular} \\[1ex]
 \begin{ldesc}
 	\li[statement separator]         ;\s\s\s\s-- or line break
@@ -504,7 +504,10 @@ do \I{statement}        & \\
 	\li[update package list]                        \$ cabal update
 	\li[list/search for packages matching \C{pat}]  \$ cabal list \I{pat}
 	\li[information about package \C{pkg}]          \$ cabal info \I{pkg}
-	\li[help on commands]                           \$ cabal help \I{[command]}
+	\LI[help on commands]                           \$ cabal help \I{[command]}
+	\li[run executable]                             \$ cabal run \I{[name]}
+	\li[run test suite(s)]                          \$ cabal test \I{[name]}
+	\li[run benchmark(s)]                           \$ cabal bench \I{[name]}
 \end{ldesc}
 
 \end{document} 

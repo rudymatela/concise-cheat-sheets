@@ -87,6 +87,11 @@
 \ifnum\theline>1 \\\hline\fi%
 #1 &
 }
+\newcommand{\LI}[1][]{%
+\stepcounter{line}%
+\ifnum\theline>1 \\[1ex]\fi%
+#1 &
+}
 \newcommand{\s}{\hphantom{A}}
 \newcommand{\comm}[1]{\textcolor{gray}{#1}}
 \newcommand{\commi}[1]{\textit{\comm{#1}}}

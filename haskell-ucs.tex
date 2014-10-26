@@ -447,39 +447,40 @@ Take \I{pat} from \I{list}. If \I{boolPredicate}, add element \I{expr} to list:\
 \section{Expressions / Clauses}
 
 \newcommand{\thead}[1]{\textnormal{\textbf{#1}}}
+\newcommand{\theads}[2]{\multicolumn{1}{C@{\s$\approx$\s}}{\thead{#1}} & \thead{#2} \\}
 
 \begin{tabular}{CC}
-\thead{if expression}  & \thead{guarded equations} \\
-\I{foo} = if~\I{boolExpr}    & \I{foo} | \I{boolExpr}~ = \I{exprA} \\
-\T{foo}~~~~~then~\I{exprA}   & \T{foo} | otherwise    = \I{exprB} \\
-\T{foo}~~~~~else~\I{exprB}   &                                       \\[1ex]
+\theads{if expression}{guarded equations}
+if~\I{boolExpr}    & \I{foo}~...~| \I{boolExpr}~ = \I{exprA} \\
+~~then~\I{exprA}   & \T{foo}~~~~~| otherwise    = \I{exprB} \\
+~~else~\I{exprB}   &                                       \\[1ex]
 
-\thead{nested if expression}      & \thead{guarded equations} \\
-\I{foo} = if~\I{boolExpr1}        & \I{foo} | \I{boolExpr1} = \I{exprA} \\
-\T{foo}~~~~~then~\I{exprA}        & \T{foo} | \I{boolExpr2} = \I{exprB} \\
-\T{foo}~~~~~else~if~\I{boolExpr2} & \T{foo} | otherwise     = \I{exprC} \\
-\T{foo}~~~~~~~~~~~~then~\I{exprB} & \\
-\T{foo}~~~~~~~~~~~~else~\I{exprC} & \\[1ex]
+\theads{nested if expression}{guarded equations}
+if~\I{boolExpr1}        & \I{foo} ...~| \I{boolExpr1} = \I{exprA} \\
+~~then~\I{exprA}        & \T{foo}~~~~~| \I{boolExpr2} = \I{exprB} \\
+~~~~else~if~\I{boolExpr2} & \T{foo}~~~~~| otherwise     = \I{exprC} \\
+~~~~~~~~~~~then~\I{exprB} & \\
+~~~~~~~~~~~else~\I{exprC} & \\[1ex]
 
-\thead{case expression}           & \thead{function pattern matching} \\
-\I{foo x} = case~\I{x}~of         & \I{foo pat1} = exprA \\
-\T{foo x}~~~~~\I{pat1} -> exprA   & \I{foo pat2} = exprB \\
-\T{foo x}~~~~~\I{pat2} -> exprB   & \I{foo \_~~~} = exprC \\
-\T{foo x}~~~~~\_\T{at2} -> exprC  & \\[1ex]
+\theads{case expression}{function pattern matching}
+case~\I{x}~of         & \I{foo pat1} = exprA \\
+~~\I{pat1} -> exprA   & \I{foo pat2} = exprB \\
+~~\I{pat2} -> exprB   & \I{foo \_~~~} = exprC \\
+~~\_\T{at2} -> exprC  & \\[1ex]
 
-\thead{2-variable case expression}  & \thead{function pattern matching} \\
-\I{foo x y} = case~(\I{x},\I{y})~of & \I{foo pat1 patA} = exprA \\
+\theads{2-variable case expression}{function pattern matching}
+case~(\I{x},\I{y})~of & \I{foo pat1 patA} = exprA \\
 ~~(\I{pat1},\I{patA}) -> exprA      & \I{foo pat2 patB} = exprB \\
 ~~(\I{pat2},\I{patB}) -> exprB      & \I{foo \_~~~ \_~~~}~ = exprC \\
 ~~\_~~~~~~~~~~        -> exprC      & \\[1ex]
 
-\thead{let expression}  & \thead{where clause} \\
+\theads{let expression}{where clause}
 let~\I{nameA}=\I{exprA} & \I{foo ...}~=~mainExpression \\
 ~~~~\I{nameB}=\I{exprB} & ~~where \I{nameA}=\I{exprA} \\
 ~~~~...                 & ~~~~~~~~\I{nameB}=\I{exprB} \\
 in mainExpression       & ~~~~~~~~...\\[1ex]
 
-\thead{do notation}     & \thead{desugarized do notation} \\
+\theads{do notation}{desugarized do notation}
 do \I{statement}        & \I{statement} >>\\
 ~~~\I{pat} <- \I{exp}   & \I{exp} >>= \la \I{pat} ->\\
 ~~~\I{statement}        & ~~\I{statement} >>\\

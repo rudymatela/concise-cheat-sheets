@@ -119,3 +119,60 @@
   \fi
 }
 
+
+% Redefinition of standard clear page supporting 3 columns
+\def \@doclearpage {% originally from latex.ltx
+     \ifvoid\footins
+       \ifvbox\@kludgeins
+         {\setbox \@tempboxa \box \@kludgeins}%
+       \fi
+       \setbox\@tempboxa\vsplit\@cclv to\z@ \unvbox\@tempboxa
+       \setbox\@tempboxa\box\@cclv
+       \xdef\@deferlist{\@toplist\@botlist\@deferlist}%
+       \global \let \@toplist \@empty
+       \global \let \@botlist \@empty
+       \global \@colroom \@colht
+       \ifx \@currlist\@empty
+       \else
+          \@latexerr{Float(s) lost}\@ehb
+          \global \let \@currlist \@empty
+       \fi
+       \@makefcolumn\@deferlist
+       \@whilesw\if@fcolmade \fi{\@opcol\@makefcolumn\@deferlist}%
+       \if@twocolumn
+         \if@firstcolumn
+           \xdef\@dbldeferlist{\@dbltoplist\@dbldeferlist}%
+           \global \let \@dbltoplist \@empty
+           \global \@colht \textheight
+           \begingroup
+              \@dblfloatplacement
+              \@makefcolumn\@dbldeferlist
+              \@whilesw\if@fcolmade \fi{\@outputpage
+                                        \@makefcolumn\@dbldeferlist}%
+           \endgroup
+         \else
+           \vbox{}\clearpage
+         \fi
+       \fi
+       \if@threecolumn % Are we in three columns?
+         \if@firstcolumns % Do the same thing for three columns
+           \xdef\@dbldeferlist{\@dbltoplist\@dbldeferlist}%
+           \global \let \@dbltoplist \@empty
+           \global \@colht \textheight
+           \begingroup
+              \@dblfloatplacement
+              \@makefcolumn\@dbldeferlist
+              \@whilesw\if@fcolmade \fi{\@outputpage
+                                        \@makefcolumn\@dbldeferlist}%
+           \endgroup
+         \else
+           \vbox{}\clearpage
+         \fi
+       \fi % We're done!
+     \else
+       \setbox\@cclv\vbox{\box\@cclv\vfil}%
+       \@makecol\@opcol
+       \clearpage
+     \fi
+}
+

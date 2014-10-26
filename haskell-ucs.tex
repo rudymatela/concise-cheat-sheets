@@ -18,6 +18,10 @@
 \newcommand{\W}{\I{w}}
 \newcommand{\XS}{\I{xs}}
 
+\newcommand{\longtype}[1]{\multicolumn{3}{@{}C}{#1}}
+\newcommand{\longcall}[1]{\multicolumn{3}{@{}R@{\s$\equiv$\s}}{#1}}
+
+
 \title{Ultimate Haskell Cheat Sheet}
 
 \cright{
@@ -64,7 +68,7 @@
 
 \section{Values and Types}
 
-\begin{tabular}{lCC}
+\begin{tabular}{lC@{\s}C}
 	\li[has type]               \I{expr}         & ::~\I{type}
 	\li[boolean]                True || False    & ::~Bool
 	\li[character]              'a'              & ::~Char
@@ -82,6 +86,7 @@
 	\li[tuple]                  (1,2)            & ::~(Int,Int)
 %	\li                         (1,'a')          & ::~(Int,Char)
 	\li                         ([1,2],'a')      & ::~([Int],Char)
+	\li[ordering relation]      LT, EQ, GT       & ::~Ordering
 	\li[function ($\lambda$)]   \la\X~->~\I{e}   & ::~a -> a
 %	\li[function]               isAlpha          & ::~Char -> Bool
 \end{tabular}
@@ -89,15 +94,16 @@
 
 \section{Values and Typeclasses}
 
-\begin{ldesc}
-	\li[Numeric (+,-,*)]               137 :: Num a => a
-	\li[Fractional (/)]                1.2 :: Fractional a => a
-	\li[Floating]                      1.2 :: Floating a => a
-	\li[Equatable (==)]                'a' :: Eq a => a
-	\li[Ordered ($<=,>=,>,<$)]         731 :: Ord a => a
-	\li                                sort :: Ord a => [a] -> [a]
-	\li[Bounded (minBound,maxBound)]   minBound ::\s{}Int
-\end{ldesc}
+\begin{tabular}{lC@{\s}C}
+	\li[given context, has type]       \I{expr} & ::~\I{context}~=>~\I{type}
+	\li[Numeric (+,-,*)]               137      & ::~Num a => a
+	\li[Fractional (/)]                1.2      & ::~Fractional a => a
+	\li[Floating]                      1.2      & ::~Floating a => a
+	\li[Equatable (==)]                'a'      & ::~Eq a => a
+	\li[Ordered ($<=,>=,>,<$)]         731      & ::~Ord a => a
+%	\li                                sort     & ::~Ord a => [a] -> [a]
+%	\li[Bounded (minBound,maxBound)]   minBound & ::~Int
+\end{tabular}
 
 
 \section{Declaring Types and Classes}
@@ -105,7 +111,7 @@
 \begin{ldesc}
 	\li[type synonym] type \I{MyType} = \I{Type} \li
 	                  type UserId = Integer \li
-%					  type UserName = String \li
+					  type UserName = String \li
 					  type User = (UserId,UserName) \li
 					  type UserList = [User]
 	\li[data \small{(single constructor)}]
@@ -138,9 +144,9 @@
 	\li[integral quotient ($\Rightarrow 0$), remainder] `quot`, `rem`
 	\Li[addition, subtraction] +, -
 	\Li[list construction, append lists] \hfill :, ++
-	\li[list difference]                 \s\s\s\s\s\s\s\s\s\s\s\s\verb+\\+
-	\Li[comparisons:]     \s\s>, >=, <, <=, ==, /=\s\s
-	\li[list membership]  \s\s\s`elem`, `notElem`\s\s\s
+	\li[list difference]                 ~~~~~~~~~~~~\verb+\\+
+	\Li[comparisons:]     ~~>, >=, <, <=, ==, /=~~
+	\li[list membership]  ~~~`elem`, `notElem`~~
 	\Li[boolean and] \hfill \&\&
 	\Li[boolean or] \hfill ||
 	\Li[sequencing: bind and then] >>=, >>
@@ -178,35 +184,31 @@ comparisons, list membership and list difference which are non-associative.  Def
 
 \begin{tabular}{@{}C@{\s}C@{\hspace{3ex}}R@{\s$\equiv$\s}C}
 	id        & ::~a -> a           & id \I{x}            & \I{x} \s{\tiny-- identity} \\
-	const     & ::~a -> b -> a      & (const \I{x}) \I{y} & \I{y}    \\
+	const     & ::~a -> b -> a      & (const \I{x}) \I{y} & \I{x}    \\
 	undefined & ::~a                & undefined           & \textnormal{$\bot$ (lifts error)}   \\
-\end{tabular}
-
-\subsection{Booleans}
-
-\begin{tabular}{@{}C@{\s}C@{\hspace{3ex}}R@{\s$\equiv$\s}C}
-    not       & ::~Bool -> Bool     & not True            & False \\
+	error     & ::~String -> a      & error \I{cs}        & \textnormal{$\bot$ (lifts error \I{cs})} \\
+    not       & ::~Bool -> Bool     & not True & False \\
+	flip      & \longtype{::~(a -> b -> c) -> (b -> a -> c)} \\
+	\longcall{flip f \$ x y} & f y x \\
+% todo: ??
+%   until
 \end{tabular}
 
 \subsection{Tuples}
 \begin{tabular}{@{}C@{\s}C@{\hspace{3ex}}R@{\s$\equiv$\s}C}
-	fst       & ::~(a, b) -> a      & fst (\I{x},\I{y})   & \I{x} \\
-	snd       & ::~(a, b) -> b      & snd (\I{x},\I{y})   & \I{y} \\
+	fst       & ::~(a, b) -> a      & ~~~~~~~~~fst (\I{x},\I{y}) & \I{x} \\
+	snd       & ::~(a, b) -> b      &          snd (\I{x},\I{y}) & \I{y} \\
 %	swap      & ::~(a, b) -> (b, a) & snd (\I{x},\I{y})   & (\I{y},\I{x}) \\ % Data.Tuple
 	curry     & \multicolumn{3}{@{}C}{::~((a, b) -> c) -> a -> b -> c} \\
-	          & \multicolumn{2}{R@{\s$\equiv$\s}}{curry (\la(\I{x},\I{y}) -> \I{e})} & \la\I{x} \I{y} -> \I{e}\\
-	uncurry   & \multicolumn{3}{@{}C}{::~((a, b) -> c) -> a -> b -> c} \\
+	          & \multicolumn{2}{R@{\s$\equiv$\s}}{curry (\la(\I{x},\I{y}) -> \I{e})} & \la\I{x} \I{y} -> \I{e}\\[1ex]
+	uncurry   & \multicolumn{3}{@{}C}{::~a -> b -> c -> ((a, b) -> c)} \\
 	          & \multicolumn{2}{R@{\s$\equiv$\s}}{uncurry (\la \I{x} \I{y} -> \I{e})} & \la(\I{x},\I{y}) -> \I{e} \\
-% todo: ??
-%   flip
-%   until
-%   error
 \end{tabular}
 
 
 \subsection{Lists}
 
-\begin{tabular}{@{}C@{\s}C@{\s}R@{\s$\equiv$\s}C}
+\begin{tabular}{@{}C@{\hspace{1ex}}C@{\s}R@{\s$\equiv$\s}C}
 	null    & ::~[a] -> Bool        & null []              & True~~{\footnotesize -- \textnormal{empty?}} \\
 %	        &                       & null [\X,\Y]         & False \\
 	head    & ::~[a] -> a           & head [\X,\Y,\Z,\W]   & \X               \\
@@ -219,16 +221,16 @@ comparisons, list membership and list difference which are non-associative.  Def
 	length  & ::~[a] -> Int         & length [\X,\Y,\Z]    & 3                \\
 	elem    & ::~a -> [a] -> Bool   & \Y~`elem`~[\X,\Y]    & True~~{\footnotesize-- \textnormal{$\in?$}}  \\
 	repeat  & ::~a -> [a]           & repeat x             & [\X,\X,\X,...] \\
-	cycle   & ::~[a] -> [a]         & cycle [\X,\Y]        & [\X,\Y,\X,\Y,...] \\
-	        &                       & cycle \XS            & \XS++\XS++... \\
-%	cycle xs& \s\textnormal{infinite repetition of \C{xs}} & \\
+	cycle   & ::~[a] -> [a]         & cycle \XS            & \XS++\XS++... \\
+%	        &                       & cycle [\X,\Y]        & [\X,\Y,\X,\Y,...] \\
+% todo: ??
 %	sort
 %   zip
 \end{tabular}
 
 \subsection{Special folds}
 
-\begin{tabular}{@{}C@{\s}C@{\hspace{1ex}}R@{\s$\equiv$\s}C}
+\begin{tabular}{@{}C@{\hspace{1ex}}C@{\hspace{1ex}}R@{\s$\equiv$\s}C}
 	and     & ::~[Bool]~->~Bool    & and [\I{p},\I{q},\I{r}]     & \I{p}~\&\&~\I{q}\&\&\I{r} \\
 	or      & ::~[Bool]~->~Bool    & or [\I{p},\I{q},\I{r}]      & \I{p}~||~\I{q}||\I{r} \\
 	sum     & ::~Num~a~=>~[a]~->~a & sum [\I{i},\I{j},\I{k}]     & \I{i} + \I{j} + \I{k} \\
@@ -245,10 +247,10 @@ comparisons, list membership and list difference which are non-associative.  Def
 	map     & \multicolumn{3}{C}{::~(a->b) -> [a] -> [b]}      \\
 	        & & map~\F~[\X,\Y,\Z]            & [\F~\X, \F~\Y, \F~\Z]      \\[1ex]
 	filter  & \multicolumn{3}{C}{::~(a -> Bool) -> [a] -> [a]} \\
-	        & & filter~\I{(/=\Y)}~[\X,\Y,\Z] & [\X,\Z]         \\[1ex]
-	foldl   & \multicolumn{3}{C}{::~(a -> b -> a) -> a -> [b] -> a {\small~~-- (left) `to` right}} \\
+	        & & ~~~~~~~~~~filter~\I{(/=\Y)}~[\X,\Y,\Z] & [\X,\Z]         \\[1ex]
+	foldl   & \multicolumn{3}{C}{::~(a -> b -> a) -> a -> [b] -> a} \\
 	        & & foldl \F~\X~[\Y,\Z]    & (\X~`\F`~\Y)~`\F`~\Z       \\[1ex]
-	foldr   & \multicolumn{3}{C}{::~(a -> b -> b) -> b -> [a] -> b {\small~~-- right to left}} \\
+	foldr   & \multicolumn{3}{C}{::~(a -> b -> b) -> b -> [a] -> b} \\
 	        & & foldr \F~\Z~[\X,\Y]    & \X~`\F`~(\Y~`\F`~\Z)       \\[1ex]
 \end{tabular}
 
@@ -274,16 +276,15 @@ comparisons, list membership and list difference which are non-associative.  Def
 
 \subsection{Strings}
 
-\newcommand{\longtype}[1]{\multicolumn{3}{@{}C}{#1}}
-\newcommand{\longcall}[1]{\multicolumn{3}{@{}R@{\s$\equiv$\s}}{#1}}
+\newcommand{\n}{\B{\la{}n}}
 
 \begin{tabular}{@{}C@{\s}C@{\hspace{3ex}}R@{\s$\equiv$\s}C}
 	lines & \longtype{::~String -> [String]} \\
-	\longcall{lines "ab\la{}nc\la{}nd"} & ["ab","c","d"] \\[1ex]
+	\longcall{lines "ab\n{}cd\n{}e"} & ["ab","cd","e"] \\[1ex]
 	unlines & \longtype{::~[String] -> String} \\
-	\longcall{~~~~~~~~~~unlines ["ab","c","d"]} & "ab\la{}nc\la{}nd" \\[1ex]
+	\longcall{~~~~~~~~~~~~unlines ["ab","cd","e"]} & "ab\n{}cd\n{}e\n{}" \\[1ex]
 	words & \longtype{::~String -> [String]} \\
-	\longcall{words "ab c d"} & ["ab","c","d"] \\[1ex]
+	\longcall{words "ab cd e"} & ["ab","cd","e"] \\[1ex]
 	unwords & \longtype{::~[String] -> String} \\
 	\longcall{unwords ["ab","cd","ef"]} & "ab cd ef" \\[1ex]
 \end{tabular}

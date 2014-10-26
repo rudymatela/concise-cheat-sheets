@@ -515,7 +515,7 @@ do \I{statement}        & \I{statement} >>\\
 %\end{ldesc}
 
 
-\section{GHC - Glasgow Haskell Compiler}
+\section{GHC - Glasgow Haskell Compiler (and Cabal)}
 
 \begin{ldesc}
 	\li[compiling \C{program.hs}] \$ ghc program.hs
@@ -531,21 +531,26 @@ do \I{statement}        & \I{statement} >>\\
 	\li[Info (oper./func./class)] \verb+>+ :i \I{thing}
 %	\li[Installed packages]       \$ ghc-pkg list \I{[optional query]}
 %   \li[Installed versions of \C{package}] \$ ghc-pkg list package
-\end{ldesc}
-
-
-\section{Cabal package and build system}
-
-\begin{ldesc}
 	\li[install package \C{pkg}]                    \$ cabal install \I{pkg}
 	\li[update package list]                        \$ cabal update
 	\li[list/search for packages matching \C{pat}]  \$ cabal list \I{pat}
 	\li[information about package \C{pkg}]          \$ cabal info \I{pkg}
-	\li[help on commands]                           \$ cabal help \I{[command]}
+%	\li[help on commands]                           \$ cabal help \I{[command]}
+\end{ldesc}
+
+
+%\subsection{Cabal package and build system}
+
+%\begin{ldesc}
+%	\li[install package \C{pkg}]                    \$ cabal install \I{pkg}
+%	\li[update package list]                        \$ cabal update
+%	\li[list/search for packages matching \C{pat}]  \$ cabal list \I{pat}
+%	\li[information about package \C{pkg}]          \$ cabal info \I{pkg}
+%	\li[help on commands]                           \$ cabal help \I{[command]}
 %	\li[run executable]                             \$ cabal run \I{[name]}
 %	\li[run test suite(s)]                          \$ cabal test \I{[name]}
 %	\li[run benchmark(s)]                           \$ cabal bench \I{[name]}
-\end{ldesc}
+%\end{ldesc}
 
 \end{document} 
 

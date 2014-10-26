@@ -55,9 +55,10 @@
 \begin{tabular}{C@{\s$\equiv$\s}C@{\s\s\s\s$\equiv$\s}C}
 	\li[f x y]         (f x) y     & ((f) (x)) (y)
 	\li[f x y z]       ((f x) y) z & (f x y) z
-	\li[f g \$ h x]    \multicolumn{2}{@{}C}{f g (h x)}
-	\li[f \$ g x y]    f (g x y)   & f~.~g~x~\$~y
+	\li[f \$ g x]      f (g x)     & f~.~g~\$~x
 	\li[f \$ g \$ h x] f (g (h x)) & f~.~g~.~h~\$~x
+	\li[f \$ g x y]    f (g x y)   & f~.~g~x~\$~y
+	\li[f g \$ h x]    \multicolumn{2}{@{}C}{f g (h x)}
 \end{tabular}
 
 

@@ -87,12 +87,12 @@
 \end{tabular}
 
 
-\section{Binding Classes (Typeclasses)}
+\section{Values and Typeclasses}
 
 \begin{ldesc}
-	\li[Numeric (+,-,*,/)]             137 :: Num a => a
+	\li[Numeric (+,-,*)]               137 :: Num a => a
+	\li[Fractional (/)]                1.2 :: Fractional a => a
 	\li[Floating]                      1.2 :: Floating a => a
-	\li[Fractional]                    1.2 :: Fractional a => a
 	\li[Equatable (==)]                'a' :: Eq a => a
 	\li[Ordered ($<=,>=,>,<$)]         731 :: Ord a => a
 	\li                                sort :: Ord a => [a] -> [a]
@@ -173,6 +173,37 @@ comparisons, list membership and list difference which are non-associative.  Def
 
 \section{Common functions}
 
+
+\subsection{Misc}
+
+\begin{tabular}{@{}C@{\s}C@{\hspace{3ex}}R@{\s$\equiv$\s}C}
+	id        & ::~a -> a           & id \I{x}            & \I{x} \s{\tiny-- identity} \\
+	const     & ::~a -> b -> a      & (const \I{x}) \I{y} & \I{y}    \\
+	undefined & ::~a                & undefined           & \textnormal{$\bot$ (lifts error)}   \\
+\end{tabular}
+
+\subsection{Booleans}
+
+\begin{tabular}{@{}C@{\s}C@{\hspace{3ex}}R@{\s$\equiv$\s}C}
+    not       & ::~Bool -> Bool     & not True            & False \\
+\end{tabular}
+
+\subsection{Tuples}
+\begin{tabular}{@{}C@{\s}C@{\hspace{3ex}}R@{\s$\equiv$\s}C}
+	fst       & ::~(a, b) -> a      & fst (\I{x},\I{y})   & \I{x} \\
+	snd       & ::~(a, b) -> b      & snd (\I{x},\I{y})   & \I{y} \\
+%	swap      & ::~(a, b) -> (b, a) & snd (\I{x},\I{y})   & (\I{y},\I{x}) \\ % Data.Tuple
+	curry     & \multicolumn{3}{@{}C}{::~((a, b) -> c) -> a -> b -> c} \\
+	          & \multicolumn{2}{R@{\s$\equiv$\s}}{curry (\la(\I{x},\I{y}) -> \I{e})} & \la\I{x} \I{y} -> \I{e}\\
+	uncurry   & \multicolumn{3}{@{}C}{::~((a, b) -> c) -> a -> b -> c} \\
+	          & \multicolumn{2}{R@{\s$\equiv$\s}}{uncurry (\la \I{x} \I{y} -> \I{e})} & \la(\I{x},\I{y}) -> \I{e} \\
+% todo: ??
+%   flip
+%   until
+%   error
+\end{tabular}
+
+
 \subsection{Lists}
 
 \begin{tabular}{@{}C@{\s}C@{\s}R@{\s$\equiv$\s}C}
@@ -195,15 +226,6 @@ comparisons, list membership and list difference which are non-associative.  Def
 %   zip
 \end{tabular}
 
-
-\subsection{Ord Class}
-
-\begin{tabular}{@{}C@{\s}CR@{\s$\equiv$\s}C}
-	min     & ::~Ord a => a -> a -> a        & min 'a' 'b'  & 'a' \\
-	max     & ::~Ord a => a -> a -> a        & max "b" "ab" & "b" \\
-	compare & ::~Ord a => a -> a -> Ordering & compare 1 2  & LT  \\
-\end{tabular}
-
 \subsection{Special folds}
 
 \begin{tabular}{@{}C@{\s}C@{\hspace{1ex}}R@{\s$\equiv$\s}C}
@@ -217,24 +239,17 @@ comparisons, list membership and list difference which are non-associative.  Def
 \end{tabular}
 
 
-\subsection{Misc / Tuples}
+\subsection{Higher-order / Functors}
 
-\begin{tabular}{@{}C@{\s}C@{\hspace{3ex}}R@{\s$\equiv$\s}C}
-	id        & ::~a -> a           & id \I{x}            & \I{x} \s{\tiny-- identity} \\
-	const     & ::~a -> b -> a      & (const \I{x}) \I{y} & \I{y}    \\
-	undefined & ::~a                & undefined           & \textnormal{$\bot$ (lifts error)}   \\
-	fst       & ::~(a, b) -> a      & fst (\I{x},\I{y})   & \I{x} \\
-	snd       & ::~(a, b) -> b      & snd (\I{x},\I{y})   & \I{y} \\
-%	swap      & ::~(a, b) -> (b, a) & snd (\I{x},\I{y})   & (\I{y},\I{x}) \\ % Data.Tuple
-	curry     & \multicolumn{3}{@{}C}{::~((a, b) -> c) -> a -> b -> c} \\
-	          & \multicolumn{2}{R@{\s$\equiv$\s}}{curry (\la(\I{x},\I{y}) -> \I{e})} & \la\I{x} \I{y} -> \I{e}\\
-	uncurry   & \multicolumn{3}{@{}C}{::~((a, b) -> c) -> a -> b -> c} \\
-	          & \multicolumn{2}{R@{\s$\equiv$\s}}{uncurry (\la \I{x} \I{y} -> \I{e})} & \la(\I{x},\I{y}) -> \I{e} \\
-    not       & ::~Bool -> Bool     & not True            & False \\
-% todo: ??
-%   flip
-%   until
-%   error
+\begin{tabular}{@{}C@{}C@{\hspace{3ex}}R@{\s$\equiv$\s}C}
+	map     & \multicolumn{3}{C}{::~(a->b) -> [a] -> [b]}      \\
+	        & & map~\F~[\X,\Y,\Z]            & [\F~\X, \F~\Y, \F~\Z]      \\[1ex]
+	filter  & \multicolumn{3}{C}{::~(a -> Bool) -> [a] -> [a]} \\
+	        & & filter~\I{(/=\Y)}~[\X,\Y,\Z] & [\X,\Z]         \\[1ex]
+	foldl   & \multicolumn{3}{C}{::~(a -> b -> a) -> a -> [b] -> a {\small~~-- (left) `to` right}} \\
+	        & & foldl \F~\X~[\Y,\Z]    & (\X~`\F`~\Y)~`\F`~\Z       \\[1ex]
+	foldr   & \multicolumn{3}{C}{::~(a -> b -> b) -> b -> [a] -> b {\small~~-- right to left}} \\
+	        & & foldr \F~\Z~[\X,\Y]    & \X~`\F`~(\Y~`\F`~\Z)       \\[1ex]
 \end{tabular}
 
 
@@ -250,8 +265,8 @@ comparisons, list membership and list difference which are non-associative.  Def
 	sqrt, log      & ::~Floating a => a -> a   & sqrt x & x**0.5 \\
 	\multicolumn{2}{@{}C}{exp, sin, cos, tan, asin, acos, atan} &
 	\multicolumn{2}{@{}C}{::~Floating a => a  -> a} \\
-	\multicolumn{2}{@{}C}{truncate, round, ceiling, floor} &
-	\multicolumn{2}{@{}C}{::~(RealFrac a, Integral b) => a -> b} \\
+	\multicolumn{4}{@{}C}{truncate, round~::~(RealFrac a, Integral b) => a -> b} \\
+	\multicolumn{4}{@{}C}{ceiling, floor~~::~(RealFrac a, Integral b) => a -> b} \\
 \end{tabular}
 
 % todo: Either?
@@ -273,28 +288,27 @@ comparisons, list membership and list difference which are non-associative.  Def
 	\longcall{unwords ["ab","cd","ef"]} & "ab cd ef" \\[1ex]
 \end{tabular}
 
+
 \subsection{Read and Show classes}
 
 \begin{tabular}{@{}C@{\s}C@{\hspace{5ex}}R@{\s$\equiv$\s}C}
 	show & ::~Show a => a -> String & show 137 & "137" \\
 	read & ::~Show a => String -> a & read "2" & 2 \\
 \end{tabular} \\
-\B{Instances}: \C{Int}, \C{Integer}, \C{Char} (\C{String}), \C{Float},
-\C{Double}, \C{Maybe}, ...
+%\B{Instances}: \C{Int}, \C{Integer}, \C{Char} (\C{String}), \C{Float},
+%\C{Double}, \C{Maybe}, ...
 
 
-\subsection{Higher-order / Functors}
+\subsection{Ord Class}
 
-\begin{tabular}{@{}C@{}C@{\hspace{3ex}}R@{\s$\equiv$\s}C}
-	map     & \multicolumn{3}{C}{::~(a->b) -> [a] -> [b]}      \\
-	        & & map~\F~[\X,\Y,\Z]            & [\F~\X, \F~\Y, \F~\Z]      \\[1ex]
-	filter  & \multicolumn{3}{C}{::~(a -> Bool) -> [a] -> [a]} \\
-	        & & filter~\I{(/=\Y)}~[\X,\Y,\Z] & [\X,\Z]         \\[1ex]
-	foldl   & \multicolumn{3}{C}{::~(a -> b -> a) -> a -> [b] -> a {\small~~-- (left) `to` right}} \\
-	        & & foldl \F~\X~[\Y,\Z]    & (\X~`\F`~\Y)~`\F`~\Z       \\[1ex]
-	foldr   & \multicolumn{3}{C}{::~(a -> b -> b) -> b -> [a] -> b {\small~~-- right to left}} \\
-	        & & foldr \F~\Z~[\X,\Y]    & \X~`\F`~(\Y~`\F`~\Z)       \\[1ex]
+\begin{tabular}{@{}C@{\s}C@{\s}R@{\s$\equiv$\s}C}
+	min     & ::~Ord a => a -> a -> a        & min 'a' 'b'  & 'a' \\
+	max     & ::~Ord a => a -> a -> a        & max "b" "ab" & "b" \\
+	compare & ::~Ord a => a -> a -> Ordering & compare 1 2  & LT  \\
 \end{tabular}
+%\B{Instances}: \C{Int}, \C{Integer}, \C{Char} (\C{String}), \C{Float},
+%\C{Double}, \C{Maybe}, ...
+
 
 %\begin{verbatim}
 %zipWith (a->b->c) [a] -> [b] -> [c]
@@ -302,54 +316,95 @@ comparisons, list membership and list difference which are non-associative.  Def
 %\end{verbatim}
 
 
+\section{Libraries / Modules}
+
+\begin{ldesc}
+	\li[importing]              import \I{PathTo.Lib}
+	\li[importing (qualified)]  import \I{PathTo.Lib} as \I{PL}
+	\li[importing (subset)]     import \I{PathTo.Lib} (\I{foo},\I{goo})
+	\li[declaring]
+		module \I{Module.Name} \li
+		\s\s( \I{foo} \li
+		\s\s, \I{goo} \li
+		\s\s) \li
+		where \li
+	    ...
+	\lI[./File/On/Disk.hs] import File.On.Disk
+\end{ldesc}
+
+
+\subsection{Tracing and monitoring (unsafe) \hfill \C{Debug.Trace}}
+
+\begin{ldesc}
+	\li[Print \I{string}, return \I{expr}] trace \I{string} \$ \I{expr}
+	\li[Call \C{show} before printing]     traceShow \I{expr} \$ \I{expr}
+\end{ldesc} \\
+\begin{ldesc}
+	\li[Trace function]  fun x y | traceShow (x,y) False = undefined \li[\s call values]
+	                     fun x y = ...
+\end{ldesc}
+
+
+\subsection{IO \normalsize -- Must be ``inside'' the IO Monad}
+
+\begin{ldesc}
+	\li[Write char \C{c} to stdout]                      putChar c
+	\li[Write string \C{cs} to stdout]                   putStr cs
+	\li[Write string \C{cs} to stdout w/ a newline]      putStrLn cs
+	\li[Print \C{x}, a \C{show} instance, to stdout]     print x
+	\li[Read char from stdin]                            getChar
+	\li[Read line from stdin as a string]                getLine
+	\li[Read all input from stdin as a string]           getContents
+	\li[Bind stdin/stdout to \C{foo} (\C{\footnotesize ::~String -> String})]
+	                                                     interact foo
+	\li[Write \C{cs} to a file named \C{fn}]             writeFile fn cs
+	\li[Append \C{cs} to a file named \C{fn}]            appendFile fn cs
+	\li[Read contents from a file named \C{fn}]          readFile fn
+%	\li[Write char \C{c} to channel/file \C{h}]          hPutChar h c  -- ghc specific!
+%	\li[Write string \C{cs} to channel/file \C{h}]       hPutStr h cs -- ghc specific!
+%	\li[Write \C{cs} to channel/file \C{h} w/ a newline] hPutStrLn h cs -- ghc specific!
+\end{ldesc}
+
 
 \section{Pattern Matching}
 
 \subsection{Simple Pattern Matching}
 
-\begin{ldesc}
-	\li[Number 3]      3
-	\li[Character 'a'] 'a'
-	\li[Empty string]  ""
-\end{ldesc}
+\begin{tabular}{lC   @{\hspace{16ex}}  lC}
+	Number 3      &      3   & Character 'a' & 'a' \\
+	Empty string  &      ""  & Ignore value  &  \_ \\
+\end{tabular}
 
 \subsection{List Pattern Matching}
 
 \begin{ldesc}
-	\li[head \C{x} and tail \C{xs}]  (x:xs)
 	\li[empty list]                  []
+	\li[head \C{x} and tail \C{xs}]  (x:xs)
+	\li[tail \C{xs} (ignore head)]   (\_:xs)
 	\li[list with 3 elements \C{a}, \C{b} and \C{c}]  [a,b,c]
-	\li[list with 3 elements \C{a}, \C{b} and \C{c}]  (a:b:c:[])
+%	\li[list with 3 elements \C{a}, \C{b} and \C{c}]  (a:b:c:[])
 	\li[list where 2nd element is 3] (x:3:xs)
 \end{ldesc}
 
 
-\subsection{Other Types Pattern Matching}
+\subsection{Patterns for Tuples and Other Types}
 
 \begin{ldesc}
 	\li[pair values \C{a} and \C{b}]           (a,b)
+	\li[ignore second element of tuple]    (a,\verb+_+)
 	\li[triple values \C{a}, \C{b} and \C{c}]  (a,b,c)
 	\li[just constructor]                      Just a
 	\li[nothing constructor]                   Nothing
 	\li[user-defined type]                     MyData a b c
-\end{ldesc}
-
-
-\subsection{Wildcard Pattern ``Matching''}
-
-\begin{ldesc}
-	\li[ignore value]                      \verb+_+
-	\li[ignore first elements of list]     (\verb+_+:xs)
-	\li[ignore second element of tuple]    (a,\verb+_+)
 	\li[ignore one of the ``components'']  MyData a \verb+_+ c
-\end{ldesc}
+%\end{ldesc}
 
 
-\subsection{Nested Pattern}
+%\subsection{Nested Pattern}
 
-\begin{ldesc}
+%\begin{ldesc}
 	\li[match first tuple on list]  ((a,b):xs)
-	\li[match list inside tuple]    (xs,y:ys,zs)
+%	\li[match list inside tuple]    (xs,y:ys,zs)
 \end{ldesc}
 
 
@@ -446,56 +501,6 @@ do \I{statement}        & \I{statement} >>\\
 %\I{foo x} = case~\I{x}~of~\I{pat1} -> \I{eA} & \I{foo pat1} = exprA \\
 %\T{foo x}~~~~~~~~\T{x}~~~~\I{pat2} -> \I{eB} & \I{foo pat2} = exprB \\
 %\T{foo x}~~~~~~~~\T{x}~~~~\_\T{at2} -> \I{eC} & \I{foo \_~~~} = exprC \\
-
-
-\section{Libraries / Modules}
-
-\begin{ldesc}
-	\li[importing]              import \I{PathTo.Lib}
-	\li[importing (qualified)]  import \I{PathTo.Lib} as \I{PL}
-	\li[importing (subset)]     import \I{PathTo.Lib} (\I{foo},\I{goo})
-	\li[declaring]
-		module \I{Module.Name} \li
-		\s\s( \I{foo} \li
-		\s\s, \I{goo} \li
-		\s\s) \li
-		where \li
-	    ...
-	\lI[./File/On/Disk.hs] import File.On.Disk
-\end{ldesc}
-
-
-\subsection{IO \normalsize -- Must be ``inside'' the IO Monad}
-
-\begin{ldesc}
-	\li[Write char \C{c} to stdout]                      putChar c
-	\li[Write string \C{cs} to stdout]                   putStr cs
-	\li[Write string \C{cs} to stdout w/ a newline]      putStrLn cs
-	\li[Print \C{x}, a \C{show} instance, to stdout]     print x
-	\li[Read char from stdin]                            getChar
-	\li[Read line from stdin as a string]                getLine
-	\li[Read all input from stdin as a string]           getContents
-	\li[Bind stdin/stdout to \C{foo} (\C{\footnotesize ::~String -> String})]
-	                                                     interact foo
-	\li[Write \C{cs} to a file named \C{fn}]             writeFile fn cs
-	\li[Append \C{cs} to a file named \C{fn}]            appendFile fn cs
-	\li[Read contents from a file named \C{fn}]          readFile fn
-%	\li[Write char \C{c} to channel/file \C{h}]          hPutChar h c  -- ghc specific!
-%	\li[Write string \C{cs} to channel/file \C{h}]       hPutStr h cs
-%	\li[Write \C{cs} to channel/file \C{h} w/ a newline] hPutStrLn h cs
-\end{ldesc}
-
-
-\subsection{Tracing and monitoring (unsafe) \hfill \C{Debug.Trace}}
-
-\begin{ldesc}
-	\li[Print \I{string}, return \I{expr}] trace \I{string} \$ \I{expr}
-	\li[Call \C{show} before printing]     traceShow \I{expr} \$ \I{expr}
-\end{ldesc} \\
-\begin{ldesc}
-	\li[Trace function]  fun x y | traceShow (x,y) False = undefined \li[\s call values]
-	                     fun x y = ...
-\end{ldesc}
 
 
 %\section{Language Pragmas}

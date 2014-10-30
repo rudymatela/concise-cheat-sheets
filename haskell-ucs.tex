@@ -56,19 +56,19 @@
 
 \section{Function Application}
 
-\begin{tabular}{C@{\s$\equiv$\s}C@{\s\s\s\s$\equiv$\s}C}
+\begin{tabularlc}{C@{\s$\equiv$\s}C@{\s\s\s\s$\equiv$\s}C}
 	\li[f x y]         (f x) y     & ((f) (x)) (y)
 	\li[f x y z]       ((f x) y) z & (f x y) z
 	\li[f \$ g x]      f (g x)     & f~.~g~\$~x
 	\li[f \$ g \$ h x] f (g (h x)) & f~.~g~.~h~\$~x
 	\li[f \$ g x y]    f (g x y)   & f~.~g~x~\$~y
 	\li[f g \$ h x]    \multicolumn{2}{@{}C}{f g (h x)}
-\end{tabular}
+\end{tabularlc}
 
 
 \section{Values and Types}
 
-\begin{tabular}{lC@{\s}C}
+\begin{tabularlc}{lC@{\s}C}
 	\li[has type]               \I{expr}         & ::~\I{type}
 	\li[boolean]                True || False    & ::~Bool
 	\li[character]              'a'              & ::~Char
@@ -89,12 +89,12 @@
 	\li[ordering relation]      LT, EQ, GT       & ::~Ordering
 	\li[function ($\lambda$)]   \la\X~->~\I{e}   & ::~a -> b
 %	\li[function]               isAlpha          & ::~Char -> Bool
-\end{tabular}
+\end{tabularlc}
 
 
 \section{Values and Typeclasses}
 
-\begin{tabular}{lC@{\s}C}
+\begin{tabularlc}{lC@{\s}C}
 	\li[given context, has type]       \I{expr} & ::~\I{context}~=>~\I{type}
 	\li[Numeric (+,-,*)]               137      & ::~Num a => a
 	\li[Fractional (/)]                1.2      & ::~Fractional a => a
@@ -103,7 +103,7 @@
 	\li[Ordered ($<=,>=,>,<$)]         731      & ::~Ord a => a
 %	\li                                sort     & ::~Ord a => [a] -> [a]
 %	\li[Bounded (minBound,maxBound)]   minBound & ::~Int
-\end{tabular}
+\end{tabularlc}
 
 
 \section{Declaring Types and Classes}

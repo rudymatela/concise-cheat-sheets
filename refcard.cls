@@ -84,7 +84,7 @@
 }
 \newcommand{\lI}[1][]{%
 \stepcounter{line}%
-\ifnum\theline>1 \\[3.5pt]\fi%
+\ifnum\theline>1 \\[1ex]\fi%
 #1 &
 }
 \newcommand{\Li}[1][]{%

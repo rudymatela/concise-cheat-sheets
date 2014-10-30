@@ -8,6 +8,8 @@
 %
 
 \documentclass{refcard}
+\usepackage{rotating}
+\usepackage{amssymb}
 
 \renewcommand{\familydefault}{\sfdefault}
 \newcommand{\la}{\textbackslash}
@@ -118,23 +120,28 @@
 					  type UserName = String \li
 					  type User = (UserId,UserName) \li
 					  type UserList = [User]
-	\li[data \small{(single constructor)}]
+
+	\lI[data \small{(single constructor)}]
 		data~\I{MyData}~{}=~\I{MyData}~\I{Type}~\I{Type}~\I{Type} \li
 		~~~~~~~~~~~~~~{}deriving (\I{Class},\I{Class})
-	\li[data \small{(multi constructor)}]
+
+	\lI[data \small{(multi constructor)}]
 		data~\I{MyData}~{}=~{}\I{Simple} \I{Type} | \li
 		~~~\hphantom{\I{MyData}}~~~~~{}\I{Duple} \I{Type} \I{Type} | \li
 		~~~\hphantom{\I{MyData}}~~~~~{}\I{Nople}
 
-	\li[typeclass] class \I{MyClass} a where \li
+	\lI[newtype]
+		newtype~\I{MyNewType}~=~\I{MyNewType}~\I{Type} \li[~~\rotatebox{90}{$\Rsh$} \small{(single constr./field)}]
+		~~~~~~~~deriving (\I{Class},\I{Class})
+
+	\lI[typeclass] class \I{MyClass} a where \li
 	               ~~\I{foo}~::~a~->~a~->~\I{b} \li
-	               ~~\I{goo}~::~a~->~a \li
-				   ~~...
-	\li[typeclass instance]
+	               ~~\I{goo}~::~a~->~a
+
+	\lI[typeclass instance]
 	               instance \I{MyClass} \I{MyType} where \li
 				   ~~\I{foo}~\I{x}~\I{y}~=~... \li
-				   ~~\I{goo}~\I{x}~=~... \li
-				   ~~...
+				   ~~\I{goo}~\I{x}~=~...
 \end{ldesc}
 
 
@@ -160,16 +167,18 @@
 \noindent
 NOTE: Highest precedence (first line) is 9, lowest precedence is 0.  Those
 aligned to the right are right associative, all others left associative: except
-comparisons, list membership and list difference which are non-associative.  Default is
-\C{infixl 9}.
+comparisons, list membership and list diff. which are non-associative.
+% Default is \C{infixl 9}.
 
-\subsubsection{Defining fixity}
+\begin{description}
+\item [Defining fixity:]
 \begin{ldesc}
-	\li[non associative fixity] infix \I{0-9} \I{`op`}
-	\li[left associative fixity] infixl \I{0-9} \I{+--+}
-	\li[right associative fixity] infixr \I{0-9} \I{-!-}
-	\li[default, implied when no fixity given] infixl 9
+	\li[non associative] infix \I{0-9} \I{`op`}
+	\li[left associative] infixl \I{0-9} \I{+--+}
+	\li[right associative] infixr \I{0-9} \I{-!-}
+	\li[default (when none given)] infixl 9
 \end{ldesc}
+\end{description}
 
 \subsection{Functions $\equiv$ Infix operators}
 

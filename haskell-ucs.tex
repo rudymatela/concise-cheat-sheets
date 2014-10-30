@@ -202,7 +202,7 @@ comparisons, list membership and list diff. which are non-associative.
 	error     & ::~String -> a      & error \I{cs}        & \textnormal{$\bot$ (lifts error \I{cs})} \\
     not       & ::~Bool -> Bool     & not True & False \\
 	flip      & \longtype{::~(a -> b -> c) -> (b -> a -> c)} \\
-	\longcall{flip f \$ x y} & f y x \\
+	\longcall{flip f \$ x y} & f y x \\[-2ex]
 % todo: ??
 %   until
 \end{tabular}
@@ -215,7 +215,7 @@ comparisons, list membership and list diff. which are non-associative.
 	curry     & \multicolumn{3}{@{}C}{::~((a, b) -> c) -> a -> b -> c} \\
 	          & \multicolumn{2}{R@{\s$\equiv$\s}}{curry (\la(\I{x},\I{y}) -> \I{e})} & \la\I{x} \I{y} -> \I{e}\\[1ex]
 	uncurry   & \multicolumn{3}{@{}C}{::~a -> b -> c -> ((a, b) -> c)} \\
-	          & \multicolumn{2}{R@{\s$\equiv$\s}}{uncurry (\la \I{x} \I{y} -> \I{e})} & \la(\I{x},\I{y}) -> \I{e} \\
+	          & \multicolumn{2}{R@{\s$\equiv$\s}}{uncurry (\la \I{x} \I{y} -> \I{e})} & \la(\I{x},\I{y}) -> \I{e} \\[-2ex]
 \end{tabular}
 
 
@@ -231,6 +231,8 @@ comparisons, list membership and list diff. which are non-associative.
 	reverse & ::~[a] -> [a]         & reverse [\X,\Y,\Z]   & [\Z,\Y,\X]       \\
 	take    & ::~Int -> [a] -> [a]  & take 2 [\X,\Y,\Z]    & [\X,\Y]          \\
 	drop    & ::~Int -> [a] -> [a]  & drop 2 [\X,\Y,\Z]    & [\Z]             \\
+	\multicolumn{4}{@{}C}{takeWhile, dropWhile ::~(a -> Bool) -> [a] -> [a]}  \\[-.3ex]
+	                 \longcall{takeWhile (/= z) [x,y,z,w]} & [x,y]            \\[.3ex]
 	length  & ::~[a] -> Int         & length [\X,\Y,\Z]    & 3                \\
 	elem    & ::~a -> [a] -> Bool   & \Y~`elem`~[\X,\Y]    & True~~{\footnotesize-- \textnormal{$\in?$}}  \\
 	repeat  & ::~a -> [a]           & repeat x             & [\X,\X,\X,...] \\

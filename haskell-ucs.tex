@@ -493,8 +493,7 @@ case~(\I{x},\I{y})~of & \I{foo pat1 patA} = exprA \\
 \theads{let expression}{where clause}
 let~\I{nameA}=\I{exprA} & \I{foo ...}~=~mainExpression \\
 ~~~~\I{nameB}=\I{exprB} & ~~where \I{nameA}=\I{exprA} \\
-~~~~...                 & ~~~~~~~~\I{nameB}=\I{exprB} \\
-in mainExpression       & ~~~~~~~~...\\[1ex]
+in mainExpression       & ~~~~~~~~\I{nameB}=\I{exprB} \\[1ex]
 
 \theads{do notation}{desugarized do notation}
 do \I{statement}        & \I{statement} >>\\
@@ -552,7 +551,7 @@ do \I{statement}        & \I{statement} >>\\
 	\li[update package list]                        \$ cabal update
 	\li[list/search for packages matching \C{pat}]  \$ cabal list \I{pat}
 	\li[information about package \C{pkg}]          \$ cabal info \I{pkg}
-%	\li[help on commands]                           \$ cabal help \I{[command]}
+	\li[help on commands]                           \$ cabal help \I{[command]}
 \end{ldesc}
 
 

@@ -340,9 +340,9 @@ comparisons, list membership and list diff. which are non-associative.
 	\li[importing (subset)]     import \I{PathTo.Lib} (\I{foo},\I{goo})
 	\li[declaring]
 		module \I{Module.Name} \li
-		\s\s( \I{foo} \li
-		\s\s, \I{goo} \li
-		\s\s) \li
+		~~( \I{foo} \li
+		~~, \I{goo} \li
+		~~) \li
 		where \li
 	    ...
 	\lI[./File/On/Disk.hs] import File.On.Disk
@@ -538,20 +538,20 @@ do \I{statement}        & \I{statement} >>\\
 	\li[running]                  \$ ./program
 	\li[running directly]         \$ run\_haskell program.hs
 	\li[interactive mode (GHCi)]  \$ ghci
-	\li[GHCi load]                \verb+>+ :l \I{program.hs}
-	\li[GHCi reload]              \verb+>+ :r
-	\li[GHCi activate stats]      \verb+>+ :set +s
-%	\li[GHCi turn off stats]      \verb+>+ :unset +s
-	\li[GHCi help]                \verb+>+ :?
-	\li[Type of an expression]    \verb+>+ :t \I{expr}
-	\li[Info (oper./func./class)] \verb+>+ :i \I{thing}
+	\li[GHCi load]                > :l \I{program.hs}
+	\li[GHCi reload]              > :r
+	\li[GHCi activate stats]      > :set +s
+%	\li[GHCi turn off stats]      > :unset +s
+	\li[GHCi help]                > :?
+	\li[Type of an expression]    > :t \I{expr}
+	\li[Info (oper./func./class)] > :i \I{thing}
 %	\li[Installed packages]       \$ ghc-pkg list \I{[optional query]}
 %   \li[Installed versions of \C{package}] \$ ghc-pkg list package
-	\li[install package \C{pkg}]                    \$ cabal install \I{pkg}
-	\li[update package list]                        \$ cabal update
-	\li[list/search for packages matching \C{pat}]  \$ cabal list \I{pat}
-	\li[information about package \C{pkg}]          \$ cabal info \I{pkg}
-	\li[help on commands]                           \$ cabal help \I{[command]}
+	\li[install package \C{pkg}]           \$ cabal install \I{pkg}
+	\li[update package list]               \$ cabal update
+	\li[search packages matching \C{pat}]  \$ cabal list \I{pat}
+	\li[information about package \C{pkg}] \$ cabal info \I{pkg}
+	\li[help on commands]                  \$ cabal help \I{[command]}
 \end{ldesc}
 
 

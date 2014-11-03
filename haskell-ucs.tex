@@ -496,11 +496,10 @@ let~\I{nameA}=\I{exprA} & \I{foo ...}~=~mainExpression \\
 in mainExpression       & ~~~~~~~~\I{nameB}=\I{exprB} \\[1ex]
 
 \theads{do notation}{desugarized do notation}
-do \I{statement}        & \I{statement} >>\\
-~~~\I{pat} <- \I{exp}   & \I{exp} >>= \la \I{pat} ->\\
+do \I{pat} <- \I{exp}   & \I{exp} >>= \la \I{pat} ->\\
 ~~~\I{statement}        & ~~\I{statement} >>\\
 ~~~\I{pat} <- \I{exp}   & ~~\I{exp} >>= \la \I{pat} ->\\
-~~~...                  & ~~~~...\\
+~~~\I{statement}        & ~~~~statement\\
 \end{tabular} \\[1ex]
 \begin{ldesc}
 	\li[statement separator]         ;\s\s\s\s-- or line break

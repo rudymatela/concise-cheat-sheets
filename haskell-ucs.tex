@@ -297,14 +297,14 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 	tail    & ::~[a] -> [a]         & tail [\X,\Y,\Z,\W]   & [\Y,\Z,\W]       \\
 	init    & ::~[a] -> [a]         & init [\X,\Y,\Z,\W]   & [\X,\Y,\Z]       \\
 %	init xs & \s\s \textnormal{\I{init}ial elements of xs}& \s\s\textnormal{(excludes last element)} \\
-	reverse & ::~[a] -> [a]         & reverse [\X,\Y,\Z]   & [\Z,\Y,\X]       \\
+	\multicolumn{2}{@{}C}{reverse ::~[a] -> [a]}           & reverse [\X,\Y,\Z]   & [\Z,\Y,\X]       \\
 	take    & ::~Int -> [a] -> [a]  & take 2 [\X,\Y,\Z]    & [\X,\Y]          \\
 	drop    & ::~Int -> [a] -> [a]  & drop 2 [\X,\Y,\Z]    & [\Z]             \\
 	\multicolumn{4}{@{}C}{takeWhile, dropWhile ::~(a -> Bool) -> [a] -> [a]}  \\
 	                 \longcall{takeWhile (/= z) [x,y,z,w]} & [x,y]            \\[.2ex]
 	zip     & \longtype{::~[a] -> [b] -> [(a, b)]}                            \\
 	                          \longcall{zip [x,y,z] [a,b]} & [(x,a),(y,b)]    \\[.2ex]
-	zipWith & \longtype{::~[a] -> [b] -> [(a, b)]}                            \\
+	\multicolumn{4}{@{}C}{zipWith ::~[a] -> [b] -> [(a, b)]}                            \\
 	                    \longcall{zipWith f [x,y,z] [a,b]} & [f x a,f y b]    \\[-2ex]
 \end{tabular}
 

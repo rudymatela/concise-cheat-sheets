@@ -391,12 +391,11 @@ comparisons, list membership and list diff. which are non-associative.
 
 \section{Pattern Matching}
 
+\begin{tabularlc}{b@{\hspace{9ex}}lC@{\hspace{11ex}}lC}
+  \li[fixed]  number 3      & 3  & character 'a' & 'a' \li
+              ignore value  & \_ & empty string  & ""
+\end{tabularlc}\\%
 \begin{tabularlc}{blC}
-  \li[fixed]  number 3                                     & 3 \li
-              character 'a'                                & 'a' \li
-              empty string                                 & "" \li
-              ignore value                                 & \_
-
   \lI[list]   empty                                        & [] \li
               head \C{x} and tail \C{xs}                   & (x:xs) \li
               tail \C{xs} (ignore head)                    & (\_:xs) \li

@@ -419,7 +419,7 @@ comparisons, list membership and list diff. which are non-associative.
 %\subsection{Nested Pattern}
 
 %\begin{ldesc}
-	\li[match first tuple on list]  ((a,b):xs)
+	\li[first tuple on list]  ((a,b):xs)
 %	\li[match list inside tuple]    (xs,y:ys,zs)
 \end{ldesc}
 
@@ -427,8 +427,8 @@ comparisons, list membership and list diff. which are non-associative.
 \subsection{As-pattern}
 
 \begin{ldesc}
-	\li[match entire tuple \C{s} its values \C{a,b}]            s@(a,b)
-	\li[match entire list \C{a} its head \C{x} and tail \C{xs}] a@(x:xs)
+	\li[entire tuple \C{s} and its values \C{a} and \C{b}]            s@(a,b)
+	\li[entire list \C{a}, its head \C{x} and tail \C{xs}] a@(x:xs)
 	\li[entire data \C{p} and ``components'']                   p@(MyData a b c)
 \end{ldesc}
 

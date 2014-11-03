@@ -397,7 +397,7 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 \begin{tabular}{@{}C@{\s}C@{\hspace{5ex}}R@{\s$\equiv$\s}C}
 	show & ::~Show a => a -> String & show 137 & "137" \\
 	read & ::~Show a => String -> a & read "2" & 2 \\
-\end{tabular} \\
+\end{tabular}% \\
 %\B{Instances}: \C{Int}, \C{Integer}, \C{Char} (\C{String}), \C{Float},
 %\C{Double}, \C{Maybe}, ...
 
@@ -523,26 +523,29 @@ Take \I{pat} from \I{list}. If \I{boolPredicate}, add element \I{expr} to list:\
 	\li[Info (oper./func./class)] > :i \I{thing}
 %	\li[Installed packages]       \$ ghc-pkg list \I{[optional query]}
 %   \li[Installed versions of \C{package}] \$ ghc-pkg list package
+%	\li[install package \C{pkg}]           \$ cabal install \I{pkg}
+%	\li[update package list]               \$ cabal update
+%	\li[search packages matching \C{pat}]  \$ cabal list \I{pat}
+%	\li[information about package \C{pkg}] \$ cabal info \I{pkg}
+%	\li[help on commands]                  \$ cabal help \I{[command]}
+\end{ldesc}
+
+
+\subsection{Cabal package and build system}
+
+\begin{ldesc}
 	\li[install package \C{pkg}]           \$ cabal install \I{pkg}
 	\li[update package list]               \$ cabal update
 	\li[search packages matching \C{pat}]  \$ cabal list \I{pat}
 	\li[information about package \C{pkg}] \$ cabal info \I{pkg}
 	\li[help on commands]                  \$ cabal help \I{[command]}
+	\li[run executable/test/benchmark]     \$ cabal run/test/bench \I{[name]}
+%	\li[run executable]                    \$ cabal run \I{[name]}
+%	\li[run test suite(s)]                 \$ cabal test \I{[name]}
+%	\li[run benchmark(s)]                  \$ cabal bench \I{[name]}
+	\li[initialize sandbox]                \$ cabal sandbox init
+	\li[add custom source to sandbox]      \$ cabal sandbox add-source \I{dir}
 \end{ldesc}
-
-
-%\subsection{Cabal package and build system}
-
-%\begin{ldesc}
-%	\li[install package \C{pkg}]                    \$ cabal install \I{pkg}
-%	\li[update package list]                        \$ cabal update
-%	\li[list/search for packages matching \C{pat}]  \$ cabal list \I{pat}
-%	\li[information about package \C{pkg}]          \$ cabal info \I{pkg}
-%	\li[help on commands]                           \$ cabal help \I{[command]}
-%	\li[run executable]                             \$ cabal run \I{[name]}
-%	\li[run test suite(s)]                          \$ cabal test \I{[name]}
-%	\li[run benchmark(s)]                           \$ cabal bench \I{[name]}
-%\end{ldesc}
 
 \end{document} 
 

@@ -190,6 +190,85 @@ comparisons, list membership and list diff. which are non-associative.
 \end{tabular}
 
 
+\section{Expressions / Clauses}
+
+\newcommand{\thead}[1]{\textnormal{\textbf{#1}}}
+\newcommand{\theads}[2]{\multicolumn{1}{C@{\s$\approx$\s}}{\thead{#1}} & \thead{#2} \\}
+
+\begin{tabular}{CC}
+\theads{if expression}{guarded equations}
+if~\I{boolExpr}    & \I{foo}~...~| \I{boolExpr}~ = \I{exprA} \\
+~~then~\I{exprA}   & \T{foo}~~~~~| otherwise    = \I{exprB} \\
+~~else~\I{exprB}   &                                       \\[1ex]
+
+\theads{nested if expression}{guarded equations}
+if~\I{boolExpr1}        & \I{foo} ...~| \I{boolExpr1} = \I{exprA} \\
+~~then~\I{exprA}        & \T{foo}~~~~~| \I{boolExpr2} = \I{exprB} \\
+~~else~if~\I{boolExpr2} & \T{foo}~~~~~| otherwise     = \I{exprC} \\
+~~~~~~~~~then~\I{exprB} & \\
+~~~~~~~~~else~\I{exprC} & \\[1ex]
+
+\theads{case expression}{function pattern matching}
+case~\I{x}~of~\I{pat1} -> exA & \I{foo pat1} = exA \\
+~~~~~\T{x}~~~~\I{pat2} -> exB & \I{foo pat2} = exB \\
+~~~~~\T{x}~~~~\_\T{at2} -> exC & \I{foo \_~~~} = exC \\[1ex]
+%~~\_\T{at2} -> exprC  & \\[1ex]
+
+\theads{2-variable case expression}{function pattern matching}
+case~(\I{x},\I{y})~of & \I{foo pat1 patA} = exprA \\
+~~(\I{pat1},\I{patA}) -> exprA      & \I{foo pat2 patB} = exprB \\
+~~(\I{pat2},\I{patB}) -> exprB      & \I{foo \_~~~ \_~~~}~ = exprC \\
+~~\_~~~~~~~~~~        -> exprC      & \\[1ex]
+
+\theads{let expression}{where clause}
+let~\I{nameA}=\I{exprA} & \I{foo ...}~=~mainExpression \\
+~~~~\I{nameB}=\I{exprB} & ~~where \I{nameA}=\I{exprA} \\
+in mainExpression       & ~~~~~~~~\I{nameB}=\I{exprB} \\[1ex]
+
+\theads{do notation}{desugarized do notation}
+do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
+~~~\I{action2}             & ~~\I{action2} >>\\
+~~~\I{patB} <- \I{action3} & ~~\I{action3} >>= \la \I{patB} ->\\
+~~~\I{action4}             & ~~~~\I{action4}\\
+\end{tabular} %\\[1ex]
+%\begin{ldesc}
+%	\li[statement separator]         ;\s\s\s\s-- or line break
+%	\li[statement grouping]          \verb+{ }+\s\s-- or layout/indentation
+%\end{ldesc}
+
+
+\section{Pattern Matching}
+
+\begin{tabularlc}{b@{\hspace{9ex}}lC@{\hspace{11ex}}lC}
+  \li[fixed]  number 3      & 3  & character 'a' & 'a' \li
+              ignore value  & \_ & empty string  & ""
+\end{tabularlc}\\%
+\begin{tabularlc}{blC}
+  \lI[list]   empty                                        & [] \li
+              head \C{x} and tail \C{xs}                   & (x:xs) \li
+              tail \C{xs} (ignore head)                    & (\_:xs) \li
+              list with 3 elements: \C{a}, \C{b} and \C{c} & [a,b,c] \li
+              list with 3 elements: \C{a}, \C{b} and \C{c} & (a:b:c:[]) \li
+              list where 2nd element is 3                  & (x:3:xs)
+
+  \lI[tuple]  pair values \C{a} and \C{b}                  & (a,b) \li
+              ignore second element of tuple               & (a,\verb+_+) \li
+              triple values \C{a}, \C{b} and \C{c}         & (a,b,c)
+
+  \lI[mixed]  first tuple on list                          & ((a,b):xs)
+
+  \lI[maybe]  just constructor                             & Just a \li
+              nothing constructor                          & Nothing
+
+  \lI[custom] user-defined type                            & MyData a b c \li
+              ignore second field                          & MyData a \verb+_+ c
+
+  \lI[as-pattern] tuple \C{s} and its values \C{a} and \C{b} & s@(a,b) \li
+                  list \C{a}, its head \C{x} and tail \C{xs} & a@(x:xs) \li
+%	              data \C{p} and its fields                  & p@(MyData a b c)
+\end{tabularlc}
+
+
 \section{Common functions}
 
 
@@ -221,11 +300,11 @@ comparisons, list membership and list diff. which are non-associative.
 	reverse & ::~[a] -> [a]         & reverse [\X,\Y,\Z]   & [\Z,\Y,\X]       \\
 	take    & ::~Int -> [a] -> [a]  & take 2 [\X,\Y,\Z]    & [\X,\Y]          \\
 	drop    & ::~Int -> [a] -> [a]  & drop 2 [\X,\Y,\Z]    & [\Z]             \\
-	\multicolumn{4}{@{}C}{takeWhile, dropWhile ::~(a -> Bool) -> [a] -> [a]}  \\[-.3ex]
-	                 \longcall{takeWhile (/= z) [x,y,z,w]} & [x,y]            \\[.3ex]
-	zip     & \longtype{::~[a] -> [b] -> [(a, b)]}                            \\[-.3ex]
-	                          \longcall{zip [x,y,z] [a,b]} & [(x,a),(y,b)]    \\[.3ex]
-	zipWith & \longtype{::~[a] -> [b] -> [(a, b)]}                            \\[-.3ex]
+	\multicolumn{4}{@{}C}{takeWhile, dropWhile ::~(a -> Bool) -> [a] -> [a]}  \\
+	                 \longcall{takeWhile (/= z) [x,y,z,w]} & [x,y]            \\[.2ex]
+	zip     & \longtype{::~[a] -> [b] -> [(a, b)]}                            \\
+	                          \longcall{zip [x,y,z] [a,b]} & [(x,a),(y,b)]    \\[.2ex]
+	zipWith & \longtype{::~[a] -> [b] -> [(a, b)]}                            \\
 	                    \longcall{zipWith f [x,y,z] [a,b]} & [f x a,f y b]    \\[-2ex]
 \end{tabular}
 
@@ -239,7 +318,7 @@ comparisons, list membership and list diff. which are non-associative.
 	        &                         & iterate f x          & [\X,\F~\X,\F~(\F~\X),...] \\[-2ex]
 \end{tabular}
 
-\subsection{Special folds}
+\subsubsection{Special folds}
 
 \begin{tabular}{@{}C@{\hspace{1ex}}C@{\hspace{1ex}}R@{\s$\equiv$\s}C}
 	and     & ::~[Bool]~->~Bool    & and [\I{p},\I{q},\I{r}]     & \I{p}~\&\&~\I{q}\&\&\I{r} \\
@@ -252,7 +331,7 @@ comparisons, list membership and list diff. which are non-associative.
 \end{tabular}
 
 
-\subsection{Higher-order / Functors}
+\subsubsection{Higher-order / Functors}
 
 \begin{tabular}{@{}C@{}C@{\hspace{3ex}}R@{\s$\equiv$\s}C}
 	map     & \multicolumn{3}{C}{::~(a->b) -> [a] -> [b]}      \\
@@ -389,38 +468,6 @@ comparisons, list membership and list diff. which are non-associative.
 \end{ldesc}
 
 
-\section{Pattern Matching}
-
-\begin{tabularlc}{b@{\hspace{9ex}}lC@{\hspace{11ex}}lC}
-  \li[fixed]  number 3      & 3  & character 'a' & 'a' \li
-              ignore value  & \_ & empty string  & ""
-\end{tabularlc}\\%
-\begin{tabularlc}{blC}
-  \lI[list]   empty                                        & [] \li
-              head \C{x} and tail \C{xs}                   & (x:xs) \li
-              tail \C{xs} (ignore head)                    & (\_:xs) \li
-              list with 3 elements: \C{a}, \C{b} and \C{c} & [a,b,c] \li
-              list with 3 elements: \C{a}, \C{b} and \C{c} & (a:b:c:[]) \li
-              list where 2nd element is 3                  & (x:3:xs)
-
-  \lI[tuple]  pair values \C{a} and \C{b}                  & (a,b) \li
-              ignore second element of tuple               & (a,\verb+_+) \li
-              triple values \C{a}, \C{b} and \C{c}         & (a,b,c)
-
-  \lI[mixed]  first tuple on list                          & ((a,b):xs)
-
-  \lI[maybe]  just constructor                             & Just a \li
-              nothing constructor                          & Nothing
-
-  \lI[custom] user-defined type                            & MyData a b c \li
-              ignore second field                          & MyData a \verb+_+ c
-
-  \lI[as-pattern] tuple \C{s} and its values \C{a} and \C{b} & s@(a,b) \li
-                  list \C{a}, its head \C{x} and tail \C{xs} & a@(x:xs) \li
-%	              data \C{p} and its fields                  & p@(MyData a b c)
-\end{tabularlc}
-
-
 \section{List Comprehensions}
 
 Take \I{pat} from \I{list}. If \I{boolPredicate}, add element \I{expr} to list:\\
@@ -435,53 +482,6 @@ Take \I{pat} from \I{list}. If \I{boolPredicate}, add element \I{expr} to list:\
 	{[}x+y | x <- [a,b], y <- [i,j]] & [a+i, a+j, b+i, b+j] \\
 %	{[}(x,y) | x <- [0..3], y <- [0..3], x + y == 3] & [(0,3),(1,2),(2,1),(3,0)] \\
 \end{tabular}
-
-
-\section{Expressions / Clauses}
-
-\newcommand{\thead}[1]{\textnormal{\textbf{#1}}}
-\newcommand{\theads}[2]{\multicolumn{1}{C@{\s$\approx$\s}}{\thead{#1}} & \thead{#2} \\}
-
-\begin{tabular}{CC}
-\theads{if expression}{guarded equations}
-if~\I{boolExpr}    & \I{foo}~...~| \I{boolExpr}~ = \I{exprA} \\
-~~then~\I{exprA}   & \T{foo}~~~~~| otherwise    = \I{exprB} \\
-~~else~\I{exprB}   &                                       \\[1ex]
-
-\theads{nested if expression}{guarded equations}
-if~\I{boolExpr1}        & \I{foo} ...~| \I{boolExpr1} = \I{exprA} \\
-~~then~\I{exprA}        & \T{foo}~~~~~| \I{boolExpr2} = \I{exprB} \\
-~~else~if~\I{boolExpr2} & \T{foo}~~~~~| otherwise     = \I{exprC} \\
-~~~~~~~~~then~\I{exprB} & \\
-~~~~~~~~~else~\I{exprC} & \\[1ex]
-
-\theads{case expression}{function pattern matching}
-case~\I{x}~of~\I{pat1} -> exA & \I{foo pat1} = exA \\
-~~~~~\T{x}~~~~\I{pat2} -> exB & \I{foo pat2} = exB \\
-~~~~~\T{x}~~~~\_\T{at2} -> exC & \I{foo \_~~~} = exC \\[1ex]
-%~~\_\T{at2} -> exprC  & \\[1ex]
-
-\theads{2-variable case expression}{function pattern matching}
-case~(\I{x},\I{y})~of & \I{foo pat1 patA} = exprA \\
-~~(\I{pat1},\I{patA}) -> exprA      & \I{foo pat2 patB} = exprB \\
-~~(\I{pat2},\I{patB}) -> exprB      & \I{foo \_~~~ \_~~~}~ = exprC \\
-~~\_~~~~~~~~~~        -> exprC      & \\[1ex]
-
-\theads{let expression}{where clause}
-let~\I{nameA}=\I{exprA} & \I{foo ...}~=~mainExpression \\
-~~~~\I{nameB}=\I{exprB} & ~~where \I{nameA}=\I{exprA} \\
-in mainExpression       & ~~~~~~~~\I{nameB}=\I{exprB} \\[1ex]
-
-\theads{do notation}{desugarized do notation}
-do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
-~~~\I{action2}             & ~~\I{action2} >>\\
-~~~\I{patB} <- \I{action3} & ~~\I{action3} >>= \la \I{patB} ->\\
-~~~\I{action4}             & ~~~~\I{action4}\\
-\end{tabular} \\[1ex]
-\begin{ldesc}
-	\li[statement separator]         ;\s\s\s\s-- or line break
-	\li[statement grouping]          \verb+{ }+\s\s-- or layout/indentation
-\end{ldesc}
 
 % Secondary formatting for case and pattern match
 %\\

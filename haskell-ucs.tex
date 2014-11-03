@@ -479,10 +479,10 @@ if~\I{boolExpr1}        & \I{foo} ...~| \I{boolExpr1} = \I{exprA} \\
 ~~~~~~~~~else~\I{exprC} & \\[1ex]
 
 \theads{case expression}{function pattern matching}
-case~\I{x}~of         & \I{foo pat1} = exprA \\
-~~\I{pat1} -> exprA   & \I{foo pat2} = exprB \\
-~~\I{pat2} -> exprB   & \I{foo \_~~~} = exprC \\
-~~\_\T{at2} -> exprC  & \\[1ex]
+case~\I{x}~of~\I{pat1} -> exA & \I{foo pat1} = exA \\
+~~~~~\T{x}~~~~\I{pat2} -> exB & \I{foo pat2} = exB \\
+~~~~~\T{x}~~~~\_\T{at2} -> exC & \I{foo \_~~~} = exC \\[1ex]
+%~~\_\T{at2} -> exprC  & \\[1ex]
 
 \theads{2-variable case expression}{function pattern matching}
 case~(\I{x},\I{y})~of & \I{foo pat1 patA} = exprA \\

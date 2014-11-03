@@ -12,7 +12,7 @@
 
 all: template-refcard.pdf haskell-ucs.pdf
 
-template-refcard.pdf: template-refcard.tex refcard.cls
+template-refcard.pdf: template-refcard.tex refcard.cls threecols.sty
 
 # Refcard dependency is provisory, as of now we're changing refcard a lot.
 haskell-ucs.pdf: haskell-ucs.tex refcard.cls

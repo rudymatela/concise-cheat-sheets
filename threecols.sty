@@ -45,7 +45,7 @@
 % This was tested on texlive-2014.34872 with latex-base 2014-10-12.
 % The definitions below we're based on "latex.ltx" from latex-base 2014-10-12.
 
-\ProvidesPackage{threecols}[2014/10/24 Definition of threecolumn command (A hack)]
+\ProvidesPackage{threecols}[2014/11/03 Definition of threecolumn command (A hack)]
 
 \newif \if@threecolumn   \@threecolumnfalse
 \newif \if@firstcolumns  \@firstcolumnsfalse
@@ -68,7 +68,7 @@
 % Redefinition of the standard ``output column'' command supporting 3 columns.
 \def \@opcol {% originally from latex.ltx
   \if@threecolumn% we are in three columns?
-	\@outputtplcol% yes, output in 3 columns
+    \@outputtplcol% yes, output in 3 columns
   \else% do as usual
     \if@twocolumn
       \@outputdblcol
@@ -84,13 +84,13 @@
 % Output three columns
 \def\@outputtplcol{% based on \@outputdblcol (from latex.ltx)
   \if@firstcolumns% are we typesetting the first 2 columns?
-  	\if@firstcolumn% yes, is this the left or center column?
+    \if@firstcolumn% yes, is this the left or center column?
       \global \@firstcolumnfalse
       \global \setbox\@leftcolumn \box\@outputbox
-	\else
+    \else
       \global \@firstcolumnsfalse
       \global \setbox\@centercolumn \box\@outputbox
-	\fi
+    \fi
   \else
     \global \@firstcolumntrue
     \global \@firstcolumnstrue
@@ -159,15 +159,21 @@
        \fi
        \if@threecolumn % Are we in three columns?
          \if@firstcolumns % Do the same thing for three columns
-           \xdef\@dbldeferlist{\@dbltoplist\@dbldeferlist}%
-           \global \let \@dbltoplist \@empty
-           \global \@colht \textheight
-           \begingroup
-              \@dblfloatplacement
-              \@makefcolumn\@dbldeferlist
-              \@whilesw\if@fcolmade \fi{\@outputpage
-                                        \@makefcolumn\@dbldeferlist}%
-           \endgroup
+           \@makefcolumn\@deferlist
+           \@whilesw\if@fcolmade \fi{\@opcol\@makefcolumn\@deferlist}%
+           \if@firstcolumn
+             \xdef\@dbldeferlist{\@dbltoplist\@dbldeferlist}%
+             \global \let \@dbltoplist \@empty
+             \global \@colht \textheight
+             \begingroup
+                \@dblfloatplacement
+                \@makefcolumn\@dbldeferlist
+                \@whilesw\if@fcolmade \fi{\@outputpage
+                                          \@makefcolumn\@dbldeferlist}%
+             \endgroup
+           \else
+             \vbox{}\clearpage
+           \fi
          \else
            \vbox{}\clearpage
          \fi

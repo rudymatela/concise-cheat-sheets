@@ -50,6 +50,7 @@
 }
 \newcolumntype{C}{>{\ttfamily\arraybackslash}l}
 \newcolumntype{R}{>{\ttfamily\arraybackslash}r}
+\newcolumntype{b}{>{\bfseries\arraybackslash}l}
 \newenvironment{tabularlc}[1]{
 \setcounter{line}{0}
 \begin{tabular}{#1}

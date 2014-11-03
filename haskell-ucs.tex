@@ -207,22 +207,12 @@ comparisons, list membership and list diff. which are non-associative.
 %   until
 \end{tabular}
 
-\subsection{Tuples}
-\begin{tabular}{@{}C@{\s}C@{\hspace{3ex}}R@{\s$\equiv$\s}C}
-	fst       & ::~(a, b) -> a      & ~~~~~~~~~fst (\I{x},\I{y}) & \I{x} \\
-	snd       & ::~(a, b) -> b      &          snd (\I{x},\I{y}) & \I{y} \\
-%	swap      & ::~(a, b) -> (b, a) & snd (\I{x},\I{y})   & (\I{y},\I{x}) \\ % Data.Tuple
-	curry     & \multicolumn{3}{@{}C}{::~((a, b) -> c) -> a -> b -> c} \\
-	          & \multicolumn{2}{R@{\s$\equiv$\s}}{curry (\la(\I{x},\I{y}) -> \I{e})} & \la\I{x} \I{y} -> \I{e}\\[1ex]
-	uncurry   & \multicolumn{3}{@{}C}{::~a -> b -> c -> ((a, b) -> c)} \\
-	          & \multicolumn{2}{R@{\s$\equiv$\s}}{uncurry (\la \I{x} \I{y} -> \I{e})} & \la(\I{x},\I{y}) -> \I{e} \\[-2ex]
-\end{tabular}
-
-
 \subsection{Lists}
 
 \begin{tabular}{@{}C@{\hspace{1ex}}C@{\s}R@{\s$\equiv$\s}C}
 	null    & ::~[a] -> Bool        & null []              & True~~{\footnotesize -- \textnormal{empty?}} \\
+	length  & ::~[a] -> Int         & length [\X,\Y,\Z]    & 3                \\
+	elem    & ::~a -> [a] -> Bool   & \Y~`elem`~[\X,\Y]    & True~~{\footnotesize-- \textnormal{$\in?$}}  \\
 %	        &                       & null [\X,\Y]         & False \\
 	head    & ::~[a] -> a           & head [\X,\Y,\Z,\W]   & \X               \\
 	tail    & ::~[a] -> [a]         & tail [\X,\Y,\Z,\W]   & [\Y,\Z,\W]       \\
@@ -233,14 +223,20 @@ comparisons, list membership and list diff. which are non-associative.
 	drop    & ::~Int -> [a] -> [a]  & drop 2 [\X,\Y,\Z]    & [\Z]             \\
 	\multicolumn{4}{@{}C}{takeWhile, dropWhile ::~(a -> Bool) -> [a] -> [a]}  \\[-.3ex]
 	                 \longcall{takeWhile (/= z) [x,y,z,w]} & [x,y]            \\[.3ex]
-	length  & ::~[a] -> Int         & length [\X,\Y,\Z]    & 3                \\
-	elem    & ::~a -> [a] -> Bool   & \Y~`elem`~[\X,\Y]    & True~~{\footnotesize-- \textnormal{$\in?$}}  \\
-	repeat  & ::~a -> [a]           & repeat x             & [\X,\X,\X,...] \\
-	cycle   & ::~[a] -> [a]         & cycle \XS            & \XS++\XS++... \\
-%	        &                       & cycle [\X,\Y]        & [\X,\Y,\X,\Y,...] \\
-% todo: ??
-%	sort
-%   zip
+	zip     & \longtype{::~[a] -> [b] -> [(a, b)]}                            \\[-.3ex]
+	                          \longcall{zip [x,y,z] [a,b]} & [(x,a),(y,b)]    \\[.3ex]
+	zipWith & \longtype{::~[a] -> [b] -> [(a, b)]}                            \\[-.3ex]
+	                    \longcall{zipWith f [x,y,z] [a,b]} & [f x a,f y b]    \\[-2ex]
+\end{tabular}
+
+\subsubsection{Infinite Lists}
+
+\begin{tabular}{@{}C@{\hspace{3ex}}C@{\s}R@{\s$\equiv$\s}C}
+	repeat  & ::~a -> [a]             & repeat x             & [\X,\X,\X,...] \\
+	cycle   & ::~[a] -> [a]           & cycle \XS            & \XS++\XS++... \\
+	        &                         & cycle [\X,\Y]        & [\X,\Y,\X,\Y,...] \\
+	iterate & \longtype{::~(a -> a) -> a -> [a]} \\
+	        &                         & iterate f x          & [\X,\F~\X,\F~(\F~\X),...] \\[-2ex]
 \end{tabular}
 
 \subsection{Special folds}
@@ -267,6 +263,18 @@ comparisons, list membership and list diff. which are non-associative.
 	        & & foldl \F~\X~[\Y,\Z]    & (\X~`\F`~\Y)~`\F`~\Z       \\[1ex]
 	foldr   & \multicolumn{3}{C}{::~(a -> b -> b) -> b -> [a] -> b} \\
 	        & & foldr \F~\Z~[\X,\Y]    & \X~`\F`~(\Y~`\F`~\Z)       \\[1ex]
+\end{tabular}
+
+
+\subsection{Tuples}
+\begin{tabular}{@{}C@{\s}C@{\hspace{3ex}}R@{\s$\equiv$\s}C}
+	fst       & ::~(a, b) -> a      & ~~~~~~~~~fst (\I{x},\I{y}) & \I{x} \\
+	snd       & ::~(a, b) -> b      &          snd (\I{x},\I{y}) & \I{y} \\
+%	swap      & ::~(a, b) -> (b, a) & snd (\I{x},\I{y})   & (\I{y},\I{x}) \\ % Data.Tuple
+	curry     & \multicolumn{3}{@{}C}{::~((a, b) -> c) -> a -> b -> c} \\
+	          & \multicolumn{2}{R@{\s$\equiv$\s}}{curry (\la(\I{x},\I{y}) -> \I{e})} & \la\I{x} \I{y} -> \I{e}\\[1ex]
+	uncurry   & \multicolumn{3}{@{}C}{::~a -> b -> c -> ((a, b) -> c)} \\
+	          & \multicolumn{2}{R@{\s$\equiv$\s}}{uncurry (\la \I{x} \I{y} -> \I{e})} & \la(\I{x},\I{y}) -> \I{e} \\[-2ex]
 \end{tabular}
 
 
@@ -342,8 +350,7 @@ comparisons, list membership and list diff. which are non-associative.
 		module \I{Module.Name} \li
 		~~( \I{foo} \li
 		~~, \I{goo} \li
-		~~) \li
-		where \li
+		~~) where \li
 	    ...
 	\lI[./File/On/Disk.hs] import File.On.Disk
 \end{ldesc}
@@ -411,7 +418,7 @@ comparisons, list membership and list diff. which are non-associative.
 
   \lI[as-pattern] tuple \C{s} and its values \C{a} and \C{b} & s@(a,b) \li
                   list \C{a}, its head \C{x} and tail \C{xs} & a@(x:xs) \li
-	              data \C{p} and its fields                  & p@(MyData a b c)
+%	              data \C{p} and its fields                  & p@(MyData a b c)
 \end{tabularlc}
 
 
@@ -425,7 +432,7 @@ Take \I{pat} from \I{list}. If \I{boolPredicate}, add element \I{expr} to list:\
 %	{[}x | x <- xs, p x, q x] & filter (\la{}x -> p x \&\& q x) xs \\
 	{[}x | x <- xs, p x, q x] & filter q \$ filter p xs \\
 %	{[}xs | xs <- xss, (not.null) xs] & filter (not~.~null) xs \\
-	{[}f x y | x <- xs, y <- ys] & zipWith f xs ys \\
+%	{[}f x y | x <- xs, y <- ys] & zipWith f xs ys \\  % WRONG!
 	{[}x+y | x <- [a,b], y <- [i,j]] & [a+i, a+j, b+i, b+j] \\
 %	{[}(x,y) | x <- [0..3], y <- [0..3], x + y == 3] & [(0,3),(1,2),(2,1),(3,0)] \\
 \end{tabular}

@@ -392,7 +392,7 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 	words & \longtype{::~String -> [String]} \\
 	\longcall{words "ab cd e"} & ["ab","cd","e"] \\[1ex]
 	unwords & \longtype{::~[String] -> String} \\
-	\longcall{unwords ["ab","cd","ef"]} & "ab cd ef" \\[1ex]
+	\longcall{unwords ["ab","cd","ef"]} & "ab cd ef" \\[-1ex]
 \end{tabular}
 
 
@@ -433,7 +433,8 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 		module \I{Module.Name} \li
 		~~( \I{foo} \li
 		~~, \I{goo} \li
-		~~) where \li
+		~~) \li
+		where \li
 	    ...
 	\lI[./File/On/Disk.hs] import File.On.Disk
 \end{ldesc}

@@ -20,8 +20,11 @@
 \newcommand{\W}{\I{w}}
 \newcommand{\XS}{\I{xs}}
 
+\newcommand{\mtype}[1]{\multicolumn{2}{@{}C}{#1}}
 \newcommand{\longtype}[1]{\multicolumn{3}{@{}C}{#1}}
+\newcommand{\Longtype}[1]{\multicolumn{4}{@{}C}{#1}}
 \newcommand{\longcall}[1]{\multicolumn{3}{@{}R@{\s$\equiv$\s}}{#1}}
+
 
 
 \title{Basic Haskell Cheat Sheet}
@@ -281,7 +284,7 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 	error     & ::~String -> a      & error \I{cs}        & \textnormal{$\bot$ (lifts error \I{cs})} \\
     not       & ::~Bool -> Bool     & not True & False \\
 	flip      & \longtype{::~(a -> b -> c) -> (b -> a -> c)} \\
-	\longcall{flip f \$ x y} & f y x \\[-2ex]
+	\longcall{flip~\F~\$~\X~\Y} & \F~\Y~\X \\[-2ex]
 % todo: ??
 %   until
 \end{tabular}
@@ -301,11 +304,11 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 	take    & ::~Int -> [a] -> [a]  & take 2 [\X,\Y,\Z]    & [\X,\Y]          \\
 	drop    & ::~Int -> [a] -> [a]  & drop 2 [\X,\Y,\Z]    & [\Z]             \\
 	\multicolumn{4}{@{}C}{takeWhile, dropWhile ::~(a -> Bool) -> [a] -> [a]}  \\
-	                 \longcall{takeWhile (/= z) [x,y,z,w]} & [x,y]            \\[.2ex]
+	                 \longcall{takeWhile (/= \Z) [\X,\Y,\Z,\W]} & [\X,\Y]            \\[.2ex]
 	zip     & \longtype{::~[a] -> [b] -> [(a, b)]}                            \\
-	                          \longcall{zip [x,y,z] [a,b]} & [(x,a),(y,b)]    \\[.2ex]
-	\multicolumn{4}{@{}C}{zipWith ::~[a] -> [b] -> [(a, b)]}                            \\
-	                    \longcall{zipWith f [x,y,z] [a,b]} & [f x a,f y b]    \\[-2ex]
+	        \longcall{zip [\X,\Y,\Z] [\I{a},\I{b}]} & [(\X,\I{a}),(\Y,\I{b})] \\[.2ex]
+	\multicolumn{4}{@{}C}{zipWith ::~[a] -> [b] -> [(a, b)]}                  \\
+	          \longcall{zipWith \F~[\X,\Y,\Z] [\I{a},\I{b}]} & [\I{f x a},\I{f y b}] \\[-2ex]
 \end{tabular}
 
 \subsubsection{Infinite Lists}
@@ -366,7 +369,7 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 	               &                           & gcd 4 2  &  2 \\
 	recip          & ::~Fractional a => a -> a & recip \X & 1/\X \\
     pi             & ::~Floating a => a        & pi     & 3.1415... \\
-	sqrt, log      & ::~Floating a => a -> a   & sqrt x & x**0.5 \\
+	sqrt, log      & ::~Floating a => a -> a   & sqrt \X& x**0.5 \\
 	\multicolumn{2}{@{}C}{exp, sin, cos, tan, asin, acos, atan} &
 	\multicolumn{2}{@{}C}{::~Floating a => a  -> a} \\
 	\multicolumn{4}{@{}C}{truncate, round~::~(RealFrac a, Integral b) => a -> b} \\
@@ -450,18 +453,18 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 \subsection{IO \normalsize -- Must be ``inside'' the IO Monad}
 
 \begin{ldesc}
-	\li[Write char \C{c} to stdout]                      putChar c
-	\li[Write string \C{cs} to stdout]                   putStr cs
-	\li[Write string \C{cs} to stdout w/ a newline]      putStrLn cs
-	\li[Print \C{x}, a \C{show} instance, to stdout]     print x
+	\li[Write char \CI{c} to stdout]                     putChar \I{c}
+	\li[Write string \CI{cs} to stdout]                  putStr \I{cs}
+	\li[Write string \CI{cs} to stdout w/ a newline]     putStrLn \I{cs}
+	\li[Print \CI{x}, a \C{show} instance, to stdout]    print \I{x}
 	\li[Read char from stdin]                            getChar
 	\li[Read line from stdin as a string]                getLine
 	\li[Read all input from stdin as a string]           getContents
-	\li[Bind stdin/stdout to \C{foo} (\C{\footnotesize ::~String -> String})]
-	                                                     interact foo
-	\li[Write string \C{cs} to a file named \C{fn}]      writeFile fn cs
-	\li[Append string \C{cs} to a file named \C{fn}]     appendFile fn cs
-	\li[Read contents from a file named \C{fn}]          readFile fn
+	\li[Bind stdin/stdout to \CI{foo} (\CI{\footnotesize ::~String -> String})]
+	                                                     interact \I{foo}
+	\li[Write string \CI{cs} to a file named \CI{fn}]    writeFile \I{fn} \I{cs}
+	\li[Append string \CI{cs} to a file named \CI{fn}]   appendFile \I{fn} \I{cs}
+	\li[Read contents from a file named \CI{fn}]         readFile \I{fn}
 %	\li[Write char \C{c} to channel/file \C{h}]          hPutChar h c  -- ghc specific!
 %	\li[Write string \C{cs} to channel/file \C{h}]       hPutStr h cs -- ghc specific!
 %	\li[Write \C{cs} to channel/file \C{h} w/ a newline] hPutStrLn h cs -- ghc specific!
@@ -473,14 +476,16 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 Take \I{pat} from \I{list}. If \I{boolPredicate}, add element \I{expr} to list:\\
 \begin{tabular}{C@{\s$\equiv$\s}C}
 	\multicolumn{2}{C}{[\I{expr} | \I{pat} <- \I{list}, \I{boolPredicate}, ...]} \\[1ex]
-	{[}x | x <- xs] & xs \\
-	{[}f x | x <- xs, p x] & map f \$ filter p xs \\
+	{[}x | x <- \I{xs}] & \I{xs} \\
+	{[}\I{f} x | x <- \I{xs}, \I{p} x] & map \I{f} \$ filter \I{p} \I{xs} \\
 %	{[}x | x <- xs, p x, q x] & filter (\la{}x -> p x \&\& q x) xs \\
-	{[}x | x <- xs, p x, q x] & filter q \$ filter p xs \\
+	{[}x | x <- \I{xs}, \I{p} x, \I{q} x] & filter \I{q} \$ filter \I{p} \I{xs} \\
 %	{[}xs | xs <- xss, (not.null) xs] & filter (not~.~null) xs \\
 %	{[}f x y | x <- xs, y <- ys] & zipWith f xs ys \\  % WRONG!
-	{[}x+y | x <- [a,b], y <- [i,j]] & [a+i, a+j, b+i, b+j] \\
+	{[}x+y | x <- [\I{a},\I{b}], y <- [\I{i},\I{j}]] &
+	    [\I{a}+\I{i}, \I{a}+\I{j}, \I{b}+\I{i}, \I{b}+\I{j}] \\
 %	{[}(x,y) | x <- [0..3], y <- [0..3], x + y == 3] & [(0,3),(1,2),(2,1),(3,0)] \\
+	{[}\I{x} | \I{boolE}] & if \I{boolE} then [\I{x}] else []
 \end{tabular}
 
 % Secondary formatting for case and pattern match

@@ -72,6 +72,7 @@
 \newcommand{\C}{\texttt}
 \newcommand{\B}{\textbf}
 \newcommand{\I}{\textit}
+\newcommand{\CI}[1]{\texttt{\textit{#1}}}
 \newcommand{\N}{\textnormal}
 \newcommand{\T}[1]{\hphantom{\I{#1}}}
 \newcommand{\D}[1]{\hphantom{#1}}

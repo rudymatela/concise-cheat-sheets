@@ -293,7 +293,7 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 
 \begin{tabular}{@{}C@{\hspace{1ex}}C@{\s}R@{\s$\equiv$\s}C}
 	null    & ::~[a] -> Bool        & null []              & True~~{\footnotesize -- \textnormal{empty?}} \\
-	length  & ::~[a] -> Int         & length [\X,\Y,\Z]    & 3                \\
+	\mtype{length~::~[a] -> Int}    & length [\X,\Y,\Z]    & 3                \\
 	elem    & ::~a -> [a] -> Bool   & \Y~`elem`~[\X,\Y]    & True~~{\footnotesize-- \textnormal{$\in?$}}  \\
 %	        &                       & null [\X,\Y]         & False \\
 	head    & ::~[a] -> a           & head [\X,\Y,\Z,\W]   & \X               \\
@@ -313,24 +313,12 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 
 \subsubsection{Infinite Lists}
 
-\begin{tabular}{@{}C@{\hspace{3ex}}C@{\s}R@{\s$\equiv$\s}C}
-	repeat  & ::~a -> [a]             & repeat x             & [\X,\X,\X,...] \\
-	cycle   & ::~[a] -> [a]           & cycle \XS            & \XS++\XS++... \\
-	        &                         & cycle [\X,\Y]        & [\X,\Y,\X,\Y,...] \\
+\begin{tabular}{@{}C@{\s}C@{}R@{\s$\equiv$\s}C}
+	repeat  & ::~a -> [a]             & repeat x             & [\X,\X,\X,\X,\X,\X,...] \\
+	cycle   & ::~[a] -> [a]           & cycle \XS            & \XS++\XS++\XS++... \\
+	        &                         & cycle [\X,\Y]        & [\X,\Y,\X,\Y,\X,\Y,...] \\
 	iterate & \longtype{::~(a -> a) -> a -> [a]} \\
 	        &                         & iterate f x          & [\X,\F~\X,\F~(\F~\X),...] \\[-2ex]
-\end{tabular}
-
-\subsubsection{Special folds}
-
-\begin{tabular}{@{}C@{\hspace{1ex}}C@{\hspace{1ex}}R@{\s$\equiv$\s}C}
-	and     & ::~[Bool]~->~Bool    & and [\I{p},\I{q},\I{r}]     & \I{p}~\&\&~\I{q}\&\&\I{r} \\
-	or      & ::~[Bool]~->~Bool    & or [\I{p},\I{q},\I{r}]      & \I{p}~||~\I{q}||\I{r} \\
-	sum     & ::~Num~a~=>~[a]~->~a & sum [\I{i},\I{j},\I{k}]     & \I{i} + \I{j} + \I{k} \\
-	product & ::~Num~a~=>~[a]~->~a & product [\I{i},\I{j},\I{k}] & \I{i} * \I{j} * \I{k} \\
-	concat  & ::~[[a]]~->[a]       & concat [\I{xs},\I{ys},\I{zs}] & \I{xs}++\I{ys}++\I{zs} \\
-	maximum & ::~Ord~a => [a] -> a & maximum [10,0,5] & 10 \\
-	minimum & ::~Ord~a => [a] -> a & minimum [10,0,5] & 0 \\
 \end{tabular}
 
 
@@ -344,7 +332,20 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 	foldl   & \multicolumn{3}{C}{::~(a -> b -> a) -> a -> [b] -> a} \\
 	        & & foldl \F~\X~[\Y,\Z]    & (\X~`\F`~\Y)~`\F`~\Z       \\[1ex]
 	foldr   & \multicolumn{3}{C}{::~(a -> b -> b) -> b -> [a] -> b} \\
-	        & & foldr \F~\Z~[\X,\Y]    & \X~`\F`~(\Y~`\F`~\Z)       \\[1ex]
+	        & & foldr \F~\Z~[\X,\Y]    & \X~`\F`~(\Y~`\F`~\Z)       \\[-2ex]
+\end{tabular}
+
+
+\subsubsection{Special folds}
+
+\begin{tabular}{@{}C@{\hspace{1ex}}C@{\hspace{1ex}}R@{\s$\equiv$\s}C}
+	and     & ::~[Bool]~->~Bool    & and [\I{p},\I{q},\I{r}]     & \I{p}~\&\&~\I{q}\&\&\I{r} \\
+	or      & ::~[Bool]~->~Bool    & or [\I{p},\I{q},\I{r}]      & \I{p}~||~\I{q}||\I{r} \\
+	sum     & ::~Num~a~=>~[a]~->~a & sum [\I{i},\I{j},\I{k}]     & \I{i} + \I{j} + \I{k} \\
+	product & ::~Num~a~=>~[a]~->~a & product [\I{i},\I{j},\I{k}] & \I{i} * \I{j} * \I{k} \\
+	concat  & ::~[[a]]~->[a]       & concat [\I{xs},\I{ys},\I{zs}] & \I{xs}++\I{ys}++\I{zs} \\
+	maximum & ::~Ord~a => [a] -> a & maximum [10,0,5] & 10 \\
+	minimum & ::~Ord~a => [a] -> a & minimum [10,0,5] & 0 \\
 \end{tabular}
 
 
@@ -369,7 +370,7 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 	               &                           & gcd 4 2  &  2 \\
 	recip          & ::~Fractional a => a -> a & recip \X & 1/\X \\
     pi             & ::~Floating a => a        & pi     & 3.1415... \\
-	sqrt, log      & ::~Floating a => a -> a   & sqrt \X& x**0.5 \\
+	sqrt, log      & ::~Floating a => a -> a   & sqrt \X& \X**0.5 \\
 	\multicolumn{2}{@{}C}{exp, sin, cos, tan, asin, acos, atan} &
 	\multicolumn{2}{@{}C}{::~Floating a => a  -> a} \\
 	\multicolumn{4}{@{}C}{truncate, round~::~(RealFrac a, Integral b) => a -> b} \\

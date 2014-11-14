@@ -4,7 +4,7 @@ Ultimate Cheat Sheets
 This repository is a collection of Cheat Sheets for programming languages and
 tools.  Currently:
 
-* A [Haskell Cheat Sheet] -- version 0.5
+* A [Haskell Cheat Sheet] -- version 0.6
 * A Template Cheat Sheet
 * A LaTeX cls file, for the creation of sheets.
 
@@ -47,4 +47,4 @@ Acknowledgements
 
 
 [C Reference Card]: http://www.math.brown.edu/~jhs/ReferenceCards/CRefCard.v2.2.pdf
-[Haskell Cheat Sheet]: https://github.com/rudymatela/ultimate-cheat-sheets/releases/download/haskell-v0.5/haskell-ucs-0.5.pdf
+[Haskell Cheat Sheet]: https://github.com/rudymatela/ultimate-cheat-sheets/releases/download/haskell-v0.6/haskell-ucs-0.6.pdf

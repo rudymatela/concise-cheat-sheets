@@ -32,6 +32,19 @@ Features
 	* The `refcard.cls` file and the template are licensed under the **LPPL**.
 
 
+Acknowledgements
+----------------
+
+* Haskell Cheat Sheet
+	* Many thanks to
+	  Colin Runciman,
+	  Doug McIlroy,
+	  Jeremy Jacob,
+	  José Calderon,
+	  Karl Voelker and
+	  Sean Leather
+	  for reviewing, corrections and suggestions.
+
 
 [C Reference Card]: http://www.math.brown.edu/~jhs/ReferenceCards/CRefCard.v2.2.pdf
 [Haskell Cheat Sheet]: https://github.com/rudymatela/ultimate-cheat-sheets/releases/download/haskell-v0.5/haskell-ucs-0.5.pdf

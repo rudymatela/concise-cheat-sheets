@@ -426,14 +426,14 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 \section{Libraries / Modules}
 
 \begin{ldesc}
-	\li[importing]              import \I{PathTo.Lib}
-	\li[importing (qualified)]  import qualified \I{PathTo.Lib} as \I{PL}
-	\li[importing (subset)]     import \I{PathTo.Lib} (\I{foo},\I{goo})
-	\li[declaring]
+	\li[importing]               import \I{Some.Module}
+	\li[~~(qualified)]           import qualified \I{Some.Module} as \I{SM}
+	\li[~~(subset)]              import \I{Some.Module} (\I{foo},\I{goo})
+	\li[~~(hiding)]              import \I{Some.Module} hiding (\I{foo,goo})
+	\li[~~(typeclass instances)] import \I{Some.Module} ()
+	\lI[declaring]
 		module \I{Module.Name} \li
-		~~( \I{foo} \li
-		~~, \I{goo} \li
-		~~) \li
+		~~( \I{foo}, \I{goo} ) \li
 		where \li
 	    ...
 	\lI[./File/On/Disk.hs] import File.On.Disk

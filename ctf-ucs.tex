@@ -1,0 +1,323 @@
+%% haskell-ucs.tex
+%
+% Copyright 2014  Rudy Matela
+%
+% This text is avaliable under (at your option):
+%   * Creative Commons Attribution-ShareAlike 3.0 Licence
+%   * GNU Free Documentation License version 1.3 or Later
+%
+
+
+\documentclass{refcard}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\title{Concise Capture the Flag Cheat Sheet}
+
+\cright{
+	Copyright 2014, Rudy Matela --
+	Compiled on \today{} --
+	Upstream: \texttt{https://github.com/rudymatela/ultimate-cheat-sheets}
+}{
+	This text is avaliable under the Creative Commons Attribution-ShareAlike
+	3.0 Licence, \textbf{or}, the GNU Free Documentation License version 1.3 or
+	Later.
+}
+
+
+\begin{document}
+
+\maketitle
+
+
+\section{Binaries and Metadata Extractors}
+
+\begin{ldesc}
+	\li[Guess file type using magic]      \$ file \I{file}
+	\li[Printable strings in binary file] \$ strings \I{file}
+	\li[Hexadecimal dump]                 \$ xxd [-c\I{16} -g\I{2}] \I{file} \li
+	                                      \$ hexdump \I{file} \li
+										  \$ od -tx1z \I{file}
+	\li[Binary hexadecimal editor]        \$ elvis [-c"display hex"] \I{file}
+	\li[Extract JPEG EXIF data]           \$ exiv2 \I{img.jpeg} \li
+	                                      \$ jhead \I{img.jpeg}
+	\li[Extract PNG metadata]             \$ pngcheck -7ptv \I{img.png}
+	\li[List tarball contents]            \$ tar -tf \I{tarball.tar}
+	\li[List zip contents]                \$ unzip -l \I{file.zip}
+	\li[Extract ID3 metadata]             \$ id3info \I{file.mp3}
+\end{ldesc}
+
+
+\section{Encoding / Decoding}
+
+\begin{ldesc}
+	\li[Encode base64]     \$ base64 [\I{file}]
+	\li[Decode base64]     \$ base64 -di [\I{file}]
+	\li[(de)code caesar's] \$ caesar [0-25]
+	\li[Encode morse]      \$ morse -s ~~~~~\I{message}
+	\li[Decode morse]      \$ morse -d --~~~\I{...~---~...}
+\end{ldesc}
+
+
+\section{Hashes}
+
+\begin{ldesc}
+	\li[md5sum]    \$ md5sum \I{file}
+	\li[sha1sum]   \$ sha1sum \I{file}
+	\li[sha256sum] \$ sha256sum \I{file}
+\end{ldesc}
+
+
+\section{Unix / Linux}
+
+\begin{ldesc}
+	\li[Extract tarball contents]  \$ tar -xvf \I{tarball.tar}
+	\li[Remove first 3 bytes]      \$ tail -c +4 [\I{file}]
+	\li[Unzip]                     \$ unzip \I{file.zip}
+\end{ldesc}
+
+
+\section{Disk Images / Forensics}
+
+
+\begin{ldesc}
+	\li[Mounting FS image]         \$ mount \I{fs.img} \I{mountpoint}
+	\li[~~(override user/group)]   ~~~-o uid=user,gid=users
+	\li[List orphan inodes on disk image]     \$ ils \I{fs.img}
+	\li[List deleted files on disk image]     \$ fls -drp \I{fs.img}
+	\li[Output file contents from inode no.]  \$ icat \I{fs.img} \I{1337}
+	\li[(Deleted) file contents on disk img.] \$ fcat \I{path/to/file} \I{fs.img}
+\end{ldesc}
+
+
+\section{Disassembly}
+
+\begin{ldesc}
+	\li[Disassemble program]       \$ objdump -d \I{prog}
+	\li[Dump RO data section]      \$ objdump -j .rodata -s \I{prog}
+	\li[List symbols from program] \$ nm \I{prog}
+	\li[Disassemble (ndisasm)]     \$ ndisasm \I{prog}
+	\li[Disasm. ncurses]           \$ TERM=vt100 biew \I{prog}
+	\li[Assembly]                  nasm, yasm, gas
+\end{ldesc}
+
+
+\section{Debugging}
+
+\begin{ldesc}
+	\li[simple / command line]     \$ gdb ./program
+	\li[run program]               > r [parameters] [< re > directs]
+	\li[print backtrace]           > bt
+	\li[set breakpoint on \I{foo}] > b \I{foo}
+	\li[unset       breakpoint(s)] > delete breakpoint [no]
+	\li[next line (over)]          > n
+	\li[step line (into)]          > s
+	\li[next instruction (over)]   > ni
+	\li[step instruction (into)]   > si
+	\li[activate display next instr.] > display/i \$pc
+	\li[continue execution]        > c
+	\li[save memory contents]      > generate-core-file
+	\li[advanced / graphical]     \$ edb \I{./program}
+	\li[trace system calls]       \$ strace \I{./program}
+\end{ldesc}
+
+% GDB Manual http://www.delorie.com/gnu/docs/gdb/gdb_38.html
+
+
+\subsection{Running and debugging Legacy/Other Systems}
+
+\subsubsection{DOS}
+
+\begin{ldesc}
+	\li[Open DOS with \textit{dir} as C:] \$ dosbox \I{dir}
+	\li[~~(debug mode)]                   \$ dosbox-debug \I{dir}
+	\li[Run \I{prog} in debug mode]       C:\textbackslash> debug \I{prog.com}
+	\li[DOSBox-debug step over]     F10
+	\li[DOSBox-debug step into]     F11
+	\li[DOSBox-debug scroll memory] PgUp / PgDn
+	\li[DOSBox-debug scroll program] + / -
+\end{ldesc}
+
+\subsection{Windows}
+
+\begin{ldesc}
+	\li[Run executable]   \$ wine \I{prog.exe}
+	\li[Debug executable] \$ winedbg \I{prog.exe}
+	% TODO: More details on winedbg
+	% see: https://www.winehq.org/docs/winedev-guide/wine-debugger
+	% and: man winedbg
+	\li[Debug executable] \$ ollydbg \I{prog.exe}
+\end{ldesc}
+
+\subsection{IBM PC XT}
+
+\begin{ldesc}
+	\li[Start system] fake86 -fd0 /usr/share/fake86/rombasic.bin
+\end{ldesc}
+
+\subsection{Android}
+
+
+
+
+
+
+\section{Image Processing}
+
+\begin{ldesc}
+	\li[Editor (simple)]   \$ pinta \I{image}
+	\li[Editor (advanced)] \$ gimp \I{image}
+	\li[Convert to pnm]    \$ \I{type}topnm \I{image.type} > \I{image}.pnm
+	\li[pnm (ppm) format] P6~~~~~~~~~~~~~~~~~~\textnormal{(type)}\li
+	                      width height~~~~~~~~\textnormal{(in printable digits)} \li
+					      255~~~~~~~~~~~~~~~~~\textnormal{(max color)} \li
+					      RGBRGBRGBRGBRGB...  \textnormal{($\times$ \textit{width} $\times$ \textit{height})}
+	\li[Bar/qrcode scanner]   \$ zbarimg --raw \I{image.png}
+	\li[~~(from X selection)] \$ import \I{i.png} \&\& zbarimg --raw \I{i.png}
+	\li[OCR in \I{lng} lang.] \$ tesseract [-l \I{lng}] \I{i.png} stdout
+	\li[Crop]                 \$ convert -crop \I{W}x\I{H}+\I{HP}+\I{VP} \I{i.png} \I{o.png}
+	\li[Montage/Concat]       \$ montage -mode concatenate \I{*.png} \I{o.png}
+%	\li[Simple unsteg]        ...  % TODO: simple unsteg
+\end{ldesc}
+
+
+\section{Video Processing}
+
+\begin{ldesc}
+	\li[Extract Frames]  \$ ffmpeg -i \I{video.mp4} \I{frame-\%4d.jpeg}
+	\li[Downl. vid. (yt/etc)] \$ youtube-dl "\I{https://example.com/etc}"
+\end{ldesc}
+
+
+\section{Audio Processing}
+
+\begin{ldesc}
+	\li[Graphical editor / waveform]   \$ audacity \I{audio.flac}
+	\li[Spectrogram]                   \$ sox \I{audio.flac} -n spectrogram
+	\li[Extract notes from MIDI]       \$ midi2ly \I{music.midi}
+	\li[Generate music sheet]          \$ lilypond \I{music.ly}
+\end{ldesc}
+
+\subsubsection{Decoding Phone Dialing Tones}
+
+\begin{ldesc}
+	\li[Decode DTMF]   sox tone.ogg -esigned-integer \textbackslash \li
+	                   ~~~~-b16 -r 22050 -t raw - | \li
+	                   multimon-ng -c -a DTMF -
+	\li[Anything else] sox ... | multimon-ng
+\end{ldesc}
+
+
+
+
+\section{Networking}
+
+\begin{ldesc}
+	\li[Network traffic (graphical)]  \$ wireshark
+	\li[Network traffic]              \$ tshark -i \I{interface} -f \I{filter}
+	\li[List interfaces]              \$ tshark -D
+	\li[Wifi HTTP traffic]            \$ tshark -i wlan0 -f "port 80"
+	\li[Filter syntax]                \$ man pcap-filter
+	\li[Network traffic (altn.)]      \$ tcpdump
+	\li[Open ports on host]           \$ nmap [-sV -O -p \I{prange}] \I{host}
+	\li[List hosts on a network]      \$ nmap [-sn] 192.168.0.*
+	\li[Network cat (GNU/BSD)]        \$ nc ...  % TODO: describe netcat
+	\li[Network cat (nmap altn.)]     \$ ncat ... % TODO: describe wireshark ncat
+	\li[Telnet to \I{host} on \I{port}] \$ telnet host port
+	\li[Info about \I{port}] \$ cat /etc/services | grep \I{port}
+	\\
+	% TODO: curl, wget
+\end{ldesc}
+
+
+\section{Keyboard Scan Codes (US QWERTY)}
+
+% Reference: http://www.win.tue.nl/~aeb/linux/kbd/scancodes-1.html
+
+\newcommand{\ppkey}{\textbackslash{} \textbar}
+
+\begin{tabular}{C@{\hspace{6ex}}llllll}
+	   & \C{00} & \C{10} & \C{20} & \C{30} & \C{40} & \C{50} \\[1ex]
+	+0 & error  & q      & d      & b      & F6     & KP 2   \\
+	+1 & Esc    & w      & f      & n      & F7     & KP 3   \\
+	+2 & 1      & e      & g      & m      & F8     & KP 0   \\
+	+3 & 2      & r      & h      & , $<$  & F9     & KP Del \\
+
+	+4 & 3      & t      & j      & . $>$  & F10    & SysRq  \\
+	+5 & 4      & y      & k      & / ?    & NmLck  & --     \\
+	+6 & 5      & u      & l      & RShift & ScLck  & --     \\
+	+7 & 6      & i      & : ;    & KP *   & KP 7   & F11    \\
+
+	+8 & 7      & o      & ' "    & LAlt   & KP 8   & F12    \\
+	+9 & 8      & p      & ` ~    & Space  & KP 9   & --     \\
+	+a & 9      & \{ [   & LShift & CaLck  & KP -   & --     \\
+	+b & 0      & ] \}   & \ppkey & F1     & KP 4   & --     \\
+
+	+c & - \_   & Enter  & z      & F2     & KP 5   & --     \\
+	+d & + =    & LCtrl  & x      & F3     & KP 6   & --     \\
+	+e & Back   & a      & c      & F4     & KP +   & --     \\
+	+f & Tab    & s      & v      & F5     & KP 1   & --     \\
+\end{tabular}
+
+
+\section{Number/character conversion}
+
+\begin{tabularlc}{lCCC}
+\li              \textnormal{Ruby}   & \textnormal{Haskell}
+\li[lib]                             & import Data.Char
+%li[lib]                             & import Data.List
+%li[lib]                             & import Data.Tuple
+%li[lib]                             & import Data.Maybe
+\li[char to int]      'a'.ord        & ord 'a'
+\li[int to char]      0x61.chr       & chr 0x61
+\lI[from hexadecimal] "FF".to\_i(16) & foldl1 (\textbackslash{}x y -> x*16 + y) \li[] &
+                                       .~map digitToInt \$ "FF"
+\lI[to hexadecimal]   255.to\_s(16)  & map intToDigit .~reverse \li[] &
+                                       .~unfoldr \li[] &
+									   ~~(\textbackslash{}n -> listToMaybe\li[] &
+									   ~~~[ swap \$ n `divMod` 16 \li[] &
+									   ~~~| n /= 0 ]) \li[] &
+									   \$ 255 \
+\end{tabularlc}
+
+
+\section{Dates}
+
+\begin{ldesc}
+	\li[Unix to Human] date -d "@seconds"
+	\li[Human to Unix] date -d "YYYY-mm-dd HH:MM:SS" -f +\%s
+\end{ldesc}
+
+\newpage
+
+\section{Stuff to install \hfill {\normalsize (Arch Linux)}}
+
+% TODO: Also add ubuntu package names?
+
+% NOTE: This section is a good candidate for removal in case we run out of
+% space.  You can always search the web with the command name to find the
+% relevant package.
+
+\begin{ldesc}
+	\li[Image processing]  \$ pacman -S pinta gimp netpbm
+	\li[Image metadata]    \$ pacman -S jhead exiv2 pngcheck
+	\li[Barcode]           \$ pacman -S zbar
+	\li[Disk image]        \$ pacman -S sleuthkit libewf
+	\li[Networking (act.)] \$ pacman -S \{gnu,openbsd\}-netcat nmap
+	\li[Networking (psv.)] \$ pacman -S wireshark-\{cli,gtk\} tcpdump
+	\li[OCR]               \$ pacman -S tesseract tesseract-data-eng %\{,por,jpn}
+	\li[Encoding/Decoding] \$ pacman -S bsdgames
+	\li[8086 emulator] \$ pacman -U fake86-???.pkg.tar.gz  \# AUR
+	\li[Dial Tones]        \$ pacman -S archassault/multimon-ng
+%	\li[StegDetect]        \$ pacman -S archassault/stegdetect
+	\li[Tools available]   \$ pacman -Ql \I{somekit} | grep /bin/
+\end{ldesc}
+
+\subsection{Other stuff}
+\begin{ldesc}
+	\lI[SQLi]     https://github.com/sqlmapproject/sqlmap
+\end{ldesc}
+
+
+\end{document}
+

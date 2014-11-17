@@ -155,14 +155,13 @@
 	\li[Start system] fake86 -fd0 /usr/share/fake86/rombasic.bin
 \end{ldesc}
 
-% TODO:
-% \subsection{Android}
-%  d2j-dex2jar \I{classes.dex}
 
+\subsection{Android}
 
-
-
-
+\begin{ldesc}
+	\li[dex to jar]   d2j-dex2jar \I{classes.dex}
+	\li[jar contents] unzip \I{classes.jar}
+\end{ldesc}
 
 \section{Image Processing}
 
@@ -314,6 +313,7 @@
 	\li[Encoding/Decoding] \$ pacman -S bsdgames
 	\li[8086 emulator] \$ pacman -U fake86-???.pkg.tar.gz  \# AUR
 	\li[Dial Tones]        \$ pacman -S archassault/multimon-ng
+	\li[Android]           \$ pacman -S archassault/dex2jar
 %	\li[StegDetect]        \$ pacman -S archassault/stegdetect
 	\li[Tools available]   \$ pacman -Ql \I{somekit} | grep /bin/
 \end{ldesc}

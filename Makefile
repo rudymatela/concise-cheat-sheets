@@ -23,7 +23,7 @@ ctf-ucs.pdf: ctf-ucs.tex refcard.cls
 
 .PHONY: clean cleanauxs cleanfigs
 clean: cleanauxs cleanfigs
-	rm -f template-refcard.pdf haskell-ucs.pdf
+	rm -f template-refcard.pdf haskell-ucs.pdf ctf-ucs.pdf
 
 cleanauxs:
 	rm -f *~ *.aux *.bbl *.blg *.log *.toc *.nav *.out *.snm

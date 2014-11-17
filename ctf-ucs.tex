@@ -226,11 +226,10 @@
 	\li[Network cat (nmap altn.)]     \$ ncat ... % TODO: describe wireshark ncat
 	\li[Telnet to \I{host} on \I{port}] \$ telnet host port
 	\li[Info about \I{port}] \$ cat /etc/services | grep \I{port}
+	\lI[Query \I{txt} DNS field]      \$ nslookup -query=txt \I{example.com}
+	\li[Query DNS info (on \I{srv})]  \$ dig \I{[@srv]} \I{example.com}
 	\\
 	% TODO: curl, wget
-	% TODO:
-	%  nslookup -query=txt \I{example.com}
-	%  dig \I{[@dnss]} \I{example.com}
 \end{ldesc}
 
 

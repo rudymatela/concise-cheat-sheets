@@ -119,23 +119,27 @@
 
 \begin{ldesc}
 	\li[type synonym] type \I{MyType} = \I{Type} \li
-	                  type UserId = Integer \li
-					  type UserName = String \li
-					  type User = (UserId,UserName) \li
-					  type UserList = [User]
+					  type User = (UserId, UserName) \li
+                      type String = [Char] ~~~~{\tiny-- from Prelude}
 
 	\lI[data \small{(single constructor)}]
-		data~\I{MyData}~{}=~\I{MyData}~\I{Type}~\I{Type}~\I{Type} \li
-		~~~~~~~~~~~~~~{}deriving (\I{Class},\I{Class})
+		data~\I{MyData}~=~\I{MyData}~\I{Type}~\I{Type}~\I{Type} \li
+		~~deriving (\I{Class}, \I{Class})
 
 	\lI[data \small{(multi constructor)}]
-		data~\I{MyData}~{}=~{}\I{Simple} \I{Type} | \li
-		~~~\hphantom{\I{MyData}}~~~~~{}\I{Duple} \I{Type} \I{Type} | \li
-		~~~\hphantom{\I{MyData}}~~~~~{}\I{Nople}
+		data~\I{MyData}~=~\I{Simple} \I{Type} \li
+		~~~~~\T{MyData}~|~\I{Duple} \I{Type} \I{Type} \li
+		~~~~~\T{MyData}~|~\I{Nople}
+
+	\lI[data \small{(labelled fields)}]
+		data~\I{MDt}~=~\I{MDt}~\{ \I{fieldA} \li
+		~~~~~\T{MDt}~~~\T{MDt}~,  \I{fieldB}~::~\I{TypeAB} \li
+		~~~~~\T{MDt}~~~\T{MDt}~,  \I{fieldC}~::~\I{TypeC} \}
 
 	\lI[newtype]
-		newtype~\I{MyNewType}~=~\I{MyNewType}~\I{Type} \li[~~\rotatebox{90}{$\Rsh$} \small{(single constr./field)}]
-		~~~~~~~~deriving (\I{Class},\I{Class})
+		newtype~\I{MyNewType}~=~\I{MyNewType}~\I{Type}
+	\li[~~\rotatebox{90}{$\Rsh$} \small{(single constr./field)}]
+		~~deriving (\I{Class}, \I{Class})
 
 	\lI[typeclass] class \I{MyClass} a where \li
 	               ~~\I{foo}~::~a~->~a~->~\I{b} \li
@@ -150,6 +154,7 @@
 
 \section{Operators (grouped by precedence)}
 
+% Of the operators, \\ is a good candidate for removal, as it is not in prelude.
 \begin{Ldesc}
 	\Li[List index, function composition] !!, \hfill .
 	\Li[raise to: Non-neg. Int, Int, Float] \hfill \verb+^+, \verb+^^+, \verb+**+

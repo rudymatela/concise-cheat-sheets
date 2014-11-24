@@ -288,7 +288,7 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 	id        & ::~a -> a           & id \I{x}            & \I{x} \s{\tiny-- identity} \\
 	const     & ::~a -> b -> a      & (const \I{x}) \I{y} & \I{x}    \\
 	undefined & ::~a                & undefined           & \textnormal{$\bot$ (lifts error)}   \\
-	error     & ::~String -> a      & error \I{cs}        & \textnormal{$\bot$ (lifts error \I{cs})} \\
+	error     & ::~[Char] -> a      & error \I{cs}        & \textnormal{$\bot$ (lifts error \I{cs})} \\
     not       & ::~Bool -> Bool     & not True & False \\
 	flip      & \longtype{::~(a -> b -> c) -> (b -> a -> c)} \\
 	\longcall{flip~\F~\$~\X~\Y} & \F~\Y~\X \\[-2ex]
@@ -307,14 +307,14 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 	tail    & ::~[a] -> [a]         & tail [\X,\Y,\Z,\W]   & [\Y,\Z,\W]       \\
 	init    & ::~[a] -> [a]         & init [\X,\Y,\Z,\W]   & [\X,\Y,\Z]       \\
 %	init xs & \s\s \textnormal{\I{init}ial elements of xs}& \s\s\textnormal{(excludes last element)} \\
-	\multicolumn{2}{@{}C}{reverse ::~[a] -> [a]}           & reverse [\X,\Y,\Z]   & [\Z,\Y,\X]       \\
+	\mtype{reverse ::~[a] -> [a]}   & reverse [\X,\Y,\Z]   & [\Z,\Y,\X]       \\
 	take    & ::~Int -> [a] -> [a]  & take 2 [\X,\Y,\Z]    & [\X,\Y]          \\
 	drop    & ::~Int -> [a] -> [a]  & drop 2 [\X,\Y,\Z]    & [\Z]             \\
 	\multicolumn{4}{@{}C}{takeWhile, dropWhile ::~(a -> Bool) -> [a] -> [a]}  \\
 	                 \longcall{takeWhile (/= \Z) [\X,\Y,\Z,\W]} & [\X,\Y]            \\[.2ex]
 	zip     & \longtype{::~[a] -> [b] -> [(a, b)]}                            \\
 	        \longcall{zip [\X,\Y,\Z] [\I{a},\I{b}]} & [(\X,\I{a}),(\Y,\I{b})] \\[.2ex]
-	\multicolumn{4}{@{}C}{zipWith ::~[a] -> [b] -> [(a, b)]}                  \\
+	\multicolumn{4}{@{}C}{zipWith ::~(a -> b -> c) -> [a] -> [b] -> [c]}                  \\
 	          \longcall{zipWith \F~[\X,\Y,\Z] [\I{a},\I{b}]} & [\I{f x a},\I{f y b}] \\[-2ex]
 \end{tabular}
 
@@ -363,7 +363,7 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 %	swap      & ::~(a, b) -> (b, a) & snd (\I{x},\I{y})   & (\I{y},\I{x}) \\ % Data.Tuple
 	curry     & \multicolumn{3}{@{}C}{::~((a, b) -> c) -> a -> b -> c} \\
 	          & \multicolumn{2}{R@{\s$\equiv$\s}}{curry (\la(\I{x},\I{y}) -> \I{e})} & \la\I{x} \I{y} -> \I{e}\\[1ex]
-	uncurry   & \multicolumn{3}{@{}C}{::~a -> b -> c -> ((a, b) -> c)} \\
+	uncurry   & \multicolumn{3}{@{}C}{::~(a -> b -> c) -> (a, b) -> c} \\
 	          & \multicolumn{2}{R@{\s$\equiv$\s}}{uncurry (\la \I{x} \I{y} -> \I{e})} & \la(\I{x},\I{y}) -> \I{e} \\[-2ex]
 \end{tabular}
 
@@ -373,17 +373,15 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 % TODO: gcd / lcm in one line?
 
 \begin{tabular}{@{}C@{\s}C@{\hspace{3ex}}R@{\s$\equiv$\s}C}
-	abs            & ::~Num a => a -> a        & abs -10             & 10    \\
-	even, odd      & ::~Num a => a -> Bool     & even -10          & True  \\
-	gcd, lcm       & \multicolumn{3}{@{}C}{::~Integral a => a -> a -> a} \\
-	               &                           & gcd 4 2  &  2 \\
-	recip          & ::~Fractional a => a -> a & recip \X & 1/\X \\
-    pi             & ::~Floating a => a        & pi     & 3.1415... \\
-	sqrt, log      & ::~Floating a => a -> a   & sqrt \X& \X**0.5 \\
-	\multicolumn{2}{@{}C}{exp, sin, cos, tan, asin, acos, atan} &
-	\multicolumn{2}{@{}C}{::~Floating a => a  -> a} \\
-	\multicolumn{4}{@{}C}{truncate, round~::~(RealFrac a, Integral b) => a -> b} \\
-	\multicolumn{4}{@{}C}{ceiling, floor~~::~(RealFrac a, Integral b) => a -> b} \\
+	abs            & ::~Num a => a -> a         & abs -10  & 10        \\
+	even, odd      & ::~Integral a => a -> Bool & even -10 & True      \\
+\mtype{gcd, lcm ::~Integral a => a -> a -> a}   & gcd 6 8  &  2        \\
+	recip          & ::~Fractional a => a -> a  & recip \X & 1/\X      \\
+    pi             & ::~Floating a => a         & pi       & 3.141...  \\
+	sqrt, log      & ::~Floating a => a -> a    & sqrt \X  & \X**0.5   \\
+	\Longtype{exp, sin, cos, tan, asin, acos, atan ::~Floating a => a  -> a} \\
+	\Longtype{truncate, round~::~(RealFrac a, Integral b) => a -> b} \\
+	\Longtype{ceiling, floor~~::~(RealFrac a, Integral b) => a -> b} \\
 \end{tabular}
 
 % todo: Either?

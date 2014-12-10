@@ -317,10 +317,7 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 	        \longcall{takeWhile (/= \Z) [\X,\Y,\Z,\W]} & [\X,\Y]              \\[.2ex]
 
 	zip     & \longtype{::~[a] -> [b] -> [(a, b)]}                            \\
-	        \longcall{zip [\X,\Y,\Z] [\I{a},\I{b}]} & [(\X,\I{a}),(\Y,\I{b})] \\[.2ex]
-
-	\Longtype{zipWith ::~(a -> b -> c) -> [a] -> [b] -> [c]}                  \\
-	        \longcall{zipWith \F~[\X,\Y,\Z] [\I{a},\I{b}]} & [\I{f x a},\I{f y b}] \\[-2ex]
+	        \longcall{zip [\X,\Y,\Z] [\I{a},\I{b}]} & [(\X,\I{a}),(\Y,\I{b})] \\[-2ex]
 \end{tabular}
 
 \subsubsection{Infinite Lists}
@@ -339,12 +336,14 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 \begin{tabular}{@{}C@{\s}C@{\hspace{3ex}}R@{\s$\equiv$\s}C}
 	map     & \longtype{::~(a->b) -> [a] -> [b]}                \\
 	        & & map~\F~[\X,\Y,\Z]      & [\F~\X, \F~\Y, \F~\Z]  \\[1ex]
+	zipWith & \longtype{::~(a -> b -> c) -> [a] -> [b] -> [c]}  \\
+	        \longcall{zipWith \F~[\X,\Y,\Z] [\I{a},\I{b}]} & [\I{f x a},\I{f y b}] \\[1ex]
 	filter  & \longtype{::~(a -> Bool) -> [a] -> [a]}           \\
-	        & & ~~~~~~~filter~\I{(/=\Y)}~[\X,\Y,\Z] & [\X,\Z]   \\[1ex]
-	foldl   & \longtype{::~(a -> b -> a) -> a -> [b] -> a}      \\
-	        & & foldl \F~\X~[\Y,\Z]    & (\X~`\F`~\Y)~`\F`~\Z   \\[1ex]
+	        & & ~~~~filter~\I{(/=\Y)}~[\X,\Y,\Z] & [\X,\Z]      \\[1ex]
 	foldr   & \longtype{::~(a -> b -> b) -> b -> [a] -> b}      \\
-	        & & foldr \F~\Z~[\X,\Y]    & \X~`\F`~(\Y~`\F`~\Z)   \\[-2ex]
+	        & & foldr \F~\Z~[\X,\Y]    & \X~`\F`~(\Y~`\F`~\Z)   \\[1ex]
+	foldl   & \longtype{::~(a -> b -> a) -> a -> [b] -> a}      \\
+	        & & foldl \F~\X~[\Y,\Z]    & (\X~`\F`~\Y)~`\F`~\Z   \\[-2ex]
 \end{tabular}
 
 

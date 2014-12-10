@@ -305,6 +305,7 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 	elem    & ::~a -> [a] -> Bool   & \Y~`elem`~[\X,\Y]    & True~~{\footnotesize-- \textnormal{$\in?$}}  \\
 %	        &                       & null [\X,\Y]         & False \\
 	head    & ::~[a] -> a           & head [\X,\Y,\Z,\W]   & \X               \\
+	last    & ::~[a] -> a           & last [\X,\Y,\Z,\W]   & \W               \\
 	tail    & ::~[a] -> [a]         & tail [\X,\Y,\Z,\W]   & [\Y,\Z,\W]       \\
 	init    & ::~[a] -> [a]         & init [\X,\Y,\Z,\W]   & [\X,\Y,\Z]       \\
 %	init xs & \s\s \textnormal{\I{init}ial elements of xs}& \s\s\textnormal{(excludes last element)} \\

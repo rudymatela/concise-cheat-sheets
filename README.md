@@ -46,6 +46,9 @@ Acknowledgements
 	  Sean Leather
 	  for reviewing, corrections and suggestions.
 
+* CTF Cheat Sheet
+	* Thanks to Saulo Hachem for suggesting reverse shells.
+
 
 [C Reference Card]: http://www.math.brown.edu/~jhs/ReferenceCards/CRefCard.v2.2.pdf
 [Haskell Cheat Sheet]: https://github.com/rudymatela/ultimate-cheat-sheets/releases/download/haskell-v0.7/haskell-ucs-0.7.pdf

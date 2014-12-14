@@ -51,4 +51,4 @@ Acknowledgements
 
 [C Reference Card]: http://www.math.brown.edu/~jhs/ReferenceCards/CRefCard.v2.2.pdf
 [Haskell Cheat Sheet]: https://github.com/rudymatela/ultimate-cheat-sheets/releases/download/haskell-v0.7/haskell-ucs-0.7.pdf
-[Capture The Flag Cheat Sheet]: https://github.com/rudymatela/ultimate-cheat-sheets/releases/download/ctf-v0.2/ctf-ucs-0.2.pdf
+[Capture The Flag Cheat Sheet]: https://github.com/rudymatela/ultimate-cheat-sheets/releases/download/ctf-v0.3/ctf-ucs-0.3.pdf

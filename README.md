@@ -41,14 +41,13 @@ Acknowledgements
 	  Colin Runciman,
 	  Doug McIlroy,
 	  Jeremy Jacob,
-	  José Calderon,
+	  [José Calderon](https://github.com/jmct),
 	  Karl Voelker and
-	  Sean Leather
+	  [Sean Leather](https://github.com/spl)
 	  for reviewing, corrections and suggestions.
 
 * CTF Cheat Sheet
-	* Thanks to Saulo Hachem for suggesting reverse shells.
-
+	* Thanks to [Saulo Hachem](https://github.com/sauloh) for suggesting reverse shells.
 
 [C Reference Card]: http://www.math.brown.edu/~jhs/ReferenceCards/CRefCard.v2.2.pdf
 [Haskell Cheat Sheet]: https://github.com/rudymatela/ultimate-cheat-sheets/releases/download/haskell-v0.7/haskell-ucs-0.7.pdf

@@ -174,6 +174,7 @@
 					      255~~~~~~~~~~~~~~~~~\textnormal{(max color)} \li
 					      RGBRGBRGBRGBRGB...  \textnormal{($\times$ \textit{width} $\times$ \textit{height})}
 	\li[Bar/qrcode scanner]   \$ zbarimg --raw \I{image.png}
+	\li[Gen. qrcode for \I{word}] \$ qrencode \I{word} -o \I{image.png}
 	\li[~~(from X selection)] \$ import \I{i.png} \&\& zbarimg --raw \I{i.png}
 	\li[OCR in \I{lng} lang.] \$ tesseract [-l \I{lng}] \I{i.png} stdout
 	\li[Crop]                 \$ convert -crop \I{W}x\I{H}+\I{HP}+\I{VP} \I{i.png} \I{o.png}
@@ -331,7 +332,7 @@
 \begin{ldesc}
 	\li[Image processing]  \$ pacman -S pinta gimp netpbm
 	\li[Image metadata]    \$ pacman -S jhead exiv2 pngcheck
-	\li[Barcode]           \$ pacman -S zbar
+	\li[QR/Barcode]        \$ pacman -S zbar qrencode
 	\li[Disk image]        \$ pacman -S sleuthkit libewf
 	\li[Networking (act.)] \$ pacman -S \{gnu,openbsd\}-netcat nmap
 	\li[Networking (psv.)] \$ pacman -S wireshark-\{cli,gtk\} tcpdump

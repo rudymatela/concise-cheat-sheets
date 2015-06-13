@@ -6,6 +6,7 @@ tools.  Currently:
 
 * A [Haskell Cheat Sheet] -- version 0.7
 * A [Capture The Flag Cheat Sheet] -- "alpha" version
+* A [Haskell Typeclasses Cheat Sheet] -- version 0.1
 * A Template Cheat Sheet
 * A LaTeX cls file, for the creation of sheets.
 
@@ -51,4 +52,5 @@ Acknowledgements
 
 [C Reference Card]: http://www.math.brown.edu/~jhs/ReferenceCards/CRefCard.v2.2.pdf
 [Haskell Cheat Sheet]: https://github.com/rudymatela/ultimate-cheat-sheets/releases/download/haskell-v0.7/haskell-ucs-0.7.pdf
+[Haskell Typeclasses Cheat Sheet]: https://github.com/rudymatela/ultimate-cheat-sheets/releases/download/haskell-tc-v0.1/haskell-tc-ucs-0.1.pdf
 [Capture The Flag Cheat Sheet]: https://github.com/rudymatela/ultimate-cheat-sheets/releases/download/ctf-v0.3/ctf-ucs-0.3.pdf

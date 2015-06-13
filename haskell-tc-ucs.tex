@@ -1,0 +1,555 @@
+%% haskell-tc-ucs.tex
+%
+% Copyright 2015  Rudy Matela
+%
+% This text is avaliable under (at your option):
+%   * Creative Commons Attribution-ShareAlike 3.0 Licence
+%   * GNU Free Documentation License version 1.3 or Later
+%
+
+\documentclass{refcard}
+\usepackage{rotating}
+\usepackage{amssymb}
+%\usepackage[utf8]{inputenc}
+%\DeclareUnicodeCharacter{2261}{$\equiv$}%      ≡
+%\usepackage{fancyvrb}
+
+\renewcommand{\familydefault}{\sfdefault}
+\newcommand{\la}{\textbackslash}
+\newcommand{\F}{\I{f}}
+\newcommand{\G}{\I{g}}
+\newcommand{\X}{\I{x}}
+\newcommand{\Y}{\I{y}}
+\newcommand{\Z}{\I{z}}
+\newcommand{\U}{\I{u}}
+\newcommand{\V}{\I{v}}
+\newcommand{\W}{\I{w}}
+\newcommand{\XS}{\I{xs}}
+
+\newcommand{\mtype}[1]{\multicolumn{2}{@{}C}{#1}}
+\newcommand{\longtype}[1]{\multicolumn{3}{@{}C}{#1}}
+\newcommand{\Longtype}[1]{\multicolumn{4}{@{}C}{#1}}
+\newcommand{\longcall}[1]{\multicolumn{3}{@{}R@{\s$\equiv$\s}}{#1}}
+\newcommand{\mcte}[1]{\multicolumn{2}{E}{#1}}
+\newcommand{\mctc}[1]{\multicolumn{2}{C}{#1}}
+\newcommand{\M}[1]{\comm{#1}}
+\newcommand{\eq}{$\equiv$}
+
+
+\title{Haskell Typeclasses Cheat Sheet}
+
+\cright{
+	Copyright 2015, Rudy Matela --
+	Compiled on \today{} --
+	Upstream: \texttt{https://github.com/rudymatela/ultimate-cheat-sheets}
+}{
+	This text is avaliable under the Creative Commons Attribution-ShareAlike
+	3.0 Licence, \textbf{or}, the GNU Free Documentation License version 1.3 or
+	Later.
+}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Function Synonyms}
+
+\begin{tabular}{@{}CCCCC}
+\N{\B{Functor}}&\N{\B{Applicative}}&\N{\B{Monad}}&\N{\B{List (\C{[]})}}& \N{\B{Fn. (\C{(->) r})}} \\[1ex]
+    fmap/(<\$>) & liftA       & liftM       & map         & (.)         \\[.5ex]
+                & pure        & return      & (:[])       & const       \\[.5ex]
+                & (<*>)       & ap          & \M{(<*>)}   & \M{(<*>)}   \\[.5ex]
+                &             & (>>=)       & \M{(>>=)}   & \M{(>>=)}   \\[2ex]
+
+\N{\B{Functor}}&\N{\B{Applicative}}&\N{\B{Monad}}&\N{\B{List (\C{[]})}}& \N{\B{Fn. (\C{(->) r})}} \\[1ex]
+%    Functor    & Applicative & Monad       & {[]}        & ((->) r)    \\[2ex]
+                & (*>)        & (>>)        & \M{(>>)}    & \M{(>>)}    \\[.5ex]
+                &             & join        & concat      & \M{join}    \\[.5ex]
+                &             & (=<<)       & concatMap   & \M{(=<<)}   \\[.5ex]
+                & liftA2      & liftM2      & \M{liftA2}  & \M{liftA2}  \\[.5ex]
+                & liftA3      & liftM3      & \M{liftA3}  & \M{liftA3}  \\[.5ex]
+				& sequenceA   & sequence    & \M{sequence}& \M{sequence}\\[.5ex]
+                & traverse    & mapM        & \M{traverse}& \M{traverse}\\[.5ex]
+				& for         & forM        & \M{for}     & \M{for}     \\[-1ex]
+%                & traverse\_  & mapM\_      &\M{traverse\_}&\M{traverse\_}\\[1ex]
+%				& for\_       & forM\_      & \M{for\_}   & \M{for\_}   \\[1ex]
+\end{tabular}
+
+% Also: (>>=) == flip concatMap
+
+
+\section{Functor}
+
+\begin{verbatim}
+	class Functor f where
+	  fmap :: (a -> b) -> f a -> f b
+\end{verbatim}
+%	  (<$) :: a -> f b -> f a
+%	  (<$) = fmap . const
+
+\subsubsection{Laws}
+
+\begin{tabular}{@{}lR@{\s$\equiv$\s}C}
+	identity       & fmap id & id \\
+	distributivity & fmap (\F~.~\G) & fmap~\F~.~fmap~\G  \\[-1ex]
+\end{tabular}
+
+\subsubsection{instances -- \C{fmap} examples}
+
+\begin{tabular}{C@{\s\s}R@{\s$\equiv$\s}C}
+	[]         & fmap~\F~[\X,\Y,\Z]  & [\F~\X, \F~\Y, \F~\Z]  \\[.5ex]
+	Maybe      & fmap~\F~(Just \X)   & Just (\F~\X)           \\[.5ex]
+	IO         & fmap~length~getLine & 4~~-- input: "test"    \\[.5ex]
+	((->) r)   & fmap~\F~\G          & \F~.~\G                \\[.5ex]
+	(Either a) & fmap~\F~(Left \X)   & (Left \X)              \\
+	           & fmap~\F~(Right \X)  & (Right (f \X))         \\[.5ex]
+	((,) a)    & fmap~\F~(\X,\Y)     & (\X,\F \Y)             \\[-1ex]
+\end{tabular}
+
+%\begin{verbatim}
+%Types (maybe remove this):
+%	
+%(a -> b) -> [a] -> [b]
+%(a -> b) -> Maybe a -> Maybe b
+%(a -> b) -> IO a -> IO b
+%(a -> b) -> Either c a -> Either c b
+%(a -> b) -> (c -> a) -> (c -> b)
+%(a -> b) -> (c,a) -> (c,b)
+%\end{verbatim}
+
+
+\subsubsection{Functions \hfill \C{Data.Functor}}
+
+\begin{tabular}{@{}C@{\s}C@{\s\s\s}R@{\s$\equiv$\s}C}
+	<\$> & ::~Functor f              & \F~<\$>~\X  & fmap~\F~\X     \\
+	     & =>~(a -> b)               & \F~<\$>~Just \X & Just~(\F~\X) \\
+		 & -> f a -> f b             & \F~<\$>~Left \X & Left \X    \\[2ex]
+
+    <\$  & ::~Functor f              & (\X~<\$) & fmap (const \X)   \\
+	     & =>~a -> f b -> f a        & \X~<\$ [\Y,\Z] & [\X,\X]     \\[2ex]
+
+	\$>  & ::~Functor f              & (\$>~\X) & fmap (const \X)   \\
+	     & =>~f a -> b -> f b        & [\Y,\Z] \$>~\X & [\X,\X]     \\[2ex] 
+	void & ::~Functor f       & void \F & () <\$ \F \\
+	     & =>~f a -> f ()     & void~[\X,\Y] & [(),()] \\
+\end{tabular}
+
+% Test output:
+%\begin{Verbatim}
+%-----------------------------------------------------------
+%<$> :: Functor f               f <$> x ≡ fmap f x
+%    => (a -> b) -> f a -> f b
+%<$  :: Functor f                void f ≡ fmap (const ()) f
+%    => a -> f b -> f a
+%$>  :: Functor f
+%    => f a -> b -> f b
+%void :: Functor f               void f ≡ fmap (const ()) f
+%    => f a -> f ()          void [x,y] ≡ [(),()]
+%-----------------------------------------------------------
+%\end{Verbatim}
+
+\pagebreak
+
+\section{Applicative}
+
+\begin{verbatim}
+	class Functor f => Applicative f where
+	  pure  :: a -> f a
+	  (<*>) :: f (a -> b) -> f a -> f b
+\end{verbatim}
+
+\vspace{-4ex}
+\subsubsection{Laws}
+
+\begin{tabular}{@{}l@{}R@{\s$\equiv$\s}C}
+	identity      &  pure~id~<*>~\V                & \V                    \\
+	composition   &  pure~(.)~<*>~\U~<*>~\V~<*>~\W & \U~<*>~(\V~<*>~\W)    \\
+	homomorphism  &  pure~\F~<*>~pure~\X           & pure~(\F~\X)          \\
+	interchange   &  \U~<*>~pure~\Y                & pure~(\$~\Y)~<*>~\U   \\
+\end{tabular}
+
+\vspace{-2ex}
+\subsubsection{Instances -- \C{pure} examples}
+
+\begin{tabular}{C@{\s\s}R@{\s$\equiv$\s}C}
+	[]         & pure \X             & [\X]                \\
+	Maybe      & pure \X             & Just \X             \\
+	IO         & pure \X             & \X~\N{``inside''~IO}\\
+	((->) r)   & pure \X             & const \X            \\
+	(Either a) & pure \X             & Right \X            \\
+\end{tabular}
+
+\vspace{-2ex}
+\subsubsection{Instances -- apply (\C{<*>}) examples}
+
+\begin{tabular}{C@{\s\s}R@{\s$\equiv$\s}C}
+	[]         & [\F,\G]~<*>~[\X,\Y]         & [\F~\X,~\G~\X,~\F~\Y,~\G~\Y] \\
+	\multicolumn{2}{R@{\s$\equiv$\s}}{
+              [(+),(*)] <*> [\X,\Y] <*> [\Z] }
+			                                 & [\X+\Z,\Y+\Z,\X*\Z,\Y*\Z]    \\[1ex]
+
+	Maybe      & Just~\F~<*>~Just~\X         & Just~(\F~\X)                 \\
+	           & Just~\F~<*>~Nothing         & Nothing                      \\[1ex]
+
+	IO         & \multicolumn{2}{C}{pure (++) <*> getLine <*> getLine}      \\[1ex]
+
+	((->) r)   & (\F~<*>~\G)~\X              & \F~\X~(\G~\X)                \\
+	           & (\F~<*>~\G~<*>~\I{h})~\X    & \F~\X~(\G~\X)~(\I{h}~\X)  \\[1ex]
+
+	(Either a) & Right~\F~<*>~Right~\X       & Right~(\F~\X)                \\
+	           & Left~\I{e1}~<*>~Right~\X    & Left~\I{e1}                  \\
+	           & Right~\F~<*>~Left~\I{e2}    & Left~\I{e2}                  \\
+	           & Left~\I{e1}~<*>~Left~\I{e2} & Left~\I{e1}                  \\[-3ex]
+\end{tabular}
+
+\subsubsection{Functions}
+
+\begin{tabular}{@{}C@{\s}C@{}R@{\s$\equiv$\s}C}
+	(*>)   & ::~Applicative f          & (*>) & flip (<*) \\
+	       & =>~f~a~->~f~b~->~f~b      & [\X] *> [\Y,\Z] & [\Y,\Z] \\[2ex]
+
+	(<*)   & ::~Applicative f          & (<*) & liftA2 const\\
+	       & =>~f~a~->~f~b~->~f~a      & [\X] <* [\Y,\Z] & [\X,\X] \\[2ex]
+
+%	  a1 *> a2 = (id <$ a1) <*> a2
+%	  (<*) = liftA2 const
+	liftA  & ::~Applicative f          & liftA~\F~\X        & fmap~\F~\X    \\
+	       & =>~(a -> b)               & liftA~\F~[\X,\Y]   & [\F~\X,\F~\Y] \\
+		   & ->~f~a~->~f~b             & liftA~\F~Nothing   & Nothing       \\[2ex]
+
+    liftA2 & ::~Applicative f          & \multicolumn{2}{E}{liftA2~(+)~(Just \X)~(Just \Y)} \\
+	       & =>~(a -> b -> c)          &                                    \\
+	       & ->~f~a~->~f~b~->~f~c      & \multicolumn{2}{E}{Just~(\X~+~\Y)} \\[2ex]
+
+    liftA3 & ::~Applicative f          & \multicolumn{2}{E}{liftA3~\F~[\X,\Y]~[\Z]~[\W,\U]}  \\
+	       & =>~(a -> b -> c -> d)     &                                                    \\
+	       & ->~f~a~->~f~b             & \multicolumn{2}{E}{[~\F~\X~\Z~\W,~\F~\X~\Z~\U~\s}   \\
+		   & ->~f~c~->~f~d             & \multicolumn{2}{E}{,~\F~\Y~\Z~\W,~\F~\Y~\Z~\U~]}    \\[-2ex]
+\end{tabular}
+
+\subsubsection{Functor and Applicative common idioms}
+
+\begin{tabular}{C@{\s\eq\s}C}
+    f <\$> x <*> y & pure f <*> x <*> y \eq~fmap f x <*> y \\
+    f <\$  g <*> x & pure f  <* g <*> x \\
+    x <*> y  \$> z & x <*> y *> pure z  \\
+\end{tabular}
+
+\pagebreak
+
+\section{Monad}
+
+\begin{verbatim}
+	class Applicative m => Monad m where
+	  return :: a -> m a
+	  (>>=)  :: m a -> (a -> m b) -> m b
+\end{verbatim}
+
+
+\subsubsection{Laws}
+
+\begin{tabular}{@{}l@{\s\s\s}R@{\s$\equiv$\s}C}
+	left identity  &  return~\X~>>=~\F      & \F~\X                                \\
+	right identity &  \I{m} >>= return      & \I{m}                                \\
+	associativity  &  (\I{m}~>>=~\F)~>>=~\G & \I{m} >>= (\la\I{x} -> \F \X >>= \G) \\
+\end{tabular}
+
+
+\subsubsection{Instances -- \C{return} examples}
+
+\begin{tabular}{C@{\s\s}R@{\s$\equiv$\s}C}
+	[]         & return \X             & [\X]                \\
+	Maybe      & return \X             & Just \X             \\
+	IO         & return \X             & \X~\N{``inside''~IO}\\
+	((->) r)   & return \X             & const \X            \\
+	(Either a) & return \X             & Right \X            \\
+\end{tabular}
+
+
+\subsubsection{Instances -- bind (\C{>>=}) examples}
+
+\begin{tabular}{C@{\s\s}R@{\s$\equiv$\s}C}
+	[]         & xs >>= f                & concatMap f xs      \\
+	           & [\X,\Y] >>= replicate 3 & [\X,\X,\X,\Y,\Y,\Y] \\[2ex]
+	Maybe      & Just~\X~>>=~\F          & \F~\X               \\
+	           & Just~[\X]~>>=~listToMaybe & Just \X           \\[2ex]
+	IO         & \multicolumn{2}{E}{getLine >>= putStrLn}      \\[2ex]
+	((->) r)   & (f >>= g) x             & g (f x) x           \\
+	           & (tail >>= (++)) [\X,\Y] & [\Y,\X,\Y]          \\[2ex]
+	(Either a) & Right~\X~>>=~\F         & \F~\X               \\
+	           & Left~\I{e1}~>>=~\F      & Left~\I{e1}         \\
+\end{tabular}
+
+
+\subsubsection{Instances -- then (\C{>>}) examples}
+
+\begin{tabular}{C@{\s\s}R@{\s$\equiv$\s}C}
+	[]         & [\X,\Y]~>>~[\Z,\W,\U]   & [\Z,\W,\U,\Z,\W,\U]  \\[2ex]
+	Maybe      & Nothing~>>~Just~\X      & Nothing              \\
+	           & Just~\X~>>~Just~\Y      & Just~\Y              \\[2ex]
+	IO         & \multicolumn{2}{E}{putStrLn "Username:" >> getLine} \\[2ex]
+	((->) r)   & (\F~>>~\G)~\X           & \G~\X                \\[2ex]
+	(Either a) & Right~\X~>>~Right~\Y       & Right \Y    \\
+	           & Left~\I{e1}~>>~Right~\Y    & Left~\I{e1} \\
+	           & Right~\X~>>~Left~\I{e2}    & Left~\I{e2} \\
+	           & Left~\I{e1}~>>~Left~\I{e2} & Left~\I{e1} \\
+\end{tabular}
+
+
+\subsubsection{Do notation}
+
+\newcommand{\thead}[1]{\textnormal{\textbf{#1}}}
+\newcommand{\theads}[2]{\multicolumn{1}{C@{\s\s\s\s\s\s\s\s$\approx$\s}}{\thead{#1}} & \thead{#2} \\}
+\begin{tabular}{CC}
+\theads{do notation}{desugarized do notation}
+do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
+~~~\I{action2}             & ~~\I{action2} >>\\
+~~~\I{patB} <- \I{action3} & ~~\I{action3} >>= \la \I{patB} ->\\
+~~~\I{action4}             & ~~~~\I{action4}\\
+\end{tabular}
+
+
+\subsubsection{Functions}
+
+\begin{tabular}{@{}C@{}R@{\s$\equiv$\s}C}
+	mapM ::~Monad m                & mapM \F & sequence .~map \F \\
+	~~~~~=>~(a -> m b)             \\
+	~~~~~->~[a] -> m [b]           \\[2ex]
+
+	sequence ::~Monad m            & \mcte{sequence [Just \X,~Just \Y]} \\
+	~~~~~~~~~=>~[m~a]              & \\
+	~~~~~~~~~->~m~[a]              & \mcte{Just [\X,\Y]~~~~~~}\\[2ex]
+
+	(>=>) ::~Monad m               & (\F~>=>~\G)~\X & \F~\X~>>=~\G    \\
+	~~~~~~=>~(a~->~m~b)            \\
+	~~~~~~->~(b~->~m~c)            & \mcte{iterate (+1) >=> replicate 2 \$ 0} \\
+	~~~~~~->~a~->~m~c              & \mcte{$\equiv$~[0,0,1,1,2,2,3,3,4,4,5,5...]} \\[2ex]
+
+    foldM~::~Monad~m               & \mctc{foldM~\F~\I{a}~[\X,~\Y,~\Z]} \\
+    ~~~~~~=>~(a~->~b~->~m~a)       &                        & do a1 <- \F~\I{a}~\X \\
+    ~~~~~~->~a~->~[b]              & \multicolumn{1}{C}{\s} & ~~~a2 <- \F~a1~\Y \\
+    ~~~~~~->~m~a                   & \multicolumn{1}{C}{\s} & ~~~\F~a2~\Z \\[2ex]
+
+	replicateM~::~Monad~m          & \mcte{replicateM 2 [\X,\Y]} \\
+	~~~~~~~~~~~=>~Int~->~m~a       & & \\
+	~~~~~~~~~~~->~m~[a]            & \mcte{[[\X,\X],[\X,\Y],[\Y,\X],[\Y,\Y]]}\\[2ex]
+
+	when,~unless~::~Monad~m        & \mcte{when verbose (putStrLn "msg")} \\
+	~~~~~~~~~~~~~=>~Bool           \\
+	~~~~~~~~~~~~~->~m ()           & \mcte{unless quiet (putStrLn "msg")} \\
+	~~~~~~~~~~~~~->~m ()           \\[2ex]
+
+
+	forever~::~Monad m             & \mcte{forever (getLine >>= putStrLn)} \\
+	~~~~~~~~->~m~a~->~m~b          & \mcte{\N{(\rotatebox{90}{$\Rsh$} poor man's cat)}} \\[2ex]
+
+	\I{<fn>}\_ ::~Monad m          & sequence\_ & void sequence \\
+	~~~~~      => ...~-> m ()      & mapM\_     & void mapM     \\
+\end{tabular}
+
+
+\section{Monoid}
+
+\begin{verbatim}
+	class Monoid a where
+	  mempty :: a
+	  mappend :: a -> a -> a    -- NOTE: (<>) infix synonym
+\end{verbatim}
+
+
+\subsubsection{Laws}
+
+\begin{tabular}{l@{\s\s\s}C}
+	identity  &  mempty~<>~\X~$\equiv$~\X~$\equiv$~\X~<>~mempty \\
+	associativity  &  \X~<>~(\Y~<>~\Z) $\equiv$ (\X~<>~\Y)~<>~\Z \\
+\end{tabular}
+
+
+\subsubsection{Instances -- \C{mempty} and \C{mappend} (\C{<>}) examples}
+
+\begin{tabular}{C@{\s\s}  R@{\s$\equiv$\s}C @{\s\s} R@{\s\eq\s}C}
+	Ordering   & mempty & EQ      & EQ <> GT & GT \eq~GT <> LT      \\
+	()         & mempty & ()      & () <> () & ()       \\
+	{[a]}      & mempty & []      & xs <> ys & xs ++ ys \\
+	Maybe a    & mempty & Nothing & \mtype{Just m <> Just n} \\
+	           &   \mctc{\s}      & \mtype{~~~~\eq~Just (m <> n)} \\[-2ex]
+\end{tabular}
+
+
+\subsubsection{Functions}
+
+\begin{tabular}{@{}C}
+	(<>)~::~Monoid a => a -> a -> a ~~~~~~ (<>)~\eq~mappend       \\[1ex]
+	mconcat ::~Monoid a ~~~~~~~ mconcat \eq~foldr (<>) mempty   \\
+	~~~~~~~~=>~[a] -> a ~~~~~~~ mconcat [[\X],[\Y]] \eq~[\X,\Y] \\
+\end{tabular}
+
+
+
+
+
+\pagebreak
+
+\section{Foldable}
+
+\begin{verbatim}
+	class Foldable t where
+	  foldr :: (a -> b -> b) -> b -> t a -> b
+\end{verbatim}
+
+NOTE: Foldable instances can also be defined by \C{foldMap}
+
+
+\subsubsection{Instances -- \C{foldr} examples}
+
+\begin{tabular}{C@{\s\s\s}R@{\s$\equiv$\s}C}
+	[]         & foldr \F~\Z~[\X,\Y]   & \X~`\F`~(\Y~`\F`~\Z)   \\
+	Maybe      & foldr \F~\X~(Just \Y) & \X~`\F`~\Y             \\
+	(Either a) & foldr \F~\X~(Left \Y) & \X                     \\
+	((,) a)    & foldr \F~\X~(\Y,\Z)   & \X~`\F`~\Z             \\
+\end{tabular}
+
+
+\subsubsection{Functions}
+
+
+\begin{tabular}{@{}C@{\s}R@{\s$\equiv$\s}C}
+	foldMap ::~( Foldable t  & foldMap~\F         & fold~.~map~\F  \\
+	~~~~~~~~~~~, Monoid m )  & foldMap~\F~[\X,\Y] & \F~\X~<>~\F~\Y \\
+	~~~~~~~~=>~(a -> m)      & \mctc{foldMap~\F~(Just x) \eq~f x}  \\
+	~~~~~~~~-> t a -> m      & foldMap~Nothing    & mempty         \\[1ex]
+
+	fold ::~( Foldable t  & fold            & foldMap id       \\
+	~~~~~~~~, Monoid m )  & fold [\X,\Y,\Z] & \X~<>~(\Y~<>~\Z) \\
+	~~~~~-> t m -> m      & fold Nothing    & mempty           \\[1ex]
+
+	foldl ::~(Foldable t)  & foldl \F~\Z~[\X,\Y] & (\X~`f`~\Y)~`f`~\Z \\
+	~~~~~~=>~(b -> a -> b) \\
+	~~~~~~-> b -> t a -> b \\[1ex]
+\end{tabular} \\
+\begin{tabular}{@{}C@{}R@{\s$\equiv$\s}C}
+	toList ::~(Foldable t) =>~t a -> [a] & toList (\X,\Y) & [\Y]   \\
+	null ::~(Foldable t) =>~t a -> Bool  & null Nothing   & True \\
+	length ::~(Foldable t) =>~t a -> Int & length [\X,\Y] & 2 \\
+	concat~::~Foldable t => t [a] -> [a] & concat & fold \\[1ex]
+	\mtype{elem,notElem ::~(Foldable t, Eq a) =>~a -> t a -> Bool}\\
+	\mtype{maximum,~minimum~::~(Foldable t, Ord a) =>~t a -> a} \\
+	\mtype{sum,~~~~~product~::~(Foldable t, Num a)~=>~t a -> a} \\
+	\mtype{asum~::~(Foldable t, Alternative f) => t (f a) -> f a} \\
+	\mtype{concatMap~::~Foldable t => (a -> [b]) -> t a -> [b]} \\
+	\mtype{and, or~~~::~Foldable t => t Bool -> Bool} \\
+	\mtype{any, all~~::~Foldable t => (a -> Bool) -> t a -> Bool} \\
+	\mtype{find~::~Foldable t~=>~(a -> Bool)~-> t a -> Maybe a} \\
+\end{tabular}
+
+\section{Operators (grouped by precedence)}
+
+\begin{Ldesc}
+	\Li[6 (\C{++}): mappend] <>
+	\Li[4 (\C{\&\&}): fmap, repl. value] <\$>, <\$, \$>
+	\li[\hphantom{4 (\C{\&\&}): }apply, apply discard] <*>, *>, <*
+	\Li[3 (\C{||}): choice] <|>
+	\Li[1 (\C{\$}): bind, then] (>>=), (>>)
+	\li[\hphantom{1 (\C{\$}): }rv. bind, kleisli c.] ~~~~~~~~~~~(=<<), (>=>), (<=<)
+\end{Ldesc}
+
+\noindent
+NOTE: left and right alignments indicate left- and right- associativity
+
+
+\pagebreak
+
+\section{Traversable}
+
+\begin{verbatim}
+	class (Functor t, Foldable t) => Traversable t
+	  traverse  :: Applicative f => (a -> f b) -> t a -> f (t b)
+	  sequenceA :: Applicative f => t (f a) -> f (t a)
+\end{verbatim}
+
+NOTE: It is only necessary to define either \C{traverse} or \C{sequenceA}.
+
+
+\subsubsection{Equivalences (laws are ommited here)}
+
+\begin{tabular}{R@{\s$\equiv$\s}C}
+	traverse f & sequenceA . fmap f \\
+	sequenceA  & traverse id        \\
+\end{tabular}
+
+
+
+\subsubsection{Instances -- \C{traverse} examples}
+
+\begin{tabular}{C@{\s}R@{\s$\equiv$\s}C}
+	[]         & \mctc{traverse~\F~[\X,\Y]~~$\equiv$} \\
+			   & \mcte{~~(:)~<\$>~\F~\X~<*>~((:)~<\$>~\F~\Y~<*>~[])} \\[1ex]
+	Maybe      & traverse~\F~(Just~\X)     & Just <\$> f x           \\[1ex]
+	(Either a) & traverse~\F~(Right~\X)    & Right <\$> f x          \\
+	           & traverse~\F~(Left~\I{e1}) & pure (Left \I{e1})      \\[1ex]
+	((,) a)    & traverse~\F~(\X,\Y)       & (,)~\X~<\$>~\F~\Y       \\
+\end{tabular}
+
+
+\subsubsection{Instances -- \C{sequenceA} examples}
+
+\begin{tabular}{C@{\s}R@{\s$\equiv$\s}C}
+	[]      & \mtype{sequenceA~[\X,\Y] $\equiv$ (:)~<\$>~\X~<*>~((:)~<\$>~\Y~<*>~[])} \\
+	Maybe   & sequenceA~(Just~\X)~ & ~Just <*> \X \\
+	Either  & sequenceA~(Right~\X) & Right <*> \X \\
+	((,) a) & sequenceA~(\X,\Y) & (,)~\X~<\$>~\Y \\
+\end{tabular}
+
+
+\subsubsection{Functions}
+
+\begin{tabular}{@{}C@{\s}CC@{\s$\equiv$\s}C}
+for  & ::~(Traversable t, Applicative f)     & flip for & traverse \\
+     & => t a -> (a -> f b) -> f (t b)       \\[1ex]
+mapM & ::~(Traversable t, Monad m)           \\
+     & => (a -> m b) -> t a -> m (t b)       \\[1ex]
+\mtype{sequence ::~(Traversable t, Monad m)} \\
+\mtype{~~~~~~~~~=> t (m a) -> m (t a)}       \\
+\end{tabular}
+
+
+\section{Alternative}
+
+\begin{verbatim}
+class Applicative f => Alternative f where
+  empty :: f a
+  (<|>) :: f a -> f a -> f a
+\end{verbatim}
+
+\subsubsection{Laws}
+
+\begin{tabular}{l@{\s\s\s}C}
+	identity  &  mempty~<|>~\X~$\equiv$~\X~$\equiv$~\X~<|>~mempty \\
+	associativity  &  \X~<|>~(\Y~<|>~\Z) $\equiv$ (\X~<|>~\Y)~<|>~\Z \\
+\end{tabular}
+
+
+\subsubsection{Instances -- \C{empty} and choice (\C{<|>}) examples}
+
+\begin{tabular}{C@{\s\s}  R@{\s$\equiv$\s}C @{\s\s} R@{\s\eq\s}C}
+	{[a]}      & empty & []      &         xs <|> ys & xs ++ ys \\
+	Maybe a    & empty & Nothing & Just x <|> Just y  & Just x   \\
+	           &  \mctc{\s}      & Nothing <|> Just y & Just y   \\
+\end{tabular}
+
+%\subsubsection{Functions}
+%
+%\begin{tabular}{@{}C@{\s}C@{\s}R@{\s$\equiv$\s}C}
+%	some & ::~Alternative f          & some [\X]      & error ``infinite loop'' \\
+%	     & =>~f a -> f [a]           & some (Just \X) & error ``infinite loop'' \\[1ex]
+%
+%    many & ::~Alternative f          & many [\X]      & error ``infinite loop'' \\
+%	     & =>~f a -> f [a]           & many (Just \X) & error ``infinite loop'' \\[1ex]
+%
+%	optional & ::~Alternative f      & optional (Just \X) & Just (Just \X)      \\
+%	         & =>~f a -> f (Maybe a) & optional [\X,\Y]   & [Just \X, Just \Y, Nothing] \\
+%\end{tabular}
+
+
+\end{document}

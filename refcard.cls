@@ -49,6 +49,7 @@
 	\end{center}
 }
 \newcolumntype{C}{>{\ttfamily\arraybackslash}l}
+\newcolumntype{E}{>{\ttfamily\arraybackslash}c}
 \newcolumntype{R}{>{\ttfamily\arraybackslash}r}
 \newcolumntype{b}{>{\bfseries\arraybackslash}l}
 \newenvironment{tabularlc}[1]{

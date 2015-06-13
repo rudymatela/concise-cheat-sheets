@@ -10,12 +10,14 @@
 
 # Making Rules
 
-all: template-refcard.pdf haskell-ucs.pdf ctf-ucs.pdf
+all: template-refcard.pdf haskell-ucs.pdf haskell-tc-ucs.pdf ctf-ucs.pdf
 
 template-refcard.pdf: template-refcard.tex refcard.cls threecols.sty
 
 # Refcard dependency is provisory, as of now we're changing refcard a lot.
 haskell-ucs.pdf: haskell-ucs.tex refcard.cls
+
+haskell-tc-ucs.pdf: haskell-tc-ucs.tex refcard.cls
 
 ctf-ucs.pdf: ctf-ucs.tex refcard.cls
 

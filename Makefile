@@ -11,9 +11,10 @@ PDFLATEX = $(QUIET) pdflatex -halt-on-error -file-line-error -output-directory t
 FASTPDFLATEX = $(PDFLATEX) -draftmode
 
 %.pdf: %.tex
-	mkdir -p tmp
+	@mkdir -p tmp
 	$(FASTPDFLATEX) $<
 	$(PDFLATEX) $<
+	@cp tmp/$@ $@
 
 
 # Making Rules

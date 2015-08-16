@@ -3,9 +3,15 @@
 
 # Implicit Rules
 
+export QUIETPREFIX = tmp/
+QUIET = ./bin/quiet
+PDFLATEX = $(QUIET) pdflatex -halt-on-error -file-line-error -output-directory tmp
+FASTPDFLATEX = $(PDFLATEX) -draftmode
+
 %.pdf: %.tex
-	pdflatex -halt-on-error -draftmode $<
-	pdflatex -halt-on-error $<
+	mkdir -p tmp
+	$(FASTPDFLATEX) $<
+	$(PDFLATEX) $<
 
 
 # Making Rules
@@ -27,5 +33,5 @@ clean: cleanauxs cleanfigs
 	rm -f template-refcard.pdf haskell-ucs.pdf ctf-ucs.pdf
 
 cleanauxs:
-	rm -f *~ *.aux *.bbl *.blg *.log *.toc *.nav *.out *.snm
+	rm -rf tmp
 

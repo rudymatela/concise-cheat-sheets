@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+# Runs a program quietly.
+#
+#
+# When running:
+#
+# $ quiet program arguments
+#
+# will run the program, with given arguments.  stdout and stderr will be
+# redirected to files.  They'll only be shown in case there is an error.
+#
+# This is useful for running tex programs.
+
+out=${QUIETPREFIX}stdout
+err=${QUIETPREFIX}stderr
+
+"$@" < /dev/null > $out 2> $err ||
+{
+	tail -n 20 $out $err > /dev/stderr
+	echo "\`\`$*'' failed: see $out and $err for more details"
+	false
+}

@@ -1,13 +1,3 @@
 *.swp
-haskell-ucs.aux
-haskell-ucs.log
-haskell-ucs.pdf
-haskell-tc-ucs.aux
-haskell-tc-ucs.log
-haskell-tc-ucs.pdf
-ctf-ucs.aux
-ctf-ucs.log
-ctf-ucs.pdf
-template-refcard.aux
-template-refcard.log
-template-refcard.pdf
+*.pdf
+tmp

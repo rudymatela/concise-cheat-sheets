@@ -1,5 +1,5 @@
 %% refcard.cls
-%% Copyright 2014  Rudy Matela
+%% Copyright 2014, 2015  Rudy Matela
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either version 1.3
@@ -15,7 +15,7 @@
 
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{refcard}[2014/02/17 Reference Card]
+\ProvidesClass{refcard}[2015/08/16 Reference Card]
 \LoadClass[8pt]{extarticle}
 \RequirePackage[margin=9mm,bmargin=6mm,landscape,a4paper,includefoot,foot=24pt]{geometry}
 \RequirePackage{array}

@@ -1,12 +1,21 @@
 # Makefile
 
 
+# Output quieting, choose one
+
+# needs bash installed:
+export QUIETPREFIX = tmp/
+QUIET = ./bin/quiet
+
+# needs moreutils installed:
+#QUIET = chronic </dev/null
+
+# verbose output (does not need anything):
+#QUIET =
+
+
 # Implicit Rules
 
-export QUIETPREFIX = tmp/
-QUIET = ./bin/quiet           # <-- needs bash installed
-#QUIET = chronic </dev/null   # <-- needs moreutils installed
-#QUIET =                      # <-- verbose output
 PDFLATEX = $(QUIET) pdflatex -halt-on-error -file-line-error -output-directory tmp
 FASTPDFLATEX = $(PDFLATEX) -draftmode
 

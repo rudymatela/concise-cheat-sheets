@@ -378,11 +378,11 @@ do \I{patA} <- \I{action1} & \I{action1} >{>}= \la \I{patA} ->\\
 % TODO: gcd / lcm in one line?
 
 \begin{tabular}{@{}C@{\s}C@{\hspace{3ex}}R@{\s$\equiv$\s}C}
-	abs            & ::~Num a => a -> a         & abs -10  & 10        \\
-	even, odd      & ::~Integral a => a -> Bool & even -10 & True      \\
+	abs            & ::~Num a => a -> a         & abs (-10)  & 10        \\
+	even, odd      & ::~Integral a => a -> Bool & even (-10) & True      \\
 \mtype{gcd, lcm ::~Integral a => a -> a -> a}   & gcd 6 8  &  2        \\
 	recip          & ::~Fractional a => a -> a  & recip \X & 1/\X      \\
-    pi             & ::~Floating a => a         & pi       & 3.141...  \\
+    pi             & ::~Floating a => a         & pi       & 3.14...  \\
 	sqrt, log      & ::~Floating a => a -> a    & sqrt \X  & \X**0.5   \\
 	\Longtype{exp, sin, cos, tan, asin, acos, atan ::~Floating a => a  -> a} \\
 	\Longtype{truncate, round~::~(RealFrac a, Integral b) => a -> b} \\

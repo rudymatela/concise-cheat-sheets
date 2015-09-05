@@ -121,7 +121,7 @@
 \begin{ldesc}
 	\li[type synonym] type \I{MyType} = \I{Type} \li
 					  type PairList a b = [(a,b)] \li
-                      type String = [Char] ~~~~{\tiny-- from Prelude}
+                      type String = [Char] ~~~~{\tiny-{-} from Prelude}
 
 	\lI[data \small{(single constructor)}]
 		data~\I{MyData}~=~\I{MyData}~\I{Type}~\I{Type}~\I{Type} \li
@@ -170,7 +170,7 @@
 	\li[list membership]  ~~~`elem`, `notElem`~~
 	\Li[boolean and] \hfill \&\&
 	\Li[boolean or] \hfill ||
-	\Li[sequencing: bind and then] >>=, >>
+	\Li[sequencing: bind and then] >{>}=, >{>}
 	\Li[application, strict apl., sequencing] \$, \$!, `seq`
 \end{Ldesc}
 
@@ -186,7 +186,7 @@ non-associativity.
 \item [Defining fixity:]
 \begin{ldesc}
 	\li[non associative] infix \I{0-9} \I{`op`}
-	\li[left associative] infixl \I{0-9} \I{+--+}
+	\li[left associative] infixl \I{0-9} \I{+-+}
 	\li[right associative] infixr \I{0-9} \I{-!-}
 	\li[default (when none given)] infixl 9
 \end{ldesc}
@@ -238,14 +238,14 @@ let~\I{nameA}=\I{exprA} & \I{foo ...}~=~mainExpression \\
 in mainExpression       & ~~~~~~~~\I{nameB}=\I{exprB} \\[1ex]
 
 \theads{do notation}{desugarized do notation}
-do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
-~~~\I{action2}             & ~~\I{action2} >>\\
-~~~\I{patB} <- \I{action3} & ~~\I{action3} >>= \la \I{patB} ->\\
+do \I{patA} <- \I{action1} & \I{action1} >{>}= \la \I{patA} ->\\
+~~~\I{action2}             & ~~\I{action2} >{>}\\
+~~~\I{patB} <- \I{action3} & ~~\I{action3} >{>}= \la \I{patB} ->\\
 ~~~\I{action4}             & ~~~~\I{action4}\\
 \end{tabular} %\\[1ex]
 %\begin{ldesc}
-%	\li[statement separator]         ;\s\s\s\s-- or line break
-%	\li[statement grouping]          \verb+{ }+\s\s-- or layout/indentation
+%	\li[statement separator]         ;\s\s\s\s-{-} or line break
+%	\li[statement grouping]          \verb+{ }+\s\s-{-} or layout/indentation
 %\end{ldesc}
 
 
@@ -287,7 +287,7 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 \subsection{Misc}
 
 \begin{tabular}{@{}C@{\s}C@{\hspace{3ex}}R@{\s$\equiv$\s}C}
-	id        & ::~a -> a           & id \I{x}            & \I{x} \s{\tiny-- identity} \\
+	id        & ::~a -> a           & id \I{x}            & \I{x} \s{\tiny-{-} identity} \\
 	const     & ::~a -> b -> a      & (const \I{x}) \I{y} & \I{x}    \\
 	undefined & ::~a                & undefined           & \textnormal{$\bot$ (lifts error)}   \\
 	error     & ::~[Char] -> a      & error \I{cs}        & \textnormal{$\bot$ (lifts error \I{cs})} \\
@@ -301,9 +301,9 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 \subsection{Lists}
 
 \begin{tabular}{@{}C@{\hspace{1ex}}C@{\s}R@{\s$\equiv$\s}C}
-	null    & ::~[a] -> Bool        & null []              & True~~{\footnotesize -- \textnormal{empty?}} \\
+	null    & ::~[a] -> Bool        & null []              & True~~{\footnotesize -{-} \textnormal{empty?}} \\
 	\mtype{length~::~[a] -> Int}    & length [\X,\Y,\Z]    & 3                \\
-	elem    & ::~a -> [a] -> Bool   & \Y~`elem`~[\X,\Y]    & True~~{\footnotesize-- \textnormal{$\in?$}}  \\
+	elem    & ::~a -> [a] -> Bool   & \Y~`elem`~[\X,\Y]    & True~~{\footnotesize-{-} \textnormal{$\in?$}}  \\
 %	        &                       & null [\X,\Y]         & False \\
 	head    & ::~[a] -> a           & head [\X,\Y,\Z,\W]   & \X               \\
 	last    & ::~[a] -> a           & last [\X,\Y,\Z,\W]   & \W               \\
@@ -479,9 +479,9 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 	\li[Write string \CI{cs} to a file named \CI{fn}]    writeFile \I{fn} \I{cs}
 	\li[Append string \CI{cs} to a file named \CI{fn}]   appendFile \I{fn} \I{cs}
 	\li[Read contents from a file named \CI{fn}]         readFile \I{fn}
-%	\li[Write char \C{c} to channel/file \C{h}]          hPutChar h c  -- ghc specific!
-%	\li[Write string \C{cs} to channel/file \C{h}]       hPutStr h cs -- ghc specific!
-%	\li[Write \C{cs} to channel/file \C{h} w/ a newline] hPutStrLn h cs -- ghc specific!
+%	\li[Write char \C{c} to channel/file \C{h}]          hPutChar h c  -{-} ghc specific!
+%	\li[Write string \C{cs} to channel/file \C{h}]       hPutStr h cs -{-} ghc specific!
+%	\li[Write \C{cs} to channel/file \C{h} w/ a newline] hPutStrLn h cs -{-} ghc specific!
 \end{ldesc}
 
 

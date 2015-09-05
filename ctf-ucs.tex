@@ -56,7 +56,7 @@
 	\li[Decode base64]     \$ base64 -di [\I{file}]
 	\li[(de)code caesar's] \$ caesar [0-25]
 	\li[Encode morse]      \$ morse -s ~~~~~\I{message}
-	\li[Decode morse]      \$ morse -d --~~~\I{...~---~...}
+	\li[Decode morse]      \$ morse -d -{-}~~~\I{...~-{-}-~...}
 \end{ldesc}
 
 
@@ -184,9 +184,9 @@
 	                      width height~~~~~~~~\textnormal{(in printable digits)} \li
 					      255~~~~~~~~~~~~~~~~~\textnormal{(max color)} \li
 					      RGBRGBRGBRGBRGB...  \textnormal{($\times$ \textit{width} $\times$ \textit{height})}
-	\li[Bar/qrcode scanner]   \$ zbarimg --raw \I{image.png}
+	\li[Bar/qrcode scanner]   \$ zbarimg -{-}raw \I{image.png}
 	\li[Gen. qrcode for \I{word}] \$ qrencode \I{word} -o \I{image.png}
-	\li[~~(from X selection)] \$ import \I{i.png} \&\& zbarimg --raw \I{i.png}
+	\li[~~(from X selection)] \$ import \I{i.png} \&\& zbarimg -{-}raw \I{i.png}
 	\li[OCR in \I{lng} lang.] \$ tesseract [-l \I{lng}] \I{i.png} stdout
 	\li[Crop]                 \$ convert -crop \I{W}x\I{H}+\I{HP}+\I{VP} \I{i.png} \I{o.png}
 	\li[Montage/Concat]       \$ montage -mode concatenate \I{*.png} \I{o.png}

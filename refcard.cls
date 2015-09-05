@@ -17,7 +17,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{refcard}[2015/08/16 Reference Card]
 \LoadClass[8pt]{extarticle}
-\RequirePackage[margin=9mm,bmargin=6mm,landscape,a4paper,includefoot,foot=24pt]{geometry}
+\RequirePackage[a4paper,landscape,nohead,includefoot,margin=24pt,footskip=16pt]{geometry}
 \RequirePackage{array}
 \RequirePackage{fancyhdr}
 \RequirePackage{xcolor}
@@ -29,6 +29,7 @@
 \setlength{\columnsep}{24pt}
 \setcounter{secnumdepth}{0}
 \pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
 \lhead{}
 \chead{}
 \rhead{}

@@ -41,6 +41,9 @@
 	\lfoot{\footnotesize #1}%
 	\rfoot{\footnotesize #2}%
 }
+\newcommand{\version}[2][]{%
+	\cfoot{#1\footnotesize\@title{} v#2}
+}
 
 \AtBeginDocument{\threecolumn}
 \renewcommand\maketitle{

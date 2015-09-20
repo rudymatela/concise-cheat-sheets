@@ -26,6 +26,7 @@
 }{
 	Avaliable under \textit{License Name} \tiny This is a template, see source for real license
 }
+\version{3.141.592.653}
 
 
 \begin{document}
@@ -35,11 +36,11 @@
 \section{Structure}
 
 \begin{verbatim}
-	Such language {
-	    Much beautiful;
-	    Clean and consistent,
-	    Want syntax |
-	]
+	Something {
+	    Command
+	    Statement
+	    Command
+	}
 \end{verbatim}
 
 
@@ -56,10 +57,10 @@
 \section{Initialization}
 
 \begin{ldesc}
-	\li[local variable]     such \I{type} \I{name}=\I{value}
-	\li[global variable]    much \I{type} \I{name}=\I{value}
-	\li[volatile variable]  so   \I{type} \I{name}=\I{value}
-	\li[lists]              such \I{type} \I{name}[\I{size}]=\I{value}
+	\li[local variable]     \I{type} \I{name}=\I{value}
+	\li[global variable]    \I{type} \I{NAME}=\I{value}
+	\li[volatile variable]  \I{type} \I{\_name\_}=\I{value}
+	\li[lists]              \I{type} \I{name}[\I{size}]=\I{value}
 \end{ldesc}
 
 
@@ -99,9 +100,9 @@ All other group left to right.
 
 \begin{ldesc}
 	\li[statement terminator]        ;
-	\li[block delimiter]             \{ ] or [ \}
-	\li[exit from while]             brk
-	\li[next while iteration]        cnt
+	\li[block delimiter]             \{ \} or [ ]
+	\li[exit from while]             break
+	\li[next while iteration]        continue
 	\li[return value from function]  return \I{expr}
 \end{ldesc}
 
@@ -110,13 +111,13 @@ All other group left to right.
 
 \begin{ldesc}
 	\li[if statement]
-		if\s(\I{expr})\s\I{block}     \li
-		else\s\s\s\s\s\s\s\s\I{block} \li
+		if~(\I{expr})~\I{block} \li
+		else~~~~~     \I{block} \li
 
 	\li[while statement]
-		while (\I{expr}) \{           \li
-		\s\s\s\s\I{statement};        \li
-		\s\s\s\s\I{statement};        \li
+		while (\I{expr}) \{ \li
+		~~~~\I{statement};  \li
+		~~~~\I{statement};  \li
 	    \}
 \end{ldesc}
 
@@ -124,7 +125,7 @@ All other group left to right.
 \section{Libraries}
 
 
-\subsection{Lists \hfill \C{import Such.StdList}}
+\subsection{Lists \hfill \C{import Libs.StdList}}
 
 \begin{ldesc}
 	\li[iiii] iiii
@@ -134,7 +135,7 @@ All other group left to right.
 	\li[blah] blah
 \end{ldesc}
 
-\subsection{Mathematical Functions \hfill \C{inc So.Math}}
+\subsection{Mathematical Functions \hfill \C{inc Some.Math}}
 
 \begin{ldesc}
 	\li[iiii] iiii
@@ -145,7 +146,7 @@ All other group left to right.
 \end{ldesc}
 
 
-\subsection{Input and Output \hfill \C{require Much.IO}}
+\subsection{Input and Output \hfill \C{require System.IO}}
 
 \begin{ldesc}
 	\li[printing] print "formatstring"

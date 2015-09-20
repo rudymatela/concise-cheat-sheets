@@ -15,7 +15,7 @@
 
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{refcard}[2015/08/16 Reference Card]
+\ProvidesClass{refcard}[2015/09/20 v0.3.0 Reference Card]
 \LoadClass[8pt]{extarticle}
 \RequirePackage[a4paper,landscape,nohead,includefoot,margin=24pt,footskip=16pt]{geometry}
 \RequirePackage{array}

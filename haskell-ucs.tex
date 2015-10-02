@@ -502,8 +502,7 @@ Take \I{pat} from \I{list}. If \I{boolPredicate}, add element \I{expr} to list:\
 	\li[GHCi help]                > :?
 	\li[Type of an expression]    > :t \I{expr}
 	\li[Info (oper./func./class)] > :i \I{thing}
-%	\li[Installed packages]       \$ ghc-pkg list \I{[optional query]}
-%   \li[Installed versions of \C{package}] \$ ghc-pkg list package
+	\li[Installed packages]       \$ ghc-pkg list \I{[package\_name]}
 \end{ldesc}
 
 
@@ -516,9 +515,6 @@ Take \I{pat} from \I{list}. If \I{boolPredicate}, add element \I{expr} to list:\
 	\li[information about package \C{pkg}] \$ cabal info \I{pkg}
 	\li[help on commands]                  \$ cabal help \I{[command]}
 	\li[run executable/test/benchmark]     \$ cabal run/test/bench \I{[name]}
-%	\li[run executable]                    \$ cabal run \I{[name]}
-%	\li[run test suite(s)]                 \$ cabal test \I{[name]}
-%	\li[run benchmark(s)]                  \$ cabal bench \I{[name]}
 	\li[initialize sandbox]                \$ cabal sandbox init
 	\li[add custom source to sandbox]      \$ cabal sandbox add-source \I{dir}
 \end{ldesc}

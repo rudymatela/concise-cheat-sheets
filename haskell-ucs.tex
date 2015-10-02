@@ -300,7 +300,7 @@ to their list instances, e.g.: foldr%
 	undefined & ::~a                & undefined           & \textnormal{$\bot$ (lifts error)}   \\
 	error     & ::~[Char] -> a      & error \I{cs}        & \textnormal{$\bot$ (lifts error \I{cs})} \\
     not       & ::~Bool -> Bool     & not True & False \\
-	flip      & \longtype{::~(a -> b -> c) -> (b -> a -> c)} \\
+	flip      & \longtype{::~(a -> b -> c) -> b -> a -> c} \\
 	\longcall{flip~\F~\$~\X~\Y} & \F~\Y~\X \\[-2ex]
 % todo: ??
 %   until

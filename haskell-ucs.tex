@@ -106,12 +106,13 @@
 \section{Values and Typeclasses}
 
 \begin{tabularlc}{lC@{\s}C}
-	\li[given context, has type]       \I{expr} & ::~\I{context}~=>~\I{type}
-	\li[Numeric (+,-,*)]               137      & ::~Num a => a
-	\li[Fractional (/)]                1.2      & ::~Fractional a => a
+	\li[given context, has type]       \I{expr} & ::~\I{constraint}~=>~\I{type}
+	\li[Numeric (\C{+},\C{-},\C{*})]   137      & ::~Num a => a
+	\li[Fractional (\C{/})]            1.2      & ::~Fractional a => a
 	\li[Floating]                      1.2      & ::~Floating a => a
-	\li[Equatable (==)]                'a'      & ::~Eq a => a
-	\li[Ordered ($<=,>=,>,<$)]         731      & ::~Ord a => a
+	\li[Equatable (\C{==})]            'a'      & ::~Eq a => a
+	\li[Ordered (\C{<=},\C{>=},\C{>},\C{<})]
+	                                   731      & ::~Ord a => a
 %	\li                                sort     & ::~Ord a => [a] -> [a]
 %	\li[Bounded (minBound,maxBound)]   minBound & ::~Int
 \end{tabularlc}

@@ -488,7 +488,7 @@ Take \I{pat} from \I{list}. If \I{boolPredicate}, add element \I{expr} to list:\
 %\end{ldesc}
 
 
-\section{GHC - Glasgow Haskell Compiler}% (and Cabal)}
+\section{GHC - Glasgow Haskell Compiler (and Cabal)}
 
 \begin{ldesc}
 	\li[compiling \C{program.hs}] \$ ghc program.hs
@@ -502,14 +502,12 @@ Take \I{pat} from \I{list}. If \I{boolPredicate}, add element \I{expr} to list:\
 	\li[GHCi help]                > :?
 	\li[Type of an expression]    > :t \I{expr}
 	\li[Info (oper./func./class)] > :i \I{thing}
-	\li[Installed packages]       \$ ghc-pkg list \I{[package\_name]}
-\end{ldesc}
+	\li[Installed GHC packages]   \$ ghc-pkg list \I{[package\_name]}
 
+	\lI[Activating some pragma]   \verb+{+-\# LANGUAGE \I{SomePragma} \#-\verb+}+
+	\li[Same, via GHC call]       \$ ghc -X\I{SomePragma} ...
 
-\subsection{Cabal package and build system}
-
-\begin{ldesc}
-	\li[install package \C{pkg}]           \$ cabal install \I{pkg}
+	\lI[install package \C{pkg}]           \$ cabal install \I{pkg}
 	\li[update package list]               \$ cabal update
 	\li[search packages matching \C{pat}]  \$ cabal list \I{pat}
 	\li[information about package \C{pkg}] \$ cabal info \I{pkg}

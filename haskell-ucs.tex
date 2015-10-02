@@ -404,9 +404,7 @@ to their list instances, e.g.: foldr%
 \begin{tabular}{@{}C@{\s}C@{\hspace{5ex}}R@{\s$\equiv$\s}C}
 	show & ::~Show a => a -> String & show 137 & "137" \\
 	read & ::~Show a => String -> a & read "2" & 2 \\
-\end{tabular}% \\
-%\B{Instances}: \C{Int}, \C{Integer}, \C{Char} (\C{String}), \C{Float},
-%\C{Double}, \C{Maybe}, ...
+\end{tabular}
 
 
 \subsection{Ord Class}
@@ -416,8 +414,6 @@ to their list instances, e.g.: foldr%
 	max     & ::~Ord a => a -> a -> a        & max "b" "ab" & "b" \\
 	compare & ::~Ord a => a -> a -> Ordering & compare 1 2  & LT  \\
 \end{tabular}
-%\B{Instances}: \C{Int}, \C{Integer}, \C{Char} (\C{String}), \C{Float},
-%\C{Double}, \C{Maybe}, ...
 
 
 \section{Libraries / Modules}

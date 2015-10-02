@@ -98,7 +98,6 @@
 	\li[maybe (just something]  Just 10          & ::~Maybe Int
 	\li[\hphantom{maybe (}or nothing)]
 	                            Nothing          & ::~Maybe a
-
 %	\li[function]               isAlpha          & ::~Char -> Bool
 \end{tabularlc}
 
@@ -181,9 +180,6 @@ NOTE: Highest precedence (first line) is 9, lowest precedence is 0.  Operator
 listings aligned left, right, and center indicate left-, right-, and
 non-associativity.
 
-
-% Default is \C{infixl 9}.
-
 \begin{description}
 \item [Defining fixity:]
 \begin{ldesc}
@@ -226,7 +222,6 @@ if~\I{boolExpr1}        & \I{foo} ...~| \I{boolExpr1} = \I{exprA} \\
 case~\I{x}~of~\I{pat1} -> \I{exA} & \I{foo pat1} = \I{exA} \\
 ~~~~~\T{x}~~~~\I{pat2} -> \I{exB} & \I{foo pat2} = \I{exB} \\
 ~~~~~\T{x}~~~~\_\T{at2} -> \I{exC} & \I{foo \_~~~} = \I{exC} \\[1ex]
-%~~\_\T{at2} -> exprC  & \\[1ex]
 
 \theads{2-variable case expression}{function pattern matching}
 case~(\I{x},\I{y})~of & \I{foo pat1 patA} = \I{exprA} \\
@@ -244,11 +239,7 @@ do \I{patA} <- \I{action1} & \I{action1} >{>}= \la \I{patA} ->\\
 ~~~\I{action2}             & ~~\I{action2} >{>}\\
 ~~~\I{patB} <- \I{action3} & ~~\I{action3} >{>}= \la \I{patB} ->\\
 ~~~\I{action4}             & ~~~~\I{action4}\\
-\end{tabular} %\\[1ex]
-%\begin{ldesc}
-%	\li[statement separator]         ;\s\s\s\s-{-} or line break
-%	\li[statement grouping]          \verb+{ }+\s\s-{-} or layout/indentation
-%\end{ldesc}
+\end{tabular}
 
 
 \section{Pattern Matching \hfill \small(function declaration, lambda, case, let, where)}
@@ -289,8 +280,6 @@ A few types have been simplified \\
 to their list instances, e.g.: foldr%
 }}})%
 }
-%\section{Prelude functions}
-
 
 \subsection{Misc}
 
@@ -302,17 +291,15 @@ to their list instances, e.g.: foldr%
     not       & ::~Bool -> Bool     & not True & False \\
 	flip      & \longtype{::~(a -> b -> c) -> b -> a -> c} \\
 	\longcall{flip~\F~\$~\X~\Y} & \F~\Y~\X \\[-2ex]
-% todo: ??
-%   until
 \end{tabular}
 
 \subsection{Lists}
 
 \begin{tabular}{@{}C@{\hspace{1ex}}C@{\s}R@{\s$\equiv$\s}C}
 	null    & ::~[a] -> Bool        & null []              & True~~{\footnotesize -{-} \textnormal{empty?}} \\
+%	        &                       & null [\X,\Y]         & False \\
 	\mtype{length~::~[a] -> Int}    & length [\X,\Y,\Z]    & 3                \\
 	elem    & ::~a -> [a] -> Bool   & \Y~`elem`~[\X,\Y]    & True~~{\footnotesize-{-} \textnormal{$\in?$}}  \\
-%	        &                       & null [\X,\Y]         & False \\
 	head    & ::~[a] -> a           & head [\X,\Y,\Z,\W]   & \X               \\
 	last    & ::~[a] -> a           & last [\X,\Y,\Z,\W]   & \W               \\
 	tail    & ::~[a] -> [a]         & tail [\X,\Y,\Z,\W]   & [\Y,\Z,\W]       \\
@@ -433,12 +420,6 @@ to their list instances, e.g.: foldr%
 %\C{Double}, \C{Maybe}, ...
 
 
-%\begin{verbatim}
-%zipWith (a->b->c) [a] -> [b] -> [c]
-%                       zipWith elem ['a','b','c'] ["ab","ca"] = [True,False]
-%\end{verbatim}
-
-
 \section{Libraries / Modules}
 
 \begin{ldesc}
@@ -483,9 +464,6 @@ to their list instances, e.g.: foldr%
 	\li[Write string \CI{cs} to a file named \CI{fn}]    writeFile \I{fn} \I{cs}
 	\li[Append string \CI{cs} to a file named \CI{fn}]   appendFile \I{fn} \I{cs}
 	\li[Read contents from a file named \CI{fn}]         readFile \I{fn}
-%	\li[Write char \C{c} to channel/file \C{h}]          hPutChar h c  -{-} ghc specific!
-%	\li[Write string \C{cs} to channel/file \C{h}]       hPutStr h cs -{-} ghc specific!
-%	\li[Write \C{cs} to channel/file \C{h} w/ a newline] hPutStrLn h cs -{-} ghc specific!
 \end{ldesc}
 
 
@@ -494,16 +472,12 @@ to their list instances, e.g.: foldr%
 Take \I{pat} from \I{list}. If \I{boolPredicate}, add element \I{expr} to list:\\
 \begin{tabular}{C@{\s$\equiv$\s}C}
 	\multicolumn{2}{C}{[\I{expr} | \I{pat} <- \I{list}, \I{boolPredicate}, ...]} \\[1ex]
-	{[}x | x <- \I{xs}] & \I{xs} \\
-	{[}\I{f} x | x <- \I{xs}, \I{p} x] & map \I{f} \$ filter \I{p} \I{xs} \\
-%	{[}x | x <- xs, p x, q x] & filter (\la{}x -> p x \&\& q x) xs \\
+	{[}x | x <- \I{xs}]                   & \I{xs} \\
+	{[}\I{f} x | x <- \I{xs}, \I{p} x]    & map \I{f} \$ filter \I{p} \I{xs} \\
 	{[}x | x <- \I{xs}, \I{p} x, \I{q} x] & filter \I{q} \$ filter \I{p} \I{xs} \\
-%	{[}xs | xs <- xss, (not.null) xs] & filter (not~.~null) xs \\
-%	{[}f x y | x <- xs, y <- ys] & zipWith f xs ys \\  % WRONG!
 	{[}x+y | x <- [\I{a},\I{b}], y <- [\I{i},\I{j}]] &
 	    [\I{a}+\I{i}, \I{a}+\I{j}, \I{b}+\I{i}, \I{b}+\I{j}] \\
-%	{[}(x,y) | x <- [0..3], y <- [0..3], x + y == 3] & [(0,3),(1,2),(2,1),(3,0)] \\
-	{[}\I{x} | \I{boolE}] & if \I{boolE} then [\I{x}] else []
+	{[}\I{x} | \I{boolE}]                 & if \I{boolE} then [\I{x}] else []
 \end{tabular}
 
 % Secondary formatting for case and pattern match

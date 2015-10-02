@@ -223,21 +223,21 @@ if~\I{boolExpr1}        & \I{foo} ...~| \I{boolExpr1} = \I{exprA} \\
 ~~~~~~~~~else~\I{exprC} & \\[1ex]
 
 \theads{case expression}{function pattern matching}
-case~\I{x}~of~\I{pat1} -> exA & \I{foo pat1} = exA \\
-~~~~~\T{x}~~~~\I{pat2} -> exB & \I{foo pat2} = exB \\
-~~~~~\T{x}~~~~\_\T{at2} -> exC & \I{foo \_~~~} = exC \\[1ex]
+case~\I{x}~of~\I{pat1} -> \I{exA} & \I{foo pat1} = \I{exA} \\
+~~~~~\T{x}~~~~\I{pat2} -> \I{exB} & \I{foo pat2} = \I{exB} \\
+~~~~~\T{x}~~~~\_\T{at2} -> \I{exC} & \I{foo \_~~~} = \I{exC} \\[1ex]
 %~~\_\T{at2} -> exprC  & \\[1ex]
 
 \theads{2-variable case expression}{function pattern matching}
-case~(\I{x},\I{y})~of & \I{foo pat1 patA} = exprA \\
-~~(\I{pat1},\I{patA}) -> exprA      & \I{foo pat2 patB} = exprB \\
-~~(\I{pat2},\I{patB}) -> exprB      & \I{foo \_~~~ \_~~~}~ = exprC \\
-~~\_~~~~~~~~~~        -> exprC      & \\[1ex]
+case~(\I{x},\I{y})~of & \I{foo pat1 patA} = \I{exprA} \\
+~~(\I{pat1},\I{patA}) -> \I{exprA} & \I{foo pat2 patB} = \I{exprB} \\
+~~(\I{pat2},\I{patB}) -> \I{exprB} & \I{foo \_~~~ \_~~~}~ = \I{exprC} \\
+~~\_~~~~~~~~~~        -> \I{exprC} & \\[1ex]
 
 \theads{let expression}{where clause}
-let~\I{nameA}=\I{exprA} & \I{foo ...}~=~mainExpression \\
-~~~~\I{nameB}=\I{exprB} & ~~where \I{nameA}=\I{exprA} \\
-in mainExpression       & ~~~~~~~~\I{nameB}=\I{exprB} \\[1ex]
+let~\I{nameA}~=~\I{exprA} & \I{foo ...}~=~\I{mainExpression} \\
+~~~~\I{nameB}~=~\I{exprB} & ~~where \I{nameA}~=~\I{exprA} \\
+in \I{mainExpression}     & ~~~~~~~~\I{nameB}~=~\I{exprB} \\[1ex]
 
 \theads{do notation}{desugarized do notation}
 do \I{patA} <- \I{action1} & \I{action1} >{>}= \la \I{patA} ->\\

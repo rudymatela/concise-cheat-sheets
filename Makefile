@@ -42,7 +42,7 @@ ctf-ucs.pdf: ctf-ucs.tex
 
 .PHONY: clean cleanauxs cleanfigs
 clean: cleanauxs cleanfigs
-	rm -f template-refcard.pdf haskell-ucs.pdf ctf-ucs.pdf
+	rm -f template-refcard.pdf haskell-ucs.pdf haskell-tc-ucs.pdf ctf-ucs.pdf
 
 cleanauxs:
 	rm -rf tmp

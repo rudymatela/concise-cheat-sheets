@@ -17,7 +17,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{refcard}[2015/09/20 v0.3.0 Reference Card]
 \LoadClass[8pt]{extarticle}
-\RequirePackage[a4paper,landscape,nohead,includefoot,margin=24pt,footskip=16pt]{geometry}
+\RequirePackage[a4paper,landscape,nohead,includefoot,margin=24pt,left=18pt,right=18pt,footskip=16pt]{geometry}
 \RequirePackage{array}
 \RequirePackage{fancyhdr}
 \RequirePackage{xcolor}
@@ -26,7 +26,7 @@
 \newcounter{line}
 
 \setlength{\columnseprule}{0.4pt}
-\setlength{\columnsep}{24pt}
+\setlength{\columnsep}{60pt}
 \setcounter{secnumdepth}{0}
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{0pt}

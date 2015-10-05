@@ -125,7 +125,7 @@
                       type String = [Char] ~~~~{\tiny-{-} from Prelude}
 
 	\lI[data \small{(single constructor)}]
-		data~\I{MyData}~=~\I{MyData}~\I{Type}~\I{Type}~\I{Type} \li
+		data~\I{MyData}~=~\I{MyData}~\I{Type}~\I{Type} \li
 		~~deriving (\I{Class}, \I{Class})
 
 	\lI[data \small{(multi constructor)}]
@@ -135,11 +135,11 @@
 
 	\lI[data \small{(labelled fields)}]
 		data~\I{MDt}~=~\I{MDt}~\{ \I{fieldA} \li
-		~~~~~\T{MDt}~~~\T{MDt}~,  \I{fieldB}~::~\I{TypeAB} \li
-		~~~~~\T{MDt}~~~\T{MDt}~,  \I{fieldC}~::~\I{TypeC} \}
+		~~~~~\T{MDt}~~~\T{MDt}~,  \I{fieldB}~::~\I{TyAB} \li
+		~~~~~\T{MDt}~~~\T{MDt}~,  \I{fieldC}~::~\I{TyC} \}
 
 	\lI[newtype]
-		newtype~\I{MyNewType}~=~\I{MyNewType}~\I{Type}
+		newtype~\I{MyType}~=~\I{MyType}~\I{Type}
 	\li[~~\rotatebox{90}{$\Rsh$} \small{(single constr./field)}]
 		~~deriving (\I{Class}, \I{Class})
 
@@ -167,7 +167,7 @@
 	\Li[addition, subtraction] +, -
 	\Li[list construction, append lists] \hfill :, ++
 	\li[list difference]                 ~~~~~~~~~~~~\verb+\\+
-	\Li[comparisons:]     ~~>, >=, <, <=, ==, /=~~
+	\Li[comparisons:]     ~~>, >=, <, <=, ==, /=~
 	\li[list membership]  ~~~`elem`, `notElem`~~
 	\Li[boolean and] \hfill \&\&
 	\Li[boolean or] \hfill ||
@@ -242,7 +242,7 @@ do \I{patA} <- \I{action1} & \I{action1} >{>}= \la \I{patA} ->\\
 \end{tabular}
 
 
-\section{Pattern Matching \hfill \small(function declaration, lambda, case, let, where)}
+\section{Pattern Matching \hfill \small(fn. declaration, lambda, case, let, where)}
 
 \begin{tabularlc}{b@{\hspace{9ex}}lC@{\hspace{11ex}}lC}
   \li[fixed]  number 3      & 3  & character 'a' & 'a' \li
@@ -295,8 +295,8 @@ to their list instances, e.g.: foldr%
 
 \subsection{Lists}
 
-\begin{tabular}{@{}C@{\hspace{1ex}}C@{\s}R@{\s$\equiv$\s}C}
-	null    & ::~[a] -> Bool        & null []              & True~~{\footnotesize -{-} \textnormal{empty?}} \\
+\begin{tabular}{@{}C@{\hspace{1ex}}C@{\hspace{5ex}}R@{\s$\equiv$\s}C}
+	null    & ::~[a] -> Bool        & null []              & True~~{\footnotesize -{-} \textnormal{$\emptyset$?}} \\
 %	        &                       & null [\X,\Y]         & False \\
 	\mtype{length~::~[a] -> Int}    & length [\X,\Y,\Z]    & 3                \\
 	elem    & ::~a -> [a] -> Bool   & \Y~`elem`~[\X,\Y]    & True~~{\footnotesize-{-} \textnormal{$\in?$}}  \\
@@ -313,7 +313,7 @@ to their list instances, e.g.: foldr%
 	        \longcall{takeWhile (/= \Z) [\X,\Y,\Z,\W]} & [\X,\Y]              \\[.2ex]
 
 	zip     & \longtype{::~[a] -> [b] -> [(a, b)]}                            \\
-	        \longcall{zip [\X,\Y,\Z] [\I{a},\I{b}]} & [(\X,\I{a}),(\Y,\I{b})] \\[-2ex]
+\multicolumn{4}{C}{~~~~~~~~~~~~~~~~~~zip [\X,\Y,\Z] [\I{a},\I{b}] $\equiv$ [(\X,\I{a}),(\Y,\I{b})]} \\[-2ex]
 \end{tabular}
 
 \subsubsection{Infinite Lists}
@@ -345,20 +345,22 @@ to their list instances, e.g.: foldr%
 
 \subsubsection{Special folds}
 
-\begin{tabular}{@{}C@{\hspace{1ex}}C@{\hspace{1ex}}R@{\s$\equiv$\s}C}
-	and     & ::~[Bool]~->~Bool    & and [\I{p},\I{q},\I{r}]     & \I{p}~\&\&~\I{q}\&\&\I{r} \\
-	or      & ::~[Bool]~->~Bool    & or [\I{p},\I{q},\I{r}]      & \I{p}~||~\I{q}||\I{r} \\
-	sum     & ::~Num~a~=>~[a]~->~a & sum [\I{i},\I{j},\I{k}]     & \I{i} + \I{j} + \I{k} \\
-	product & ::~Num~a~=>~[a]~->~a & product [\I{i},\I{j},\I{k}] & \I{i} * \I{j} * \I{k} \\
-	concat  & ::~[[a]]~->[a]       & concat [\I{xs},\I{ys},\I{zs}] & \I{xs}++\I{ys}++\I{zs} \\
-	maximum & ::~Ord~a => [a] -> a & maximum [10,0,5] & 10 \\
-	minimum & ::~Ord~a => [a] -> a & minimum [10,0,5] & 0 \\
+\begin{tabular}{@{}C@{\hspace{1ex}}C@{\hspace{10ex}}R@{\s$\equiv$\s}C}
+	and     & ::~[Bool]~->~Bool    & and [\I{p},\I{q},\I{r}]     & \I{p}~\&\&~\I{q} \&\& \I{r} \\
+	or      & ::~[Bool]~->~Bool    & or [\I{p},\I{q},\I{r}]      & \I{p}~||~\I{q} || \I{r} \\
+\end{tabular} \\
+\begin{tabular}{@{}C@{\hspace{1ex}}C@{\hspace{4ex}}R@{\s$\equiv$\s}C}
+	sum     & ::~Num~a~=>~[a]~->~a & sum [\I{i},\I{j},\I{k}]     & \I{i}+\I{j}+\I{k} \\
+	product & ::~Num~a~=>~[a]~->~a & product [\I{i},\I{j},\I{k}] & \I{i}*\I{j}*\I{k} \\
+	maximum & ::~Ord~a => [a] -> a & maximum [9,0,5] & 9 \\
+	minimum & ::~Ord~a => [a] -> a & minimum [9,0,5] & 0 \\
+	concat  & \longtype{::~[[a]]~->[a]  ~ concat [\I{xs},\I{ys},\I{zs}] $\equiv$ \I{xs}++\I{ys}++\I{zs}} \\
 \end{tabular}
 
 
 \subsection{Tuples}
 \begin{tabular}{@{}C@{\s}C@{\hspace{3ex}}R@{\s$\equiv$\s}C}
-	fst       & ::~(a, b) -> a      & ~~~~~~~~~fst (\I{x},\I{y}) & \I{x} \\
+	fst       & ::~(a, b) -> a      &     ~~~~~fst (\I{x},\I{y}) & \I{x} \\
 	snd       & ::~(a, b) -> b      &          snd (\I{x},\I{y}) & \I{y} \\
 %	swap      & ::~(a, b) -> (b, a) & snd (\I{x},\I{y})   & (\I{y},\I{x}) \\ % Data.Tuple
 	curry     & \longtype{::~((a, b) -> c) -> a -> b -> c} \\
@@ -370,14 +372,14 @@ to their list instances, e.g.: foldr%
 
 \subsection{Numeric}
 
-\begin{tabular}{@{}C@{\s}C@{\hspace{3ex}}R@{\s$\equiv$\s}C}
-	abs            & ::~Num a => a -> a         & abs (-10)  & 10        \\
-	even, odd      & ::~Integral a => a -> Bool & even (-10) & True      \\
-\mtype{gcd, lcm ::~Integral a => a -> a -> a}   & gcd 6 8  &  2        \\
-	recip          & ::~Fractional a => a -> a  & recip \X & 1/\X      \\
+\begin{tabular}{@{}C@{\s}C@{\hspace{-1ex}}R@{\s$\equiv$\s}C}
+	abs            & ::~Num a => a -> a         & abs (-9) & 9     \\
+	even, odd      & ::~Integral a => a -> Bool & even 10  & True  \\
+\mtype{gcd, lcm ::~Integral a => a -> a -> a}   & gcd 6 8  &  2    \\
+	recip          & ::~Fractional a => a -> a  & recip \X & 1/\X  \\
     pi             & ::~Floating a => a         & pi       & 3.14...  \\
 	sqrt, log      & ::~Floating a => a -> a    & sqrt \X  & \X**0.5   \\
-	\Longtype{exp, sin, cos, tan, asin, acos, atan ::~Floating a => a  -> a} \\
+	\Longtype{exp, sin, cos, tan, asin, acos ::~Floating a => a  -> a} \\
 	\Longtype{truncate, round~::~(RealFrac a, Integral b) => a -> b} \\
 	\Longtype{ceiling, floor~~::~(RealFrac a, Integral b) => a -> b} \\
 \end{tabular}
@@ -409,10 +411,10 @@ to their list instances, e.g.: foldr%
 
 \subsection{Ord Class}
 
-\begin{tabular}{@{}C@{\s}C@{\s}R@{\s$\equiv$\s}C}
+\begin{tabular}{@{}C@{\s}C@{\hspace{3ex}}R@{\s$\equiv$\s}C}
 	min     & ::~Ord a => a -> a -> a        & min 'a' 'b'  & 'a' \\
 	max     & ::~Ord a => a -> a -> a        & max "b" "ab" & "b" \\
-	compare & ::~Ord a => a -> a -> Ordering & compare 1 2  & LT  \\
+	compare & ::~Ord a => a->a->Ordering & compare 1 2  & LT  \\
 \end{tabular}
 
 
@@ -440,8 +442,8 @@ to their list instances, e.g.: foldr%
 	\li[Call \C{show} before printing]     traceShow \I{expr} \$ \I{expr}
 \end{ldesc} \\
 \begin{ldesc}
-	\li[Trace function]  fun x y | traceShow (x,y) False = undefined \li[\s call values]
-	                     fun x y = ...
+	\li[Trace function]  f x y | traceShow (x,y) False = undefined \li[\s call values]
+	                     f x y = ...
 \end{ldesc}
 
 
@@ -455,7 +457,7 @@ to their list instances, e.g.: foldr%
 	\li[Read char from stdin]                            getChar
 	\li[Read line from stdin as a string]                getLine
 	\li[Read all input from stdin as a string]           getContents
-	\li[Bind stdin/stdout to \CI{foo} (\CI{\footnotesize ::~String -> String})]
+	\li[Bind stdin/out to \CI{foo} (\CI{\footnotesize ::~String -> String})]
 	                                                     interact \I{foo}
 	\li[Write string \CI{cs} to a file named \CI{fn}]    writeFile \I{fn} \I{cs}
 	\li[Append string \CI{cs} to a file named \CI{fn}]   appendFile \I{fn} \I{cs}
@@ -471,11 +473,12 @@ Take \I{pat} from \I{list}. If \I{boolPredicate}, add element \I{expr} to list:\
 	{[}x | x <- \I{xs}]                   & \I{xs} \\
 	{[}\I{f} x | x <- \I{xs}, \I{p} x]    & map \I{f} \$ filter \I{p} \I{xs} \\
 	{[}x | x <- \I{xs}, \I{p} x, \I{q} x] & filter \I{q} \$ filter \I{p} \I{xs} \\
-	{[}x+y | x <- [\I{a},\I{b}], y <- [\I{i},\I{j}]] &
-	    [\I{a}+\I{i}, \I{a}+\I{j}, \I{b}+\I{i}, \I{b}+\I{j}] \\
+\multicolumn{2}{C}{
+	{[}x+y | x <- [\I{a},\I{b}], y <- [\I{i},\I{j}]] $\equiv$
+	    [\I{a}+\I{i}, \I{a}+\I{j}, \I{b}+\I{i}, \I{b}+\I{j}]
+} \\
 	{[}\I{x} | \I{boolE}]                 & if \I{boolE} then [\I{x}] else []
 \end{tabular}
-
 
 \section{GHC - Glasgow Haskell Compiler (and Cabal)}
 
@@ -491,19 +494,19 @@ Take \I{pat} from \I{list}. If \I{boolPredicate}, add element \I{expr} to list:\
 	\li[GHCi help]                > :?
 	\li[Type of an expression]    > :t \I{expr}
 	\li[Info (oper./func./class)] > :i \I{thing}
-	\li[Installed GHC packages]   \$ ghc-pkg list \I{[package\_name]}
+	\li[Installed GHC packages]   \$ ghc-pkg list \I{[pkg\_name]}
 
-	\lI[Activating some pragma]   \verb+{+-\# LANGUAGE \I{SomePragma} \#-\verb+}+
+	\lI[Activating some pragma]   \verb+{+-\# LANGUAGE \I{Pragma} \#-\verb+}+
 	\li[Same, via GHC call]       \$ ghc -X\I{SomePragma} ...
 
 	\lI[install package \C{pkg}]           \$ cabal install \I{pkg}
 	\li[update package list]               \$ cabal update
-	\li[search packages matching \C{pat}]  \$ cabal list \I{pat}
-	\li[information about package \C{pkg}] \$ cabal info \I{pkg}
+	\li[list packages matching \C{pat}]    \$ cabal list \I{pat}
+	\li[information about package]         \$ cabal info \I{pkg}
 	\li[help on commands]                  \$ cabal help \I{[command]}
-	\li[run executable/test/benchmark]     \$ cabal run/test/bench \I{[name]}
+	\li[run executable/test/bench]         \$ cabal run/test/bench \I{[name]}
 	\li[initialize sandbox]                \$ cabal sandbox init
-	\li[add custom source to sandbox]      \$ cabal sandbox add-source \I{dir}
+	\li[add custom sandbox source]         \$ cabal sandbox add-source \I{dir}
 \end{ldesc}
 
 \end{document} 

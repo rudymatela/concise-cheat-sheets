@@ -166,7 +166,7 @@
 
 \begin{tabular}{@{}l@{}R@{\s$\equiv$\s}C}
 	identity      &  pure~id~<*>~\V                & \V                    \\
-	composition   &  pure~(.)~<*>~\U~<*>~\V~<*>~\W & \U~<*>~(\V~<*>~\W)    \\
+	composition   &  pure~(.)~<*>~\U~<*>~\V<*>\W & \U~<*>~(\V~<*>~\W)    \\
 	homomorphism  &  pure~\F~<*>~pure~\X           & pure~(\F~\X)          \\
 	interchange   &  \U~<*>~pure~\Y                & pure~(\$~\Y)~<*>~\U   \\
 \end{tabular}
@@ -497,7 +497,7 @@ NOTE: It is only necessary to define either \C{traverse} or \C{sequenceA}.
 \subsubsection{Instances -- \C{sequenceA} examples}
 
 \begin{tabular}{C@{\s}R@{\s$\equiv$\s}C}
-	[]      & \mtype{sequenceA~[\X,\Y] $\equiv$ (:)~<\$>~\X~<*>~((:)~<\$>~\Y~<*>~[])} \\
+	[]      & \mtype{sequenceA~[\X,\Y] $\equiv$ (:)~<\$>~\X~<*>~((:)<\$>\Y<*>[])} \\
 	Maybe   & sequenceA~(Just~\X)~ & ~Just <*> \X \\
 	Either  & sequenceA~(Right~\X) & Right <*> \X \\
 	((,) a) & sequenceA~(\X,\Y) & (,)~\X~<\$>~\Y \\
@@ -507,7 +507,7 @@ NOTE: It is only necessary to define either \C{traverse} or \C{sequenceA}.
 \subsubsection{Functions}
 
 \begin{tabular}{@{}C@{\s}CC@{\s$\equiv$\s}C}
-for  & ::~(Traversable t, Applicative f)     & flip for & traverse \\
+for  & ::~(Traversable t, Applicative f)     & & flip traverse \\
      & => t a -> (a -> f b) -> f (t b)       \\[1ex]
 mapM & ::~(Traversable t, Monad m)           \\
      & => (a -> m b) -> t a -> m (t b)       \\[1ex]
@@ -535,7 +535,7 @@ class Applicative f => Alternative f where
 \subsubsection{Instances -- \C{empty} and choice (\C{<|>}) examples}
 
 \begin{tabular}{C@{\s\s}  R@{\s$\equiv$\s}C @{\s\s} R@{\s\eq\s}C}
-	{[a]}      & empty & []      &         xs <|> ys & xs ++ ys \\
+	{[a]}      & empty & []      &         xs <|> ys  & xs++ys   \\
 	Maybe a    & empty & Nothing & Just x <|> Just y  & Just x   \\
 	           &  \mctc{\s}      & Nothing <|> Just y & Just y   \\
 \end{tabular}

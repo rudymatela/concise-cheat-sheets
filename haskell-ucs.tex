@@ -133,7 +133,7 @@
 		~~~~~\T{MyData}~|~\I{Duple} \I{Type} \I{Type} \li
 		~~~~~\T{MyData}~|~\I{Nople}
 
-	\lI[data \small{(labelled fields)}]
+	\lI[data \small{(record syntax)}]
 		data~\I{MDt}~=~\I{MDt}~\{ \I{fieldA} \li
 		~~~~~\T{MDt}~~~\T{MDt}~,  \I{fieldB}~::~\I{TyAB} \li
 		~~~~~\T{MDt}~~~\T{MDt}~,  \I{fieldC}~::~\I{TyC} \}
@@ -252,12 +252,12 @@ do \I{patA} <- \I{action1} & \I{action1} >{>}= \la \I{patA} ->\\
   \lI[list]   empty                                        & [] \li
               head \C{x} and tail \C{xs}                   & (x:xs) \li
               tail \C{xs} (ignore head)                    & (\_:xs) \li
-              list with 3 elements: \C{a}, \C{b} and \C{c} & [a,b,c] \li
-              list with 3 elements: \C{a}, \C{b} and \C{c} & (a:b:c:[]) \li
+              list with 3 elements                         & [a,b,c] \li
+%             list with 3 elements: \C{a}, \C{b} and \C{c} & (a:b:c:[]) \li
               list where 2nd element is 3                  & (x:3:xs)
 
   \lI[tuple]  pair values \C{a} and \C{b}                  & (a,b) \li
-              ignore second element of tuple               & (a,\verb+_+) \li
+              ignore second element                        & (a,\verb+_+) \li
               triple values \C{a}, \C{b} and \C{c}         & (a,b,c)
 
   \lI[mixed]  first tuple on list                          & ((a,b):xs)
@@ -266,12 +266,16 @@ do \I{patA} <- \I{action1} & \I{action1} >{>}= \la \I{patA} ->\\
               nothing constructor                          & Nothing
 
   \lI[custom] user-defined type                            & MyData a b c \li
-              ignore second field                          & MyData a \verb+_+ c
+              ignore second field                          & MyData a \verb+_+ c \li
+              user-defined record type                     & MyR \{ f1=x, f2=y \}
 
-  \lI[as-pattern] tuple \C{s} and its values \C{a} and \C{b} & s@(a,b) \li
-                  list \C{a}, its head \C{x} and tail \C{xs} & a@(x:xs) \li
+  \lI[as-pattern] tuple \C{s} and its values               & s@(a,b) \li
+                  list \C{a}, its head and tail            & a@(x:xs) \li
 %	              data \C{p} and its fields                  & p@(MyData a b c)
 \end{tabularlc}
+
+
+% TODO: Add record update syntax somewhere
 
 
 \section{Prelude functions \hfill

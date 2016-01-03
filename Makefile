@@ -27,6 +27,11 @@ FASTPDFLATEX = $(PDFLATEX) -draftmode
 
 
 # Making Rules
+#
+# This Makefile intentionally will not detect changes
+# in either refcard.cls and threecols.sty:
+#   those are seldom modified
+# (with the exception of template-refcard.pdf)
 
 CSS = \
   haskell-ucs.pdf \
@@ -38,12 +43,6 @@ CSS = \
 all: $(CSS)
 
 template-refcard.pdf: template-refcard.tex refcard.cls threecols.sty
-
-haskell-ucs.pdf: haskell-ucs.tex
-
-haskell-tc-ucs.pdf: haskell-tc-ucs.tex
-
-ctf-ucs.pdf: ctf-ucs.tex
 
 # Cleanup rules
 

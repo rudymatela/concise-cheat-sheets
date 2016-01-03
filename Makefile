@@ -34,10 +34,10 @@ FASTPDFLATEX = $(PDFLATEX) -draftmode
 # (with the exception of template-refcard.pdf)
 
 CSS = \
-  haskell-ucs.pdf \
+  haskell-ucs.pdf    \
   haskell-tc-ucs.pdf \
-  ctf-ucs.pdf \
-  thaskell-ucs.pdf \
+  thaskell-ucs.pdf   \
+  ctf-ucs.pdf        \
   template-refcard.pdf
 
 all: $(CSS)

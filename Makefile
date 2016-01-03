@@ -28,7 +28,14 @@ FASTPDFLATEX = $(PDFLATEX) -draftmode
 
 # Making Rules
 
-all: template-refcard.pdf haskell-ucs.pdf haskell-tc-ucs.pdf ctf-ucs.pdf thaskell-ucs.pdf
+CSS = \
+  haskell-ucs.pdf \
+  haskell-tc-ucs.pdf \
+  ctf-ucs.pdf \
+  thaskell-ucs.pdf \
+  template-refcard.pdf
+
+all: $(CSS)
 
 template-refcard.pdf: template-refcard.tex refcard.cls threecols.sty
 
@@ -42,7 +49,7 @@ ctf-ucs.pdf: ctf-ucs.tex
 
 .PHONY: clean cleanauxs cleanfigs
 clean: cleanauxs cleanfigs
-	rm -f template-refcard.pdf haskell-ucs.pdf haskell-tc-ucs.pdf ctf-ucs.pdf thaskell-ucs.pdf
+	rm -f $(CSS)
 
 cleanauxs:
 	rm -rf tmp

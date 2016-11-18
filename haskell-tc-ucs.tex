@@ -62,11 +62,11 @@
     fmap/(<\$>) & liftA       & liftM       & map         & (.)         \\[.5ex]
                 & pure        & return      & (:[])       & const       \\[.5ex]
                 & (<*>)       & ap          & \M{(<*>)}   & \M{(<*>)}   \\[.5ex]
-                &             & (>>=)       & \M{(>>=)}   & \M{(>>=)}   \\[2ex]
+                &             & (>{>}=)     & \M{(>{>}=)} & \M{(>{>}=)} \\[2ex]
 
 \N{\B{Functor}}&\N{\B{Applicative}}&\N{\B{Monad}}&\N{\B{List (\C{[]})}}& \N{\B{Fn. (\C{(->) r})}} \\[1ex]
 %    Functor    & Applicative & Monad       & {[]}        & ((->) r)    \\[2ex]
-                & (*>)        & (>>)        & \M{(>>)}    & \M{(>>)}    \\[.5ex]
+                & (*>)        & (>{>})      & \M{(>{>})}  & \M{(>{>})}  \\[.5ex]
                 &             & join        & concat      & \M{join}    \\[.5ex]
                 &             & (=<<)       & concatMap   & \M{(=<<)}   \\[.5ex]
                 & liftA2      & liftM2      & \M{liftA2}  & \M{liftA2}  \\[.5ex]
@@ -252,9 +252,9 @@
 \subsubsection{Laws}
 
 \begin{tabular}{@{}l@{\s\s\s}R@{\s$\equiv$\s}C}
-	left identity  &  return~\X~>>=~\F      & \F~\X                                \\
-	right identity &  \I{m} >>= return      & \I{m}                                \\
-	associativity  &  (\I{m}~>>=~\F)~>>=~\G & \I{m} >>= (\la\I{x} -> \F \X >>= \G) \\
+	left identity  &  return~\X~>{>}=~\F        & \F~\X                                    \\
+	right identity &  \I{m} >{>}= return        & \I{m}                                    \\
+	associativity  &  (\I{m}~>{>}=~\F)~>{>}=~\G & \I{m} >{>}= (\la\I{x} -> \F \X >{>}= \G) \\
 \end{tabular}
 
 
@@ -269,7 +269,7 @@
 \end{tabular}
 
 
-\subsubsection{Instances -- bind (\C{>>=}) examples}
+\subsubsection{Instances -- bind (\C{>{>}=}) examples}
 
 \begin{tabular}{C@{\s\s}R@{\s$\equiv$\s}C}
 	[]         & xs >>= f                & concatMap f xs      \\

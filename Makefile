@@ -40,15 +40,35 @@ CSS = \
   ctf-cs.pdf        \
   template-refcard.pdf
 
+CSS2X = \
+  haskell-cs-2x.pdf    \
+  haskell-tc-cs-2x.pdf \
+  thaskell-cs-2x.pdf   \
+  ctf-cs-2x.pdf        \
+  template-refcard-2x.pdf
+
 all: $(CSS)
 
+2x: $(CSS2X)
+
 template-refcard.pdf: template-refcard.tex refcard.cls threecols.sty
+
+%-2x.pdf: %.pdf
+	mkdir -p tmp/2x
+	./bin/quiet pdf90 haskell-cs.pdf -o tmp/2x/90.pdf
+	pdfseparate tmp/2x/90.pdf tmp/2x/%d.pdf
+	pdfunite tmp/2x/1.pdf tmp/2x/1.pdf tmp/2x/2.pdf tmp/2x/2.pdf tmp/2x/united.pdf
+	./bin/quiet pdfnup tmp/2x/united.pdf -o $@
+	rm -r tmp/2x
 
 # Cleanup rules
 
 .PHONY: clean cleanauxs cleanfigs
 clean: cleanauxs cleanfigs
-	rm -f $(CSS)
+	rm -f $(CSS) $(CSS2X)
+
+clean-2x:
+	rm -f $(CSS2X)
 
 cleanauxs:
 	rm -rf tmp

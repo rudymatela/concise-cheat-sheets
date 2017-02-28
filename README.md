@@ -1,5 +1,5 @@
-Ultimate Cheat Sheets
-=====================
+Concise Cheat Sheets
+====================
 
 This repository is a collection of Cheat Sheets for programming languages and
 tools.  Currently:
@@ -10,13 +10,16 @@ tools.  Currently:
 * A Template Cheat Sheet
 * A LaTeX cls file, for the creation of sheets.
 
+This project was previously known as "Ultimate Cheat Sheets" and has been
+renamed to "Concise Cheat Sheets".
+
 
 Compiling
 ---------
 
 Clone the project, then:
 
-    cd ./ultimate-cheat-sheets
+    cd ./concise-cheat-sheets
     make
 
 
@@ -51,6 +54,6 @@ Acknowledgements
 	* Thanks to [Saulo Hachem](https://github.com/sauloh) for suggesting reverse shells.
 
 [C Reference Card]: http://www.math.brown.edu/~jhs/ReferenceCards/CRefCard.v2.2.pdf
-[Haskell Cheat Sheet]: https://github.com/rudymatela/ultimate-cheat-sheets/releases/download/haskell-v1.0/haskell-ucs-1.0.pdf
-[Haskell Typeclasses Cheat Sheet]: https://github.com/rudymatela/ultimate-cheat-sheets/releases/download/haskell-tc-v0.2/haskell-tc-ucs-0.2.pdf
-[Capture The Flag Cheat Sheet]: https://github.com/rudymatela/ultimate-cheat-sheets/releases/download/ctf-v0.4/ctf-ucs-0.4.pdf
+[Haskell Cheat Sheet]: https://github.com/rudymatela/concise-cheat-sheets/releases/download/haskell-v1.0/haskell-ucs-1.0.pdf
+[Haskell Typeclasses Cheat Sheet]: https://github.com/rudymatela/concise-cheat-sheets/releases/download/haskell-tc-v0.2/haskell-tc-ucs-0.2.pdf
+[Capture The Flag Cheat Sheet]: https://github.com/rudymatela/concise-cheat-sheets/releases/download/ctf-v0.4/ctf-ucs-0.4.pdf

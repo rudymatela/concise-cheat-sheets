@@ -1,4 +1,4 @@
-Ultimate Cheat Sheets versioning scheme
+Concise Cheat Sheets versioning scheme
 =======================================
 
 UCS class file uses [Semantic Versioning 2.0] with an addendum:

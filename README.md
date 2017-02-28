@@ -5,7 +5,7 @@ This repository is a collection of Cheat Sheets for programming languages and
 tools.  Currently:
 
 * A [Haskell Cheat Sheet] -- version 1.0
-* A [Capture The Flag Cheat Sheet] -- version 0.4
+* A [Capture The Flag Cheat Sheet] -- version 0.5
 * A [Haskell Typeclasses Cheat Sheet] -- version 0.2
 * A Template Cheat Sheet
 * A LaTeX cls file, for the creation of sheets.
@@ -56,4 +56,4 @@ Acknowledgements
 [C Reference Card]: http://www.math.brown.edu/~jhs/ReferenceCards/CRefCard.v2.2.pdf
 [Haskell Cheat Sheet]: https://github.com/rudymatela/concise-cheat-sheets/releases/download/haskell-v1.0/haskell-ucs-1.0.pdf
 [Haskell Typeclasses Cheat Sheet]: https://github.com/rudymatela/concise-cheat-sheets/releases/download/haskell-tc-v0.2/haskell-tc-ucs-0.2.pdf
-[Capture The Flag Cheat Sheet]: https://github.com/rudymatela/concise-cheat-sheets/releases/download/ctf-v0.4/ctf-ucs-0.4.pdf
+[Capture The Flag Cheat Sheet]: https://github.com/rudymatela/concise-cheat-sheets/releases/download/ctf-v0.5/ctf-cs-0.5.pdf

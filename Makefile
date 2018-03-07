@@ -38,6 +38,7 @@ CSS = \
   haskell-tc-cs.pdf \
   thaskell-cs.pdf   \
   python-cs.pdf     \
+  lua-cs.pdf        \
   ctf-cs.pdf        \
   template-refcard.pdf
 
@@ -46,6 +47,7 @@ CSS2X = \
   haskell-tc-cs-2x.pdf \
   thaskell-cs-2x.pdf   \
   python-cs-2x.pdf     \
+  lua-cs-2x.pdf        \
   ctf-cs-2x.pdf        \
   template-refcard-2x.pdf
 

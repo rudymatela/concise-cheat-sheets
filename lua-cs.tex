@@ -1,0 +1,542 @@
+%% lua-cs.tex
+%
+% Copyright 2018  Rudy Matela
+%
+% This text is available under (at your option):
+%   * Creative Commons Attribution-ShareAlike 3.0 Licence
+%   * GNU Free Documentation License version 1.3 or Later
+%
+
+\documentclass{refcard}
+\usepackage[T1]{fontenc}
+
+\renewcommand{\familydefault}{\sfdefault}
+\newcommand{\X}{\I{x}}
+\newcommand{\Y}{\I{y}}
+\newcommand{\Z}{\I{z}}
+\newcommand{\W}{\I{w}}
+\newcommand{\F}{\I{f}}
+
+
+\title{Concise Lua Cheat Sheet}
+
+\cright{
+	Copyright 2018, Rudy Matela --
+	Compiled on \today{} \\
+	Upstream: \texttt{https://github.com/rudymatela/concise-cheat-sheets}
+}{
+	This text is available under
+	the Creative Commons Attribution-ShareAlike 3.0 Licence, \\
+	\textbf{or} (at your option), the GNU Free Documentation License version 1.3 or Later.
+}
+\version[~\\]{0.0 (WORK IN PROGRESS)}
+
+
+% Useful links
+% ============
+%
+% Changes
+% -------
+%
+% 5.2 -> 5.3: http://www.lua.org/manual/5.3/readme.html#changes
+% 5.1 -> 5.2: http://www.lua.org/manual/5.2/readme.html#changes
+% 5.0 -> 5.1: http://www.lua.org/manual/5.1/manual.html#7.1
+%
+%
+% Book
+% ----
+%
+% Programming in Lua (first edition), Lua 5.0:
+%   http://www.lua.org/pil/contents.html
+
+
+\begin{document}
+
+\maketitle
+
+\centering
+{\Large \textbf{NOTE:} this is a work in progress}
+
+\section{Structure}
+
+\begin{verbatim}
+	function funct (n,m)
+	  statements
+	  return value
+	end
+
+	statement
+	statement
+\end{verbatim}
+
+
+\section{Types}
+
+\begin{ldesc}
+	\li[nil]       nil
+	\li[boolean]   false, true
+	\li[number]    0, 1, -1, 12.34
+	\li[string]    "double quotes", 'single quotes', [[ \li
+	               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~multi \li
+	               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~line \li
+	               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~]] \li
+	\li[function]  function (x) return x * 2 end
+	\li[table]     \{\}, \{["ab"]="cd", [12]=34\}, \{ab="cd"\}
+\end{ldesc}
+
+
+\section{Tables}
+
+\subsection{Initializing}
+
+\begin{ldesc}
+	\li[empty]               \{\}
+	\lI[list (indexed by 1)] \{\X, \Y, \Z\}
+	\li[record]              \{\X=\I{value}, \Y=\I{value}\}
+	\li[mixed record and list] \{\I{length}=2, \X, \Y\}
+	\lI[general forms]       \{[1]=\X, [2]=\Y, [3]=\Z\} \li[~\small (equivalent to the ones above)]
+	                         \{["\X"]=\I{value}, ["\Y"]=\I{value}\} \li
+	                         \{["\I{length}"]=2, [1]=\X, [2]=\Y\}
+\end{ldesc}
+
+\subsection{Acessing}
+
+\begin{ldesc}
+	\li[\hfill consider:~~] table = \{\I{length}=2, \X, \Y\}
+	\lI[acessing via string indices] table["length"] = 2 \li
+	                                 table.length = 2
+	\lI[accessing integer positions] table[1] = \X \li
+	                                 table[2] = \Y
+	\lI[unassigned positions are \I{nil}] table["pos"] = \I{nil} \li
+	                                      table.pos = \I{nil}
+	\lI[record syntax only works] table.1*2+asdf ~~~-{-} wrong!
+	\li[~~for valid identifiers]    table["1*2+asdf"] -{-} ok!
+\end{ldesc}
+
+\section{Assignments}
+
+\begin{ldesc}
+	\li[assign variable \I{x} the value \I{expr}] \X~= \I{expr}
+	\li[assign field \Y~on table \X] \X.\Y~= expr
+	\li[multiple assignment] \X,~\Y~=~\I{exprX},~\I{exprY}
+	\li[swap values]         \X,~\Y~=~\Y,~\X
+	\li[missing values (\Z, \W) are nil]  \X,~\Y,~\Z,~\W~= \I{exprX},~\I{exprY}
+	\li[extra values are ignored]         \X~= \I{exprX}, \I{ignored}, \I{ignored}
+	\li[fns. can return multiple vals.] \X,~\Y~=~\F()
+	\li[local (to fn./chunk/block) var.] local \X~= \I{expr}
+	\li[local nil var.]                  local \Y
+\end{ldesc}
+
+
+\section{Control Structures and Blocks}
+
+\begin{ldesc}
+	\li[do block (for scoping)] do \li
+	                            ~~\I{statements} \li
+								end
+
+	\lI[if statement] if \I{condition} then \li
+	                  ~~\I{statements} \li
+					  elseif \I{condition} then \li
+					  ~~\I{statements} \li
+					  else \li
+					  ~~\I{statements} \li
+					  end
+
+	\lI[while statement] while \I{condition} do \li
+	                     ~~\I{statements} \li
+						 end
+
+	\lI[repeat-until statement] repeat \li[~(always executes once)]
+	                            ~~\I{statements} \li
+						        until \I{condition}
+
+	\lI[numeric for (inclusive)] for \I{i}=\I{start},\I{end} do \li[~(\I{i} is local)]
+	                             ~~\I{statements}      \li[~(never change \I{i} manually)]
+	                             end
+
+	\lI[numeric for (w/step)] for \I{i}=\I{start},\I{end},\I{step} do \li
+	                          ~~\I{statements} \li
+	                          end
+
+	\lI[generic for]
+		for \I{cvars} in \I{iterator(args)} do \li
+		~~\I{statements} \li
+		end
+
+	\lI[exit loop] break
+\end{ldesc}
+
+
+\section{Operators (grouped by precedence)}
+\begin{Ldesc}
+	\Li[exponentiation] \hfill \^{}
+	\Li[unary: numeric and bool negation] not -
+	\Li[multiplication, float division] *, /
+	\Li[addition, subtraction] +, -
+	\Li[string concatenation] \hfill ..
+	\Li[comparisons] ==, \~{}=, <, >, <=, >=~~~~~~
+	\Li[boolean conjunction] and
+	\Li[boolean disjunction] or
+\end{Ldesc} \\[1ex]
+NOTE: \texttt{\^{}} and \texttt{..} are right associative.  The rest are left associative.
+
+
+\section{Functions}
+
+\subsubsection{Function Calls}
+
+\begin{ldesc}
+	\li[procedure call (action)]             \F(\I{args})
+	\li[call and assign return value]        \X~=~\F(\I{args})
+	\li[call within expression]              \Y~=~\X~+~\F(\Z,\W)
+
+	\lI[call with numbers]                   \F(42,1.0)
+	\li[call with string]                    \F("\I{string}")
+	\li[call with single string]             \F~"\I{string}
+	\li[call with table constructor]         \F(\{\X=\Z, \Y=\W\})
+	\li[call with single table constructor]  \F\{\X=\Z, \Y=\W\}
+\end{ldesc}
+
+
+\subsubsection{Function Declaration}
+
+\begin{ldesc}
+	\li[no arguments]
+		function \F~() \li
+		~~\I{statements} \li
+		~~return \I{expression} ~-{-} optional \li
+		end
+
+	\li[single argument]
+		function \F~(\X)~\I{statements}~end
+
+	\li[multiple arguments]
+		function \F~(\X,\Y)~\I{statements}~end
+
+	\li[as assignment $\equiv$ to above]
+		\F~=~function (\X,\Y)~\I{statements}~end
+\end{ldesc}
+
+
+\subsubsection{Function Arguments}
+
+\begin{ldesc}
+	\lI[\hfill consider:~~~]
+		function \F(\I{a},\I{b}) \I{stmts}~end
+
+	\li[valid: missing argument are \I{nil}]
+		\F(\X)   ~~~~~-{-}~\I{a}==\X~\I{b}==nil
+
+	\li[valid: extra args. are discarded]
+		\F(\X,\Y,\Z) ~-{-}~\I{a}==\X~\I{b}==\Y
+
+	\lI[useful: override nil arguments]
+		function \F~(\X) \li[~(if \X~is nil it is replaced)]
+		~~\X~= \X~or \I{defaultX} \li
+		~~\I{statements} \li
+		end
+\end{ldesc}
+
+
+\subsubsection{Function Results}
+
+
+% TODO: Improve formatting:
+%         - Maybe remove captions
+%         - Use tabulation instead of ~~~~ to show meaning
+%         - remove \I{a} and \I{b}, use \U, \V, \W
+\begin{ldesc}
+	\li[\hfill consider:~~~]
+		function \F() return \I{a},\I{b} end
+
+	\lI[assign return values]
+		\X, \Y~= \F()        ~~~~~~-{-} \X=\I{a} \Y=\I{b}
+
+	\li[discard extra return values]
+		\X~= \F()         ~~~~~~~~~-{-} \X=\I{a}
+
+	\li[extra vars. are set to nil]
+		\X, \Y, \Z~= \F()       ~~~-{-} \X=\I{a} \Z=nil
+
+	\li[fn. at end of assign list]
+		\X, \Y, \Z~= \I{c}, \F()   -{-} \X=\I{a} \Z=\I{b}
+
+	\li[fn. in assign list]
+		\X, \Y~= \F(), \I{c}    ~~~-{-} \X=\I{a} \Y=\I{c}
+
+	\li[fn. at end of arg. list]
+		\I{g}(\I{c},\F())  ~~~~~~~~-{-} g(\I{c},\I{a},\I{b})
+
+	\li[fn. in arg. list]
+		\I{g}(\F(),\I{c})  ~~~~~~~~-{-} g(\I{a},\I{c})
+
+	\li[fn. at end of constr.]
+		\{\I{c},\F()\}    ~~~~~~~~~-{-} \{\I{a}, \I{b}, \I{c}\}
+
+	\li[fn. in constr.]
+		\{\F(),\I{c}\}    ~~~~~~~~~-{-} \{\I{a}, \I{c}\}
+
+	\li[fn. in expr. (one result)]
+		\F() + \X        ~~~~~~~~~ -{-} \I{a} + \X
+
+	\li[force single result]
+		(\F())
+
+	\li[unpack table]
+		\X, \Y~= unpack\{\I{a}, \I{b}, \I{c}\}  -{-} \X=\I{a} \Y=\I{b}
+
+	\li[unpack table (in fun arg)]
+		\F(unpack(\{\X,\Y\})) -{-} \F(\X,\Y)
+\end{ldesc}
+
+
+% Lua gotcha!:
+%  f(unpack{x,nil,y}) == f(x,nil,y)
+%  f(unpack{x,nil,y,nil}) == f(x)
+% unpack uses only the numbered arguments
+%
+% This maybe has to deal with the "n" hidden variable
+% it only appears on the ones for which lua stores it??
+
+
+
+\section{Functions (Advanced)}
+
+\subsubsection{Variable number of arguments}
+
+\begin{ldesc}
+	\li[assigning directly]
+		function \F (...) \li
+		~~\I{arg1}, \I{arg2}, \I{arg3}~= ... \li
+		~~\I{statements} \li
+		end
+
+	\lI[packing in a table]
+		function \F (...) \li
+		~~\I{args} = table.pack(...) \li
+		~~\I{statements} \li
+		end
+
+	\lI[fixed and rest]
+		function \F (\X, \Y, ...)~\li
+		~~\I{statements} \li
+		end
+
+	\lI[select implementation]
+		function select (n, ...) \li
+		~~return table.pack(...)[n] \li
+		end
+\end{ldesc} \\[1ex]
+
+{NOTE: The ellipses (\texttt{...}) above are literal}
+
+\subsubsection{Named arguments}
+
+\begin{ldesc}
+	\li[declaration]
+		function \F (arg) \li
+		~~statement ~ -{-} using arg.\I{x}, arg.\I{y}, etc... \li
+		end
+
+	\li[call]
+		\F\{\I{a}=\X, \I{b}=\Y\}
+
+% Bad example?  This could be done by overwriting on arg
+%	\lI[default args]
+%		function \_\F(arg) ... end \li
+%		function \F (arg) \li
+%		~~\_\F~(\X~=~arg.\X~or~\I{a}, \li
+%		~~~~~   \Y~=~arg.\Y~or~\I{b}) \li
+%		end
+\end{ldesc}
+
+\subsubsection{Tail calls}
+
+\begin{ldesc}
+	\li[tail call]
+		function \F(\X,\Y) \li
+		~~\I{statements} \li
+		~~return \I{g}(\Z,\W) \li
+		end
+\end{ldesc}
+
+
+\section{Libraries and Chunks}
+
+\begin{ldesc}
+	\li[Load library \I{lib}] dofile("lib.lua")
+
+	\lI[defining (explictly)]
+		\I{MyLib} = \{\} \li
+		\I{MyLib.f}~=~function (\X) ...~end \li
+		\I{MyLib.g}~=~function (\X,\Y) ...~end
+
+	\lI[defining (implicitly)]
+		\I{MyLib} = \{\} \li
+		function \I{MyLib.f} (\X) \li
+		~~... \li
+		end \li
+		function \I{MyLib.g} (\X,\Y) \li
+		~~... \li
+		end
+
+	\lI[local functions (chunk)]
+		local function \F~(\X) \li
+		~~... \li
+		end
+\end{ldesc}
+
+% TODO: document the select function:
+%   select(1,10,20) == 10
+%   select(2,10,20) == 20
+
+
+\section{Comments}
+
+\begin{ldesc}
+	\li[Single line comment]  -{-} this is a comment
+	\li[Multi line comment]   -{-}[[ \li
+	                          This is a comment \li
+	                          -{-}]]
+	\li[Cancel multi line comment] -{-}-[[ \li
+	                               print("not a comment") \li
+	                               -{-}]]
+\end{ldesc}
+
+
+\section{Misc}
+
+\begin{itemize}
+	\item Lua is CaSe SeNsItIvE
+	\item Tables, userdata and functions are compared by reference:
+	\begin{itemize}
+	      \item \C{~~~~~~~~~~~~~~~~\{\} ~\~{}=~ \{\}}
+		  \item \C{   ~~function () end ~\~{}=~ function () end}
+	\end{itemize}
+	\item In interactive mode, each line is a chunk
+	\begin{itemize}
+		\item local declarations expire on next line
+		\item use do to test local variables
+	\end{itemize}
+\end{itemize}
+
+
+\section{Input/Output}
+
+\begin{ldesc}
+	\li[Print line with \I{value}]    print(\I{value})
+	\li[Print line with \I{"string"}] print "string" \li % this looks like syntatic sugar when it is a string
+	                                  print("string")
+\end{ldesc}
+
+
+\section{Flow of Control}
+
+\begin{ldesc}
+	\li[newline terminated statements]  statement \li
+	                                    statement
+	\li[semicolon terminated statements]  statement; \li
+	                                      statement;
+	\li[semicolon (single line)]  statement; statement
+	\li[double statements on single line (ugly)] statement statement
+\end{ldesc}
+
+
+% TODO: Write about iterators (list most important, and how to create one)
+% Section 7.1
+\section{Iterators}
+
+
+
+
+\section{Interpreter}
+
+\begin{ldesc}
+	\li[load interpreter]   \$ lua
+	\li[run \I{file}]           \$ lua \I{file}.lua
+	\li[run then load interpreter] \$ lua -i \I{file}.lua
+	\li[run then load interpreter] \$ lua -l\I{file}
+	\li[lua shebang]        \#!/usr/bin/env lua
+	\li[run file (with shebang)] ./\I{file}
+	\li[run expression] \$ lua -e "\I{expr}"
+\end{ldesc}
+
+
+\pagebreak
+\section{Standard Libraries}
+
+\subsubsection{Basic (already imported)}
+
+\begin{ldesc}
+	\li[Raise error if \I{v} is \C{false}]  assert(\I{v}, \I{"message"})
+	\li[Execute chunk in \I{filename}]      dofile(\I{"filename"})
+	\li[Raise error \C{\I{message}}]        error(\I{"message"})
+	\li[Iterate over table numeric indexes]   for \I{i},\I{v} in ipairs(\I{t}) do
+	\li[Load chunk as fn. (nil on error)]  load(\I{"chunk"})
+	\li[Load chunk on file as a function]         loadfile(\I{"filename"})
+%	\li[Traverse table]                           \I{newidx}, \I{value} = \li
+%	                                              ~~next(\I{t}, \I{oldidx})
+%	\li[Traverse table]
+%		i = nil \li
+%		repeat \li
+%		~~\I{i}, \I{v} = next(\I{t}, \I{i}) \li
+%		~~\I{statement using v} \li
+%		until i == nil
+
+	\li[Iterate over table values]     for \I{k},\I{v} in pairs(\I{t}) do
+	\li[Protected function call]       stat, retVal = pcall(\F,\I{args})
+	\li[Select \I{\C{n}}-th argument]  select(\I{n},args)
+	\li[String to number]              tonumber("\I{n}")
+	\li[String to number (base)]       tonumber("\I{n}",b)
+	\li[Type as a string]              type(\I{value})
+
+	% from package but exported globally
+	\li[Loads a given module]
+		require("\I{modname}")
+\end{ldesc}
+
+\subsubsection{String Manipulation}
+
+\begin{ldesc}
+	\li[Get numeric value of first char]   string.byte("\I{c}")
+	\li[Get chars from numeric values]     string.char(97,98,99) ~-{-} "abc"
+	\li[Find occurrence in string]         string.find("\I{string}","\I{pattern}")
+	\li[??]                                string.format(??)
+	\li[??]                                string.gmatch(??)
+	\li[??]                                string.gsub(??)
+	\li[??]                                string.len(??)
+	\li[??]                                string.lower(??)
+	\li[??]                                string.match(??)
+	\li[??]                                string.pack(??)
+	\li[??]                                string.rep(??)
+	\li[Return reversed \C{\I{str}}]       string.reverse(\I{str})
+	\li[??]                                string.sub(??)
+	\li[??]                                string.unpack(??)
+	\li[??]                                string.upper(??)
+\end{ldesc}
+
+
+\subsubsection{Table}
+
+\begin{ldesc}
+	\li[??] table.concat(??)
+	\li[??] table.insert(??)
+	\li[??] table.move(??)
+	\li[??] table.pack(??)
+	\li[??] table.remove(??)
+	\li[??] table.sort(??)
+	\li[??] table.unpack(??)
+\end{ldesc}
+
+
+\subsubsection{Mathematical Functions}
+
+\begin{ldesc}
+	\li[Trigonometry] math.acos math.asin math.atan math.cos
+	\li[Max and min arg]   math.max(\X,\Y,\Z,\W) -{-} or math.min
+	\li[Max and min int]    math.mininteger()     -{-} or math.maxinteger
+\end{ldesc}
+
+
+\end{document}

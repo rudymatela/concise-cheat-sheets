@@ -1,0 +1,157 @@
+%% python-cs.tex
+%
+% Copyright 2018  Rudy Matela
+%
+% This text is available under (at your option):
+%   * Creative Commons Attribution-ShareAlike 3.0 Licence
+%   * GNU Free Documentation License version 1.3 or Later
+%
+
+
+\documentclass{refcard}
+\usepackage[T1]{fontenc} % necessary so '{', '}' and '\' get the right font
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\title{Concise Python Cheat Sheet}
+
+\cright{
+	Copyright 2018, Rudy Matela --
+	Compiled on \today{} \\
+	Upstream: \texttt{https://github.com/rudymatela/concise-cheat-sheets}
+}{
+	This text is available under
+	the Creative Commons Attribution-ShareAlike 3.0 Licence, \\
+	\textbf{or} (at your option), the GNU Free Documentation License version 1.3 or Later.
+}
+\version{0.0.0}
+
+
+\begin{document}
+
+\maketitle
+
+\vspace{4em}
+\centering
+{\Large\textbf{NOTE:} this is a work in progress}
+\vspace{4em}
+
+\section{Structure}
+
+\begin{verbatim}
+#!/usr/bin/env python
+
+def hello(who):
+    print("Hello " + who + "!");
+
+hello("world")
+\end{verbatim}
+
+
+
+\section{Literals}
+
+\begin{ldesc}
+	\li[String with escapes]    "Escape \textbackslash{}'double-quotes\textbackslash{}', not 'single'"
+	\li[String with escapes]    'Escape \textbackslash{}'single-quotes\textbackslash{}', not "double"'
+\end{ldesc}
+
+
+\section{Operators (grouped by precedence)}
+
+\begin{Ldesc}
+	\Li[exponentiation]                  **
+	\Li[positive, negative, bitwise not] +, -, ~
+	\Li[multiplication and division]     *, /, //, \%, @
+	\Li[addition and subtraction]        +, -
+	\Li[...] ... TODO: add more ...
+\end{Ldesc}
+
+
+\section{Control Flow}
+
+\begin{ldesc}
+	\li[if statement]            if \I{condition}: \li
+	                             ~~~~\I{code-block} \li
+
+	\li[if-else statement]       if \I{condition1}: \li
+	                             ~~~~\I{code-block} \li
+								 else: \li
+								 ~~~~\I{code-block} \li
+
+	\li[if-elif-else statement]  if \I{condition1}: \li
+	                             ~~~~\I{code-block} \li
+								 elif \I{condition2}: \li
+								 ~~~~\I{code-block} \li
+								 else: \li
+								 ~~~~\I{code-block} \li
+
+	\li[while statement]         while \I{condition}: \li
+	                             ~~~~\I{code-block} \li
+
+	\li[for statement]           for \I{v} in \I{values}: \li
+	                             ~~~~\I{code-block} \li
+
+	\li[for statement (copy)]    for \I{v} in values[:]: \li
+	                             ~~~~\I{code-block} \li
+
+	\li[for statement (count)]   for \I{i} in range(\I{n}): \li
+	                             ~~~~\I{code-block} ~~ \# from 0 to n \li
+
+	\li[break statement]
+		\I{while-or-for-statement}: \li
+		~~~~break ~~ \# exit loop, skip else \li
+		else: \li
+		~~~~\I{code-block} \li
+
+	\li[continue-statement]
+		\I{while-or-for-statement}: \li
+		~~~~continue ~~ \# next loop iteraction \li
+
+	\li[pass-statement (no-op)]
+		\I{def do-nothing():} \li
+		~~~~pass \li
+
+	\li[case/switch statements]  \textnormal{There aren't any.}
+\end{ldesc}
+
+
+\section{Functions}
+
+\begin{ldesc}
+	\li[referencing] \I{fun} \li
+
+	\li[calling]     \I{fun}() \li
+
+	\li[calling (w/arg)] \I{fun}(\I{arg\_value}) \li
+
+	\li[calling (w/kw arg)] \I{fun}(\I{1st\_arg}, \I{2nd\_arg}, \I{key}=\I{val}) \li
+
+	\li[0-arguments] def \I{fun}(): \li
+	                 ~~~~\I{code-block} \li
+
+	\li[1-argument]  def \I{fun}(\I{arg}): \li
+	                 ~~~~\I{code-block} \li
+
+	\li[2-arguments] def \I{fun}(\I{arg0},\I{arg1}): \li
+	                 ~~~~\I{code-block} \li
+
+	\li[default arguments] def \I{fun}(\I{mandatory},\I{optional}=\I{default\_val}): \li
+	                       ~~~~\I{code-block} \li
+
+	\li[arbitrary arguments] def \I{fun}(\I{mandatory}, \I{*args}): \li
+	                         ~~~~\I{code-block} \li
+
+	\li[lambda (1-arg)]      lambda \I{arg}:~\I{expression} \li
+
+	\li[lambda (2-args)]     lambda \I{arg0},\I{arg1}:~\I{expression} \li
+
+	\li[documentation string] def \I{fun}(\I{args}): \li
+	                          ~~~~"""Concise summary of purpose \li
+	                          ~~~~ \li
+	                          ~~~~Longer description, if needed \li
+	                          ~~~~""" \li
+	                          ~~~~\I{code-block} \li
+\end{ldesc}
+
+\end{document}

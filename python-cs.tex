@@ -201,4 +201,26 @@ If \emph{boolPredicate}, add element \emph{expr} to list:\\
 	\li[return a copy of the list \C{xs}]                      xs.copy()
 \end{ldesc}
 
+\subsection{Objects}
+
+\begin{ldesc}
+	\li[list attributes \& methods of an object] dir(o)
+\end{ldesc}
+
+\section{Modules}
+
+\begin{ldesc}
+	\li[qualified module import] import \I{module} \li
+	                             module.foo() \li
+	\li[unqualified module import] from \I{module} import * \li
+	                               foo() \li
+	\li[import specific name]      from \I{module} import \I{foo} \li
+	                               foo() \li
+	\li[import module renaming] import \I{module} as \I{m} \li
+	                            m.foo() \li
+	\li[import specific rename] from \I{module} import \I{foo} as \I{f} \li
+	                            f()
+\end{ldesc}
+
+
 \end{document}

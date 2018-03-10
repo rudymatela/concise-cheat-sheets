@@ -164,4 +164,41 @@ Expressions are evaluated left-to-right:
 3rd + 4th = 1st, 2nd
 \end{verbatim}
 
+\section{List Comprehensions}
+
+Take \emph{element} from \emph{list}.
+If \emph{boolPredicate}, add element \emph{expr} to list:\\
+\begin{tabular}{C@{\s$\equiv$\s}C}
+	\multicolumn{2}{C}{[\I{expr} for \I{element} in \I{list} if \I{boolPredicate} ...]} \\[1ex]
+	{[}x for x in \I{xs}]                   & \I{xs} \\
+	{[}\I{f} x for x in \I{xs} if \I{p} x]    & list(map(\I{f},filter(\I{p},\I{xs}))) \\
+	{[}x for x in \I{xs} if \I{p} x if \I{q} x] & list(filter(\I{q},filter(\I{p},\I{xs}))) \\
+\multicolumn{2}{C}{
+	{[}x+y for x in [\I{a},\I{b}] for y in [\I{i},\I{j}]] $\equiv$
+	    [\I{a}+\I{i}, \I{a}+\I{j}, \I{b}+\I{i}, \I{b}+\I{j}]
+} \\
+\end{tabular}
+
+\section{Functions}
+
+\subsection{Lists}
+
+\begin{ldesc}
+	\li[append \C{x} to the end of list \C{xs}]                xs.append(x)
+	\li[append iterable \C{iter} to the end of list \C{xs}]    xs.extend(iter)
+	\li[insert \C{x} in position \C{i} on the list \C{xs}]     xs.insert(i, x)
+	\li[remove the first occurrence of \C{x} in \C{xs}]        xs.remove(x)
+	\li[remove then return the last element of xs]             xs.pop()
+	\li[remove then return the \C{i}-th element of xs]         xs.pop(i)
+	\li[remove all items from \C{xs}]                          xs.clear()
+	\li[index of the first occurrence of \C{x}]                xs.index(x)
+	\li[~~~~ between \C{i} and \C{j}]                          xs.index(x,i,j)
+	\li[count occurrences of \C{x} in \C{xs}]                  xs.count(x)
+	\li[sort the list \C{xs}]                                  xs.sort()
+	\li[sort the list \C{xs} in reverse]                       xs.sort(reverse=True)
+	\li[sort the list \C{xs} using keying function \C{k}]      xs.sort(key=k)
+	\li[reverse the list \C{xs}]                               xs.reverse()
+	\li[return a copy of the list \C{xs}]                      xs.copy()
+\end{ldesc}
+
 \end{document}

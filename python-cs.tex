@@ -61,11 +61,27 @@ hello("world")
 \section{Operators (grouped by precedence)}
 
 \begin{Ldesc}
-	\Li[exponentiation]                  **
-	\Li[positive, negative, bitwise not] +, -, ~
-	\Li[multiplication and division]     *, /, //, \%, @
-	\Li[addition and subtraction]        +, -
-	\Li[...] ... TODO: add more ...
+	\Li[tuples, lists, dictionaries]          (...), [...], {...}
+	\Li[attribute reference]                  .
+	\Li[function call, indexing\&slicing]     \I{name}(\I{args}), \I{name}{[}\I{index}{]}
+	\Li[exponentiation]                       **
+	\Li[bitwise negation]                     \~{}
+	\Li[unary identity, unary negation]       -, +
+	\Li[multiplication\&repetition, division] *, /
+	\li[integer division, integer remainder]  //, \%
+	\li[matrix multiplication]                @
+	\Li[addition \& concat, subtraction]      +, -
+	\Li[left shift, right shift]              <<, >>
+	\Li[bitwise and]                          \&
+	\Li[bitwise xor]                          \^{}
+	\Li[bitwise or]                           |
+	\Li[comparisons (chaining)]               ==, !=, <, <=, >, >=
+	\li[object identity, set membership]      is, is not, in, not in
+	\Li[logical negation]                     not
+	\Li[conjunction]                          and
+	\Li[disjunction]                          or
+	\Li[ternary selection]                    \I{expr1} if \I{expr2} else \I{expr3}
+	\Li[lambda]                               lambda \I{args}: \I{expr}
 \end{Ldesc}
 
 

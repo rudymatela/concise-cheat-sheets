@@ -239,4 +239,55 @@ If \emph{boolPredicate}, add element \emph{expr} to list:\\
 \end{ldesc}
 
 
+\section{String Methods}
+
+\begin{ldesc}
+	\li[String formatting operation] str.format(args)
+\end{ldesc}
+
+
+\section{IO}
+
+\subsection{Printing}
+
+\begin{ldesc}
+	\li[printable representation of \I{x}]          str(x)
+	\li[parsable printable representation of \I{x}] repr(x)
+	\li[identity of \I{x}]                          parse(repr(x))
+\end{ldesc}
+
+
+\section{String formatting}
+
+\begin{ldesc}
+	\li[format \I{x} to string using \C{str}] "\{0\}".format(x)
+	\li[format \I{x} to decimal]     "\{0:d\}".format(x)
+	\li[format \I{x} to hexadecimal] "\{0:x\}".format(x)
+	\li[format \I{x} to octal]       "\{0:o\}".format(x)
+	\li[replace \C{\{0\}} by \I{s}] "...~\{0\}~...".format(s)
+	\li[repl.~\C{\{0\}} and \C{\{1\}} by \I{s0} and \I{s1}]  ".~\{0\}~.~\{1\}~." \% (s0,s1)
+	\li[generate \C{"pi is 3.14"}]    "pi is {0:2f}".format(math.pi)
+	\li[generate \C{"pi is 003.141"}] "pi is {0:3.3f}".format(math.pi)
+\end{ldesc}
+
+
+\section{Old printf-style string formatting}
+
+\begin{ldesc}
+	\li[format \I{x} to string using \C{str}] "\%s" \% x
+	\li[format \I{x} to string using \C{repr}] "\%s" \% x
+	\li[format \I{x} to decimal]     "\%d" \% x
+	\li[format \I{x} to hexadecimal] "\%x" \% x
+	\li[format \I{x} to octal]       "\%o" \% x
+	\li[replace \C{\%s} by \I{s}] "...~\%s~..." \% s
+	\li[repl.~\C{\%s} by \I{s1} then \I{s2}]  ".~\%s~.~\%s~." \% (s1,s2)
+	\li[generate \C{"pi is 3.14"}] "pi is \%.2f" \% math.pi
+	\li[generate \C{"pi is 003.141"}] "pi is \%3.3f" \% math.pi
+	\li[generate \C{"1 + 1 = 2"}] "1 + 1 = \%d" \% (1 + 1)
+	\li[generate \C{"2'n'1"}] "\%(two)d'n'\%(one)d" \% \{'one':~1, \li
+	                              ~~~~~~~~~~~~~~~~~~~~~~ "two":~2\}
+\end{ldesc}
+
+
+
 \end{document}

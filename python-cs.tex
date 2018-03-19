@@ -266,8 +266,8 @@ If \emph{boolPredicate}, add element \emph{expr} to list:\\
 	\li[format \I{x} to octal]       "\{0:o\}".format(x)
 	\li[replace \C{\{0\}} by \I{s}] "...~\{0\}~...".format(s)
 	\li[repl.~\C{\{0\}} and \C{\{1\}} by \I{s0} and \I{s1}]  ".~\{0\}~.~\{1\}~." \% (s0,s1)
-	\li[generate \C{"pi is 3.14"}]    "pi is {0:2f}".format(math.pi)
-	\li[generate \C{"pi is 003.141"}] "pi is {0:3.3f}".format(math.pi)
+	\li[generate \C{"pi is 3.14"}]    "pi is \{0:2f\}".format(math.pi)
+	\li[generate \C{"pi is 003.141"}] "pi is \{0:3.3f\}".format(math.pi)
 \end{ldesc}
 
 

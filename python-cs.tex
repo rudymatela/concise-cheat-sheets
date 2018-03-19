@@ -288,6 +288,23 @@ If \emph{boolPredicate}, add element \emph{expr} to list:\\
 	                              ~~~~~~~~~~~~~~~~~~~~~~ "two":~2\}
 \end{ldesc}
 
+\section{Input and output to files}
+
+\begin{ldesc}
+	\li[open a file for reading]              \I{f} = open('\I{file.txt}')
+	\li[open a file for reading]              \I{f} = open('\I{file.txt}','r')
+	\li[open a file for writing]              \I{f} = open('\I{file.txt}','w')
+	\li[open a file for writing (appending)]  \I{f} = open('\I{file.txt}','a')
+	\li[closes file \I{f}]                    close(\I{f})
+	\li[opens and closes]                     with open('\I{file.txt}') as \I{f} \li
+	                                          ~~~~\I{operations on f}
+	\li[reads the entire contents of file \I{f}]  \I{f}.read()
+	\li[reads a line from file \I{f}]             \I{f}.readline()
+	\li[reads all lines from file \I{f}]          \I{f}.readlines()
+	\li[loop over all lines from file \I{f}]      for line in \I{f}: \li
+	                                              ~~~~\I{code-block}
+	\li[writes \I{string} on file \I{f}]          \I{f}.write(\I{string})
+\end{ldesc}
 
 
 \end{document}

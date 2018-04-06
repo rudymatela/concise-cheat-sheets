@@ -237,6 +237,13 @@
 \end{ldesc}
 
 
+\section{Password brute force}
+
+\begin{ldesc}
+	\li[ssh brute force] hydra -L \I{us.txt} -P \I{ps.txt} ssh://\I{host}
+\end{ldesc}
+
+
 \pagebreak
 
 \section{Networking}
@@ -396,6 +403,7 @@
 	\li[Network (psv.)]    \$ pacman -S wireshark-\{cli,gtk\} tcpdump
 	\li[OCR]               \$ pacman -S tesseract tesseract-data-eng %\{,por,jpn}
 	\li[En/Decoding]       \$ pacman -S bsdgames
+	\li[Pw.\ Brute Force]  \$ pacman -S hydra
 	\li[8086 emulator] \$ pacman -U fake86-???.pkg.tar.gz  \# AUR
 	\li[Dial Tones]        \$ pacman -S archassault/multimon-ng
 	\li[Android]           \$ pacman -S archassault/dex2jar

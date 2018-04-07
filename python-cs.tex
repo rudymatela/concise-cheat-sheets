@@ -31,11 +31,11 @@
 
 \maketitle
 
-\vspace{4em}
+\vspace{1em}
 \begin{center}
 {\Large\textbf{NOTE:} this is a work in progress}
 \end{center}
-\vspace{4em}
+\vspace{1em}
 
 \section{Structure}
 
@@ -50,11 +50,22 @@ hello("world")
 
 
 
-\section{Literals}
+\section{Standard Classes and Types}
+
+% https://docs.python.org/2.0/ref/types.html
+% https://docs.python.org/3/reference/datamodel.html
 
 \begin{ldesc}
-	\li[String with escapes]    "Escape \textbackslash{}'double-quotes\textbackslash{}', not 'single'"
-	\li[String with escapes]    'Escape \textbackslash{}'single-quotes\textbackslash{}', not "double"'
+	\li[\C{NoneType}]  None
+	\li[\C{ellipsis}]  ...
+	\li[\C{bool}]      False
+	\li[\C{int}]       5040
+	\li[\C{float}]     3.141
+	\li[\C{str}]       "Escape \textbackslash{}"double-quotes\textbackslash{}", not 'single'"
+	\li[\C{str}]       'Escape \textbackslash{}'single-quotes\textbackslash{}', not "double"'
+	\li[\C{list}]      [360,'abc',3.141,360]
+	\li[\C{set}]       \{1,'abc',3\}
+	\li[\C{dict}]      \{'abc': 10, 2: 3, 7: 'def'\}
 \end{ldesc}
 
 
@@ -368,6 +379,13 @@ If \emph{boolPredicate}, add element \emph{expr} to list:\\
 	\li[loop over all lines from file \I{f}]      for line in \I{f}: \li
 	                                              ~~~~\I{code-block}
 	\li[writes \I{string} on file \I{f}]          \I{f}.write(\I{string})
+\end{ldesc}
+
+\section{Misc (merge into other sections)}
+
+\begin{ldesc}
+	\li[type/class of \I{x}] type(\I{x})
+	\li[base classes of \I{cls}] cls.\_\_bases\_\_
 \end{ldesc}
 
 

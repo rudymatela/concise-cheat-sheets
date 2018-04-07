@@ -89,47 +89,47 @@ hello("world")
 
 \begin{ldesc}
 	\li[if statement]            if \I{condition}: \li
-	                             ~~~~\I{code-block} \li
+	                             ~~~~\I{code-block}
 
-	\li[if-else statement]       if \I{condition1}: \li
+	\lI[if-else statement]       if \I{condition1}: \li
 	                             ~~~~\I{code-block} \li
 								 else: \li
-								 ~~~~\I{code-block} \li
+								 ~~~~\I{code-block}
 
-	\li[if-elif-else statement]  if \I{condition1}: \li
+	\lI[if-elif-else statement]  if \I{condition1}: \li
 	                             ~~~~\I{code-block} \li
 								 elif \I{condition2}: \li
 								 ~~~~\I{code-block} \li
 								 else: \li
-								 ~~~~\I{code-block} \li
+								 ~~~~\I{code-block}
 
-	\li[while statement]         while \I{condition}: \li
-	                             ~~~~\I{code-block} \li
+	\lI[while statement]         while \I{condition}: \li
+	                             ~~~~\I{code-block}
 
-	\li[for statement]           for \I{v} in \I{values}: \li
-	                             ~~~~\I{code-block} \li
+	\lI[for statement]           for \I{v} in \I{values}: \li
+	                             ~~~~\I{code-block}
 
-	\li[for statement (copy)]    for \I{v} in values[:]: \li
-	                             ~~~~\I{code-block} \li
+	\lI[for statement (copy)]    for \I{v} in values[:]: \li
+	                             ~~~~\I{code-block}
 
-	\li[for statement (count)]   for \I{i} in range(\I{n}): \li
-	                             ~~~~\I{code-block} ~~ \# from 0 to n \li
+	\lI[for statement (count)]   for \I{i} in range(\I{n}): \li
+	                             ~~~~\I{code-block} ~~ \# from 0 to n
 
-	\li[break statement]
+	\lI[break statement]
 		\I{while-or-for-statement}: \li
 		~~~~break ~~~ \# \textnormal{exit loop, skip else} \li
 		else: \li
-		~~~~\I{code-block} \li
+		~~~~\I{code-block}
 
-	\li[continue-statement]
+	\lI[continue-statement]
 		\I{while-or-for-statement}: \li
-		~~~~continue ~\# \textnormal{next loop iteraction} \li
+		~~~~continue ~\# \textnormal{next loop iteraction}
 
-	\li[pass-statement (no-op)]
+	\lI[pass-statement (no-op)]
 		\I{def do-nothing():} \li
-		~~~~pass \li
+		~~~~pass
 
-	\li[case/switch statements]  \textnormal{There aren't any.  Use if-elif-else.}
+	\lI[case/switch statements]  \textnormal{There aren't any.  Use if-elif-else.}
 \end{ldesc}
 
 \section{Exceptions}
@@ -199,36 +199,36 @@ hello("world")
 \section{Functions}
 
 \begin{ldesc}
-	\li[referencing] \I{fun} \li
+	\li[referencing] \I{fun}
 
-	\li[calling]     \I{fun}() \li
+	\lI[calling]     \I{fun}()
 
-	\li[calling (w/arg)] \I{fun}(\I{arg\_value}) \li
+	\lI[calling (w/arg)] \I{fun}(\I{arg\_value})
 
-	\li[calling (w/kw arg)] \I{fun}(\I{1st\_arg}, \I{2nd\_arg}, \I{key}=\I{val}) \li
+	\lI[calling (w/kw arg)] \I{fun}(\I{1st\_arg}, \I{2nd\_arg}, \I{key}=\I{val}) \li
 
 	\li[0-arguments] def \I{fun}(): \li
-	                 ~~~~\I{code-block} \li
+	                 ~~~~\I{code-block}
 
-	\li[1-argument]  def \I{fun}(\I{arg}): \li
-	                 ~~~~\I{code-block} \li
+	\lI[1-argument]  def \I{fun}(\I{arg}): \li
+	                 ~~~~\I{code-block}
 
-	\li[2-arguments] def \I{fun}(\I{arg0},\I{arg1}): \li
-	                 ~~~~\I{code-block} \li
+	\lI[2-arguments] def \I{fun}(\I{arg0},\I{arg1}): \li
+	                 ~~~~\I{code-block}
 
-	\li[default args] def \I{fun}(\I{mandatory},\I{optional}=\I{default\_val}): \li
-	                       ~~~~\I{code-block} \li
+	\lI[default args] def \I{fun}(\I{mandatory},\I{optional}=\I{default\_val}): \li
+	                       ~~~~\I{code-block}
 
-	\li[arbitrary args] def \I{fun}(\I{mandatory}, \I{*args}): \li
-	                         ~~~~\I{code-block} \li
+	\lI[arbitrary args] def \I{fun}(\I{mandatory}, \I{*args}): \li
+	                         ~~~~\I{code-block}
 
-	\li[lambda (1-arg)]      lambda \I{arg}:~\I{expression} \li
+	\lI[lambda (1-arg)]      lambda \I{arg}:~\I{expression}
 
-	\li[lambda (2-args)]     lambda \I{arg0},\I{arg1}:~\I{expression} \li
+	\lI[lambda (2-args)]     lambda \I{arg0},\I{arg1}:~\I{expression}
 
-	\li[docstring] def \I{fun}(\I{args}): \li
+	\lI[docstring] def \I{fun}(\I{args}): \li
 	               ~~~~"""Concise summary of purpose \li
-	               ~~~~ \li
+	               ~~~~
 	               ~~~~Longer description, if needed \li
 	               ~~~~""" \li
 	               ~~~~\I{code-block} \li
@@ -291,14 +291,14 @@ If \emph{boolPredicate}, add element \emph{expr} to list:\\
 
 \begin{ldesc}
 	\li[qualified module import] import \I{module} \li
-	                             module.foo() \li
-	\li[unqualified module import] from \I{module} import * \li
-	                               foo() \li
-	\li[import specific name]      from \I{module} import \I{foo} \li
-	                               foo() \li
-	\li[import module renaming] import \I{module} as \I{m} \li
-	                            m.foo() \li
-	\li[import specific rename] from \I{module} import \I{foo} as \I{f} \li
+	                             module.foo()
+	\lI[unqualified module import] from \I{module} import * \li
+	                               foo()
+	\lI[import specific name]      from \I{module} import \I{foo} \li
+	                               foo()
+	\lI[import module renaming] import \I{module} as \I{m} \li
+	                            m.foo()
+	\lI[import specific rename] from \I{module} import \I{foo} as \I{f} \li
 	                            f()
 \end{ldesc}
 

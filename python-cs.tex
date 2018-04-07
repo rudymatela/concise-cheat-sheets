@@ -371,4 +371,52 @@ If \emph{boolPredicate}, add element \emph{expr} to list:\\
 \end{ldesc}
 
 
+\pagebreak
+
+\section{Classes}
+
+\begin{ldesc}
+	\li[defining a class]
+		class \I{OurClass}: \li
+		~~~~"""Description of \I{OurClass}""" \li
+		~~~~\I{class\_var} = \I{val} ~ \# shared\lI
+		~~~~def \I{f}(self): \li
+		~~~~~~~~\I{self.instance\_var} = \I{val} \li
+		~~~~~~~~\I{code} \li
+
+	\li[inheritance] class \I{OurSubClass}(\I{OurClass}):
+	\li[multiple inheritance] class \I{SubClass}(\I{Cl1},\I{Cl2}):
+	\li[object instance]     \I{x} = \I{MyClass}()
+	\li[attribute reference] \I{x}.\I{x}
+	\li[class var reference] \I{OurClass}.class\_var
+	\li[class var reference on obj] \I{x}.class\_var
+	\li[instance var reference] \I{x}.instance\_var
+	\li[method call]         \I{x}.\I{f}()
+
+	\li[initializer/constructor]
+		def \_\_init\_\_(self, \I{arg1}, \I{arg2}): \li
+		~~~~\I{code} \li
+
+	\li[simple record]
+		class \I{Record}: \li
+		~~~~pass \lI
+
+		\I{record} = \I{Record}() \li
+		\I{record}.\I{x} = \I{value1} \li
+		\I{record}.\I{y} = \I{value2}
+\end{ldesc}
+
+
+\section{Iterators \& Generators}
+
+\begin{ldesc}
+	\li[declaring]  def \I{generator}() \li
+	                ~~~~ yield \I{value1} \li
+	                ~~~~ yield \I{value2} \li
+	                ~~~~ yield \I{value3} \li
+	\li[using]      for \I{value} in \I{generator}():
+	                  \I{code-block}
+\end{ldesc}
+
+
 \end{document}

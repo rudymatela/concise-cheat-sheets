@@ -132,6 +132,69 @@ hello("world")
 	\li[case/switch statements]  \textnormal{There aren't any.  Use if-elif-else.}
 \end{ldesc}
 
+\section{Exceptions}
+
+\begin{ldesc}
+	\li[try-except]
+		try: \li
+		~~~~code-block \li
+		except \I{Exception}: \li
+		~~~~code-block \li
+	\li[finally-else]
+		try: \li
+		~~~~code-block \li
+		except \I{Exception1}: \li
+		~~~~\textnormal{run when \I{\C{Exception1}} is raised} \li
+		except \I{Exception2}: \li
+		~~~~\textnormal{run when \I{\C{Exception2}} is raised} \li
+		else: \li
+		~~~~\textnormal{run when no exception is raised} \li
+		finally: \li
+		~~~~always-run \li
+
+	\li[catch \C{BaseException}]   except: ~\# \textnormal{\emph{dangerous}}
+	\li[catch all \C{Exception}s]  except Exception:
+	\li[catch as]                  except \I{Ex1} as \I{ex}:
+	\li[catch multiple exceptions] except (\I{Ex1}, \I{Ex2}, \I{Ex3}): \li
+	\li[exception arguments (\C{as})]  \I{ex.args}
+
+	\li[raise exception \I{\C{Ex1}}]       raise \I{Ex1}
+	\li[raise \I{\C{Ex1}} with ``msg'']    raise \I{Ex1}("\I{msg}")
+	\li[re-raise (inside \C{except:})]  raise
+\end{ldesc}
+
+\subsection{Exception Hierarchy}
+
+% Please see the following for a complete list
+% https://docs.python.org/3/library/exceptions.html#exception-hierarchy
+\begin{tabular}{ll}
+\C{BaseException}              & not to be directly inherited \\
+\C{~~SystemExit}               & raised by \C{sys.exit()} \\
+\C{~~KeyboardInterrupt}        & raised on interrupt / ctrl-C \\
+\C{~~Exception}                & derive \textbf{user-defined exceptions} \\
+\C{~~~~StopIteration}          & no further items on iterator \\
+\C{~~~~ArithmeticError}        & arithmetic error \\
+\C{~~~~~~ZeroDivisionError}    & raised on division by zero \\
+\C{~~~~AssertionError}         & raised by \C{assert()} \\
+\C{~~~~AttributeError}         & inaccessible/nonexistent attribute \\
+\C{~~~~BufferError}            & error on a buffer operation \\
+\C{~~~~EOFError}               & raised by \C{input()} on \C{EOF} \\
+\C{~~~~LookupError}            & error on lookup \\
+\C{~~~~~~IndexError}           & out of range list index \\
+\C{~~~~~~KeyError}             & key not found on dictionary \\
+\C{~~~~NameError}              & name not found \\
+\C{~~~~OSError}                & raised by the OS \\
+\C{~~~~~~FileExistsError}      & file exists \\
+\C{~~~~~~FileNotFoundError}    & file not found \\
+\C{~~~~~~PermissionError}      & inadequate access rights \\
+\C{~~~~RuntimeError}           & runtime error, see error string \\
+\C{~~~~~~NotImplementedError}  & unimplemented abstract method \\
+\C{~~~~~~RecursionError}       & maximum recursion depth reached \\
+\C{~~~~TypeError}              & inappropriate type \\
+\C{~~~~ValueError}             & right type, innapropriate value \\
+\C{~~~~Warning}                & warnings \\
+\end{tabular}
+
 
 \section{Functions}
 

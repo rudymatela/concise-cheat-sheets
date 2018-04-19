@@ -31,11 +31,9 @@
 
 \maketitle
 
-\vspace{1em}
 \begin{center}
 {\Large\textbf{NOTE:} this is a work in progress}
 \end{center}
-\vspace{1em}
 
 \section{Structure}
 
@@ -68,7 +66,24 @@ hello("world")
 	\li[\C{dict}]      \{'abc': 10, 2: 3, 7: 'def'\}
 \end{ldesc}
 
+\section{Evaluation Order}
 
+Expressions are evaluated left-to-right:
+\begin{verbatim}
+1st + (2nd * 3rd)
+(1st + 2nd) * 3rd
+3rd + 4th = 1st, 2nd
+\end{verbatim}
+
+\section{Misc (merge into other sections)}
+
+\begin{ldesc}
+	\li[type/class of \I{x}] type(\I{x})
+	\li[base classes of \I{cls}] cls.\_\_bases\_\_
+\end{ldesc}
+
+
+\pagebreak
 \section{Operators (grouped by precedence)}
 
 \begin{Ldesc}
@@ -95,6 +110,43 @@ hello("world")
 	\Li[lambda]                               lambda \I{args}: \I{expr}
 \end{Ldesc}
 
+\section{Functions}
+
+\begin{ldesc}
+	\li[referencing] \I{fun}
+
+	\lI[calling]     \I{fun}()
+
+	\lI[calling (w/arg)] \I{fun}(\I{arg\_value})
+
+	\lI[calling (w/kw arg)] \I{fun}(\I{1st\_arg}, \I{2nd\_arg}, \I{key}=\I{val}) \li
+
+	\li[0-arguments] def \I{fun}(): \li
+	                 ~~~~\I{code-block}
+
+	\lI[1-argument]  def \I{fun}(\I{arg}): \li
+	                 ~~~~\I{code-block}
+
+	\lI[2-arguments] def \I{fun}(\I{arg0},\I{arg1}): \li
+	                 ~~~~\I{code-block}
+
+	\lI[default args] def \I{fun}(\I{mandatory},\I{optional}=\I{default\_val}): \li
+	                       ~~~~\I{code-block}
+
+	\lI[arbitrary args] def \I{fun}(\I{mandatory}, \I{*args}): \li
+	                         ~~~~\I{code-block}
+
+	\lI[lambda (1-arg)]      lambda \I{arg}:~\I{expression}
+
+	\lI[lambda (2-args)]     lambda \I{arg0},\I{arg1}:~\I{expression}
+
+	\lI[docstring] def \I{fun}(\I{args}): \li
+	               ~~~~"""Concise summary of purpose \li
+	               ~~~~
+	               ~~~~Longer description, if needed \li
+	               ~~~~""" \li
+	               ~~~~\I{code-block} \li
+\end{ldesc}
 
 \section{Flow Control}
 
@@ -142,6 +194,24 @@ hello("world")
 
 	\lI[case/switch statements]  \textnormal{There aren't any.  Use if-elif-else.}
 \end{ldesc}
+
+
+\section{List Comprehensions}
+
+Take \emph{element} from \emph{list}.
+If \emph{boolPredicate}, add element \emph{expr} to list:\\
+\begin{tabular}{C@{\s$\equiv$\s}C}
+	\multicolumn{2}{C}{[\I{expr} for \I{element} in \I{list} if \I{boolPredicate} ...]} \\[1ex]
+	{[}x for x in \I{xs}]                   & \I{xs} \\
+	{[}\I{f} x for x in \I{xs} if \I{p} x]    & list(map(\I{f},filter(\I{p},\I{xs}))) \\
+	{[}x for x in \I{xs} if \I{p} x if \I{q} x] & list(filter(\I{q},filter(\I{p},\I{xs}))) \\
+\multicolumn{2}{C}{
+	{[}x+y for x in [\I{a},\I{b}] for y in [\I{i},\I{j}]] $\equiv$
+	    [\I{a}+\I{i}, \I{a}+\I{j}, \I{b}+\I{i}, \I{b}+\I{j}]
+} \\
+\end{tabular}
+
+
 
 \section{Exceptions}
 
@@ -207,67 +277,6 @@ hello("world")
 \end{tabular}
 
 
-\section{Functions}
-
-\begin{ldesc}
-	\li[referencing] \I{fun}
-
-	\lI[calling]     \I{fun}()
-
-	\lI[calling (w/arg)] \I{fun}(\I{arg\_value})
-
-	\lI[calling (w/kw arg)] \I{fun}(\I{1st\_arg}, \I{2nd\_arg}, \I{key}=\I{val}) \li
-
-	\li[0-arguments] def \I{fun}(): \li
-	                 ~~~~\I{code-block}
-
-	\lI[1-argument]  def \I{fun}(\I{arg}): \li
-	                 ~~~~\I{code-block}
-
-	\lI[2-arguments] def \I{fun}(\I{arg0},\I{arg1}): \li
-	                 ~~~~\I{code-block}
-
-	\lI[default args] def \I{fun}(\I{mandatory},\I{optional}=\I{default\_val}): \li
-	                       ~~~~\I{code-block}
-
-	\lI[arbitrary args] def \I{fun}(\I{mandatory}, \I{*args}): \li
-	                         ~~~~\I{code-block}
-
-	\lI[lambda (1-arg)]      lambda \I{arg}:~\I{expression}
-
-	\lI[lambda (2-args)]     lambda \I{arg0},\I{arg1}:~\I{expression}
-
-	\lI[docstring] def \I{fun}(\I{args}): \li
-	               ~~~~"""Concise summary of purpose \li
-	               ~~~~
-	               ~~~~Longer description, if needed \li
-	               ~~~~""" \li
-	               ~~~~\I{code-block} \li
-\end{ldesc}
-
-\section{Evaluation Order}
-
-Expressions are evaluated left-to-right:
-\begin{verbatim}
-1st + (2nd * 3rd)
-(1st + 2nd) * 3rd
-3rd + 4th = 1st, 2nd
-\end{verbatim}
-
-\section{List Comprehensions}
-
-Take \emph{element} from \emph{list}.
-If \emph{boolPredicate}, add element \emph{expr} to list:\\
-\begin{tabular}{C@{\s$\equiv$\s}C}
-	\multicolumn{2}{C}{[\I{expr} for \I{element} in \I{list} if \I{boolPredicate} ...]} \\[1ex]
-	{[}x for x in \I{xs}]                   & \I{xs} \\
-	{[}\I{f} x for x in \I{xs} if \I{p} x]    & list(map(\I{f},filter(\I{p},\I{xs}))) \\
-	{[}x for x in \I{xs} if \I{p} x if \I{q} x] & list(filter(\I{q},filter(\I{p},\I{xs}))) \\
-\multicolumn{2}{C}{
-	{[}x+y for x in [\I{a},\I{b}] for y in [\I{i},\I{j}]] $\equiv$
-	    [\I{a}+\I{i}, \I{a}+\I{j}, \I{b}+\I{i}, \I{b}+\I{j}]
-} \\
-\end{tabular}
 
 \section{Functions}
 
@@ -380,14 +389,6 @@ If \emph{boolPredicate}, add element \emph{expr} to list:\\
 	                                              ~~~~\I{code-block}
 	\li[writes \I{string} on file \I{f}]          \I{f}.write(\I{string})
 \end{ldesc}
-
-\section{Misc (merge into other sections)}
-
-\begin{ldesc}
-	\li[type/class of \I{x}] type(\I{x})
-	\li[base classes of \I{cls}] cls.\_\_bases\_\_
-\end{ldesc}
-
 
 \pagebreak
 

@@ -105,7 +105,7 @@ Expressions are evaluated left-to-right:
 \begin{Ldesc}
 	\Li[tuples, lists, dictionaries]          (...), [...], \{...\}
 	\Li[attribute reference]                  .
-	\Li[function call, indexing\&slicing]     \I{name}(\I{args}), \I{name}{[}\I{index}{]}
+	\Li[function call, indexing\&slicing]     \I{name}(\I{args}), \I{name}{[}\I{idx}{]}
 	\Li[exponentiation]                       **
 	\Li[bitwise negation]                     \~{}
 	\Li[unary identity, unary negation]       -, +
@@ -122,7 +122,7 @@ Expressions are evaluated left-to-right:
 	\Li[logical negation]                     not
 	\Li[conjunction]                          and
 	\Li[disjunction]                          or
-	\Li[ternary selection]                    \I{expr1} if \I{expr2} else \I{expr3}
+	\Li[ternary selection]                    \I{expr1} if \I{cond} else \I{expr2}
 	\Li[lambda]                               lambda \I{args}: \I{expr}
 \end{Ldesc}
 
@@ -146,7 +146,7 @@ Expressions are evaluated left-to-right:
 	\lI[2-arguments] def \I{fun}(\I{arg0},\I{arg1}): \li
 	                 ~~~~\I{code-block}
 
-	\lI[default args] def \I{fun}(\I{mandatory},\I{optional}=\I{default\_val}): \li
+	\lI[default args] def \I{fun}(\I{mandatory},\I{optional}=\I{default}): \li
 	                       ~~~~\I{code-block}
 
 	\lI[arbitrary args] def \I{fun}(\I{mandatory}, \I{*args}): \li
@@ -159,7 +159,7 @@ Expressions are evaluated left-to-right:
 	\lI[docstring] def \I{fun}(\I{args}): \li
 	               ~~~~"""Concise summary of purpose \li
 	               ~~~~
-	               ~~~~Longer description, if needed \li
+	               ~~~~Longer description, ifneedbe \li
 	               ~~~~""" \li
 	               ~~~~\I{code-block} \li
 \end{ldesc}

@@ -82,6 +82,22 @@ Expressions are evaluated left-to-right:
 	\li[base classes of \I{cls}] cls.\_\_bases\_\_
 \end{ldesc}
 
+\section{Modules}
+
+\begin{ldesc}
+	\li[qualified module import] import \I{module} \li
+	                             module.foo()
+	\lI[unqualified module import] from \I{module} import * \li
+	                               foo()
+	\lI[import specific name]      from \I{module} import \I{foo} \li
+	                               foo()
+	\lI[import module renaming] import \I{module} as \I{m} \li
+	                            m.foo()
+	\lI[import specific rename] from \I{module} import \I{foo} as \I{f} \li
+	                            f()
+\end{ldesc}
+
+
 
 \pagebreak
 \section{Operators (grouped by precedence)}
@@ -307,29 +323,6 @@ If \emph{boolPredicate}, add element \emph{expr} to list:\\
 	\li[shows the help for object \I{o}]            help(o)
 \end{ldesc}
 
-\section{Modules}
-
-\begin{ldesc}
-	\li[qualified module import] import \I{module} \li
-	                             module.foo()
-	\lI[unqualified module import] from \I{module} import * \li
-	                               foo()
-	\lI[import specific name]      from \I{module} import \I{foo} \li
-	                               foo()
-	\lI[import module renaming] import \I{module} as \I{m} \li
-	                            m.foo()
-	\lI[import specific rename] from \I{module} import \I{foo} as \I{f} \li
-	                            f()
-\end{ldesc}
-
-
-\section{String Methods}
-
-\begin{ldesc}
-	\li[String formatting operation] str.format(args)
-\end{ldesc}
-
-
 \section{IO}
 
 \subsection{Printing}
@@ -341,7 +334,7 @@ If \emph{boolPredicate}, add element \emph{expr} to list:\\
 \end{ldesc}
 
 
-\section{String formatting}
+\subsection{String formatting}
 
 \begin{ldesc}
 	\li[format \I{x} to string using \C{str}] "\{0\}".format(x)
@@ -354,8 +347,8 @@ If \emph{boolPredicate}, add element \emph{expr} to list:\\
 	\li[generate \C{"pi is 003.141"}] "pi is \{0:3.3f\}".format(math.pi)
 \end{ldesc}
 
-
-\section{Old printf-style string formatting}
+\vspace{-1ex}
+\subsubsection{Old printf-style string formatting}
 
 \begin{ldesc}
 	\li[format \I{x} to string using \C{str}] "\%s" \% x
@@ -368,8 +361,8 @@ If \emph{boolPredicate}, add element \emph{expr} to list:\\
 	\li[generate \C{"pi is 3.14"}] "pi is \%.2f" \% math.pi
 	\li[generate \C{"pi is 003.141"}] "pi is \%3.3f" \% math.pi
 	\li[generate \C{"1 + 1 = 2"}] "1 + 1 = \%d" \% (1 + 1)
-	\li[generate \C{"2'n'1"}] "\%(two)d'n'\%(one)d" \% \{'one':~1, \li
-	                              ~~~~~~~~~~~~~~~~~~~~~~ "two":~2\}
+%	\li[generate \C{"2'n'1"}] "\%(two)d'n'\%(one)d" \% \{'one':~1, \li
+%	                              ~~~~~~~~~~~~~~~~~~~~~~ "two":~2\}
 \end{ldesc}
 
 \section{Input and output to files}
@@ -389,8 +382,6 @@ If \emph{boolPredicate}, add element \emph{expr} to list:\\
 	                                              ~~~~\I{code-block}
 	\li[writes \I{string} on file \I{f}]          \I{f}.write(\I{string})
 \end{ldesc}
-
-\pagebreak
 
 \section{Classes}
 

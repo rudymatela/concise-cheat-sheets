@@ -219,13 +219,21 @@ If \emph{boolPredicate}, add element \emph{expr} to list:\\
 \begin{tabular}{C@{\s$\equiv$\s}C}
 	\multicolumn{2}{C}{[\I{expr} for \I{element} in \I{list} if \I{boolPredicate} ...]} \\[1ex]
 	{[}x for x in \I{xs}]                   & \I{xs} \\
-	{[}\I{f} x for x in \I{xs} if \I{p} x]    & list(map(\I{f},filter(\I{p},\I{xs}))) \\
-	{[}x for x in \I{xs} if \I{p} x if \I{q} x] & list(filter(\I{q},filter(\I{p},\I{xs}))) \\
+	{[}\I{f}(x) for x in [\I{a},\I{b},\I{c}]]    & [\I{f}(\I{a}),\I{f}(\I{b}),\I{f}(\I{c})] \\
+	{[}\I{f}(x) for x in \I{xs} if \I{p}(x)]    & list(map(\I{f},filter(\I{p},\I{xs}))) \\
+%\multicolumn{2}{C}{
+%	{[}x for x in \I{xs} if \I{p} x if \I{q} x] $\equiv$
+%	list(filter(\I{q},filter(\I{p},\I{xs})))
+%	} \\
 \multicolumn{2}{C}{
-	{[}x+y for x in [\I{a},\I{b}] for y in [\I{i},\I{j}]] $\equiv$
-	    [\I{a}+\I{i}, \I{a}+\I{j}, \I{b}+\I{i}, \I{b}+\I{j}]
+	{[}x+y for x in [\I{a},\I{b}] for y in [\I{i},\I{j}]]
+} \\
+\multicolumn{2}{C}{
+	\hfill $\equiv$ [\I{a}+\I{i}, \I{a}+\I{j}, \I{b}+\I{i}, \I{b}+\I{j}]
 } \\
 \end{tabular}
+Generator \C{(...)} and set \C{\{...\}} comprehensions
+	are also allowed.
 
 
 

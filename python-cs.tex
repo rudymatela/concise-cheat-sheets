@@ -297,6 +297,15 @@ Generator \C{(...)} and set \C{\{...\}} comprehensions
 
 \section{Functions}
 
+\subsection{Objects}
+
+\begin{ldesc}
+	\li[list attributes \& methods of object \I{o}] dir(o)
+	\li[shows the help for object \I{o}]            help(o)
+	\li[type/class of \I{x}]                        type(\I{x})
+	\li[base classes of \I{cls}]                    cls.\_\_bases\_\_
+\end{ldesc}
+
 \subsection{Lists}
 
 \begin{ldesc}
@@ -316,17 +325,6 @@ Generator \C{(...)} and set \C{\{...\}} comprehensions
 	\li[reverse the list \C{xs}]                               xs.reverse()
 	\li[return a copy of the list \C{xs}]                      xs.copy()
 \end{ldesc}
-
-\subsection{Objects}
-
-\begin{ldesc}
-	\li[list attributes \& methods of object \I{o}] dir(o)
-	\li[shows the help for object \I{o}]            help(o)
-	\li[type/class of \I{x}]                        type(\I{x})
-	\li[base classes of \I{cls}]                    cls.\_\_bases\_\_
-\end{ldesc}
-
-\section{IO}
 
 \subsection{Printing}
 
@@ -368,7 +366,7 @@ Generator \C{(...)} and set \C{\{...\}} comprehensions
 %	                              ~~~~~~~~~~~~~~~~~~~~~~ "two":~2\}
 \end{ldesc}
 
-\section{Input and output to files}
+\subsection{Input and output to files}
 
 \begin{ldesc}
 	\li[open a file for reading]              \I{f} = open('\I{file.txt}')

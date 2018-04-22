@@ -75,13 +75,6 @@ Expressions are evaluated left-to-right:
 3rd, 4th = 1st, 2nd
 \end{verbatim}
 
-\section{Misc (merge into other sections)}
-
-\begin{ldesc}
-	\li[type/class of \I{x}] type(\I{x})
-	\li[base classes of \I{cls}] cls.\_\_bases\_\_
-\end{ldesc}
-
 \section{Modules}
 
 \begin{ldesc}
@@ -318,7 +311,7 @@ Generator \C{(...)} and set \C{\{...\}} comprehensions
 	\li[~~~~ between \C{i} and \C{j}]                          xs.index(x,i,j)
 	\li[count occurrences of \C{x} in \C{xs}]                  xs.count(x)
 	\li[sort the list \C{xs}]                                  xs.sort()
-	\li[sort the list \C{xs} in reverse]                       xs.sort(reverse=True)
+%	\li[sort the list \C{xs} in reverse]                       xs.sort(reverse=True)
 	\li[sort the list \C{xs} using keying function \C{k}]      xs.sort(key=k)
 	\li[reverse the list \C{xs}]                               xs.reverse()
 	\li[return a copy of the list \C{xs}]                      xs.copy()
@@ -329,6 +322,8 @@ Generator \C{(...)} and set \C{\{...\}} comprehensions
 \begin{ldesc}
 	\li[list attributes \& methods of object \I{o}] dir(o)
 	\li[shows the help for object \I{o}]            help(o)
+	\li[type/class of \I{x}]                        type(\I{x})
+	\li[base classes of \I{cls}]                    cls.\_\_bases\_\_
 \end{ldesc}
 
 \section{IO}

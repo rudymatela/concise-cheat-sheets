@@ -433,4 +433,71 @@ Generator \C{(...)} and set \C{\{...\}} comprehensions
 \end{ldesc}
 
 
+\section{Decorators}
+
+\begin{tabular}{CC}
+	\hline
+	\textnormal{sugary}          & \textnormal{explicit}    \\[1ex]
+
+	\hline
+	@\I{decorate}                & def \I{fun}():                  \\
+	def \I{fun}():               & ~~\I{code-block}                \\
+	~~\I{code-block}             & \I{fun} = \I{decorate}(\I{fun}) \\[1ex]
+	\hline
+
+	@\I{decorate}(\I{arg})~~~~~  & def \I{fun}():                           \\
+	def \I{fun}():               & ~~\I{code-block}                         \\
+	~~\I{code-block}             & \I{fun} = \I{decorate}(\I{arg})(\I{fun}) \\[1ex]
+	\hline
+
+	@\I{deco2}                   & def \I{fun}():                           \\
+	@\I{deco1}                   & ~~\I{code-block}                         \\
+	def \I{fun}():               & \I{fun} = \I{deco2}(\I{deco1}(\I{fun}))  \\
+	~~\I{code-block}             &                                          \\
+	\hline
+\end{tabular}
+
+\subsection{Defining a decorator}
+
+\begin{verbatim}
+def decorate(fun):
+    @functools.wraps(fun):
+    def decorated(*args, **kwargs):
+        ... fun ...
+    return decorated
+\end{verbatim}
+
+\subsection{Useful decorators}
+
+\begin{ldesc}
+	\li[class method (class as 1st arg)]   @classmethod
+	\li[static method (skip 1st arg)] @staticmethod
+	\li[overload function \texttt{foo}] @singledispatch \li
+	                                    @\I{foo}.register(\I{type})
+	\li[object property \texttt{obj.prop}] @property \li @\I{prop}.setter
+\end{ldesc}
+
+
+\section{Libraries}
+
+\begin{tabular}{Cll}
+\textnormal{library} & description & useful cls/funs/vars \\[1ex]
+os        & operating system interfaces  & \C{environ()}, \C{system()} \\
+sys       & system specific functions    & \C{argv[]}, \C{stdin}, \C{exit()} \\
+inspect   & function introspection       & \C{signature()}\\
+functools & functional programming tools & \C{reduce()}\\
+operator  & standard operators as funs.  & \C{add()}, \C{mul()}\\
+mailbox   & manipulate mailboxes         & \C{Mailbox} \\
+email     & email/MIME handling          & \C{EmailMessage} \\
+\end{tabular}
+
+
+\section{Interesting resources}
+
+\begin{itemize}
+\item \texttt{www.pythontutor.com}
+\end{itemize}
+
+
+
 \end{document}

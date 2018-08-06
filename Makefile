@@ -41,6 +41,7 @@ CSS = \
   python-cs.pdf     \
   lua-cs.pdf        \
   ctf-cs.pdf        \
+  yesod-cs.pdf      \
   template-refcard.pdf
 
 CSS2X = \
@@ -51,6 +52,7 @@ CSS2X = \
   python-cs-2x.pdf     \
   lua-cs-2x.pdf        \
   ctf-cs-2x.pdf        \
+  yesod-cs-2x.pdf      \
   template-refcard-2x.pdf
 
 all: $(CSS)

@@ -1,0 +1,113 @@
+%% haskell-exts-cs.tex
+%
+% Copyright 2018  Rudy Matela
+%
+% This text is available under (at your option):
+%   * Creative Commons Attribution-ShareAlike 3.0 Licence
+%   * GNU Free Documentation License version 1.3 or Later
+%
+
+\documentclass{refcard}
+\usepackage[T1]{fontenc}
+\usepackage{rotating}
+\usepackage{amssymb}
+
+\renewcommand{\familydefault}{\sfdefault}
+\newcommand{\la}{\textbackslash}
+
+
+\title{Haskell Yesod Cheat Sheet}
+
+\cright{
+	Copyright 2018, Rudy Matela --
+	Compiled on \today{} \\
+	Upstream: \texttt{https://github.com/rudymatela/concise-cheat-sheets}
+}{
+	This text is available under
+	the Creative Commons Attribution-ShareAlike 3.0 Licence, \\
+	\textbf{or} (at your option), the GNU Free Documentation License version 1.3 or Later.
+}
+\version[~\\]{0.0}
+
+
+\begin{document}
+
+\maketitle
+
+\section{File Extensions}
+
+\begin{tabular}{Cl}
+	.hs          & Haskell source \\
+	.lhs         & Literate Haskell source \\
+	.cabal       & CABAL Build System config \\[1ex]
+	.html (.htm) & Hypertext Markup Language \\
+	.css         & Cascading Style Sheet \\
+	.js          & Javascript \\[1ex]
+	.hamlet      & HTML template language \\
+	.lucius      & Curly CSS template language \\
+	.cassius     & Indenty CSS template language \\
+	.julius      & Javascript with variable interpolation \\[1ex]
+	.md          & Markdown markup language \\
+	.yaml (.yml) & YAML Ain't Markup Language (data / configs) \\
+\end{tabular}
+
+\section{Packages}
+
+\subsection{Hackage / Stackage}
+
+\begin{tabular}{Cl}
+	yesod-bin & Provides the `yesod` executable. \\
+\end{tabular}
+
+\subsection{Ubuntu}
+
+\subsection{Arch Linux}
+
+\section{Default Directory Structure}
+
+\begin{tabular}{Cl}
+	\I{myprj}.cabal     & modules / deps. / build options \\
+	stack.yaml          & stackage dependencies \\
+	app/                & \\
+	~~main.hs           & entry point for the production server \\
+	~~devel.hs          & entry point for \C{~yesod devel~}\\
+	config/             & \\
+	config/settings.yml & settings: host, port, logging, dbs... \\
+	config/routes       & all application routes \\
+	config/models       & models: Haskell records / DB Tables \\
+	src/                & Haskell source files \\
+	src/Application.hs  & imported by \C{main.hs} and \C{devel.hs} \\
+	src/Handler/        & Request handlers \\
+	src/Handler/Home.hs & Home route handler \\
+	static/             & static files (\C{<URL>/static/}) \\
+	templates/          & template files: hamlet, lucius, cassius... \\
+	\multicolumn{2}{C}{templates/default-layout.hamlet} \\
+	\multicolumn{2}{C}{templates/default-layout-wrapper.hamlet} \\
+	\multicolumn{2}{C}{templates/default-layout.lucius} \\
+	templates/homepage.hamlet & homepage HTML template \\
+	templates/homepage.lucius & homepage CSS template \\
+	test/               & test files \\
+	test/...            & TODO: describe me \\
+\end{tabular}
+
+\section{Miscellaneous Commands}
+
+\begin{ldesc}
+\li[List available project templates] stack templates | grep yesod
+\li[Scaffold (minimal) new project]   stack new \I{myprj} yesod-minimal
+\li[Scaffold (simple) new project]    stack new \I{myprj} yesod-simple
+\li[Scaffold (sqlite) new project]    stack new \I{myprj} yesod-sqlite
+\li[Scaffold (postgres) new project]  stack new \I{myprj} yesod-postgres
+\li[Prints Yesod's version]           yesod version
+\li[Adds a new handler]               yesod add-handler
+\li[Runs development web server]      yesod devel
+\li[Default dev.~server locations]    http://localhost:3000/ \li
+                                      https://localhost:3443/
+\end{ldesc}
+
+
+\section{Routes}
+
+\section{Models}
+
+\end{document}

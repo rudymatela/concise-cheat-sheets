@@ -230,6 +230,10 @@ If \emph{boolPredicate}, add element \emph{expr} to list:\\
 \end{tabular}
 Generator \C{(...)} and set \C{\{...\}} comprehensions
 	are also allowed.
+\begin{verbatim}
+lets:
+[x for y in ys for x in (doSomethingLong(y),)]
+\end{verbatim}
 
 
 

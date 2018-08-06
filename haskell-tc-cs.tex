@@ -1,6 +1,6 @@
 %% haskell-tc-cs.tex
 %
-% Copyright 2015  Rudy Matela
+% Copyright 2015-2018  Rudy Matela
 %
 % This text is available under (at your option):
 %   * Creative Commons Attribution-ShareAlike 3.0 Licence
@@ -40,7 +40,7 @@
 \title{Haskell Typeclasses Cheat Sheet}
 
 \cright{
-	Copyright 2015, Rudy Matela --
+	Copyright 2015--2018, Rudy Matela --
 	Compiled on \today{} \\
 	Upstream: \texttt{https://github.com/rudymatela/concise-cheat-sheets}
 }{
@@ -68,7 +68,7 @@
 %    Functor    & Applicative & Monad       & {[]}        & ((->) r)    \\[2ex]
                 & (*>)        & (>{>})      & \M{(>{>})}  & \M{(>{>})}  \\[.5ex]
                 &             & join        & concat      & \M{join}    \\[.5ex]
-                &             & (=<<)       & concatMap   & \M{(=<<)}   \\[.5ex]
+                &             & (={<}<)     & concatMap   & \M{(={<}<)} \\[.5ex]
                 & liftA2      & liftM2      & \M{liftA2}  & \M{liftA2}  \\[.5ex]
                 & liftA3      & liftM3      & \M{liftA3}  & \M{liftA3}  \\[.5ex]
 				& sequenceA   & sequence    & \M{sequence}& \M{sequence}\\[.5ex]
@@ -272,30 +272,30 @@
 \subsubsection{Instances -- bind (\C{>{>}=}) examples}
 
 \begin{tabular}{C@{\s\s}R@{\s$\equiv$\s}C}
-	[]         & xs >>= f                & concatMap f xs      \\
-	           & [\X,\Y] >>= replicate 3 & [\X,\X,\X,\Y,\Y,\Y] \\[2ex]
-	Maybe      & Just~\X~>>=~\F          & \F~\X               \\
-	           & Just~[\X]~>>=~listToMaybe & Just \X           \\[2ex]
-	IO         & \multicolumn{2}{E}{getLine >>= putStrLn}      \\[2ex]
-	((->) r)   & (f >>= g) x             & g (f x) x           \\
-	           & (tail >>= (++)) [\X,\Y] & [\Y,\X,\Y]          \\[2ex]
-	(Either a) & Right~\X~>>=~\F         & \F~\X               \\
-	           & Left~\I{e1}~>>=~\F      & Left~\I{e1}         \\
+	[]         & xs >{>}= f                & concatMap f xs      \\
+	           & [\X,\Y] >{>}= replicate 3 & [\X,\X,\X,\Y,\Y,\Y] \\[2ex]
+	Maybe      & Just~\X~>{>}=~\F          & \F~\X               \\
+	           & Just~[\X]~>{>}=~listToMaybe & Just \X           \\[2ex]
+	IO         & \multicolumn{2}{E}{getLine >{>}= putStrLn}      \\[2ex]
+	((->) r)   & (f >{>}= g) x             & g (f x) x           \\
+	           & (tail >{>}= (++)) [\X,\Y] & [\Y,\X,\Y]          \\[2ex]
+	(Either a) & Right~\X~>{>}=~\F         & \F~\X               \\
+	           & Left~\I{e1}~>{>}=~\F      & Left~\I{e1}         \\
 \end{tabular}
 
 
-\subsubsection{Instances -- then (\C{>>}) examples}
+\subsubsection{Instances -- then (\C{>{>}}) examples}
 
 \begin{tabular}{C@{\s\s}R@{\s$\equiv$\s}C}
-	[]         & [\X,\Y]~>>~[\Z,\W,\U]   & [\Z,\W,\U,\Z,\W,\U]  \\[2ex]
-	Maybe      & Nothing~>>~Just~\X      & Nothing              \\
-	           & Just~\X~>>~Just~\Y      & Just~\Y              \\[2ex]
-	IO         & \multicolumn{2}{E}{putStrLn "Username:" >> getLine} \\[2ex]
-	((->) r)   & (\F~>>~\G)~\X           & \G~\X                \\[2ex]
-	(Either a) & Right~\X~>>~Right~\Y       & Right \Y    \\
-	           & Left~\I{e1}~>>~Right~\Y    & Left~\I{e1} \\
-	           & Right~\X~>>~Left~\I{e2}    & Left~\I{e2} \\
-	           & Left~\I{e1}~>>~Left~\I{e2} & Left~\I{e1} \\
+	[]         & [\X,\Y]~>{>}~[\Z,\W,\U]   & [\Z,\W,\U,\Z,\W,\U]  \\[2ex]
+	Maybe      & Nothing~>{>}~Just~\X      & Nothing              \\
+	           & Just~\X~>{>}~Just~\Y      & Just~\Y              \\[2ex]
+	IO         & \multicolumn{2}{E}{putStrLn "Username:" >{>} getLine} \\[2ex]
+	((->) r)   & (\F~>{>}~\G)~\X           & \G~\X                \\[2ex]
+	(Either a) & Right~\X~>{>}~Right~\Y       & Right \Y    \\
+	           & Left~\I{e1}~>{>}~Right~\Y    & Left~\I{e1} \\
+	           & Right~\X~>{>}~Left~\I{e2}    & Left~\I{e2} \\
+	           & Left~\I{e1}~>{>}~Left~\I{e2} & Left~\I{e1} \\
 \end{tabular}
 
 
@@ -305,9 +305,9 @@
 \newcommand{\theads}[2]{\multicolumn{1}{C@{\s\s\s\s\s\s\s\s$\approx$\s}}{\thead{#1}} & \thead{#2} \\}
 \begin{tabular}{CC}
 \theads{do notation}{desugarized do notation}
-do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
-~~~\I{action2}             & ~~\I{action2} >>\\
-~~~\I{patB} <- \I{action3} & ~~\I{action3} >>= \la \I{patB} ->\\
+do \I{patA} <- \I{action1} & \I{action1} >{>}= \la \I{patA} ->\\
+~~~\I{action2}             & ~~\I{action2} >{>}\\
+~~~\I{patB} <- \I{action3} & ~~\I{action3} >{>}= \la \I{patB} ->\\
 ~~~\I{action4}             & ~~~~\I{action4}\\
 \end{tabular}
 
@@ -323,7 +323,7 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 	~~~~~~~~~=>~[m~a]              & \\
 	~~~~~~~~~->~m~[a]              & \mcte{Just [\X,\Y]~~~~~~}\\[2ex]
 
-	(>=>) ::~Monad m               & (\F~>=>~\G)~\X & \F~\X~>>=~\G    \\
+	(>=>) ::~Monad m               & (\F~>=>~\G)~\X & \F~\X~>{>}=~\G    \\
 	~~~~~~=>~(a~->~m~b)            \\
 	~~~~~~->~(b~->~m~c)            & \mcte{iterate (+1) >=> replicate 2 \$ 0} \\
 	~~~~~~->~a~->~m~c              & \mcte{$\equiv$~[0,0,1,1,2,2,3,3,4,4,5,5...]} \\[2ex]
@@ -343,7 +343,7 @@ do \I{patA} <- \I{action1} & \I{action1} >>= \la \I{patA} ->\\
 	~~~~~~~~~~~~~->~m ()           \\[2ex]
 
 
-	forever~::~Monad m             & \mcte{forever (getLine >>= putStrLn)} \\
+	forever~::~Monad m             & \mcte{forever (getLine >{>}= putStrLn)} \\
 	~~~~~~~~->~m~a~->~m~b          & \mcte{\N{(\rotatebox{90}{$\Rsh$} poor man's cat)}} \\[2ex]
 
 	\I{<fn>}\_ ::~Monad m          & sequence\_ & void sequence \\
@@ -452,8 +452,8 @@ NOTE: Foldable instances can also be defined by \C{foldMap}
 	\Li[4 (\C{\&\&}): fmap, repl. value] <\$>, <\$, \$>
 	\li[\hphantom{4 (\C{\&\&}): }apply, apply discard] <*>, *>, <*
 	\Li[3 (\C{||}): choice] <|>
-	\Li[1 (\C{\$}): bind, then] (>>=), (>>)
-	\li[\hphantom{1 (\C{\$}): }rv. bind, kleisli c.] ~~~~~~~~~~~(=<<), (>=>), (<=<)
+	\Li[1 (\C{\$}): bind, then] (>{>}=), (>{>})
+	\li[\hphantom{1 (\C{\$}): }rv. bind, kleisli c.] ~~~~~~~~~~~(={<}<), (>=>), (<=<)
 \end{Ldesc}
 
 \noindent

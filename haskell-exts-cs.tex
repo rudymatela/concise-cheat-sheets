@@ -1,0 +1,61 @@
+%% haskell-exts-cs.tex
+%
+% Copyright 2018  Rudy Matela
+%
+% This text is available under (at your option):
+%   * Creative Commons Attribution-ShareAlike 3.0 Licence
+%   * GNU Free Documentation License version 1.3 or Later
+%
+
+\documentclass{refcard}
+\usepackage[T1]{fontenc}
+\usepackage{rotating}
+\usepackage{amssymb}
+
+\renewcommand{\familydefault}{\sfdefault}
+\newcommand{\la}{\textbackslash}
+
+
+\title{Haskell Extensions Cheat Sheet}
+
+\cright{
+	Copyright 2018, Rudy Matela --
+	Compiled on \today{} \\
+	Upstream: \texttt{https://github.com/rudymatela/concise-cheat-sheets}
+}{
+	This text is available under
+	the Creative Commons Attribution-ShareAlike 3.0 Licence, \\
+	\textbf{or} (at your option), the GNU Free Documentation License version 1.3 or Later.
+}
+\version[~\\]{0.0}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Type Families (Type Functions)}
+
+\begin{tabularlc}{r@{\s$\equiv$\s}l}
+	type family          & type function \\	
+	type family instance & type function pattern match \\
+\end{tabularlc} \\[1em]
+\begin{ldesc}
+	\li[declaring]             type family \I{Family} a
+	\li[instantiating]         type instance \I{Family} \I{TypeA} = \I{TypeB} \li
+
+	\li[declaring (data)]      data family \I{DataFam} a
+	\li[instantiating (data)]  data instance \I{DataFam} \I{Type} = \I{Conses...} \li
+
+	\li[declaring (class)]
+	class \I{Class} a where \li
+	~~type \I{Family} a \li
+	~~fun ::~...~->~\I{Family}~a~->~... \li
+
+	\li[instantiating (class)]
+	instance \I{Class} \I{TypeA} where \li
+	~~type \I{Family} \I{TypeA}  =  \I{TypeB} \li
+	~~fun ...~= ... \li
+\end{ldesc}
+
+\end{document}

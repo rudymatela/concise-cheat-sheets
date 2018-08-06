@@ -36,6 +36,7 @@ FASTPDFLATEX = $(PDFLATEX) -draftmode
 CSS = \
   haskell-cs.pdf    \
   haskell-tc-cs.pdf \
+  haskell-exts-cs.pdf \
   thaskell-cs.pdf   \
   python-cs.pdf     \
   lua-cs.pdf        \
@@ -45,6 +46,7 @@ CSS = \
 CSS2X = \
   haskell-cs-2x.pdf    \
   haskell-tc-cs-2x.pdf \
+  haskell-exts-cs-2x.pdf \
   thaskell-cs-2x.pdf   \
   python-cs-2x.pdf     \
   lua-cs-2x.pdf        \

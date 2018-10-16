@@ -4,7 +4,7 @@ Concise Cheat Sheets
 This repository is a collection of Cheat Sheets for programming languages and
 tools.  Currently:
 
-* A [Haskell Cheat Sheet] -- version 1.1
+* A [Haskell Cheat Sheet] -- [version 1.1]
 * A [Python Cheat Sheet] -- version 0.1 (work in progress)
 * A [Capture The Flag Cheat Sheet] -- version 0.5
 * A [Haskell Typeclasses Cheat Sheet] -- version 0.3
@@ -55,7 +55,8 @@ Acknowledgements
 	* Thanks to [Saulo Hachem](https://github.com/sauloh) for suggesting reverse shells.
 
 [C Reference Card]: http://www.math.brown.edu/~jhs/ReferenceCards/CRefCard.v2.2.pdf
-[Haskell Cheat Sheet]: https://github.com/rudymatela/concise-cheat-sheets/releases/download/haskell-v1.1/haskell-cs-1.1.pdf
+[Haskell Cheat Sheet]: https://matela.com.br/haskell-cs.pdf
+[version 1.1]: https://github.com/rudymatela/concise-cheat-sheets/releases/download/haskell-v1.1/haskell-cs-1.1.pdf
 [Python CHeat Sheet]:  https://github.com/rudymatela/concise-cheat-sheets/releases/download/python-v0.1/python-cs-0.1.pdf
 [Haskell Typeclasses Cheat Sheet]: https://github.com/rudymatela/concise-cheat-sheets/releases/download/haskell-tc-v0.3/haskell-tc-cs-0.3.pdf
 [Capture The Flag Cheat Sheet]: https://github.com/rudymatela/concise-cheat-sheets/releases/download/ctf-v0.5/ctf-cs-0.5.pdf

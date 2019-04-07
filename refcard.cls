@@ -1,5 +1,5 @@
 %% refcard.cls
-%% Copyright 2014, 2015  Rudy Matela
+%% Copyright 2014-2019 Rudy Matela
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either version 1.3
@@ -15,7 +15,7 @@
 
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{refcard}[2015/09/20 v0.5.0 Reference Card]
+\ProvidesClass{refcard}[2019/04/07 v0.6.0 Reference Card]
 \DeclareOption{8pt}{\def\sz{8pt}}
 \DeclareOption{9pt}{\def\sz{9pt}}
 \DeclareOption{10pt}{\def\sz{10pt}}

@@ -21,6 +21,7 @@
 \DeclareOption{10pt}{\def\sz{10pt}}
 \DeclareOption{11pt}{\def\sz{11pt}}
 \DeclareOption{12pt}{\def\sz{12pt}}
+\DeclareOption{14pt}{\def\sz{14pt}}
 \ExecuteOptions{8pt}
 \ProcessOptions
 \LoadClass[\sz]{extarticle}

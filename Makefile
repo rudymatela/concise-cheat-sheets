@@ -63,7 +63,7 @@ template-refcard.pdf: template-refcard.tex refcard.cls threecols.sty
 
 %-2x.pdf: %.pdf
 	mkdir -p tmp/2x
-	./bin/quiet pdf90 haskell-cs.pdf -o tmp/2x/90.pdf
+	./bin/quiet pdf90 $< -o tmp/2x/90.pdf
 	pdfseparate tmp/2x/90.pdf tmp/2x/%d.pdf
 	pdfunite tmp/2x/1.pdf tmp/2x/1.pdf tmp/2x/2.pdf tmp/2x/2.pdf tmp/2x/united.pdf
 	./bin/quiet pdfnup tmp/2x/united.pdf -o $@

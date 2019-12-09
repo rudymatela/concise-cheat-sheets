@@ -19,7 +19,7 @@
 \title{Haskell Extensions Cheat Sheet}
 
 \cright{
-	Copyright 2018, Rudy Matela --
+	Copyright 2018-2019, Rudy Matela --
 	Compiled on \today{} \\
 	Upstream: \texttt{https://github.com/rudymatela/concise-cheat-sheets}
 }{
@@ -35,7 +35,7 @@
 \maketitle
 
 \section{Type Families (Type Functions)
-  \hfill\C{\normalsize -X TypeFamilies}}
+  \hfill\C{\normalsize TypeFamilies}}
 
 \begin{ldesc}
 	\li[enabling] \C{\{-\# LANGUAGE TypeFamilies \#-\}}
@@ -61,5 +61,31 @@
 	~~type \I{Family} \I{TypeA}  =  \I{TypeB} \li
 	~~fun ...~= ... \li
 \end{ldesc}
+
+
+\section{Tuple Sections
+  \hfill\C{\normalsize TupleSections}}
+
+\begin{ldesc}
+	\li[enabling] \C{\{-\# LANGUAGE TupleSections \#-\}}
+\end{ldesc}\\[1em]
+
+\begin{tabularlc}{C@{\s$\equiv$\s}C}
+	~~(x,)    & \la{}y -> (x,y) \\
+	~~(,y)    & \la{}x -> (x,y) \\
+	~(x,{},)  & \la{}y z -> (x,y,z) \\
+	~(,y,)    & \la{}x z -> (x,y,z) \\
+	~(,{},z)  & \la{}x y -> (x,y,z) \\
+	(x,y,)   & \la{}z -> (x,y,z) \\
+	(x,{},z) & \la{}y -> (x,y,z) \\
+	(,y,z)   & \la{}x -> (x,y,z) \\
+\end{tabularlc} \\[1em]
+
+\begin{tabularlc}{C@{\s$\equiv$\s}C}
+	~~~~~~~~~~~~~~~~(0,{},2) 1     &  (0,1,2) \\
+	~~~~~~~~~~~(False,) True  &  (False,True) \\
+	(False,{},0,{},{},) True 1 2 3 & (False,True,0,1,2,3) \\
+\end{tabularlc} \\[1em]
+
 
 \end{document}

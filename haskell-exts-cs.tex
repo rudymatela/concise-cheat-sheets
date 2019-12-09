@@ -87,5 +87,28 @@
 	(False,{},0,{},{},) True 1 2 3 & (False,True,0,1,2,3) \\
 \end{tabularlc} \\[1em]
 
+\section{Lambda Case
+  \hfill\C{\normalsize LambdaCase}}
+
+\begin{ldesc}
+	\li[enabling] \C{\{-\# LANGUAGE LambdaCase \#-\}}
+\end{ldesc}\\[1ex]
+
+\newcommand{\thead}[1]{\textnormal{\textbf{#1}}}
+\newcommand{\theads}[2]{\multicolumn{1}{C@{\s$\approx$\s}}{\thead{#1}} & \thead{#2} \\}
+\begin{tabular}{CC}
+\theads{lambda case}{explicit lambda case}
+\la{}case & \la{}\I{x} -> case~\I{x}~of \\
+~~\I{pat1} -> \I{exA}~~~~ & ~~\T{x}~~~~~\I{pat1} -> \I{exA} \\
+~~\I{pat1} -> \I{exA} & ~~\T{x}~~~~~\I{pat2} -> \I{exB} \\
+~~\_\T{at2} -> \I{exC} & ~~\T{x}~~~~~\_\T{at2} -> \I{exC} \\[1ex]
+\end{tabular}
+
+\section{Generalized Algebraic Datatypes
+  \hfill\C{\normalsize GADTs}}
+
+\begin{ldesc}
+	\li[enabling] \C{\{-\# LANGUAGE GADTs\#-\}}
+\end{ldesc}\\[1ex]
 
 \end{document}

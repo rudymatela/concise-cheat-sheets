@@ -110,5 +110,33 @@
 \begin{ldesc}
 	\li[enabling] \C{\{-\# LANGUAGE GADTs\#-\}}
 \end{ldesc}\\[1ex]
+\begin{tabular}{CC}
+\theads{GADT}{regular data definition}
+\\
+data Maybe a where~~~~~~~~~~ & data~Maybe~a \\
+~~Nothing~::~Maybe~a         & ~~=~Nothing  \\
+~~Just~~~~::~a~->~Maybe~a    & ~~|~Just~a   \\
+\\
+data List a where                & data List a         \\
+~~Nil~~::~List a                 & ~~= Nil             \\
+~~Cons~::~a -> List a -> List a  & ~~| Cons a (List a) \\
+\\
+data [a] where                   & data [a] = [] | a:[a] \\
+~~[]~~::~[a]                     & ~~\rotatebox{90}{$\Rsh$}\textnormal{\footnotesize ~(not real Haskell)} \\
+~~(:)~::~a -> [a] -> [a]         & \\
+\\
+data Thing a where            & \textnormal{regular defn.~impossible} \\
+~~Thing ::~a -> Thing a       & \\
+~~AnInt ::~Int -> Thing Int   & \\
+~~ABool ::~Bool -> Thing Bool & \\
+\\
+data Nat where      & data Nat = Z | S Nat \\
+~~Z~::~Nat & \\
+~~S~::~Nat -> Nat & \\
+\\
+data Vec n a where & \textnormal{regular defn.~impossible} \\
+~~Nil~~~::~Vec Z a & \\
+~~(:::)~::~a -> Vec n a -> Vec (S n) a \hspace{-8ex} & \\
+\end{tabular}
 
 \end{document}

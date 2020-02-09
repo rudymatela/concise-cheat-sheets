@@ -143,4 +143,11 @@ data Vec n a where & \textnormal{regular defn.~impossible} \\
 \section{Rank-2 and Rank-N Types
   \hfill\C{\normalsize Rank2Types, RankNTypes}}
 
+\begin{tabularlc}{C@{\s$\equiv$\s}C}
+x~::~a          &  x~::~forall a.~a        \\
+xs~::~{}[a]     &  xs~::~forall a.~[a]     \\
+mx~::~Maybe a   &  mx~::~forall a.~Maybe a \\
+f~::~a~->~b     &  f~::~forall~a~b.~a~->~b
+\end{tabularlc} \\[1em]
+
 \end{document}

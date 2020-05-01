@@ -245,6 +245,16 @@
 \end{ldesc}
 
 
+\section{Checking for memory leaks (Valgrind)}
+
+\begin{ldesc}
+\li[list leaks and invalid writes] valgrind \I{program}
+\li[print leak details]            valgrind -{}-leak-check=full \I{prog}
+\end{ldesc}
+
+(Compile with \texttt{-g} to get line of code position.)
+
+
 \pagebreak
 
 \section{Networking}
@@ -447,6 +457,7 @@
 	\li[8086 emulator] \$ pacman -U fake86-???.pkg.tar.gz  \# AUR
 	\li[Dial Tones]        \$ pacman -S archassault/multimon-ng
 	\li[Android]           \$ pacman -S archassault/dex2jar
+	\li[Valgrind]          \$ pacman -S valgrind
 %	\li[StegDetect]        \$ pacman -S archassault/stegdetect
 	\li[Tools available]   \$ pacman -Ql \I{somekit} | grep /bin/
 \end{ldesc}

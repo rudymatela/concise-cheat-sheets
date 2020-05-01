@@ -402,6 +402,16 @@
 	\li[Human to Unix] date -d "\I{YYYY}-\I{mm}-\I{dd} \I{HH}:\I{MM}:\I{SS}" -f +\%s
 \end{ldesc}
 
+\section{Timing}
+
+\begin{ldesc}
+	\li[Stopwatch (ctrl-C to stop)] \$ time cat
+	\li[Elapsed runtime]            \$ time \I{program} [arguments...]
+	\li[Elapsed runtime]            \$ /usr/bin/time -f\%e \I{program}
+	\li[Max memory use (Kbytes)]    \$ /usr/bin/time -f\%M \I{program}
+	\li[Time/Memory]                \$ /usr/bin/time -f"\%es \%MKb" \I{prog}
+\end{ldesc}
+
 \section{SSL}
 
 \begin{ldesc}

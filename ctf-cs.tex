@@ -442,7 +442,7 @@
 		root@container\$ exit \li
 		user@host\$ su \li
 		Password: \li
-		root@host\$ \li
+		root@host\$
 \end{ldesc}
 
 
@@ -476,6 +476,21 @@
 \begin{ldesc}
 	\lI[SQLi]     https://github.com/sqlmapproject/sqlmap
 \end{ldesc}
+
+\section{Hardware info}
+
+\begin{ldesc}
+	\li[List system information] uname -a
+	\li[List detailed hardware info]    [sudo] lshw
+	\li[List CPU devices] lscpu
+	\li[List PCI devices] lspci [-t] [-v]
+	\li[List USB devices] lsusb [-t] [-v]
+	\li[List loaded kernel modules] lsmod
+	\li[Processor width 32/64 (software)] uname -m
+	\li[Processor width 32/64 (software)] file /usr/bin/ls
+\end{ldesc}\\[1ex]
+{\centering
+i386(32), i686(32), x86\_64(64), amd64(64), armv7l(32), armv8(64)}
 
 
 \end{document}

@@ -235,6 +235,8 @@
 \begin{ldesc}
 	\li[Brute force URLs]       dirb http://example.com/
 	\li[~~ (specific wordlist)] dirb http://example.com/ wordlist.txt
+	\li[List HTML errors]       tidy -qe file.html
+	\li[~~ (from URL)]          curl -sL example.com | tidy -qe
 \end{ldesc}
 
 

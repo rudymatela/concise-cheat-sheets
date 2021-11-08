@@ -56,7 +56,7 @@ Acknowledgements
 
 [C Reference Card]: http://www.math.brown.edu/~jhs/ReferenceCards/CRefCard.v2.2.pdf
 [Haskell Cheat Sheet]: https://matela.com.br/haskell-cs.pdf
-[version 1.2]: https://github.com/rudymatela/concise-cheat-sheets/releases/download/haskell/v1.2/haskell-cs-1.2.pdf
+[version 1.2]: https://github.com/rudymatela/concise-cheat-sheets/releases/download/haskell%2Fv1.2/haskell-cs-1.2.pdf
 [Python CHeat Sheet]:  https://github.com/rudymatela/concise-cheat-sheets/releases/download/python-v0.1/python-cs-0.1.pdf
 [Haskell Typeclasses Cheat Sheet]: https://github.com/rudymatela/concise-cheat-sheets/releases/download/haskell-tc-v0.3/haskell-tc-cs-0.3.pdf
 [Capture The Flag Cheat Sheet]: https://github.com/rudymatela/concise-cheat-sheets/releases/download/ctf-v0.5/ctf-cs-0.5.pdf

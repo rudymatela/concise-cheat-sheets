@@ -207,16 +207,16 @@ non-associativity.
 
 \begin{tabular}{CC}
 \theads{if expression}{guarded equations}
-if~\I{boolExpr}    & \I{foo}~...~| \I{boolExpr}~ = \I{exprA} \\
-~~then~\I{exprA}   & \T{foo}~~~~~| otherwise    = \I{exprB} \\
-~~else~\I{exprB}   &                                       \\[1ex]
+if~\I{boolExpr}  & \I{foo}~...~| \I{boolExpr}~ = \I{exprA} \\
+then~\I{exprA}   & \T{foo}~~~~~| otherwise    = \I{exprB} \\
+else~\I{exprB}   &                                       \\[1ex]
 
 \theads{nested if expression}{guarded equations}
-if~\I{boolExpr1}        & \I{foo} ...~| \I{boolExpr1} = \I{exprA} \\
-~~then~\I{exprA}        & \T{foo}~~~~~| \I{boolExpr2} = \I{exprB} \\
-~~else~if~\I{boolExpr2} & \T{foo}~~~~~| otherwise     = \I{exprC} \\
-~~~~~~~~~then~\I{exprB} & \\
-~~~~~~~~~else~\I{exprC} & \\[1ex]
+if~\I{boolExpr1}      & \I{foo} ...~| \I{boolExpr1} = \I{exprA} \\
+then~\I{exprA}        & \T{foo}~~~~~| \I{boolExpr2} = \I{exprB} \\
+else~if~\I{boolExpr2} & \T{foo}~~~~~| otherwise     = \I{exprC} \\
+~~~~~then~\I{exprB} & \\
+~~~~~else~\I{exprC} & \\[1ex]
 
 \theads{case expression}{function pattern matching}
 case~\I{x}~of~\I{pat1} -> \I{exA} & \I{foo pat1} = \I{exA} \\
@@ -225,9 +225,9 @@ case~\I{x}~of~\I{pat1} -> \I{exA} & \I{foo pat1} = \I{exA} \\
 
 \theads{2-variable case expression}{function pattern matching}
 case~(\I{x},\I{y})~of & \I{foo pat1 patA} = \I{exprA} \\
-~~(\I{pat1},\I{patA}) -> \I{exprA} & \I{foo pat2 patB} = \I{exprB} \\
-~~(\I{pat2},\I{patB}) -> \I{exprB} & \I{foo \_~~~ \_~~~}~ = \I{exprC} \\
-~~\_~~~~~~~~~~        -> \I{exprC} & \\[1ex]
+(\I{pat1},\I{patA}) -> \I{exprA} & \I{foo pat2 patB} = \I{exprB} \\
+(\I{pat2},\I{patB}) -> \I{exprB} & \I{foo \_~~~ \_~~~} = \I{exprC} \\
+\_~~~~~~~~~~        -> \I{exprC} & \\[1ex]
 
 \theads{let expression}{where clause}
 let~\I{nameA}~=~\I{exprA} & \I{foo ...}~=~\I{mainExpression} \\

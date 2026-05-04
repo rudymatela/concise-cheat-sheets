@@ -349,17 +349,17 @@ lets:
 \end{ldesc}
 
 
-\subsection{String formatting}
+\subsection{String formatting (f-string)}
 
 \begin{ldesc}
-	\li[format \I{x} to string using \C{str}] "\{0\}".format(x)
-	\li[format \I{x} to decimal]     "\{0:d\}".format(x)
-	\li[format \I{x} to hexadecimal] "\{0:x\}".format(x)
-	\li[format \I{x} to octal]       "\{0:o\}".format(x)
-	\li[replace \C{\{0\}} by \I{s}] "...~\{0\}~...".format(s)
-	\li[repl.~\C{\{0\}} and \C{\{1\}} by \I{s0} and \I{s1}]  ".~\{0\}~.~\{1\}~." \% (s0,s1)
-	\li[generate \C{"pi is 3.14"}]    "pi is \{0:2f\}".format(math.pi)
-	\li[generate \C{"pi is 003.141"}] "pi is \{0:3.3f\}".format(math.pi)
+	\li[format \I{x} to string] f"\{x\}"
+	\li[format \I{x} to string message] f"We have \{x\} items."
+	\li[format \I{x} and \I{y} to string] f"x is \{x\}, y is \{y\}"
+	\li[format \I{n} to hexadecimal] f"\{n\} in hexadecimal is \{n:x\}"
+	\li[format \I{n} to octal] f"\{n\} in hexadecimal is \{n:o\}"
+	\li[format \I{n} with six decimal places] f"\{n:06d\}"
+	\li[yield \C{"pi is 3.14"}]    f"pi is \{0:2f\}"
+	\li[yield \C{"pi is 003.141"}] f"pi is \{0:3.3f\}"
 \end{ldesc}
 
 \vspace{-1ex}
